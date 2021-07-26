@@ -10,43 +10,64 @@ import { RateDashComponent } from './rate-dash/rate-dash.component';
 import { AccountUpgradeComponent } from './account-upgrade/account-upgrade.component';
 import { ReferComponent } from './refer/refer.component';
 import { FaqComponent } from './faq/faq.component';
+import { DepositNgnComponent } from './deposit-ngn/deposit-ngn.component';
+import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
+import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 
-const routes: Routes = [{
-	path: '',
-	component: DashboardComponent,
-	children: [{
+const routes: Routes = [
+	{
 		path: '',
-		component: HomeComponent
+		redirectTo: 'home',
+		pathMatch: 'full',
 	},
 	{
-		path: 'transactions',
-		component: TransactionsComponent,
-	},
-	{
-		path: 'transactions-details',
-		component: TransactionDetailsComponent,
-	},
-	{
-		path: 'my-details',
-		component: MydetailsComponent,
-	}, {
-		path: 'notification',
-		component: NotificationComponent
-	}, {
-		path: 'rate',
-		component: RateDashComponent,
-	}, {
-		path: 'upgrade-account',
-		component: AccountUpgradeComponent,
-	},{
-		path: 'refer',
-		component: ReferComponent,
-	},
-	{
-		path: 'faq',
-		component: FaqComponent,
-	},]
-}];
+		path: '',
+		component: DashboardComponent,
+		children: [{
+			path: 'home',
+			loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+		},
+		{
+			path: 'transactions',
+			component: TransactionsComponent,
+		},
+		{
+			path: 'transactions-details',
+			component: TransactionDetailsComponent,
+		},
+		{
+			path: 'my-details',
+			component: MydetailsComponent,
+		}, {
+			path: 'notification',
+			component: NotificationComponent
+		}, {
+			path: 'rate',
+			component: RateDashComponent,
+		}, {
+			path: 'upgrade-account',
+			component: AccountUpgradeComponent,
+		}, {
+			path: 'refer',
+			component: ReferComponent,
+		},
+		{
+			path: 'faq',
+			component: FaqComponent,
+		},
+		{
+			path: 'payment',
+			loadChildren: () => import('./deposit-ngn/deposit-ngn.module').then(m => m.DepositNgnModule)
+		},
+		{
+			path: 'addbankdetails',
+			component: AddbankdetailsComponent,
+		}, {
+			path: 'withdrawcryto',
+			component: WithdrawcryptoComponent,
+		}
+		]
+	}];
 
 @NgModule({
 	imports: [RouterModule.forChild(routes)],

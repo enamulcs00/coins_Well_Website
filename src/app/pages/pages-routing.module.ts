@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { AboutusComponent } from '../pages/aboutus/aboutus.component';
-import { DepositNgnComponent } from './deposit-ngn/deposit-ngn.component';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
-import { WithdrawngnComponent } from './withdrawngn/withdrawngn.component';
-import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
-import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 import { VerifyaccountComponent } from './verifyaccount/verifyaccount.component';
 import { VerifyphonenumberComponent } from './verifyphonenumber/verifyphonenumber.component';
 import { TicketComponent } from './ticket/ticket.component';
@@ -40,22 +36,6 @@ const routes: Routes = [
 			{
 				path: 'aboutus',
 				component: AboutusComponent,
-			},
-			{
-				path: 'deposit-ngn',
-				component: DepositNgnComponent,
-			},
-			{
-				path: 'withdrawngn',
-				component: WithdrawngnComponent,
-			},
-			{
-				path: 'addbankdetails',
-				component: AddbankdetailsComponent,
-			},
-			{
-				path: 'withdrawcryto',
-				component: WithdrawcryptoComponent,
 			},
 			{
 				path: 'ticket',

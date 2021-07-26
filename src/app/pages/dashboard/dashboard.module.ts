@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { HomeComponent } from './home/home.component';
 import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
 import { DashboardComponent } from './dashboard.component';
 import { MaterialCommonModule } from '../../material-common/material-common.module';
@@ -13,10 +12,10 @@ import { RateDashComponent } from './rate-dash/rate-dash.component';
 import { AccountUpgradeComponent } from './account-upgrade/account-upgrade.component';
 import { ReferComponent } from './refer/refer.component';
 import { FaqComponent } from './faq/faq.component';
-
+import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
+import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 @NgModule({
 	declarations: [
-		HomeComponent,
 		LeftSidebarComponent,
 		DashboardComponent,
 		MydetailsComponent,
@@ -26,7 +25,9 @@ import { FaqComponent } from './faq/faq.component';
 		RateDashComponent,
 		AccountUpgradeComponent,
 		ReferComponent,
-		FaqComponent
+		FaqComponent,
+		AddbankdetailsComponent,
+		WithdrawcryptoComponent
 	],
 	imports: [
 		CommonModule,
