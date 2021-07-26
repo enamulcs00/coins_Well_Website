@@ -1,0 +1,45 @@
+<div class="auth-main d-flex">
+    <div class="auth-img">
+     <figure>
+         <img src="assets/images/auth/trogin.png" alt="">
+     </figure>
+    </div>
+    <div class="auth-form">
+      <div class="auth-logo">
+        <figure><img src="assets/images/nav-logo.png" alt=""></figure>
+    </div>
+       <div class="d-flex auth-title">
+         <h3 class="auth-title__h3">Trouble loging in 
+             <span class="d-block">
+                Choose the accurate reason why you are not able to log in.
+             </span>
+         </h3>
+         <p class="auth-link__title" routerLink="/auth/support">Contact Support</p>
+       </div>
+       <div class="auth-form-bx">
+           <div class="trouble-bx d-flex">
+               <div class="trouble__bx active-bx">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34.762" height="34.762" viewBox="0 0 34.762 34.762">
+                    <path id="Icon_awesome-key" data-name="Icon awesome-key" d="M32.762,11.262A11.268,11.268,0,0,1,19.4,22.328l-1.536,1.729a1.536,1.536,0,0,1-1.148.515H14.333v2.56A1.536,1.536,0,0,1,12.8,28.667h-2.56v2.56A1.536,1.536,0,0,1,8.7,32.762H1.536A1.536,1.536,0,0,1,0,31.226V26.232a1.536,1.536,0,0,1,.45-1.086L10.8,14.792a11.263,11.263,0,1,1,21.959-3.53ZM21.5,8.191a3.071,3.071,0,1,0,3.071-3.071A3.071,3.071,0,0,0,21.5,8.191Z" transform="translate(1 1)" fill="none" stroke="#17c2ec" stroke-width="2"/>
+                
+                  </svg>  
+                  <p>Forgot password</p>                
+               </div>
+               <!--  -->
+               <div class="trouble__bx" routerLink="/auth/oldphone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24.704" height="34.762" viewBox="0 0 24.704 34.762">
+                    <g id="Group_185031" data-name="Group 185031" transform="translate(-6.5 -2)">
+                      <path id="Path_27381" data-name="Path 27381" d="M10.743,3H26.961A3.26,3.26,0,0,1,30.2,6.276v26.21a3.26,3.26,0,0,1-3.243,3.276H10.743A3.26,3.26,0,0,1,7.5,32.486V6.276A3.26,3.26,0,0,1,10.743,3Z" fill="none" stroke="#17c2ec" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                      <path id="Path_27382" data-name="Path 27382" d="M18,27h0" transform="translate(0.852 2.21)" fill="none" stroke="#17c2ec" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    </g>
+                  </svg>
+                  <p>Lost phone no.</p>                
+               </div>
+           </div>
+        <!-- <p class="trouble" routerLink="/auth/troublelogin">Trouble logging in?</p> -->
+        <div class="btn-outer mt-40">
+          <button class="btn btn-primary" routerLink="/auth/forgotpassword">Continue</button>
+        </div>
+       </div>
+    </div>
+  </div>

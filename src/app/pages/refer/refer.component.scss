@@ -1,0 +1,34 @@
+.Refer-earn{
+
+    h3{
+        font-size: 20px;
+        color: #404040;
+        margin-bottom: 9px;
+    }
+    p{
+        font-size: 15px;
+        color: #999999;
+    }
+    figure{
+        margin-top: 23px;
+    }
+    .invite{
+        text-align: center;
+        .code-num {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            border: 3px solid #17C2EC;
+            border-style: dotted;
+            padding: 11px 14px;
+            justify-content: space-between;
+            h5{
+                font-size: 18px;
+            }
+            figure{
+                margin-top: 0;
+                margin-left: 50px;
+            }
+        }
+    }
+}
