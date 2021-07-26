@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field'
-import {MatDialogModule} from '@angular/material/dialog';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateprofileComponent } from './createprofile/createprofile.component';
 import { WhatsEmailidComponent } from './whats-emailid/whats-emailid.component';
 import { LoginComponent } from './login/login.component';
@@ -26,34 +26,36 @@ import { VerifyDocComponent } from './verify-doc/verify-doc.component';
 
 
 @NgModule({
-  declarations: [CreateprofileComponent,WhatsEmailidComponent,
-    LoginComponent,
-    SignupComponent,
-    SignupActivateComponent,
-    SetupPasswordComponent,
-    TransactionpinComponent,
-    WelcomeComponent,
-    TroubleloginComponent,
-    ForgotpasswordComponent,
-    VerfiyaccountComponent,
-    ResetpasswordComponent,
-    OldphoneComponent,
-    ConfirmaccountComponent,
-    UpdatephonenoComponent,
-    SupportComponent,
-    ChatscreenComponent,
-    VerifyDocComponent
-  ],
-  exports:[
-    // MatFormFieldModule,
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    FormsModule, ReactiveFormsModule
-  ]
+	declarations: [
+		CreateprofileComponent, 
+		WhatsEmailidComponent,
+		LoginComponent,
+		SignupComponent,
+		SignupActivateComponent,
+		SetupPasswordComponent,
+		TransactionpinComponent,
+		WelcomeComponent,
+		TroubleloginComponent,
+		ForgotpasswordComponent,
+		VerfiyaccountComponent,
+		ResetpasswordComponent,
+		OldphoneComponent,
+		ConfirmaccountComponent,
+		UpdatephonenoComponent,
+		SupportComponent,
+		ChatscreenComponent,
+		VerifyDocComponent
+	],
+	exports: [
+		// MatFormFieldModule,
+	],
+	imports: [
+		CommonModule,
+		AuthRoutingModule,
+		MatInputModule,
+		MatFormFieldModule,
+		MatDialogModule,
+		FormsModule, ReactiveFormsModule
+	]
 })
 export class AuthModule { }

@@ -26,112 +26,131 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { ChangeemailComponent } from './changeemail/changeemail.component';
 import { EmailverifyComponent } from './emailverify/emailverify.component';
 import { RateComponent } from './rate/rate.component';
+import { FullComponent } from '../layout/full/full.component';
+import { WithoutheaderComponent } from '../layout/withoutheader/withoutheader.component';
 
 const routes: Routes = [
-{
-path:'landingpage',
-component:LandingpageComponent
-},
-{
-path:'dashboard',
-component:DashboardComponent
-},
-{
-path:'notification',
-component:NotificationComponent
-},
-{
-path:'home',
-component:HomeComponent,
-},
-{
-path:'transactions-page',
-component:TransactionsComponent,
-},
-{
-path:'transactions-details',
-component:TransactionDetailsComponent,
-},
-{
-path:'aboutus',
-component:AboutusComponent,
-},
-{
-path:'deposit-ngn',
-component:DepositNgnComponent,
-},
-{
-path:'Congratulations',
-component:CongratulationsComponent,
-},
-{
-path:'withdrawngn',
-component:WithdrawngnComponent,
-},
-{
-path:'addbankdetails',
-component:AddbankdetailsComponent,
-},
-{
-path:'withdrawcryto',
-component:WithdrawcryptoComponent,
-},
-{
-path:'verify-account',
-component:VerifyaccountComponent,
-},
-{
-path:'verify-phonenumber',
-component:VerifyphonenumberComponent,
-},
-{
-path:'my-details',
-component:MydetailsComponent,
-},
-{
-path:'upgrade-account',
-component:AccountUpgradeComponent,
-},
-{
-path:'refer',
-component:ReferComponent,
-},
-{
-path:'faq',
-component:FaqComponent,
-},
-{
-  path:'ticket',
-  component:TicketComponent,
-  },
-  {
-    path:'tpc',
-    component:ChangeTranstionpinComponent,
-    },
-{
-path:'sap',
-component:SetappPinComponent,
-},
-{
-path:'chanage-password',
-component:ChangepasswordComponent,
-},
-{
-path:'change-email',
-component:ChangeemailComponent,
-},
-{
-path:'email-code',
-component:EmailverifyComponent,
-},
-{
-path:'rate',
-component:RateComponent
-}
+	{
+		path: '',
+		redirectTo: '/landingpage',	
+		pathMatch: 'full',
+	},
+	{
+		path  : '',
+		component: FullComponent,
+		children: [
+			{
+				path: 'landingpage',
+				component: LandingpageComponent
+			},
+			{
+				path: 'dashboard',
+				component: DashboardComponent
+			},
+			{
+				path: 'notification',
+				component: NotificationComponent
+			},
+			{
+				path: 'home',
+				component: HomeComponent,
+			},
+			{
+				path: 'transactions-page',
+				component: TransactionsComponent,
+			},
+			{
+				path: 'transactions-details',
+				component: TransactionDetailsComponent,
+			},
+			{
+				path: 'aboutus',
+				component: AboutusComponent,
+			},
+			{
+				path: 'deposit-ngn',
+				component: DepositNgnComponent,
+			},
+			{
+				path: 'withdrawngn',
+				component: WithdrawngnComponent,
+			},
+			{
+				path: 'addbankdetails',
+				component: AddbankdetailsComponent,
+			},
+			{
+				path: 'withdrawcryto',
+				component: WithdrawcryptoComponent,
+			},
+			{
+				path: 'my-details',
+				component: MydetailsComponent,
+			},
+			{
+				path: 'upgrade-account',
+				component: AccountUpgradeComponent,
+			},
+			{
+				path: 'refer',
+				component: ReferComponent,
+			},
+			{
+				path: 'faq',
+				component: FaqComponent,
+			},
+			{
+				path: 'ticket',
+				component: TicketComponent,
+			},
+			{
+				path: 'rate',
+				component: RateComponent
+			}
+		]
+	},
+	{
+		path : '',
+		component : WithoutheaderComponent,
+		children : [
+			{
+				path: 'tpc',
+				component: ChangeTranstionpinComponent,
+			},
+			{
+				path: 'change-email',
+				component: ChangeemailComponent,
+			},
+			{
+				path: 'email-code',
+				component: EmailverifyComponent,
+			},
+			{
+				path: 'chanage-password',
+				component: ChangepasswordComponent,
+			},
+			{
+				path: 'Congratulations',
+				component: CongratulationsComponent,
+			},
+			{
+				path: 'sap',
+				component: SetappPinComponent,
+			},
+			{
+				path: 'verify-account',
+				component: VerifyaccountComponent,
+			},
+			{
+				path: 'verify-phonenumber',
+				component: VerifyphonenumberComponent,
+			}
+		]
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class PagesRoutingModule { }

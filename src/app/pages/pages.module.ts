@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field'
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatDialogModule } from '@angular/material/dialog';
 import { PagesRoutingModule } from './pages-routing.module';
 import { LandingpageComponent } from './landingpage/landingpage.component';
-import { CoreModule } from '../core/core.module';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotificationComponent } from './notification/notification.component';
@@ -30,23 +29,21 @@ import { SetappPinComponent } from './setapp-pin/setapp-pin.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { ChangeemailComponent } from './changeemail/changeemail.component';
 import { EmailverifyComponent } from './emailverify/emailverify.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { RateComponent } from './rate/rate.component';
-
-
+import { LayoutModule } from '../layout/layout.module';
 @NgModule({
-  declarations: [LandingpageComponent, DashboardComponent, NotificationComponent, HomeComponent, TransactionsComponent, AboutusComponent, DepositNgnComponent, CongratulationsComponent, WithdrawngnComponent, AddbankdetailsComponent, WithdrawcryptoComponent, VerifyaccountComponent, VerifyphonenumberComponent, TransactionDetailsComponent, MydetailsComponent, AccountUpgradeComponent, ReferComponent, FaqComponent, TicketComponent, ChangeTranstionpinComponent, SetappPinComponent, ChangepasswordComponent, ChangeemailComponent, EmailverifyComponent, RateComponent,],
-  
-  imports: [
-    CommonModule,
-    PagesRoutingModule,
-    CoreModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    MatTabsModule
+	declarations: [LandingpageComponent, DashboardComponent, NotificationComponent, HomeComponent, TransactionsComponent, AboutusComponent, DepositNgnComponent, CongratulationsComponent, WithdrawngnComponent, AddbankdetailsComponent, WithdrawcryptoComponent, VerifyaccountComponent, VerifyphonenumberComponent, TransactionDetailsComponent, MydetailsComponent, AccountUpgradeComponent, ReferComponent, FaqComponent, TicketComponent, ChangeTranstionpinComponent, SetappPinComponent, ChangepasswordComponent, ChangeemailComponent, EmailverifyComponent, RateComponent,],
 
-  ]
+	imports: [
+		CommonModule,
+		PagesRoutingModule,
+		FormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatDialogModule,
+		MatTabsModule,
+		LayoutModule
+	]
 })
 export class PagesModule { }

@@ -131,5 +131,8 @@
       }
     }
   },
-  "defaultProject": "coinswellWeb"
+  "defaultProject": "coinswellWeb",
+  "cli": {
+    "analytics": false
+  }
 }
