@@ -1,0 +1,37 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { HomeComponent } from './home/home.component';
+import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
+import { DashboardComponent } from './dashboard.component';
+import { MaterialCommonModule } from '../../material-common/material-common.module';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { MydetailsComponent } from './mydetails/mydetails.component';
+import { NotificationComponent } from './notification/notification.component';
+import { RateDashComponent } from './rate-dash/rate-dash.component';
+import { AccountUpgradeComponent } from './account-upgrade/account-upgrade.component';
+import { ReferComponent } from './refer/refer.component';
+import { FaqComponent } from './faq/faq.component';
+
+@NgModule({
+	declarations: [
+		HomeComponent,
+		LeftSidebarComponent,
+		DashboardComponent,
+		MydetailsComponent,
+		TransactionsComponent,
+		TransactionDetailsComponent,
+		NotificationComponent,
+		RateDashComponent,
+		AccountUpgradeComponent,
+		ReferComponent,
+		FaqComponent
+	],
+	imports: [
+		CommonModule,
+		DashboardRoutingModule,
+		MaterialCommonModule
+	]
+})
+export class DashboardModule { }

@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Notification } from 'rxjs';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
-import { NotificationComponent } from './notification/notification.component';
-import { HomeComponent } from './home/home.component';
-import { TransactionsComponent } from '../pages/transactions/transactions.component';
 import { AboutusComponent } from '../pages/aboutus/aboutus.component';
 import { DepositNgnComponent } from './deposit-ngn/deposit-ngn.component';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
@@ -14,11 +9,6 @@ import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.compone
 import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 import { VerifyaccountComponent } from './verifyaccount/verifyaccount.component';
 import { VerifyphonenumberComponent } from './verifyphonenumber/verifyphonenumber.component';
-import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
-import { MydetailsComponent } from './mydetails/mydetails.component';
-import { AccountUpgradeComponent } from './account-upgrade/account-upgrade.component';
-import { ReferComponent } from './refer/refer.component';
-import { FaqComponent } from './faq/faq.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { ChangeTranstionpinComponent } from './change-transtionpin/change-transtionpin.component';
 import { SetappPinComponent } from './setapp-pin/setapp-pin.component';
@@ -45,23 +35,7 @@ const routes: Routes = [
 			},
 			{
 				path: 'dashboard',
-				component: DashboardComponent
-			},
-			{
-				path: 'notification',
-				component: NotificationComponent
-			},
-			{
-				path: 'home',
-				component: HomeComponent,
-			},
-			{
-				path: 'transactions-page',
-				component: TransactionsComponent,
-			},
-			{
-				path: 'transactions-details',
-				component: TransactionDetailsComponent,
+				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
 			},
 			{
 				path: 'aboutus',
@@ -82,22 +56,6 @@ const routes: Routes = [
 			{
 				path: 'withdrawcryto',
 				component: WithdrawcryptoComponent,
-			},
-			{
-				path: 'my-details',
-				component: MydetailsComponent,
-			},
-			{
-				path: 'upgrade-account',
-				component: AccountUpgradeComponent,
-			},
-			{
-				path: 'refer',
-				component: ReferComponent,
-			},
-			{
-				path: 'faq',
-				component: FaqComponent,
 			},
 			{
 				path: 'ticket',

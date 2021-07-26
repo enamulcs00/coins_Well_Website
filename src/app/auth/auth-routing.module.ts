@@ -20,81 +20,82 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { WhatsEmailidComponent } from './whats-emailid/whats-emailid.component';
 
 const routes: Routes = [
-{
-path:'login',
-component:LoginComponent
-},
-{
-path:'signup',
-component:SignupComponent  },
-{
-path:'activate',
-component:SignupActivateComponent
-},
-{
-path:'setuppassword',
-component:SetupPasswordComponent
-},
-{
-  path:'emailid',
-  component:WhatsEmailidComponent
-  },
-{
-path:'createprofie',
-component:CreateprofileComponent
-},
-{
-path:'transtionpin',
-component:TransactionpinComponent
-},
-{
-path:'welcome',
-component:WelcomeComponent
-},
-{
-path:'troublelogin',
-component:TroubleloginComponent
-},
-{
-path:'forgotpassword',
-component:ForgotpasswordComponent
-},
-{
-path:'verifyaccount',
-component:VerfiyaccountComponent
-},
-{
-path:'resetpassword',
-component:ResetpasswordComponent
-},
-{
-path:'oldphone',
-component:OldphoneComponent
-},
-{
-path:'confirmaccount',
-component:ConfirmaccountComponent
-},
-{
-path:'updatephone',
-component:UpdatephonenoComponent
-},
-{
-path:'support',
-component:SupportComponent
-},
-{
-path:'chat',
-component:ChatscreenComponent
-},
-{
-  path:'verify-doc',
-  component:VerifyDocComponent
-  }
+	{
+		path: 'login',
+		component: LoginComponent
+	},
+	{
+		path: 'signup',
+		component: SignupComponent
+	},
+	{
+		path: 'activate',
+		component: SignupActivateComponent
+	},
+	{
+		path: 'setuppassword',
+		component: SetupPasswordComponent
+	},
+	{
+		path: 'emailid',
+		component: WhatsEmailidComponent
+	},
+	{
+		path: 'createprofie',
+		component: CreateprofileComponent
+	},
+	{
+		path: 'transtionpin',
+		component: TransactionpinComponent
+	},
+	{
+		path: 'welcome',
+		component: WelcomeComponent
+	},
+	{
+		path: 'troublelogin',
+		component: TroubleloginComponent
+	},
+	{
+		path: 'forgotpassword',
+		component: ForgotpasswordComponent
+	},
+	{
+		path: 'verifyaccount',
+		component: VerfiyaccountComponent
+	},
+	{
+		path: 'resetpassword',
+		component: ResetpasswordComponent
+	},
+	{
+		path: 'oldphone',
+		component: OldphoneComponent
+	},
+	{
+		path: 'confirmaccount',
+		component: ConfirmaccountComponent
+	},
+	{
+		path: 'updatephone',
+		component: UpdatephonenoComponent
+	},
+	{
+		path: 'support',
+		component: SupportComponent
+	},
+	{
+		path: 'chat',
+		component: ChatscreenComponent
+	},
+	{
+		path: 'verify-doc',
+		component: VerifyDocComponent
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class AuthRoutingModule { }
