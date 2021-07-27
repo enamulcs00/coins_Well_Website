@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+	baseUrl: 'https://appgrowthcompany.com:4129/api/v1/',
+	storageKey: 'coinswellUserInfo',
+	dateFormatWithTime: 'MM-DD-YYYY hh:mm A',
+	dateFormat: 'MM-DD-YYYY',
+	resetPasswordLink: 'http://localhost:4200/resetpassword',
+	homeURL: 'http://localhost:4200/'
 };
 
 /*
