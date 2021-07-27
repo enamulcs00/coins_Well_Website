@@ -14,7 +14,7 @@ import { EmailverifyComponent } from './emailverify/emailverify.component';
 import { RateComponent } from './rate/rate.component';
 import { FullComponent } from '../layout/full/full.component';
 import { WithoutheaderComponent } from '../layout/withoutheader/withoutheader.component';
-
+import { AuthGuard } from '../_gurads/auth.guard';
 const routes: Routes = [
 	{
 		path: '',
@@ -31,7 +31,8 @@ const routes: Routes = [
 			},
 			{
 				path: 'dashboard',
-				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+				// canActivate :  [AuthGuard],
+				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
 			},
 			{
 				path: 'aboutus',

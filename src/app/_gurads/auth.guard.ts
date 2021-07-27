@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import { environment } from '../../../src/environments/environment';
-import { NotificationsService } from '../_services/notifications.service';
+import { Notify, Report, Confirm, Loading, Block } from "notiflix";
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-    constructor(private router: Router, private _noti : NotificationsService) { }
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    constructor(private router: Router) { }
+    canActivate() {
         let userInfo = localStorage.getItem(environment.storageKey);
         if((userInfo != null)) {
             return true;
         } else {
-            this.router.navigate(['/login']);
-            this._noti.show("error", "Please login to continue.", "Login")
+            this.router.navigate(['/landingpage']);
+            Notify.info('Please login to continue.');
         }
     }
 }

@@ -23,7 +23,8 @@ import { UpdatephonenoComponent } from './updatephoneno/updatephoneno.component'
 import { SupportComponent } from './support/support.component';
 import { ChatscreenComponent } from './chatscreen/chatscreen.component';
 import { VerifyDocComponent } from './verify-doc/verify-doc.component';
-
+import { LoginSvg } from './svg/loginSvg'
+import { MaterialCommonModule } from '../material-common/material-common.module';
 
 @NgModule({
 	declarations: [
@@ -44,7 +45,8 @@ import { VerifyDocComponent } from './verify-doc/verify-doc.component';
 		UpdatephonenoComponent,
 		SupportComponent,
 		ChatscreenComponent,
-		VerifyDocComponent
+		VerifyDocComponent,
+		LoginSvg
 	],
 	exports: [
 		// MatFormFieldModule,
@@ -52,9 +54,7 @@ import { VerifyDocComponent } from './verify-doc/verify-doc.component';
 	imports: [
 		CommonModule,
 		AuthRoutingModule,
-		MatInputModule,
-		MatFormFieldModule,
-		MatDialogModule,
+		MaterialCommonModule,
 		FormsModule, ReactiveFormsModule
 	]
 })

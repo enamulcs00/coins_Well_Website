@@ -1,35 +1,31 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service'
 import { CommonService } from './_services/common.service';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { JwtInterceptor } from './_helpers/jwt.interceptor'; 
+
 @NgModule({
 	declarations: [
 		AppComponent
 	],
-	exports: [
-
-	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		MatFormFieldModule,
-		MatInputModule,
-		ReactiveFormsModule,
-		MatDialogModule,
-		FormsModule,
-		NoopAnimationsModule
+		NoopAnimationsModule,
+		HttpClientModule
 	],
 	providers: [
 		{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
+		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		AuthService,
-		CommonService
+		CommonService,
 	],
 	bootstrap: [AppComponent],
 })
