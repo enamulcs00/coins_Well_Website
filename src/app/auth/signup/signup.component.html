@@ -6,22 +6,41 @@
 		<div class="auth-logo">
 			<figure><img src="assets/images/nav-logo.png" alt=""></figure>
 		</div>
-		<div class="d-flex auth-title">
-			<h3 class="auth-title__h3">Sign up</h3>
-			<p class="auth-link__title" routerLink="/auth/login">Login</p>
-		</div>
-		<div class="auth-form-bx">
-			<div class="input-bxx mb-0">
-				<figure class="input-icon">
-					<img src="assets/images/auth/mob-icon.png" alt="">
-				</figure>
-				<mat-form-field class="example-full-width" appearance="fill">
-					<input matInput placeholder="Phone Number" value="Sushi">
-				</mat-form-field>
-			</div>
-			<div class="btn-outer mt-40">
-				<button class="btn btn-primary" routerLink="/auth/activate">Sign up</button>
-			</div>
-		</div>
+		<mat-horizontal-stepper linear #stepper>
+			<mat-step>
+				<div class="d-flex auth-title">
+					<h3 class="auth-title__h3">Sign up</h3>
+					<p class="auth-link__title" routerLink="/auth/login">Login</p>
+				</div>
+				<form [formGroup]="signUpForm" class="auth-form-bx my-forms" (ngSubmit)="signUpNow()">
+					<mat-form-field class="example-full-width" appearance="outline">
+						<span matPrefix>
+							<figure class="input-icon">
+								<img src="assets/images/auth/mob-icon.png" alt="">
+							</figure>
+						</span>
+						<ngx-mat-intl-tel-input [preferredCountries]="['us', 'gb']" [enablePlaceholder]="true"
+							[enableSearch]="true" name="full_phone" formControlName="full_phone"
+							(countryChanged)="countryChanged($event)" inputPlaceholder="Phone number"></ngx-mat-intl-tel-input>
+						<mat-error *ngIf="signUpForm.get('full_phone').hasError('required')">Please enter phone number.
+						</mat-error>
+						<mat-error *ngIf="signUpForm.get('full_phone').hasError('validatePhoneNumber')">Please enter valid phone
+							number.
+						</mat-error>
+					</mat-form-field>
+					<div class="btn-outer mt-40">
+						<div id="signup-button"class="border-plus">
+							<button type="submit" class="btn btn-primary">Sign up</button>
+						</div>
+					</div>
+				</form>
+			</mat-step>
+			<mat-step>
+				<signup-activate [data]="signUpForm.value" (verified)="OtpVerified($event)"></signup-activate>
+			</mat-step>
+			<mat-step>
+				<setup-password [data]="{ id : userId }" (setupDone)="setPasswordCompleted()"></setup-password>
+			</mat-step>
+		</mat-horizontal-stepper>
 	</div>
 </div>

@@ -25,10 +25,13 @@ import { ChatscreenComponent } from './chatscreen/chatscreen.component';
 import { VerifyDocComponent } from './verify-doc/verify-doc.component';
 import { LoginSvg } from './svg/loginSvg'
 import { MaterialCommonModule } from '../material-common/material-common.module';
+import { NgxMatIntlTelInputModule } from '../ngx-input-tel';
+import {MatStepper, MatStepperModule} from '@angular/material/stepper';
+import { NgxOtpInputModule } from 'ngx-otp-input';
 
 @NgModule({
 	declarations: [
-		CreateprofileComponent, 
+		CreateprofileComponent,
 		WhatsEmailidComponent,
 		LoginComponent,
 		SignupComponent,
@@ -55,7 +58,11 @@ import { MaterialCommonModule } from '../material-common/material-common.module'
 		CommonModule,
 		AuthRoutingModule,
 		MaterialCommonModule,
-		FormsModule, ReactiveFormsModule
-	]
+		FormsModule, ReactiveFormsModule,
+		NgxMatIntlTelInputModule,
+		MatStepperModule,
+		NgxOtpInputModule
+	],
+	providers : [MatStepper]
 })
 export class AuthModule { }

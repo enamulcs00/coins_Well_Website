@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { ChatIconComponent } from './chat-icon/chat-icon.component';
 import { WithoutheaderComponent } from './withoutheader/withoutheader.component';
+import { AuthService } from '../_services/auth.service';
 // import
 @NgModule({
 	declarations: [
@@ -19,6 +20,7 @@ import { WithoutheaderComponent } from './withoutheader/withoutheader.component'
 		CommonModule,
 		RouterModule
 	],
-	exports: [FullComponent, WithoutheaderComponent]
+	exports: [FullComponent, WithoutheaderComponent],
+	providers : [AuthService]
 })
 export class LayoutModule { }

@@ -23,28 +23,37 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Settings</a>
-                        <div class="dropdown">
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" routerLink="/tpc">Change Transaction Pin</a>
-                                <a class="dropdown-item" routerLink="/tpc">App Lock Pin</a>
-                                <!-- <a class="dropdown-item" routerLink="/sap">2FA</a> -->
-                                <a class="dropdown-item" routerLink="/chanage-password">Change Password</a>
-                                <a class="dropdown-item" routerLink="/change-email">Change Email Address</a>
-                                <a class="dropdown-item" href="#">Deactivate Account</a>
+                    <ng-container *ngIf="_auth.isLoggedIn()">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Settings</a>
+                            <div class="dropdown">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" routerLink="/tpc">Change Transaction Pin</a>
+                                    <a class="dropdown-item" routerLink="/tpc">App Lock Pin</a>
+                                    <!-- <a class="dropdown-item" routerLink="/sap">2FA</a> -->
+                                    <a class="dropdown-item" routerLink="/chanage-password">Change Password</a>
+                                    <a class="dropdown-item" routerLink="/change-email">Change Email Address</a>
+                                    <a class="dropdown-item" href="#">Deactivate Account</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="nav-profile d-flex" routerLink="/dashboard/my-details">
-                            <figure><img src="" alt=""></figure>
-                            <div class="usr-name">
-                                <p>KUMAR</p>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-profile d-flex" routerLink="/dashboard/my-details">
+                                <figure><img src="" alt=""></figure>
+                                <div class="usr-name">
+                                    <p>{{ userInfo?.first_name }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="!_auth.isLoggedIn()">
+                        <li class="nav-item">
+                            <div class="btn-outer">
+                                <button class="btn btn-primary" routerLink="/auth">Login/Signup</button>
+                            </div>
+                        </li>
+                    </ng-container>
                 </ul>
             </div>
         </div>

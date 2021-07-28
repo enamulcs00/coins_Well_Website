@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Notify, Loading, Block } from 'notiflix';
+import { Notify, Loading, Block, Confirm } from 'notiflix';
 
 @Component({
 	selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent implements AfterViewInit{
 		Notify.init({
 			clickToClose: true,
 			position: 'right-bottom',
-			closeButton: true,
+			// closeButton: true,
 			fontSize: '15px',
 			showOnlyTheLastOne: true
 		})
@@ -23,6 +23,12 @@ export class AppComponent implements AfterViewInit{
 		Block.init({
 			svgColor : '#17C2EC'
 		})
+
+		Confirm.init({
+			titleColor : "#17C2EC",
+			okButtonBackground : "#17C2EC"
+		})
+
 		Loading.pulse();
 	}
 

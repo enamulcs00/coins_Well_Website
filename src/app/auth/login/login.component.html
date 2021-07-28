@@ -10,40 +10,46 @@
 			<h3 class="auth-title__h3">Log in</h3>
 			<p class="auth-link__title" routerLink="/auth/signup">Sign up</p>
 		</div>
-		<form class="auth-form-bx" [formGroup]="loginForm">
+		<form class="my-forms auth-form-bx" [formGroup]="loginForm">
 			<mat-form-field class="example-full-width" appearance="outline">
 				<span matPrefix>
 					<figure class="input-icon">
 						<img src="assets/images/auth/mob-icon.png" alt="">
 					</figure>
 				</span>
-				<input formControlName="phone" name="phone" matInput placeholder="Phone Number">
-				<mat-error *ngIf="loginForm.get('phone').hasError('required')">Please enter email address
+				<ngx-mat-intl-tel-input [preferredCountries]="['us', 'gb']" [enablePlaceholder]="true"
+					[enableSearch]="true" name="full_phone" formControlName="full_phone"
+					(countryChanged)="countryChanged($event)" inputPlaceholder="Phone number"></ngx-mat-intl-tel-input>
+				<mat-error *ngIf="loginForm.get('full_phone').hasError('required')">Please enter phone number.
+				</mat-error>
+				<mat-error *ngIf="loginForm.get('full_phone').hasError('validatePhoneNumber')">Please enter valid phone
+					number.
 				</mat-error>
 			</mat-form-field>
-			<!-- <div class="input-bxx">
-				
-			</div> -->
-			<!-- <div class="input-group">
-				<div class="input-group-prepend">
-					<div class="input-group-text">@</div>
-				</div>
-				<input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
-			</div> -->
-			<div class="input-bxx mb-0 pos-rel">
-				<figure class="input-icon">
-					<img src="assets/images/auth/pass-icon.png" alt="">
-				</figure>
-				<mat-form-field class="example-full-width" appearance="fill">
-					<input formControlName="password" type="password" matInput placeholder="Password">
-				</mat-form-field>
-				<figure class="pass-icon">
-					<img src="assets/images/auth/pass-show.png" alt="">
-				</figure>
-			</div>
-			<p class="trouble" routerLink="/auth/troublelogin">Trouble logging in?</p>
+			<mat-form-field class="example-full-width" appearance="outline">
+				<span matPrefix>
+					<figure class="input-icon">
+						<img src="assets/images/auth/pass-icon.png" alt="">
+					</figure>
+				</span>
+				<input [type]="hide ? 'password' : 'text'" formControlName="password" name="password" matInput
+					placeholder="Password">
+				<span matSuffix (click)="hide = !hide">
+					<figure class="input-icon">
+						<img *ngIf="hide" src="assets/images/auth/pass-show.png" alt="">
+						<img *ngIf="!hide" src="assets/images/auth/pass-show.png" alt="">
+					</figure>
+				</span>
+				<mat-error *ngIf="loginForm.get('password').hasError('required')">Please enter password.
+				</mat-error>
+			</mat-form-field>
+
+			<p class="trouble" style="padding-top: 0px;
+			margin-top: -10px;" routerLink="/auth/troublelogin">Trouble logging in?</p>
 			<div class="btn-outer mt-40">
-				<button class="btn btn-primary" routerLink="/dashboard">log in</button>
+				<div id="login-button"  class="border-plus">
+					<button (click)="loginNow()" class="btn btn-primary">log in</button>
+				</div>
 			</div>
 		</form>
 	</div>

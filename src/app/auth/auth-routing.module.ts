@@ -21,6 +21,11 @@ import { WhatsEmailidComponent } from './whats-emailid/whats-emailid.component';
 
 const routes: Routes = [
 	{
+		path: '',
+		redirectTo: 'login',	
+		pathMatch: 'full',
+	},
+	{
 		path: 'login',
 		component: LoginComponent
 	},
@@ -28,14 +33,14 @@ const routes: Routes = [
 		path: 'signup',
 		component: SignupComponent
 	},
-	{
-		path: 'activate',
-		component: SignupActivateComponent
-	},
-	{
-		path: 'setuppassword',
-		component: SetupPasswordComponent
-	},
+	// {
+	// 	path: 'activate',
+	// 	component: SignupActivateComponent
+	// },
+	// {
+	// 	path: 'setuppassword',
+	// 	component: SetupPasswordComponent
+	// },
 	{
 		path: 'emailid',
 		component: WhatsEmailidComponent

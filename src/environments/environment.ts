@@ -4,7 +4,7 @@
 
 export const environment = {
 	production: false,
-	baseUrl: 'https://appgrowthcompany.com:4129/api/v1/',
+	baseUrl: 'http://3.108.67.252:2222/api/',
 	storageKey: 'coinswellUserInfo',
 	dateFormatWithTime: 'MM-DD-YYYY hh:mm A',
 	dateFormat: 'MM-DD-YYYY',

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { LoggedGuard } from './_gurads/logged.guard';
 const routes: Routes = [
 	{
 		path: '',
@@ -8,7 +8,8 @@ const routes: Routes = [
 	},
 	{
 		path: 'auth',
-		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+		canActivate: [LoggedGuard]
 	}
 
 ];

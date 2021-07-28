@@ -1,0 +1,19 @@
+::ng-deep ngx-otp-input {
+    width: 100%; 
+    form {
+        width: 100%; 
+        .ngx-otp-input-box {
+            width: 24%;
+            label {
+                width: 100%; 
+                input {
+                    border: 1px solid #dfe0e2 !important;
+                    padding: 11px 3px !important;
+                    text-align: center !important;
+                    width: 100% !important;
+                    height: 45px !important;
+                }
+            }
+        }
+    }
+}

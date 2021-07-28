@@ -2,7 +2,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service'
@@ -18,7 +18,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 		BrowserModule,
 		AppRoutingModule,
 		NoopAnimationsModule,
-		HttpClientModule
+		HttpClientModule,
+		BrowserAnimationsModule
 	],
 	providers: [
 		{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },

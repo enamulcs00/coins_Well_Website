@@ -85,5 +85,12 @@ export class CommonService {
 				return data.map((user: User) => new User().deserialize(user));
 			}));
 	}
+	
+	uploadMedia(formData) {
+		return this._http.post<any>(`${environment.baseUrl}upload/media/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
 
 }
