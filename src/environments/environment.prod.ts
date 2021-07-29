@@ -6,5 +6,5 @@ export const environment = {
 	dateFormat: 'MM-DD-YYYY',
 	resetPasswordLink: 'http://localhost:4200/resetpassword',
 	homeURL: 'http://localhost:4200/',
-	allowedCountries :  ['ng', 'in']
+	allowedCountries :  ['ng']
 };
