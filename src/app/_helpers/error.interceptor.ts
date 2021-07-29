@@ -24,9 +24,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                     localStorage.clear();
                     this.router.navigate(['/login']);
                 } else {
-                    Notify.failure(err.error.error);
+                    var error = err.error.error_description || err.error.message || err.statusText || err.message;
+                    Notify.failure(error);
                 }
-                const error = err.error.error_description || err.error.message || err.statusText;
+                var error = err.error.error_description || err.error.message || err.statusText || err.message;
                 return throwError(error);
             }));
     }

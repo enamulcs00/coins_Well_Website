@@ -17,9 +17,15 @@
 						<img src="assets/images/auth/mob-icon.png" alt="">
 					</figure>
 				</span>
-				<ngx-mat-intl-tel-input [preferredCountries]="['us', 'gb']" [enablePlaceholder]="true"
-					[enableSearch]="true" name="full_phone" formControlName="full_phone"
-					(countryChanged)="countryChanged($event)" inputPlaceholder="Phone number"></ngx-mat-intl-tel-input>
+				<ngx-mat-intl-tel-input 
+					[onlyCountries]="allowedCountries"  
+					[enablePlaceholder]="true"
+					[enableSearch]="true" 
+					name="full_phone" 
+					formControlName="full_phone"
+					(countryChanged)="countryChanged($event)" 
+					inputPlaceholder="Phone number">
+				</ngx-mat-intl-tel-input>
 				<mat-error *ngIf="loginForm.get('full_phone').hasError('required')">Please enter phone number.
 				</mat-error>
 				<mat-error *ngIf="loginForm.get('full_phone').hasError('validatePhoneNumber')">Please enter valid phone
@@ -36,14 +42,13 @@
 					placeholder="Password">
 				<span matSuffix (click)="hide = !hide">
 					<figure class="input-icon">
-						<img *ngIf="hide" src="assets/images/auth/pass-show.png" alt="">
-						<img *ngIf="!hide" src="assets/images/auth/pass-show.png" alt="">
+						<img class="pass-hide-show" *ngIf="hide" src="assets/images/auth/pass-show.png" alt="">
+						<img class="pass-hide-show" *ngIf="!hide" src="assets/images/auth/pass-hide.png" alt="">
 					</figure>
 				</span>
 				<mat-error *ngIf="loginForm.get('password').hasError('required')">Please enter password.
 				</mat-error>
 			</mat-form-field>
-
 			<p class="trouble" style="padding-top: 0px;
 			margin-top: -10px;" routerLink="/auth/troublelogin">Trouble logging in?</p>
 			<div class="btn-outer mt-40">

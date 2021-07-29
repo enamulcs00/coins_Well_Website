@@ -16,7 +16,7 @@ export class CreateprofileComponent implements OnInit {
 	emailForm: any;
 	profileForm: FormGroup;
 	showImage: any = '';
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common : CommonService) {
 		if (this._router.getCurrentNavigation().extras.state && typeof this._router.getCurrentNavigation().extras.state.emailForm != "undefined") {
 			this.emailForm = this._router.getCurrentNavigation().extras.state.emailForm;
 		} else {
@@ -53,7 +53,7 @@ export class CreateprofileComponent implements OnInit {
 			let file = this.profileForm.get('tempImage').value;
 			const formData: FormData = new FormData();
 			formData.append('media', file, file.name);
-			this._auth.validateEmail(formData, this._auth.userId).subscribe(image => {
+			this._common.uploadMedia(formData).subscribe(image => {
 				Block.circle('#create-profile-button');
 				this.profileForm.get('image').setValue(image.data[0]['id']);
 				let copyOfProfileForm = this.profileForm.value;

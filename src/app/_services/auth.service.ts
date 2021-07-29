@@ -38,6 +38,27 @@ export class AuthService {
 			}));
 	}
 
+	updatePhone(formData, id : string) {
+		return this._http.put<any>(`${environment.baseUrl}user/update-phone-number/${id}/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
+	lostPhone(formData) {
+		return this._http.post<any>(`${environment.baseUrl}user/lost-phone-number/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
+	forgotPassword(formData) {
+		return this._http.post<any>(`${environment.baseUrl}user/forgot-password/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
 	verifyOtp(formData) {
 		return this._http.post<any>(`${environment.baseUrl}user/verify-otp/`, formData)
 			.pipe(map((data: any) => {
@@ -60,54 +81,17 @@ export class AuthService {
 	}
 
 	validateEmail(formData: any, id: string | number) {
-		return this._http.post<any>(`${environment.baseUrl}auth/validate-email/${id}/`, formData)
+		return this._http.post<any>(`${environment.baseUrl}user/validate-email/`, formData)
 			.pipe(map((data: any) => {
 				return data;
 			}));
 	}
 
+	verifyDetailsPhone(formData) {
+		return this._http.post<any>(`${environment.baseUrl}user/verify-details-phone-number/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
 
-	// forgot(formData) {
-	// 	return this._http.post<any>(`${environment.baseUrl}admin/forgotPassword`, formData)
-	// 		.pipe(map((data : any) => {	
-	// 			return data;
-	// 		}));
-	// }
-
-	// getProfileInfo() {
-	// 	return this._http.get<any>(`${environment.baseUrl}admin/profile`)
-	// 		.pipe(map((data : any) => {	
-	// 			return data;
-	// 		}));
-	// }
-
-	// updateProfile(formData) {
-	// 	return this._http.put<any>(`${environment.baseUrl}admin/profile`, formData)
-	// 		.pipe(map((data : any) => {	
-	// 			if(data) {
-	// 				this.onProfileUpdate.next(data.data);
-	// 			}
-	// 			return data;
-	// 		}));
-	// }
-
-	// changePassword(formData) {
-	// 	return this._http.put<any>(`${environment.baseUrl}admin/changePassword`, formData)
-	// 		.pipe(map((data : any) => {	
-	// 			if(data) {
-	// 				this.onProfileUpdate.next(data.data);
-	// 			}
-	// 			return data;
-	// 		}));
-	// }
-
-	// resetPassword(formData, token) {
-	// 	return this._http.post<any>(`${environment.baseUrl}admin/resetPassword/${token}`, formData)
-	// 		.pipe(map((data : any) => {	
-	// 			if(data) {
-	// 				this.onProfileUpdate.next(data.data);
-	// 			}
-	// 			return data;
-	// 		}));
-	// }
 }

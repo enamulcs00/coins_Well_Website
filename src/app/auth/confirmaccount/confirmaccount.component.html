@@ -2,7 +2,7 @@
 	<div class="auth-img">
 		<login-svg-image></login-svg-image>
 	</div>
-	<div class="auth-form">
+	<form class="auth-form" [formGroup]="confirmAccount">
 		<div class="auth-logo">
 			<figure><img src="assets/images/nav-logo.png" alt=""></figure>
 		</div>
@@ -17,38 +17,74 @@
 			</h3>
 			<!-- <p class="auth-link__title" (click)=" signup()">Sign up</p> -->
 		</div>
-		<div class="auth-form-bx">
-			<div class="d-flex otp">
-				<input type="text">
-				<input type="text">
-				<input type="text">
-				<input type="text">
-			</div>
+		<div class="auth-form-bx my-forms">
+			<ngx-otp-input [config]="{
+				otpLength: 4,
+				autoFocus: true
+			}" (otpChange)="otpEnter($event)"></ngx-otp-input>
+			<mat-error style="font-size: 13px;"
+				*ngIf="confirmAccount.get('otp').touched && confirmAccount.get('otp').hasError('required')">Please enter
+				otp.
+			</mat-error>
+			<mat-error style="font-size: 13px;"
+				*ngIf="confirmAccount.get('otp').touched && !confirmAccount.get('otp').hasError('required') && confirmAccount.get('otp').hasError('minlength')">
+				Invalid Otp.
+			</mat-error>
+
 			<p class="didnt">Didn't get the code?</p>
 			<h3 class="auth-title__h3 mt-40">Confirm account</h3>
-			<div class="input-bxx mt-10 pos-rel">
-				<figure class="input-icon">
-					<img src="assets/images/auth/pass-icon.png" alt="">
-				</figure>
-				<mat-form-field class="example-full-width" appearance="fill">
-					<input matInput placeholder="Confirm new password">
-				</mat-form-field>
-				<figure class="pass-icon">
-					<img src="assets/images/auth/pass-show.png" alt="">
-				</figure>
-			</div>
+			<mat-form-field class="example-full-width" appearance="outline">
+				<span matPrefix>
+					<figure class="input-icon">
+						<img src="assets/images/auth/pass-icon.png" alt="">
+					</figure>
+				</span>
+				<input [type]="hide ? 'password' : 'text'" formControlName="password" name="password" matInput
+					placeholder="New password">
+				<span matSuffix (click)="hide = !hide">
+					<figure class="input-icon">
+						<img class="pass-hide-show" *ngIf="hide" src="assets/images/auth/pass-show.png" alt="">
+						<img class="pass-hide-show" *ngIf="!hide" src="assets/images/auth/pass-hide.png" alt="">
+					</figure>
+				</span>
+				<mat-error *ngIf="confirmAccount.get('password').hasError('required')">Please enter password.
+				</mat-error>
+
+				<mat-error
+					*ngIf="!confirmAccount.get('password')?.hasError('removeSpaces') && confirmAccount.get('password')?.hasError('minlength')">
+					Password must be at least 8 characters long.
+				</mat-error>
+				<mat-error
+					*ngIf="!confirmAccount.get('password')?.hasError('removeSpaces') && confirmAccount.get('password')?.hasError('maxlength')">
+					Password is too long (Max 16 characters allowed).
+				</mat-error>
+				<mat-error *ngIf="confirmAccount.get('password')?.hasError('removeSpaces')">
+					Spaces not allowed.
+				</mat-error>
+			</mat-form-field>
 			<h3 class="auth-title__h3">Transaction pin</h3>
 			<div class="d-flex otp mt-10">
-				<input type="text">
-				<input type="text">
-				<input type="text">
-				<input type="text">
+				<ngx-otp-input [config]="{
+					otpLength: 4,
+					autoFocus: true,
+					isPasswordInput : true
+				}" (otpChange)="transactionEnter($event)"></ngx-otp-input>
 			</div>
-
+			<mat-error style="font-size: 13px;"
+				*ngIf="confirmAccount.get('transaction_pin').touched && confirmAccount.get('transaction_pin').hasError('required')">
+				Please enter transaction
+				pin.
+			</mat-error>
+			<mat-error style="font-size: 13px;"
+				*ngIf="confirmAccount.get('transaction_pin').touched && !confirmAccount.get('transaction_pin').hasError('required') && confirmAccount.get('otp').hasError('minlength')">
+				Invalid pin.
+			</mat-error>
 			<div class="btn-outer mt-40">
-				<button class="btn btn-primary" routerLink="/auth/updatephone">Submit</button>
-				<!-- (click)="WhatsEmailid()" -->
+				<div id="confirm-account-button" class="border-plus">
+					<button class="btn btn-primary" (click)="submitDetails()">Submit</button>
+				</div>
 			</div>
+			<!-- routerLink="/auth/updatephone" -->
 		</div>
-	</div>
+	</form>
 </div>

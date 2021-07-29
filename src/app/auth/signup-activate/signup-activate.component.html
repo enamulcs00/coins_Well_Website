@@ -1,7 +1,13 @@
 <div class="d-flex auth-title">
-	<h3 class="auth-title__h3">Activate your account <span class="d-block">
+	<h3 class="auth-title__h3" *ngIf="type =='new'">Activate your account <span class="d-block">
 			Enter 4 digit code sent on your registered phone number
-		</span></h3>
+		</span>
+	</h3>
+
+	<h3 class="auth-title__h3" *ngIf="type =='verify'">Verify account <span class="d-block">
+			Enter 4 digit code sent on your registered phone number
+		</span>
+	</h3>
 </div>
 <div class="auth-form-bx">
 	<div class="d-flex otp">
@@ -11,7 +17,7 @@
 		}" (otpChange)="checkOTP($event)"></ngx-otp-input>
 	</div>
 	<div class="btn-outer mt-40">
-		<div id="validate-otp-button"  class="border-plus">
+		<div id="validate-otp-button" class="border-plus">
 			<button class="btn btn-primary" (click)="validateOtp()">Submit</button>
 		</div>
 	</div>

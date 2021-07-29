@@ -11,6 +11,7 @@ import { MustMatch } from 'src/app/_validators/must-match.validator';
 })
 export class SetupPasswordComponent implements OnInit {
 	@Input('data') data: any;
+	@Input('type') type: string = 'new';
 	@Output('setupDone') setupDone: EventEmitter<any> = new EventEmitter();
 	hide: boolean = true;
 	setPasswordForm: FormGroup;

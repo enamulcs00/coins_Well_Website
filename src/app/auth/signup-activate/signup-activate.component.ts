@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class SignupActivateComponent implements OnInit {
 	@Input('data') data: any;
+	@Input('type') type: any = 'new';
 	@Output('verified') verified : EventEmitter<any> = new EventEmitter();
 	otp: string = '';
 	constructor(private _auth: AuthService) { }

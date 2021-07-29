@@ -19,17 +19,24 @@
 								<img src="assets/images/auth/mob-icon.png" alt="">
 							</figure>
 						</span>
-						<ngx-mat-intl-tel-input [preferredCountries]="['us', 'gb']" [enablePlaceholder]="true"
-							[enableSearch]="true" name="full_phone" formControlName="full_phone"
-							(countryChanged)="countryChanged($event)" inputPlaceholder="Phone number"></ngx-mat-intl-tel-input>
+						<ngx-mat-intl-tel-input 
+							[onlyCountries]="allowedCountries"
+							[enablePlaceholder]="true"
+							[enableSearch]="true" 
+							name="full_phone" 
+							formControlName="full_phone"
+							(countryChanged)="countryChanged($event)" 
+							inputPlaceholder="Phone number">
+						</ngx-mat-intl-tel-input>
 						<mat-error *ngIf="signUpForm.get('full_phone').hasError('required')">Please enter phone number.
 						</mat-error>
-						<mat-error *ngIf="signUpForm.get('full_phone').hasError('validatePhoneNumber')">Please enter valid phone
+						<mat-error *ngIf="signUpForm.get('full_phone').hasError('validatePhoneNumber')">Please enter
+							valid phone
 							number.
 						</mat-error>
 					</mat-form-field>
 					<div class="btn-outer mt-40">
-						<div id="signup-button"class="border-plus">
+						<div id="signup-button" class="border-plus">
 							<button type="submit" class="btn btn-primary">Sign up</button>
 						</div>
 					</div>

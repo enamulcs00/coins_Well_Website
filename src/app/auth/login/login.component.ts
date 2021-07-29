@@ -3,12 +3,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
+import { environment } from 'src/environments/environment';
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+	allowedCountries : any = environment.allowedCountries;
 	loginForm: FormGroup;
 	selectedCountry: any;
 	hide = true;
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
 			this._auth.login(formData).subscribe(res => {
 				Block.remove('#login-button');
 				if(res.data.is_profile_setup) {
+					localStorage.setItem(environment.storageKey,JSON.stringify(res.data));
 					Notify.success("Logged in successfully.");
 					this.router.navigate(['/dashboard']);
 				} else {

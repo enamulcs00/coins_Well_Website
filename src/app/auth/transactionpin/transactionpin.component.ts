@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Block } from 'notiflix';
+import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { MustMatch } from 'src/app/_validators/must-match.validator';
@@ -25,22 +25,23 @@ export class TransactionpinComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.transactionForm = this._fb.group({
-			transaction_pin: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(12), removeSpaces]],
+			transaction_pin: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4), removeSpaces]],
 			transaction_pin_confirm: [null, Validators.required]
 		}, { validators: MustMatch('transaction_pin', 'transaction_pin_confirm') })
 	}
 
 	submitAllDetails() {
 		if(this.transactionForm.valid) {
-			console.log("Working");
 			Block.circle('#transaction-pin-set')
 			this._auth.updateDetails({
 				...this.profileForm,
 				...this.transactionForm.value
 			}, this._auth.userId).subscribe(res=>{
-				Block.remove('#transaction-pin-set')
+				Block.remove('#transaction-pin-set');
+				Notify.success("Account created successfully. Wait for the admin approval.");
+				this._router.navigate(['/auth/login']);
 			}, _ => {
-				Block.remove('#transaction-pin-set')
+				Block.remove('#transaction-pin-set');
 			})
 		} else {
 			this.transactionForm.markAllAsTouched();

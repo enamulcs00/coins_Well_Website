@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Notify, Loading, Block, Confirm } from 'notiflix';
+import { Notify, Loading, Block, Confirm, Report } from 'notiflix';
 
 @Component({
 	selector: 'app-root',
@@ -27,6 +27,16 @@ export class AppComponent implements AfterViewInit{
 		Confirm.init({
 			titleColor : "#17C2EC",
 			okButtonBackground : "#17C2EC"
+		})
+
+		Report.init({
+			svgSize : '60px',
+			success : {
+				svgColor : "#17C2EC",
+				titleColor : '#17C2EC',
+				buttonBackground : '#17C2EC',
+				buttonColor : '#fff'
+			}
 		})
 
 		Loading.pulse();

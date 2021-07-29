@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { MatStepper } from '@angular/material/stepper';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-signup',
@@ -11,6 +12,7 @@ import { MatStepper } from '@angular/material/stepper';
 	styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit, AfterViewInit {
+	allowedCountries : any = environment.allowedCountries;
 	signUpForm: FormGroup;
 	selectedCountry: any;
 	userId: string = '';
@@ -30,6 +32,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 	}
 
 	countryChanged(event: any) {
+		console.log("event",event);
 		if (event) {
 			this.selectedCountry = event;
 		}
