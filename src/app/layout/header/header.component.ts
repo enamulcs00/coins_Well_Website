@@ -17,6 +17,10 @@ export class HeaderComponent implements OnInit {
 		this._auth.onLogin.subscribe(x=>{
 			this.userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
 		})
+
+		this._auth.onProfileUpdate.subscribe(x=>{
+			this.userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+		})
 	}
 
 }

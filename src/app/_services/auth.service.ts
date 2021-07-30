@@ -38,7 +38,7 @@ export class AuthService {
 			}));
 	}
 
-	updatePhone(formData, id : string) {
+	updatePhone(formData, id: string) {
 		return this._http.put<any>(`${environment.baseUrl}user/update-phone-number/${id}/`, formData)
 			.pipe(map((data: any) => {
 				return data;
@@ -89,6 +89,20 @@ export class AuthService {
 
 	verifyDetailsPhone(formData) {
 		return this._http.post<any>(`${environment.baseUrl}user/verify-details-phone-number/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
+	resendOTP(formData: any) {
+		return this._http.post<any>(`${environment.baseUrl}user/resend-otp/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
+	resendEmailOtp(formData: any) {
+		return this._http.post<any>(`${environment.baseUrl}user/resend-mail-otp/`, formData)
 			.pipe(map((data: any) => {
 				return data;
 			}));

@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { urls } from './urls';
 import { User } from '../_models/user.model';
 @Injectable({
@@ -19,14 +18,14 @@ export class CommonService {
 	}
 
 	get(url: string) {
-		return this._http.get<any>(`${environment.baseUrl}${urls[url]}`)
+		return this._http.get<any>(`${environment.baseUrl}${url}`)
 			.pipe(map((data: any) => {
 				return data;
 			}));
 	}
 
 	put(url: string, putData: any = {}) {
-		return this._http.put<any>(`${environment.baseUrl}${urls[url]}`, putData)
+		return this._http.put<any>(`${environment.baseUrl}${url}`, putData)
 			.pipe(map((data: any) => {
 				return data;
 			}));

@@ -15,7 +15,7 @@ export class OldphoneComponent implements OnInit {
 	oldPhoneForm: FormGroup;
 	selectedCountry: any;
 	userId: string = '';
-	constructor(private _auth: AuthService, private _fb: FormBuilder, private router : Router) { }
+	constructor(private _auth: AuthService, private _fb: FormBuilder, private _router : Router) { }
 
 	ngOnInit(): void {
 		this.oldPhoneForm = this._fb.group({
@@ -44,6 +44,12 @@ export class OldphoneComponent implements OnInit {
 			delete formData.full_phone;
 			this._auth.lostPhone(formData).subscribe(res => {
 				Block.remove('#signup-button');
+				Notify.success("Email sent on your registered email address.");
+				this._router.navigate(['/auth/confirmaccount'], {
+					state: {
+						data : res.data
+					}
+				});				
 			}, _ => {
 				Block.remove('#signup-button');
 			})

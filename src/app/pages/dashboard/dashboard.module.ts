@@ -14,6 +14,7 @@ import { ReferComponent } from './refer/refer.component';
 import { FaqComponent } from './faq/faq.component';
 import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
 import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
 	declarations: [
 		LeftSidebarComponent,
@@ -32,7 +33,8 @@ import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.compone
 	imports: [
 		CommonModule,
 		DashboardRoutingModule,
-		MaterialCommonModule
+		MaterialCommonModule,
+		ReactiveFormsModule
 	]
 })
 export class DashboardModule { }

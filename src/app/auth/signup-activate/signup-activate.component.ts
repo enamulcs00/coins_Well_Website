@@ -44,6 +44,16 @@ export class SignupActivateComponent implements OnInit {
 		}
 	}
 
+	resendOtp() {
+		Block.circle('#validate-otp-button');
+		this._auth.resendOTP(this.data).subscribe(data=>{
+			Notify.success("Otp sent successfully.");
+			Block.remove('#validate-otp-button');
+		}, _ =>{
+			Block.remove('#validate-otp-button');
+		})
+	}
+
 }
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Block } from 'notiflix';
+import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { removeSpaces } from 'src/app/_validators/remove-spaces';
 
@@ -23,7 +23,7 @@ export class ConfirmaccountComponent implements OnInit {
 		}
 		this.confirmAccount = this._fb.group({
 			otp: [null, [Validators.required, Validators.minLength(4), Validators.minLength(4)]],
-			email: ['money@gmail.com'],
+			email: [this.data.email],
 			password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(16), removeSpaces]],
 			transaction_pin: [null, [Validators.required]]
 		});
@@ -59,5 +59,26 @@ export class ConfirmaccountComponent implements OnInit {
 		} else {
 			this.confirmAccount.markAllAsTouched();
 		}
+	}
+
+	resendOtp() {
+		Block.circle('#confirm-account-button');
+		this._auth.resendEmailOtp(this.data).subscribe(data => {
+			Notify.success("Otp sent successfully.");
+			Block.remove('#confirm-account-button');
+		}, _ => {
+			Block.remove('#confirm-account-button');
+		})
+	}
+
+	returnEmail(input : string) {
+		var a = input.split("@");
+		var b = a[0];
+		var newstr = "";
+		for(let i = 0; i < b.length; i++) {
+			if (i > 0 && i < b.length - 1) newstr += "*";
+			else newstr += b[i];
+		}
+		return newstr + "@" + a[1];
 	}
 }

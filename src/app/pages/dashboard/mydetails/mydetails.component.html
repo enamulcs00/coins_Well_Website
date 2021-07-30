@@ -1,50 +1,55 @@
 <h3 class="tp-head text-center">
 	My Details
 </h3>
-<div class="form-bx">
+<form class="form-bx my-forms" [formGroup]="profileForm" (ngSubmit)="submitDetails()">
 	<div class="usr-img mb-20">
-		<figure class="whiite">
-			<img src="assets/images/auth/usr-img.png" alt="">
+		<input type="file" #myFile class="d-none" (change)="preview(myFile.files)" accept="image/*">
+		<figure class="whiite" (click)="myFile.click()">
+			<img style="height: 80px;width: 80px;border-radius: 50%;" [src]="showImage" alt="">
 		</figure>
-		<div class="upload">
+		<div class="upload" (click)="myFile.click()">
 			<img src="assets/images/upload.png" alt="">
 			<input type="file">
 		</div>
 	</div>
-	<div class="input-bxx pos-rel mt-40">
-		<figure class="input-icon">
-			<img src="assets/images/auth/perfered-name.png" alt="">
-		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
-			<input matInput placeholder="Preferred Name">
-		</mat-form-field>
-	</div>
-	<div class="input-bxx">
-		<figure class="input-icon">
-			<img src="assets/images/auth/a.png" alt="">
-		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
-			<input matInput placeholder="Email">
-		</mat-form-field>
-	</div>
-	<div class="input-bxx">
-		<figure class="input-icon">
-			<img src="assets/images/auth/mob-icon.png" alt="">
-		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
-			<input matInput placeholder="Phone Number">
-		</mat-form-field>
-	</div>
-	<div class="input-bxx">
-		<figure class="input-icon">
-			<img src="assets/images/auth/perfered-name.png" alt="">
-		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
-			<input matInput placeholder="Full Name">
-		</mat-form-field>
-	</div>
+	<mat-form-field class="example-full-width" appearance="outline">
+		<span matPrefix>
+			<figure class="input-icon">
+				<img src="assets/images/auth/perfered-name.png" alt="">
+			</figure>
+		</span>
+		<input matInput type="text" formControlName="full_name" name="full_name" placeholder="Preferred Name">
+		<mat-error *ngIf="profileForm.get('full_name')?.hasError('required')">
+			Please enter full name.
+		</mat-error>
+		<mat-error *ngIf="profileForm.get('full_name')?.hasError('maxlength')">
+			Full name must be less than 30 charaters.
+		</mat-error>
+	</mat-form-field>
 
+
+	<mat-form-field class="example-full-width" appearance="outline">
+		<span matPrefix>
+			<figure class="input-icon">
+				<img src="assets/images/auth/a.png" alt="">
+			</figure>
+		</span>
+		<input matInput type="text" formControlName="email" name="email" placeholder="Email">
+	</mat-form-field>
+
+
+	<mat-form-field class="example-full-width" appearance="outline">
+		<span matPrefix>
+			<figure class="input-icon">
+				<img src="assets/images/auth/mob-icon.png" alt="">
+			</figure>
+		</span>
+		<input matInput type="text" formControlName="phone_number" name="phone_number" placeholder="Phone number">
+	</mat-form-field>
+	
 	<div class="btn-outer">
-		<button class="btn btn-primary">Update</button>
+		<div id="create-profile-button" class="border-plus">
+			<button class="btn btn-primary">Update</button>
+		</div>
 	</div>
-</div>
+</form>

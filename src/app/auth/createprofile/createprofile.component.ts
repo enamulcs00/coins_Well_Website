@@ -54,7 +54,7 @@ export class CreateprofileComponent implements OnInit {
 			const formData: FormData = new FormData();
 			formData.append('media', file, file.name);
 			this._common.uploadMedia(formData).subscribe(image => {
-				Block.circle('#create-profile-button');
+				Block.remove('#create-profile-button');
 				this.profileForm.get('image').setValue(image.data[0]['id']);
 				let copyOfProfileForm = this.profileForm.value;
 				delete copyOfProfileForm.tempImage;
@@ -67,7 +67,7 @@ export class CreateprofileComponent implements OnInit {
 					}
 				});
 			}, _ => {
-				Block.circle('#create-profile-button');
+				Block.remove('#create-profile-button');
 			});
 		} else {
 			this.profileForm.markAllAsTouched();

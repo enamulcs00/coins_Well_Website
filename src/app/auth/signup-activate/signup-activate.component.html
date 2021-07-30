@@ -3,7 +3,6 @@
 			Enter 4 digit code sent on your registered phone number
 		</span>
 	</h3>
-
 	<h3 class="auth-title__h3" *ngIf="type =='verify'">Verify account <span class="d-block">
 			Enter 4 digit code sent on your registered phone number
 		</span>
@@ -16,6 +15,9 @@
 			autoFocus: true
 		}" (otpChange)="checkOTP($event)"></ngx-otp-input>
 	</div>
+	<p style="width: 100%; text-align: right; font-size: 10px;" >
+		<a href="javascript:void(0)" (click)="resendOtp()">Resend Otp</a>
+	</p>
 	<div class="btn-outer mt-40">
 		<div id="validate-otp-button" class="border-plus">
 			<button class="btn btn-primary" (click)="validateOtp()">Submit</button>

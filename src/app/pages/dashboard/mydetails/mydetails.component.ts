@@ -1,15 +1,107 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Block, Notify } from 'notiflix';
+import { loadImage } from 'src/app/_helpers/common.helper';
+import { AuthService } from 'src/app/_services/auth.service';
+import { CommonService } from 'src/app/_services/common.service';
+import { MustMatch } from 'src/app/_validators/must-match.validator';
+import { environment } from 'src/environments/environment';
+import { urls } from 'src/app/_services/urls';
 @Component({
-  selector: 'app-mydetails',
-  templateUrl: './mydetails.component.html',
-  styleUrls: ['./mydetails.component.scss']
+	selector: 'app-mydetails',
+	templateUrl: './mydetails.component.html',
+	styleUrls: ['./mydetails.component.scss']
 })
 export class MydetailsComponent implements OnInit {
+	profileForm: FormGroup;
+	showImage: any = '';
+	userInfo: any = JSON.parse(localStorage.getItem(environment.storageKey));
+	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) {
+		this.profileForm = this._fb.group({
+			tempImage: [null],
+			image: [null],
+			full_name: [null, [Validators.required, Validators.maxLength(30)]],
+			phone_number: [null],
+			email: [null]
+		});
+	}
 
-  constructor() { }
+	ngOnInit(): void {
+		if (this.userInfo) {
+			this.profileForm.patchValue({
+				full_name: this.userInfo.first_name + ' ' + this.userInfo.last_name,
+				phone_number: this.userInfo.phone_number,
+				email: this.userInfo.email,
+				image : this.userInfo.image.id
+			});
+			this.profileForm.get('email').disable();
+			this.profileForm.get('phone_number').disable();
+			this.showImage = environment.homeURL + this.userInfo?.image?.media_file;
+		}
+	}
 
-  ngOnInit(): void {
-  }
+	preview(files) {
+		if (files.length === 0)
+			return;
+		loadImage(files[0]).then(image => {
+			this.profileForm.get('tempImage').setValue(files[0]);
+			this.showImage = image;
+		})
+	}
 
+
+	submitDetails() {
+		if (this.profileForm.valid) {
+			Block.circle('#create-profile-button');
+			if (this.profileForm.get('tempImage').value) {
+				let file = this.profileForm.get('tempImage').value;
+				const formData: FormData = new FormData();
+				formData.append('media', file, file.name);
+				this._common.uploadMedia(formData).subscribe(image => {
+					this.profileForm.get('image').setValue(image.data[0]['id']);
+					const formData = {
+						...this.profileForm.value,
+						email: this.userInfo.email,
+						phone_number: this.userInfo.phone_number
+					}
+					this.updateDetails(formData).then(x => {
+						Notify.success("Profile updated successfully.");
+					});
+				});
+			} else {
+				const formData = {
+					...this.profileForm.value,
+					email: this.userInfo.email,
+					phone_number: this.userInfo.phone_number
+				}
+				this.updateDetails(formData).then(x => {
+					Notify.success("Profile updated successfully.");
+				});
+			}
+		} else {
+			this.profileForm.markAllAsTouched();
+		}
+	}
+
+
+	updateDetails(formData: any) {
+		return new Promise((resolve, reject) => {
+			this._common.put(urls.updateDetail, formData).subscribe(res => {
+				this._common.get(urls.getProfileDetails).subscribe(data=>{
+					Block.remove('#create-profile-button')
+					this.userInfo = {
+						...this.userInfo,
+						...data.data
+					};
+					localStorage.setItem(environment.storageKey, JSON.stringify(this.userInfo));
+					resolve(formData);
+					this._auth.onProfileUpdate.next(data);
+				})
+			}, error => {
+				reject(error);
+				Block.remove('#create-profile-button')
+			})
+		})
+	}
 }

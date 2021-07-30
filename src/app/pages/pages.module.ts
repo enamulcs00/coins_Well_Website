@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { LandingpageComponent } from './landingpage/landingpage.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { VerifyaccountComponent } from './verifyaccount/verifyaccount.component';
@@ -37,7 +37,8 @@ import { MaterialCommonModule } from '../material-common/material-common.module'
 		PagesRoutingModule,
 		FormsModule,
 		LayoutModule,
-		MaterialCommonModule
+		MaterialCommonModule,
+		ReactiveFormsModule
 	]
 })
 export class PagesModule { }

@@ -11,7 +11,7 @@
 				<span class="d-block">
 					Enter 4 digit code sent on your mail
 					<span class="d-block theme-color">
-						ak*********ra@apptunix.com
+					{{ returnEmail(data.email) }}
 					</span>
 				</span>
 			</h3>
@@ -31,7 +31,7 @@
 				Invalid Otp.
 			</mat-error>
 
-			<p class="didnt">Didn't get the code?</p>
+			<p class="didnt">Didn't get the code? <a href="javascript:void(0);" (click)="resendOtp()">Resend Otp</a></p>
 			<h3 class="auth-title__h3 mt-40">Confirm account</h3>
 			<mat-form-field class="example-full-width" appearance="outline">
 				<span matPrefix>

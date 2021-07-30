@@ -11,7 +11,7 @@
 			</h3>
 		</div>
 		<form [formGroup]="profileForm" (ngSubmit)="submitDetails()" class="auth-form-bx my-forms">
-			<input type="file" style="display: none;" #myFile (change)="preview(myFile.files)">
+			<input accept="image/*" type="file" style="display: none;" #myFile (change)="preview(myFile.files)">
 			<div class="usr-img mb-20" (click)="myFile.click()">
 				<figure>
 					<img *ngIf="!showImage" src="assets/images/auth/usr-img.png" alt="">
