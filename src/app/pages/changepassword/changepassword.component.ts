@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Block, Notify } from 'notiflix';
-import { AuthService } from 'src/app/_services/auth.service';
 import { removeSpaces } from 'src/app/_validators/remove-spaces';
 import { MustMatch } from 'src/app/_validators/must-match.validator';
 import { CommonService } from 'src/app/_services/common.service';

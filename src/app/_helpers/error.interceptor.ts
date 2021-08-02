@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Notify } from 'notiflix';
+import { environment } from 'src/environments/environment';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private router: Router) { }
@@ -12,7 +13,20 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             tap((data: any) => {
                 if (data.body && data.body.code == 400) {
-                    Notify.failure(data.body.message);
+                    if(data.body.data != null && data.body.data != undefined) {
+                        if(typeof data.body.data == 'object') {
+                            Object.keys(data.body.data).forEach(key=>{
+                                if(typeof data.body.data[key] == 'object') {
+                                    Object.keys(data.body.data[key]).forEach(key2=>{
+                                        Notify.failure(data.body.data[key][key2]);
+                                    })
+                                }
+                            })
+                        }
+                        // if(typeof data.body.data)
+                    } else {
+                        Notify.failure(data.body.message);
+                    }
                     return Observable.throw(data.body.message);
                 } else {
                     return data.body;
@@ -21,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             catchError(err => {
                 if (err.status === 401) {
                     Notify.failure("Not authorized");
-                    localStorage.clear();
+                    localStorage.removeItem(environment.storageKey);
                     this.router.navigate(['/login']);
                 } else {
                     var error = err.error.error_description || err.error.message || err.statusText || err.message;

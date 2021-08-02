@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { environment } from '../../../src/environments/environment';
-import { Notify, Report, Confirm, Loading, Block } from "notiflix";
+import { Notify } from "notiflix";
 @Injectable({
     providedIn: 'root'
 })
