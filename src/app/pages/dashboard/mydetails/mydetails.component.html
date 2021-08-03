@@ -2,14 +2,13 @@
 	My Details
 </h3>
 <form class="form-bx my-forms" [formGroup]="profileForm" (ngSubmit)="submitDetails()">
-	<div class="usr-img mb-20">
-		<input type="file" #myFile class="d-none" (change)="preview(myFile.files)" accept="image/*">
-		<figure class="whiite" (click)="myFile.click()">
+	<input type="file" #myFile class="d-none" (change)="preview(myFile.files)" accept="image/*">
+	<div class="usr-img mb-20 cursor-pointer" (click)="myFile.click()">
+		<figure class="whiite">
 			<img style="height: 80px;width: 80px;border-radius: 50%;" [src]="showImage" alt="">
 		</figure>
-		<div class="upload" (click)="myFile.click()">
+		<div class="upload">
 			<img src="assets/images/upload.png" alt="">
-			<input type="file">
 		</div>
 	</div>
 	<mat-form-field class="example-full-width" appearance="outline">
@@ -22,8 +21,12 @@
 		<mat-error *ngIf="profileForm.get('full_name')?.hasError('required')">
 			Please enter full name.
 		</mat-error>
-		<mat-error *ngIf="profileForm.get('full_name')?.hasError('maxlength')">
-			Full name must be less than 30 charaters.
+		<mat-error *ngIf="profileForm.get('full_name')?.hasError('validString')">
+			Numbers not accepted.
+		</mat-error>
+		<mat-error
+			*ngIf="!profileForm.get('full_name')?.hasError('validString') && (profileForm.get('full_name')?.hasError('maxlength') || profileForm.get('full_name')?.hasError('minlength')) ">
+			Full name has to be between 4 and 30 characters long.
 		</mat-error>
 	</mat-form-field>
 
@@ -46,7 +49,7 @@
 		</span>
 		<input matInput type="text" formControlName="phone_number" name="phone_number" placeholder="Phone number">
 	</mat-form-field>
-	
+
 	<div class="btn-outer">
 		<div id="create-profile-button" class="border-plus">
 			<button class="btn btn-primary">Update</button>

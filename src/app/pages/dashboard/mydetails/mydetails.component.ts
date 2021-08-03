@@ -8,6 +8,7 @@ import { CommonService } from 'src/app/_services/common.service';
 import { MustMatch } from 'src/app/_validators/must-match.validator';
 import { environment } from 'src/environments/environment';
 import { urls } from 'src/app/_services/urls';
+import { ValidString } from 'src/app/_validators/string';
 @Component({
 	selector: 'app-mydetails',
 	templateUrl: './mydetails.component.html',
@@ -21,7 +22,7 @@ export class MydetailsComponent implements OnInit {
 		this.profileForm = this._fb.group({
 			tempImage: [null],
 			image: [null],
-			full_name: [null, [Validators.required, Validators.maxLength(30)]],
+			full_name: [null, [Validators.required, Validators.maxLength(30), Validators.minLength(4), ValidString]],
 			phone_number: [null],
 			email: [null]
 		});

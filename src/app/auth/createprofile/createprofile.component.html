@@ -33,9 +33,17 @@
 					Please enter full name.
 				</mat-error>
 
-				<mat-error *ngIf="profileForm.get('full_name')?.hasError('maxlength')">
-					Full name must be less than 30 charaters.
+				<mat-error *ngIf="profileForm.get('full_name')?.hasError('validString')">
+					Numbers not accepted.
 				</mat-error>
+
+				<!-- <mat-error *ngIf="profileForm.get('full_name')?.hasError('minlength')">
+					Full name should contain at least 4	.
+				</mat-error> -->
+				<mat-error *ngIf="profileForm.get('full_name')?.hasError('minlength') || profileForm.get('full_name')?.hasError('maxlength')">
+					Full name has to be between 4 and 30 characters long.
+				</mat-error>
+				
 			</mat-form-field>
 
 			<ng-container [formGroup]="profileForm.get('bank_details')">
@@ -50,8 +58,8 @@
 						Please enter bank name.
 					</mat-error>
 
-					<mat-error *ngIf="profileForm.get('bank_details').get('bank_name')?.hasError('maxlength')">
-						Bank name must be less than 30 charaters.
+					<mat-error *ngIf="profileForm.get('bank_details').get('bank_name')?.hasError('minlength') || profileForm.get('bank_details').get('bank_name')?.hasError('maxlength')">
+						Bank name has to be between 4 and 30 characters long.
 					</mat-error>
 				</mat-form-field>
 
@@ -87,14 +95,13 @@
 					</mat-error>
 
 					<mat-error *ngIf="profileForm.get('bank_details').get('confirm_account')?.hasError('mustMatch')">
-						Confirm account number does not match with account number.
+						Confirm account number does not match.
 					</mat-error>
 
 				</mat-form-field>
 			</ng-container>
 			<div class="note">
-				<p class="note-p"><span>Note:</span>Please use your real name, because any name used now can not be
-					changed again</p>
+				<p class="note-p"><span>Note: </span>Please use your real name, because any name used now cannot be changed again.</p>
 			</div>
 			<div class="btn-outer mt-40">
 				<div id="create-profile-button" class="border-plus">

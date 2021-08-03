@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class ChangepasswordComponent implements OnInit {
 	hide: boolean = true;
+	hide2 : boolean = true;
+	hide3 : boolean = true;
 	setPasswordForm: FormGroup;
 
 	constructor(private _common: CommonService, private _fb: FormBuilder, private _router: Router) { }

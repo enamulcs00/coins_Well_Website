@@ -38,9 +38,11 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item cursor-pointer">
                             <div class="nav-profile d-flex" routerLink="/dashboard/my-details">
-                                <figure><img src="" alt=""></figure>
+                                <figure>
+                                    <img class="h-profile-img" [src]="baseUrl+userInfo?.image?.media_file" alt="{{ userInfo?.first_name }}">
+                                </figure>
                                 <div class="usr-name">
                                     <p>{{ userInfo?.first_name }}</p>
                                 </div>

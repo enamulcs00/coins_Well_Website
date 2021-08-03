@@ -14,6 +14,7 @@ export class SetupPasswordComponent implements OnInit {
 	@Input('type') type: string = 'new';
 	@Output('setupDone') setupDone: EventEmitter<any> = new EventEmitter();
 	hide: boolean = true;
+	hide2 : boolean = true;
 	setPasswordForm: FormGroup;
 
 	constructor(private _auth: AuthService, private _fb: FormBuilder) { }

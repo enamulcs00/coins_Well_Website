@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HeaderComponent implements OnInit {
 	userInfo: any = JSON.parse(localStorage.getItem(environment.storageKey));
+	baseUrl : string = environment.homeURL;
 	constructor(public _auth: AuthService, private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {

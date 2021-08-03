@@ -14,18 +14,18 @@ export class VerifyDocComponent implements OnInit {
 	documents: any[] = [
 		{
 			type: 'driving',
-			title: 'Driving Licences',
+			title: 'Driving License',
 			image: null,
 			base64: null
 		}, {
 			type: 'votor',
-			title: 'Votor Card',
+			title: 'Voter Card',
 			image: null,
 			base64: null
 		},
 		{
 			type: 'passport',
-			title: 'International Password',
+			title: 'International Passport',
 			image: null,
 			base64: null
 		},

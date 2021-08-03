@@ -13,17 +13,16 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             tap((data: any) => {
                 if (data.body && data.body.code == 400) {
-                    if(data.body.data != null && data.body.data != undefined) {
-                        if(typeof data.body.data == 'object') {
-                            Object.keys(data.body.data).forEach(key=>{
-                                if(typeof data.body.data[key] == 'object') {
-                                    Object.keys(data.body.data[key]).forEach(key2=>{
+                    if (data.body.data != null && data.body.data != undefined) {
+                        if (typeof data.body.data == 'object') {
+                            Object.keys(data.body.data).forEach(key => {
+                                if (typeof data.body.data[key] == 'object') {
+                                    Object.keys(data.body.data[key]).forEach(key2 => {
                                         Notify.failure(data.body.data[key][key2]);
                                     })
                                 }
                             })
                         }
-                        // if(typeof data.body.data)
                     } else {
                         Notify.failure(data.body.message);
                     }

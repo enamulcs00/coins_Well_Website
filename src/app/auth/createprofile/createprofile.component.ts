@@ -6,6 +6,7 @@ import { loadImage } from 'src/app/_helpers/common.helper';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { MustMatch } from 'src/app/_validators/must-match.validator';
+import { ValidString } from 'src/app/_validators/string';
 
 @Component({
 	selector: 'app-createprofile',
@@ -25,10 +26,10 @@ export class CreateprofileComponent implements OnInit {
 		this.profileForm = this._fb.group({
 			tempImage: [null, Validators.required],
 			image: [null],
-			full_name: [null, [Validators.required, Validators.maxLength(30)]],
+			full_name: [null, [Validators.required, Validators.maxLength(30), Validators.minLength(4), ValidString]],
 			role: [2],
 			bank_details: this._fb.group({
-				bank_name: [null, [Validators.required, Validators.maxLength(30)]],
+				bank_name: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
 				account_number: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
 				confirm_account: [null, Validators.required]
 			}, { validators: MustMatch('account_number', 'confirm_account') }),

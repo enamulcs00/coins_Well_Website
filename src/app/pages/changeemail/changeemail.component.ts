@@ -8,6 +8,7 @@ import { urls } from 'src/app/_services/urls';
 import { Router } from '@angular/router';
 import { validEmail } from 'src/app/_validators/validEmail';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
 	selector: 'app-changeemail',
@@ -15,14 +16,14 @@ import { environment } from 'src/environments/environment';
 	styleUrls: ['./changeemail.component.scss']
 })
 export class ChangeemailComponent implements OnInit {
-	userInfo : any = JSON.parse(localStorage.getItem(environment.storageKey));
+	userInfo: any = JSON.parse(localStorage.getItem(environment.storageKey));
 	hide: boolean = true;
 	setEmailForm: FormGroup;
 
-	constructor(private _common: CommonService, private _fb: FormBuilder, private _router: Router) { }
+	constructor(private _common: CommonService, private _fb: FormBuilder, private _router: Router, private _auth: AuthService) { }
 
 	ngOnInit(): void {
-		console.log("this.userInfo",this.userInfo);
+		console.log("this.userInfo", this.userInfo);
 		this.setEmailForm = this._fb.group({
 			email: [this.userInfo.email, Validators.required],
 			new_email: [null, [Validators.required, Validators.email, validEmail, removeSpaces]],
@@ -39,6 +40,10 @@ export class ChangeemailComponent implements OnInit {
 			this._common.put(urls.changeEmail, {
 				email: this.setEmailForm.get('new_email').value.trim()
 			}).subscribe(res => {
+				let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+				userInfo['email'] = this.setEmailForm.get('new_email').value.trim();
+				localStorage.setItem(environment.storageKey, JSON.stringify(userInfo));
+				this._auth.onProfileUpdate.next();
 				Notify.success("Email changed successfully.");
 				this._router.navigate(['/dashboard/my-details']);
 				Block.remove('#setup-email-form-button');

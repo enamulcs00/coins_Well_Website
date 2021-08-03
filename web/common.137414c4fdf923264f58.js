@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{"8wFo":function(e,a,n){"use strict";n.d(a,"a",(function(){return o}));var i=n("vZrp");const o=e=>new Promise((a,n)=>{if(null==e.type.match(/image\/*/))return i.Notify.failure("Only valid image format is allowed."),void n(null);var o=new FileReader;o.readAsDataURL(e),o.onload=e=>{a(o.result)}})}}]);
