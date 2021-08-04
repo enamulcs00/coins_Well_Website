@@ -16,6 +16,7 @@ import { EmailverifyComponent } from './emailverify/emailverify.component';
 import { RateComponent } from './rate/rate.component';
 import { LayoutModule } from '../layout/layout.module';
 import { MaterialCommonModule } from '../material-common/material-common.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -38,7 +39,8 @@ import { MaterialCommonModule } from '../material-common/material-common.module'
 		FormsModule,
 		LayoutModule,
 		MaterialCommonModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		SharedModule
 	]
 })
 export class PagesModule { }

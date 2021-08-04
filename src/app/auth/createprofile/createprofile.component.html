@@ -16,7 +16,9 @@
 					<img *ngIf="!showImage" src="assets/images/auth/usr-img.png" alt="">
 					<img *ngIf="showImage" [src]="showImage" alt="">
 				</figure>
-				<mat-error *ngIf="profileForm.get('tempImage').touched && profileForm.get('tempImage').hasError('required')" style="font-size: 13px;">
+				<mat-error
+					*ngIf="profileForm.get('tempImage').touched && profileForm.get('tempImage').hasError('required')"
+					style="font-size: 13px;">
 					Please upload profile image.
 				</mat-error>
 			</div>
@@ -39,10 +41,11 @@
 				<!-- <mat-error *ngIf="profileForm.get('full_name')?.hasError('minlength')">
 					Full name should contain at least 4	.
 				</mat-error> -->
-				<mat-error *ngIf="!profileForm.get('full_name')?.hasError('validString') && (profileForm.get('full_name')?.hasError('minlength') || profileForm.get('full_name')?.hasError('maxlength'))">
+				<mat-error
+					*ngIf="!profileForm.get('full_name')?.hasError('validString') && (profileForm.get('full_name')?.hasError('minlength') || profileForm.get('full_name')?.hasError('maxlength'))">
 					Full name has to be between 4 and 30 characters long.
 				</mat-error>
-				
+
 			</mat-form-field>
 
 			<ng-container [formGroup]="profileForm.get('bank_details')">
@@ -52,12 +55,17 @@
 							<img src="assets/images/auth/address.png" alt="">
 						</figure>
 					</span>
-					<input matInput formControlName="bank_name" name="bank_name" placeholder="Bank Name">
+					<mtx-select [items]="bankList" bindLabel="name" bindValue="name" formControlName="bank_name" placeholder="Select bank name">
+					</mtx-select>
+
+
+					<!-- <input matInput formControlName="bank_name" name="bank_name" placeholder="Bank Name"> -->
 					<mat-error *ngIf="profileForm.get('bank_details').get('bank_name')?.hasError('required')">
 						Please enter bank name.
 					</mat-error>
 
-					<mat-error *ngIf="profileForm.get('bank_details').get('bank_name')?.hasError('minlength') || profileForm.get('bank_details').get('bank_name')?.hasError('maxlength')">
+					<mat-error
+						*ngIf="profileForm.get('bank_details').get('bank_name')?.hasError('minlength') || profileForm.get('bank_details').get('bank_name')?.hasError('maxlength')">
 						Bank name has to be between 4 and 30 characters long.
 					</mat-error>
 				</mat-form-field>
@@ -100,7 +108,8 @@
 				</mat-form-field>
 			</ng-container>
 			<div class="note">
-				<p class="note-p"><span>Note: </span>Please use your real name, because any name used now cannot be changed again.</p>
+				<p class="note-p"><span>Note: </span>Please use your real name, because any name used now cannot be
+					changed again.</p>
 			</div>
 			<div class="btn-outer mt-40">
 				<div id="create-profile-button" class="border-plus">

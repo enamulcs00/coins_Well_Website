@@ -18,17 +18,15 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { VerfiyaccountComponent } from './verfiyaccount/verfiyaccount.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { OldphoneComponent } from './oldphone/oldphone.component';
-import { ConfirmaccountComponent } from './confirmaccount/confirmaccount.component';
-import { UpdatephonenoComponent } from './updatephoneno/updatephoneno.component';
 import { SupportComponent } from './support/support.component';
 import { ChatscreenComponent } from './chatscreen/chatscreen.component';
 import { VerifyDocComponent } from './verify-doc/verify-doc.component';
-import { LoginSvg } from './svg/loginSvg'
 import { MaterialCommonModule } from '../material-common/material-common.module';
 import { NgxMatIntlTelInputModule } from '../ngx-input-tel';
-import {MatStepper, MatStepperModule} from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { NgxOtpInputModule } from 'ngx-otp-input';
-
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 @NgModule({
 	declarations: [
 		CreateprofileComponent,
@@ -44,15 +42,10 @@ import { NgxOtpInputModule } from 'ngx-otp-input';
 		VerfiyaccountComponent,
 		ResetpasswordComponent,
 		OldphoneComponent,
-		ConfirmaccountComponent,
-		UpdatephonenoComponent,
 		SupportComponent,
 		ChatscreenComponent,
-		VerifyDocComponent,
-		LoginSvg
-	],
+		VerifyDocComponent],
 	exports: [
-		// MatFormFieldModule,
 	],
 	imports: [
 		CommonModule,
@@ -61,8 +54,10 @@ import { NgxOtpInputModule } from 'ngx-otp-input';
 		FormsModule, ReactiveFormsModule,
 		NgxMatIntlTelInputModule,
 		MatStepperModule,
-		NgxOtpInputModule
+		NgxOtpInputModule,
+		SharedModule,
+		MtxSelectModule
 	],
-	providers : [MatStepper]
+	providers: [MatStepper]
 })
 export class AuthModule { }

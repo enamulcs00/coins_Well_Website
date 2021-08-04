@@ -15,14 +15,16 @@ import { RateComponent } from './rate/rate.component';
 import { FullComponent } from '../layout/full/full.component';
 import { WithoutheaderComponent } from '../layout/withoutheader/withoutheader.component';
 import { AuthGuard } from '../_gurads/auth.guard';
+import { ConfirmaccountComponent } from '../shared/confirmaccount/confirmaccount.component';
+import { UpdatephonenoComponent } from '../shared/updatephoneno/updatephoneno.component';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: '/landingpage',	
+		redirectTo: '/landingpage',
 		pathMatch: 'full',
 	},
 	{
-		path  : '',
+		path: '',
 		component: FullComponent,
 		children: [
 			{
@@ -31,7 +33,7 @@ const routes: Routes = [
 			},
 			{
 				path: 'dashboard',
-				canActivate :  [AuthGuard],
+				canActivate: [AuthGuard],
 				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
 			},
 			{
@@ -49,9 +51,9 @@ const routes: Routes = [
 		]
 	},
 	{
-		path : '',
-		component : WithoutheaderComponent,
-		children : [
+		path: '',
+		component: WithoutheaderComponent,
+		children: [
 			{
 				path: 'tpc',
 				component: ChangeTranstionpinComponent,
@@ -67,6 +69,14 @@ const routes: Routes = [
 			{
 				path: 'chanage-password',
 				component: ChangepasswordComponent,
+			},
+			{
+				path: 'change-phone-number',
+				component: ConfirmaccountComponent,
+			},
+			{
+				path: 'update-number',
+				component: UpdatephonenoComponent,
 			},
 			{
 				path: 'Congratulations',

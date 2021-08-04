@@ -16,10 +16,12 @@ export class UpdatephonenoComponent {
 	updatePhoneForm: FormGroup;
 	selectedCountry: any;
 	allowedCountries: any = environment.allowedCountries;
+	from: string = 'no';
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
 		if (this._router.getCurrentNavigation().extras.state && typeof this._router.getCurrentNavigation().extras.state.confirmAccount != "undefined") {
 			this.confirmAccount = this._router.getCurrentNavigation().extras.state.confirmAccount;
-			console.log("ConfirAccount", this.confirmAccount);
+			this.from = this._router.getCurrentNavigation().extras.state.from;
+			// console.log("ConfirAccount", this.confirmAccount);
 		} else {
 			this._router.navigate(['/auth/login']);
 		}
@@ -49,10 +51,15 @@ export class UpdatephonenoComponent {
 			delete formData.full_phone;
 			this._auth.updatePhone(formData, this.confirmAccount.id).subscribe(res => {
 				Block.remove('#update-phone-button');
-				// Report.success('Success', 'Phone number updated successfully. <br/> Click <b>OK</b> to Login', 'Ok', () => {
-				// });
 				this._router.navigate(['/auth/login']);
-				Notify.success("Phone number updated successfully.");
+				if (this.from == 'dashboard') {
+					Notify.success("Phone number updated successfully. Login again to continue.");
+					localStorage.removeItem(environment.storageKey);
+					this._router.navigate(['/auth/login']);
+				} else {
+					Notify.success("Phone number updated successfully.");
+				}
+				
 			}, _ => {
 				Block.remove('#update-phone-button');
 			})
@@ -60,6 +67,5 @@ export class UpdatephonenoComponent {
 			this.updatePhoneForm.markAllAsTouched();
 		}
 	}
-
 
 }

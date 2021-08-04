@@ -40,7 +40,7 @@ export class VerifyDocComponent implements OnInit {
 	constructor(private _router: Router, private _common: CommonService) {
 		if (this._router.getCurrentNavigation().extras.state && typeof this._router.getCurrentNavigation().extras.state.profileForm != "undefined") {
 			this.profileForm = this._router.getCurrentNavigation().extras.state.profileForm;
-			console.log('this.profileForm',this.profileForm);
+			console.log('this.profileForm', this.profileForm);
 		} else {
 			this._router.navigate(['/auth/signup']);
 		}
@@ -91,6 +91,17 @@ export class VerifyDocComponent implements OnInit {
 				}
 			});
 		})
+	}
+
+	skipIt() {
+		this._router.navigate(['/auth/transtionpin'], {
+			state: {
+				profileForm: {
+					...this.profileForm,
+					"user_documents": []
+				},
+			}
+		});
 	}
 
 }

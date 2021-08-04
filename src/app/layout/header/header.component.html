@@ -34,14 +34,16 @@
                                     <!-- <a class="dropdown-item" routerLink="/sap">2FA</a> -->
                                     <a class="dropdown-item" routerLink="/chanage-password">Change Password</a>
                                     <a class="dropdown-item" routerLink="/change-email">Change Email Address</a>
-                                    <a class="dropdown-item" (click)="deactivateAccount()">Deactivate Account</a>
+                                    <a class="dropdown-item cursor-pointer" (click)="changePassword()">Change Phone number</a>
+                                    <a class="dropdown-item cursor-pointer" (click)="deactivateAccount()">Deactivate Account</a>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item cursor-pointer">
                             <div class="nav-profile d-flex" routerLink="/dashboard/my-details">
                                 <figure>
-                                    <img class="h-profile-img" [src]="baseUrl+userInfo?.image?.media_file" alt="{{ userInfo?.first_name }}">
+                                    <img class="h-profile-img" [src]="baseUrl+userInfo?.image?.media_file"
+                                        alt="{{ userInfo?.first_name }}">
                                 </figure>
                                 <div class="usr-name">
                                     <p>{{ userInfo?.first_name }}</p>

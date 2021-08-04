@@ -6,7 +6,11 @@ import { MustMatch } from 'src/app/_validators/must-match.validator';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { Router } from '@angular/router';
-
+import { uperCase } from 'src/app/_validators/upercase.validator';
+import { lowerCase } from 'src/app/_validators/lowercase.validator';
+import { oneDigit } from 'src/app/_validators/onedigit.validator';
+import { specialChar } from 'src/app/_validators/specialChar.validator';
+import { showErrors } from 'src/app/_helpers/common.helper';
 @Component({
 	selector: 'app-changepassword',
 	templateUrl: './changepassword.component.html',
@@ -14,16 +18,16 @@ import { Router } from '@angular/router';
 })
 export class ChangepasswordComponent implements OnInit {
 	hide: boolean = true;
-	hide2 : boolean = true;
-	hide3 : boolean = true;
+	hide2: boolean = true;
+	hide3: boolean = true;
 	setPasswordForm: FormGroup;
-
+	showErrors = showErrors;
 	constructor(private _common: CommonService, private _fb: FormBuilder, private _router: Router) { }
 
 	ngOnInit(): void {
 		this.setPasswordForm = this._fb.group({
 			current_password: [null, Validators.required],
-			new_password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(16), removeSpaces]],
+			new_password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(16), removeSpaces, uperCase, lowerCase, oneDigit, specialChar]],
 			confirm_password: [null, Validators.required]
 		}, { validators: MustMatch('new_password', 'confirm_password') });
 	}

@@ -17,7 +17,7 @@
 				<img src="assets/images/auth/perfered-name.png" alt="">
 			</figure>
 		</span>
-		<input matInput type="text" formControlName="full_name" name="full_name" placeholder="Preferred Name">
+		<input matInput type="text" readonly formControlName="full_name" name="full_name" placeholder="Preferred Name">
 		<mat-error *ngIf="profileForm.get('full_name')?.hasError('required')">
 			Please enter full name.
 		</mat-error>
@@ -37,7 +37,7 @@
 				<img src="assets/images/auth/a.png" alt="">
 			</figure>
 		</span>
-		<input matInput type="text" formControlName="email" name="email" placeholder="Email">
+		<input matInput type="text" formControlName="email" name="email" placeholder="Email" readonly>
 	</mat-form-field>
 
 
@@ -47,7 +47,7 @@
 				<img src="assets/images/auth/mob-icon.png" alt="">
 			</figure>
 		</span>
-		<input matInput type="text" formControlName="phone_number" name="phone_number" placeholder="Phone number">
+		<input matInput type="text" formControlName="phone_number" name="phone_number" placeholder="Phone number" readonly>
 	</mat-form-field>
 
 	<div class="btn-outer">

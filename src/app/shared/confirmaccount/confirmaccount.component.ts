@@ -15,16 +15,19 @@ export class ConfirmaccountComponent implements OnInit {
 	confirmAccount: FormGroup;
 	showImage: any = '';
 	hide: boolean = true;
+	from: string = 'no';
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
 		if (this._router.getCurrentNavigation().extras.state && typeof this._router.getCurrentNavigation().extras.state.data != "undefined") {
 			this.data = this._router.getCurrentNavigation().extras.state.data;
+			this.from = this._router.getCurrentNavigation().extras.state.from;
+			alert(this.from);
 		} else {
 			this._router.navigate(['/auth/login']);
 		}
 		this.confirmAccount = this._fb.group({
 			otp: [null, [Validators.required, Validators.minLength(4), Validators.minLength(4)]],
 			email: [this.data.email],
-			password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(16), removeSpaces]],
+			password: [null, [Validators.required, removeSpaces]],
 			transaction_pin: [null, [Validators.required]]
 		});
 	}
@@ -45,14 +48,26 @@ export class ConfirmaccountComponent implements OnInit {
 			Block.circle('#confirm-account-button');
 			this._auth.verifyDetailsPhone(this.confirmAccount.value).subscribe(res => {
 				Block.remove('#confirm-account-button');
-				this._router.navigate(['/auth/updatephone'], {
-					state: {
-						confirmAccount: {
-							...this.confirmAccount.value,
-							...res.data
+				if (this.from == 'dashboard') {
+					this._router.navigate(['/update-number'], {
+						state: {
+							confirmAccount: {
+								...this.confirmAccount.value,
+								...res.data
+							},
+							from  : 'dashboard'
 						}
-					}
-				});
+					});
+				} else {
+					this._router.navigate(['/auth/updatephone'], {
+						state: {
+							confirmAccount: {
+								...this.confirmAccount.value,
+								...res.data
+							}
+						}
+					});
+				}
 			}, _ => {
 				Block.remove('#confirm-account-button');
 			});
@@ -71,11 +86,11 @@ export class ConfirmaccountComponent implements OnInit {
 		})
 	}
 
-	returnEmail(input : string) {
+	returnEmail(input: string) {
 		var a = input.split("@");
 		var b = a[0];
 		var newstr = "";
-		for(let i = 0; i < b.length; i++) {
+		for (let i = 0; i < b.length; i++) {
 			if (i > 0 && i < b.length - 1) newstr += "*";
 			else newstr += b[i];
 		}

@@ -36,8 +36,8 @@ export class MydetailsComponent implements OnInit {
 				email: this.userInfo.email,
 				image : this.userInfo.image.id
 			});
-			this.profileForm.get('email').disable();
-			this.profileForm.get('phone_number').disable();
+			// this.profileForm.get('email').disable();
+			// this.profileForm.get('phone_number').disable();
 			this.showImage = environment.homeURL + this.userInfo?.image?.media_file;
 		}
 	}

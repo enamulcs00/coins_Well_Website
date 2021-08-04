@@ -1759,3 +1759,19 @@ figure.whiite {
 .cursor-pointer {
 	cursor: pointer !important;
 }
+
+mat-form-field {
+	margin-top: 10px;
+}
+
+.ng-dropdown-panel-items {
+	z-index: 1;
+    background: #fff;
+}
+
+.ng-select.ng-select-opened .ng-arrow-wrapper .ng-arrow {
+	border-color: transparent transparent rgba(0,0,0,.54) !important;
+}
+.ng-select .ng-arrow-wrapper .ng-arrow {
+	border-color: rgba(0,0,0,.54) transparent transparent !important;
+}

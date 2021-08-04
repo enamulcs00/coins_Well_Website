@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Block, Confirm, Notify } from 'notiflix';
+import { Block, Confirm, Loading, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HeaderComponent implements OnInit {
 	userInfo: any = JSON.parse(localStorage.getItem(environment.storageKey));
-	baseUrl : string = environment.homeURL;
+	baseUrl: string = environment.homeURL;
 	constructor(public _auth: AuthService, private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
@@ -38,6 +38,27 @@ export class HeaderComponent implements OnInit {
 		}, () => {
 			// No button callbackalert('If you say so...');
 		});
+	}
+
+	changePassword() {
+		const formData = Object.assign({
+			country_code : this.userInfo.country_code,
+			phone_number : this.userInfo.phone_number
+		});
+		delete formData.full_phone;
+		Loading.circle();
+		this._auth.lostPhone(formData).subscribe(res => {
+			Notify.success("Email sent on your registered email address.");
+			this._router.navigate(['/change-phone-number'], {
+				state: {
+					data: res.data,
+					from : 'dashboard'
+				}
+			});
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
 	}
 
 }

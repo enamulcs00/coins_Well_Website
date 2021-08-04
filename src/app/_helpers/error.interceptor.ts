@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if (err.status === 401) {
                     Notify.failure("Not authorized");
                     localStorage.removeItem(environment.storageKey);
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/auth/login']);
                 } else {
                     var error = err.error.error_description || err.error.message || err.statusText || err.message;
                     Notify.failure(error);

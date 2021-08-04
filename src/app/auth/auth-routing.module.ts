@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ChatscreenComponent } from './chatscreen/chatscreen.component';
-import { ConfirmaccountComponent } from './confirmaccount/confirmaccount.component';
+import { ConfirmaccountComponent } from '../shared/confirmaccount/confirmaccount.component';
 import { CreateprofileComponent } from './createprofile/createprofile.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
@@ -13,7 +13,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SupportComponent } from './support/support.component';
 import { TransactionpinComponent } from './transactionpin/transactionpin.component';
 import { TroubleloginComponent } from './troublelogin/troublelogin.component';
-import { UpdatephonenoComponent } from './updatephoneno/updatephoneno.component';
+import { UpdatephonenoComponent } from '../shared/updatephoneno/updatephoneno.component';
 import { VerfiyaccountComponent } from './verfiyaccount/verfiyaccount.component';
 import { VerifyDocComponent } from './verify-doc/verify-doc.component';
 import { WelcomeComponent } from './welcome/welcome.component';

@@ -1,6 +1,7 @@
+import { AbstractControl, FormControl } from '@angular/forms';
 import { Notify } from 'notiflix';
 export const loadImage = (files) => {
-    return new Promise((resolve, reject)=> {
+    return new Promise((resolve, reject) => {
         var mimeType = files.type;
         if (mimeType.match(/image\/*/) == null) {
             Notify.failure("Only valid image format is allowed.");
@@ -13,4 +14,16 @@ export const loadImage = (files) => {
             resolve(reader.result);
         }
     })
+}
+
+
+export const showErrors = (formControl: AbstractControl) => {
+    if (formControl.errors != null) {
+        let error;
+        Object.keys(formControl.errors).splice(0,1).forEach(key => {
+            error = key;
+        })
+        return error;
+    }
+    return false;
 }
