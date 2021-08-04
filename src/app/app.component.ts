@@ -12,9 +12,10 @@ export class AppComponent implements AfterViewInit{
 		Notify.init({
 			clickToClose: true,
 			position: 'right-bottom',
-			// closeButton: true,
 			fontSize: '15px',
-			showOnlyTheLastOne: true
+			showOnlyTheLastOne: true,
+			messageMaxLength : 50000,
+			width : '300px'
 		})
 		Loading.init( {
 			svgColor : '#17C2EC'
