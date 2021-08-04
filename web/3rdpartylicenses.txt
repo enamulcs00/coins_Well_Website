@@ -66,6 +66,12 @@ MIT
 @angular/router
 MIT
 
+@ng-matero/extensions
+MIT
+
+@ng-select/ng-select
+MIT
+
 aos
 MIT
 The MIT License (MIT)
