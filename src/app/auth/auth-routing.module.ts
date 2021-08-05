@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { OldphoneComponent } from './oldphone/oldphone.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SetupPasswordComponent } from './setup-password/setup-password.component';
-import { SignupActivateComponent } from './signup-activate/signup-activate.component';
+import { SignupActivateComponent } from '../shared/signup-activate/signup-activate.component';
 import { SignupComponent } from './signup/signup.component';
 import { SupportComponent } from './support/support.component';
 import { TransactionpinComponent } from './transactionpin/transactionpin.component';

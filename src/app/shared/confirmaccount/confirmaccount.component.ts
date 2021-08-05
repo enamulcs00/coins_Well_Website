@@ -20,7 +20,6 @@ export class ConfirmaccountComponent implements OnInit {
 		if (this._router.getCurrentNavigation().extras.state && typeof this._router.getCurrentNavigation().extras.state.data != "undefined") {
 			this.data = this._router.getCurrentNavigation().extras.state.data;
 			this.from = this._router.getCurrentNavigation().extras.state.from;
-			alert(this.from);
 		} else {
 			this._router.navigate(['/auth/login']);
 		}

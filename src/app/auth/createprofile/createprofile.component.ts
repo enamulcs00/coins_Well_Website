@@ -17,97 +17,161 @@ export class CreateprofileComponent implements OnInit {
 	emailForm: any;
 	profileForm: FormGroup;
 	showImage: any = '';
+	bankList2 = [];
 	bankList: any[] = [
 		{
 			"id": "1",
-			"name": "Access Bank Plc"
+			"name": "Access Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "2",
-			"name": "Citibank Nigeria Limited"
+			"name": "Citibank Nigeria Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "3",
-			"name": "Ecobank Nigeria"
+			"name": "Ecobank Nigeria",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "4",
-			"name": "Fidelity Bank Plc"
+			"name": "Fidelity Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "5",
-			"name": "First Bank of Nigeria Limited"
+			"name": "First Bank of Nigeria Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "6",
-			"name": "First City Monument Bank Limited"
+			"name": "First City Monument Bank Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "7",
-			"name": "Globus Bank Limited"
+			"name": "Globus Bank Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "8",
-			"name": "Guaranty Trust Bank Plc"
+			"name": "Guaranty Trust Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "9",
-			"name": "Heritage Bank Plc"
+			"name": "Heritage Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "10",
-			"name": "Keystone Bank Limited"
+			"name": "Keystone Bank Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "11",
-			"name": "Polaris Bank Limited"
+			"name": "Polaris Bank Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "12",
-			"name": "Providus Bank Limited"
+			"name": "Providus Bank Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "13",
-			"name": "Stanbic IBTC Bank Plc"
+			"name": "Stanbic IBTC Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "14",
-			"name": "Standard Chartered"
+			"name": "Standard Chartered",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "15",
-			"name": "Sterling Bank Plc"
+			"name": "Sterling Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "16",
-			"name": "SunTrust Bank Nigeria Limited"
+			"name": "SunTrust Bank Nigeria Limited",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "17",
-			"name": "TITAN Trust Bank"
+			"name": "TITAN Trust Bank",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "18",
-			"name": "Union Bank of Nigeria Plc"
+			"name": "Union Bank of Nigeria Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "19",
-			"name": "Unity Bank Plc"
+			"name": "Unity Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "20",
-			"name": "Wema Bank Plc"
+			"name": "Wema Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		},
 		{
 			"id": "21",
-			"name": "Zenith Bank Plc"
+			"name": "Zenith Bank Plc",
+			"branch" : "Ludhiana Punjab India",
+			"ifsc" : "NI0000G10A",
+			"image" : "https://upload.wikimedia.org/wikipedia/en/6/62/First_Bank_of_Nigeria_logo.png"
 		}
 	]
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) {
 		if (this._router.getCurrentNavigation().extras.state && typeof this._router.getCurrentNavigation().extras.state.emailForm != "undefined") {
 			this.emailForm = this._router.getCurrentNavigation().extras.state.emailForm;
 		} else {
-			this._router.navigate(['/auth/signup']);
+			// this._router.navigate(['/auth/signup']);
 		}
 		this.profileForm = this._fb.group({
 			tempImage: [null, Validators.required],
@@ -115,7 +179,7 @@ export class CreateprofileComponent implements OnInit {
 			full_name: [null, [Validators.required, Validators.maxLength(30), Validators.minLength(4), ValidString]],
 			role: ['2'],
 			bank_details: this._fb.group({
-				bank_name: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+				bank_name: [null, [Validators.required]],
 				account_number: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
 				confirm_account: [null, Validators.required]
 			}, { validators: MustMatch('account_number', 'confirm_account') }),

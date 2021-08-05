@@ -42,8 +42,8 @@ export class HeaderComponent implements OnInit {
 
 	changePassword() {
 		const formData = Object.assign({
-			country_code : this.userInfo.country_code,
-			phone_number : this.userInfo.phone_number
+			country_code: this.userInfo.country_code,
+			phone_number: this.userInfo.phone_number
 		});
 		delete formData.full_phone;
 		Loading.circle();
@@ -52,7 +52,30 @@ export class HeaderComponent implements OnInit {
 			this._router.navigate(['/change-phone-number'], {
 				state: {
 					data: res.data,
-					from : 'dashboard'
+					from: 'dashboard'
+				}
+			});
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
+	}
+
+	changeEmail() {
+		const formData = Object.assign({
+			email: this.userInfo.email,
+		});
+		delete formData.full_phone;
+		Loading.circle();
+		this._common.put(urls.changeEmail, formData).subscribe(res => {
+			Notify.success("Otp sent on your registered phone number.");
+			this._router.navigate(['/change-email'], {
+				state: {
+					data: {
+						country_code: this.userInfo.country_code,
+						phone_number: this.userInfo.phone_number
+					},
+					from: 'dashboard'
 				}
 			});
 			Loading.remove();

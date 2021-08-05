@@ -9,7 +9,6 @@ import { CreateprofileComponent } from './createprofile/createprofile.component'
 import { WhatsEmailidComponent } from './whats-emailid/whats-emailid.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { SignupActivateComponent } from './signup-activate/signup-activate.component';
 import { SetupPasswordComponent } from './setup-password/setup-password.component';
 import { TransactionpinComponent } from './transactionpin/transactionpin.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -33,7 +32,6 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
 		WhatsEmailidComponent,
 		LoginComponent,
 		SignupComponent,
-		SignupActivateComponent,
 		SetupPasswordComponent,
 		TransactionpinComponent,
 		WelcomeComponent,
