@@ -5,12 +5,30 @@
 	<div class="acc-upgrade">
 		<h3>Facial Verification</h3>
 		<p>Upload a selfie of you holding a piece of paper with your name, Date of Birth on the piece of paper</p>
-		<figure class="m-auto">
-			<img src="assets/images/scan.png" alt="">
+		<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
+			class="d-none">
+		<figure class="m-auto cursor-pointer" (click)="facialDocument.click()">
+			<img *ngIf="!facialVerificationImageUrl" src="assets/images/scan.png" alt="">
+			<img *ngIf="facialVerificationImageUrl" [src]="facialVerificationImageUrl" alt="">
 		</figure>
 	</div>
 
+	<div class="acc-upgrade">
+		<h3>Upload Documents</h3>
+		<p>Upload any one of the following to upgrade your account.</p>
+		<div class="documents-upload-bx">
+			<div class="upload-bx cursor-pointer" *ngFor="let doc of documents; let i = index;"
+				[ngStyle]="{background: 'url('+doc.base64+')'}">
+				<div class="plus-icon cursor-pointer">+</div>
+				<p class="cursor-pointer">{{ doc?.title }}</p>
+				<input #file (change)="preview(file.files, i)" type="file" accept="image/*">
+			</div>
+		</div>
+	</div>
+
 	<div class="btn-outer m-auto pt-20">
-		<button class="btn btn-primary">Update</button>
+		<div id="submit-documents">
+			<button class="btn btn-primary" (click)="goToNext()">Update</button>
+		</div>
 	</div>
 </div>

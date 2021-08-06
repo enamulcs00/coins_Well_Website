@@ -65,7 +65,7 @@
 			<h3 class="auth-title__h3">Transaction pin</h3>
 			<div class="d-flex otp mt-10">
 				<ngx-otp-input [config]="{
-					otpLength: 4,
+					otpLength: 6,
 					autoFocus: true,
 					isPasswordInput : true
 				}" (otpChange)="transactionEnter($event)"></ngx-otp-input>

@@ -15,6 +15,7 @@ import { FaqComponent } from './faq/faq.component';
 import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
 import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MtxSelectModule } from '@ng-matero/extensions';
 @NgModule({
 	declarations: [
 		LeftSidebarComponent,
@@ -34,7 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 		CommonModule,
 		DashboardRoutingModule,
 		MaterialCommonModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		MtxSelectModule
 	]
 })
 export class DashboardModule { }

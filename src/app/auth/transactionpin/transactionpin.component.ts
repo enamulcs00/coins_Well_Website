@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
-import { CommonService } from 'src/app/_services/common.service';
 import { MustMatch } from 'src/app/_validators/must-match.validator';
 import { removeSpaces } from 'src/app/_validators/remove-spaces';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-transactionpin',
@@ -15,7 +15,7 @@ import { removeSpaces } from 'src/app/_validators/remove-spaces';
 export class TransactionpinComponent implements OnInit {
 	profileForm: any;
 	transactionForm: FormGroup;
-	constructor(private _router: Router, private _common: CommonService, private _fb: FormBuilder, private _auth : AuthService) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService) {
 		if (this._router.getCurrentNavigation().extras.state && typeof this._router.getCurrentNavigation().extras.state.profileForm != "undefined") {
 			this.profileForm = this._router.getCurrentNavigation().extras.state.profileForm;
 		} else {
@@ -25,21 +25,22 @@ export class TransactionpinComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.transactionForm = this._fb.group({
-			transaction_pin: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4), removeSpaces]],
+			transaction_pin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6), removeSpaces]],
 			transaction_pin_confirm: [null, Validators.required]
 		}, { validators: MustMatch('transaction_pin', 'transaction_pin_confirm') })
 	}
 
 	submitAllDetails() {
-		if(this.transactionForm.valid) {
+		if (this.transactionForm.valid) {
 			Block.circle('#transaction-pin-set')
 			this._auth.updateDetails({
 				...this.profileForm,
 				...this.transactionForm.value
-			}, this._auth.userId).subscribe(res=>{
+			}, this._auth.userId).subscribe(res => {
 				Block.remove('#transaction-pin-set');
-				Notify.success("Account created successfully. Wait for the admin approval.");
-				this._router.navigate(['/auth/login']);
+				Notify.success("Account create successfully.");
+				localStorage.setItem(environment.storageKey,JSON.stringify(res.data));
+				this._router.navigate(['/dashboard']);
 			}, _ => {
 				Block.remove('#transaction-pin-set');
 			})

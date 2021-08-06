@@ -25,11 +25,11 @@
 				</mat-error>
 
 				<mat-error *ngIf="!transactionForm.get('transaction_pin')?.hasError('removeSpaces') && transactionForm.get('transaction_pin')?.hasError('maxlength')">
-					Transaction pin must be 4 characters long.
+					Transaction pin must be 6 characters long.
 				</mat-error>
 
 				<mat-error *ngIf="!transactionForm.get('transaction_pin')?.hasError('removeSpaces') && transactionForm.get('transaction_pin')?.hasError('minlength')">
-					Transaction pin must be 4 characters long.
+					Transaction pin must be 6 characters long.
 				</mat-error>
 
 				<mat-error *ngIf="transactionForm.get('transaction_pin')?.hasError('removeSpaces')">

@@ -11,7 +11,7 @@ export class CommonService {
 	constructor(private _http: HttpClient) { }
 
 	post(url: string, postData: any = {}) {
-		return this._http.post<any>(`${environment.baseUrl}${urls[url]}`, postData)
+		return this._http.post<any>(`${environment.baseUrl}${url}`, postData)
 			.pipe(map((data: any) => {
 				return data;
 			}));

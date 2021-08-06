@@ -1,0 +1,70 @@
+::ng-deep .bank-dropdown {
+    .ng-option-disabled {
+        color : #9c9c9c !important;
+    }
+    .ng-placeholder {
+        opacity: 1 !important;   
+    }
+    .ng-value-container {
+        min-height: 31px !important;
+    }
+    .ng-value {
+        &:after {
+            display: block !important;
+        }
+    }
+    .mat-form-field-flex > .mat-form-field-infix {
+        padding: 0.8em 0px !important;
+    }
+    ng-dropdown-panel {
+        width: 100% !important;
+    }
+
+    .bank-dropdown-label {
+        display: flex;
+        width: 100%;
+        margin-left: 10px;
+        justify-content: start;
+        .bank-heading {
+            font-size: 15px;
+            font-weight: 500;
+            color: #0a1958;
+            line-height: inherit;
+        }
+        .branch {
+            font-size: 12px;
+            line-height: inherit;
+            margin-top: 4px;
+        }
+    }
+
+    .bank-dropdown-option {
+        display: flex;
+        width: 100%;
+        justify-content: start;
+        .img {
+            height: 35px;
+            min-width: 35px;
+            width: 35px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .bank-heading {
+            font-size: 15px;
+            font-weight: 500;
+            color: #0a1958;
+            line-height: inherit;
+        }
+        .branch {
+            font-size: 12px;
+            line-height: inherit;
+            margin-top: 4px;
+        }
+        .ifsc {
+            line-height: inherit;
+            font-size: 12px;
+            margin-top: 4px;
+            color: #616161;
+        }
+    }
+}

@@ -37,9 +37,9 @@
 						<img src="assets/images/auth/mail.png" alt="">
 					</figure>
 				</span>
-				<input type="text" formControlName="referral_link" name="referral_link" matInput placeholder="Referral link (optional)">
-				<mat-error *ngIf="emailForm.get('referral_link')?.hasError('required')">
-					Please enter email address.
+				<input type="text" formControlName="referred_by" name="referred_by" matInput placeholder="Referral Code (optional)">
+				<mat-error *ngIf="emailForm.get('referred_by')?.hasError('required')">
+					Please enter refer code.
 				</mat-error>
 			</mat-form-field>
 

@@ -55,8 +55,11 @@
 							<img src="assets/images/auth/address.png" alt="">
 						</figure>
 					</span>
-					<mtx-select [loading]="false" loadingText="Please wait..." notFoundText="No bank found. Try another name" [virtualScroll]="true" bindLabel="Select bank name" [items]="bankList" bindLabel="name" bindValue="id" formControlName="bank_name"
-						placeholder="Select bank name">
+					<mtx-select typeToSearchText="Search bank name or IFSC code." [typeahead]="bankListEvent"
+						[loading]="bankListLoading" loadingText="Fetching banks..."
+						notFoundText="No bank found. Try another name" [virtualScroll]="true"
+						bindLabel="Select bank name" [items]="bankList" bindLabel="name" bindValue="id"
+						formControlName="bank_name" placeholder="Select bank name">
 						<ng-template ng-label-tmp let-item="item">
 							<div class="bank-dropdown-label">
 								<div>
@@ -68,20 +71,18 @@
 						<ng-template ng-option-tmp let-item="item">
 							<div class="bank-dropdown-option">
 								<div class="pr-2">
-									<img class="img" src="{{ item.image }}" alt="">
+									<img class="img" src="{{ baseUrl+item?.bank_image?.media_file }}" alt="">
 								</div>
 								<div>
 									<p class="bank-heading">{{ item.name }} </p>
 									<p class="branch">{{ item.branch }}</p>
-									<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc }}</span></p>
+									<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc_code }}</span></p>
 								</div>
 							</div>
 							<!-- </div> -->
 						</ng-template>
 					</mtx-select>
-
-
-					<!-- <input matInput formControlName="bank_name" name="bank_name" placeholder="Bank Name"> -->
+					
 					<mat-error *ngIf="profileForm.get('bank_details').get('bank_name')?.hasError('required')">
 						Please enter bank name.
 					</mat-error>
@@ -126,7 +127,6 @@
 					<mat-error *ngIf="profileForm.get('bank_details').get('confirm_account')?.hasError('mustMatch')">
 						Confirm account number does not match.
 					</mat-error>
-
 				</mat-form-field>
 			</ng-container>
 			<div class="note">

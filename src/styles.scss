@@ -1518,7 +1518,11 @@ figure.whiite {
 		border-radius: $border-radius;
 	}
 }
-
+.documents-upload-bx {
+	display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 .upload-bx {
 	height: 150px;
 	border: 1px solid #ccc;
@@ -1528,6 +1532,7 @@ figure.whiite {
 	flex-direction: column;
 	margin-bottom: 10px;
 	position: relative;
+	width: calc(50% - 10px);
 }
 .upload-bx input {
 	position: absolute;
@@ -1658,7 +1663,7 @@ figure.whiite {
 .hm-contactus {
 	background: #f9fbff;
 }
-.small .navbar {
+.fixednav .navbar {
 	box-shadow: 0px 10px 33px #0003;
 	transition: all 500ms linear;
 }
@@ -1774,4 +1779,9 @@ mat-form-field {
 }
 .ng-select .ng-arrow-wrapper .ng-arrow {
 	border-color: rgba(0,0,0,.54) transparent transparent !important;
+}
+
+.fixednav .navbar {
+	box-shadow: 0px 10px 33px #0003;
+	transition: all 500ms linear;
 }

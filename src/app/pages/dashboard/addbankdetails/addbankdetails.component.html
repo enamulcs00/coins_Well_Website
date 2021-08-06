@@ -1,40 +1,104 @@
 <h3 class="tp-head pb-20 text-center">
 	Add Bank Details
 </h3>
-<div class="pt-60">
-	<div class="input-bxx">
+<form class="pt-60 my-forms" [formGroup]="bankForm" (ngSubmit)="submitDetails()">
+	<mat-form-field class=" bank-dropdown example-full-width" appearance="outline">
+		<span matPrefix>
+			<figure class="input-icon">
+				<img src="assets/images/auth/address.png" alt="">
+			</figure>
+		</span>
+		<mtx-select typeToSearchText="Search bank name or IFSC code." [typeahead]="bankListEvent"
+		formControlName="bank_name"
+			[loading]="bankListLoading" loadingText="Fetching banks..." notFoundText="No banks found. Try another name"
+			[virtualScroll]="true" bindLabel="Select bank name" [items]="bankList" bindLabel="name" bindValue="id"
+			placeholder="Select bank name">
+			<ng-template ng-label-tmp let-item="item">
+				<div class="bank-dropdown-label">
+					<div>
+						<p class="bank-heading">{{ item.name }} </p>
+						<p class="branch">{{ item.branch }}</p>
+					</div>
+				</div>
+			</ng-template>
+			<ng-template ng-option-tmp let-item="item">
+				<div class="bank-dropdown-option">
+					<div class="pr-2">
+						<img class="img" src="{{ baseUrl+item?.bank_image?.media_file }}" alt="">
+					</div>
+					<div>
+						<p class="bank-heading">{{ item.name }} </p>
+						<p class="branch">{{ item.branch }}</p>
+						<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc_code }}</span></p>
+					</div>
+				</div>
+				<!-- </div> -->
+			</ng-template>
+		</mtx-select>
+
+		<mat-error *ngIf="bankForm.get('bank_name')?.hasError('required')">
+			Please enter bank name.
+		</mat-error>
+
+		<mat-error
+			*ngIf="bankForm.get('bank_name')?.hasError('minlength') || bankForm.get('bank_name')?.hasError('maxlength')">
+			Bank name has to be between 4 and 30 characters long.
+		</mat-error>
+	</mat-form-field>
+
+	<!-- <div class="input-bxx">
 		<figure class="input-icon">
 			<img src="assets/images/auth/address.png" alt="">
 		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
+		<mat-form-field class="example-full-width" appearance="outline">
 			<input matInput placeholder="Bank Name">
 		</mat-form-field>
-	</div>
+	</div> -->
 	<div class="input-bxx pos-rel">
-		<figure class="input-icon">
-			<img src="assets/images/auth/perfered-name.png" alt="">
-		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
+		<mat-form-field class="example-full-width" appearance="outline">
+			<span matPrefix>
+				<figure class="input-icon">
+					<img src="assets/images/auth/perfered-name.png" alt="">
+				</figure>
+			</span>
 			<input matInput placeholder="Account holder name">
 		</mat-form-field>
 	</div>
-	<div class="input-bxx">
-		<figure class="input-icon">
-			<img src="assets/images/auth/address.png" alt="">
-		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
-			<input matInput placeholder="Account number">
-		</mat-form-field>
-	</div>
-	<div class="input-bxx">
-		<figure class="input-icon">
-			<img src="assets/images/auth/address.png" alt="">
-		</figure>
-		<mat-form-field class="example-full-width" appearance="fill">
-			<input matInput placeholder="Confirm account number">
-		</mat-form-field>
-	</div>
+	<mat-form-field class="example-full-width" appearance="outline">
+		<span matPrefix>
+			<figure class="input-icon">
+				<img src="assets/images/auth/address.png" alt="">
+			</figure>
+		</span>
+		<input formControlName="account_number" name="account_number" matInput placeholder="Account number">
+		<mat-error *ngIf="bankForm.get('account_number')?.hasError('required')">
+			Please enter account number.
+		</mat-error>
+
+		<mat-error *ngIf="bankForm.get('account_number')?.hasError('maxlength')">
+			Account number must be less than 25 charaters.
+		</mat-error>
+
+		<mat-error *ngIf="bankForm.get('account_number')?.hasError('minlength')">
+			Account number must be greater than 6 charaters.
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field class="example-full-width" appearance="outline">
+		<span matPrefix>
+			<figure class="input-icon">
+				<img src="assets/images/auth/address.png" alt="">
+			</figure>
+		</span>
+		<input matInput formControlName="confirm_account" name="confirm_account" placeholder="Confirm account number">
+		<mat-error *ngIf="bankForm.get('confirm_account')?.hasError('required')">
+			Please enter confirm account number.
+		</mat-error>
+
+		<mat-error *ngIf="bankForm.get('confirm_account')?.hasError('mustMatch')">
+			Confirm account number does not match.
+		</mat-error>
+	</mat-form-field>
 	<div class="btn-outer mt-40 w-100">
 		<button class="btn btn-primary" routerLink="/Congratulations">Submit</button>
 	</div>
-</div>
+</form>

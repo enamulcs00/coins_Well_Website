@@ -21,7 +21,7 @@ export class ChangeTranstionpinComponent implements OnInit {
 	ngOnInit(): void {
 		this.setTransactionForm = this._fb.group({
 			transaction_pin: [null, Validators.required],
-			new_transaction_pin: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4), removeSpaces]],
+			new_transaction_pin: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(6), removeSpaces]],
 			confirm_transaction_pin: [null, Validators.required]
 		}, { validators: MustMatch('new_transaction_pin', 'confirm_transaction_pin') });
 	}

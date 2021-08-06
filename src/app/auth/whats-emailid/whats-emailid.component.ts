@@ -21,7 +21,7 @@ export class WhatsEmailidComponent implements OnInit {
 		}
 		this.emailForm = this._fb.group({
 			email: [null, [Validators.required, Validators.email, validEmail, removeSpaces]],
-			referral_link: [null],
+			referred_by: [null],
 			tos: [true, Validators.requiredTrue]
 		});
 	}
