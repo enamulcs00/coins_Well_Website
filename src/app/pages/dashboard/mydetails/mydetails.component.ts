@@ -85,7 +85,6 @@ export class MydetailsComponent implements OnInit {
 		}
 	}
 
-
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
 			this._common.put(urls.updateDetail, formData).subscribe(res => {

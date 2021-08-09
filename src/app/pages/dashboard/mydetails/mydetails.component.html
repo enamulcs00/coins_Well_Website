@@ -18,6 +18,7 @@
 			</figure>
 		</span>
 		<input matInput type="text" readonly formControlName="full_name" name="full_name" placeholder="Preferred Name">
+		<mat-hint>Full name is non editable.</mat-hint>
 		<mat-error *ngIf="profileForm.get('full_name')?.hasError('required')">
 			Please enter full name.
 		</mat-error>
@@ -38,6 +39,7 @@
 			</figure>
 		</span>
 		<input matInput type="text" formControlName="email" name="email" placeholder="Email" readonly>
+		<mat-hint>Email is non editable.</mat-hint>
 	</mat-form-field>
 
 
@@ -48,6 +50,7 @@
 			</figure>
 		</span>
 		<input matInput type="text" formControlName="phone_number" name="phone_number" placeholder="Phone number" readonly>
+		<mat-hint>Phone number is non editable.</mat-hint>
 	</mat-form-field>
 
 	<div class="btn-outer">
