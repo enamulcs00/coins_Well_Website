@@ -9,4 +9,7 @@ export const urls = {
     deactivateAccount: 'user/deactivate_user/',
     searchBank: 'admin/search-bank/',
     facialVerification: 'user/account_upgrade/',
+    getCMS: 'cms/get-details/',
+    getBankDetails : 'admin/get-bank-details/',
+    addCash  : 'payment/create-add-payment-request/',
 };

@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/file-input": "^4.0.2",
     "@angular/animations": "~10.0.6",
     "@angular/cdk": "^10.2.7",
     "@angular/common": "~10.0.6",
