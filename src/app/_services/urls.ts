@@ -11,5 +11,9 @@ export const urls = {
     facialVerification: 'user/account_upgrade/',
     getCMS: 'cms/get-details/',
     getBankDetails : 'admin/get-bank-details/',
-    addCash  : 'payment/create-add-payment-request/',
+    addCash  : 'payment/create-payment-deposit-withdraw-request/',
+    getAllCurrencies : 'user/get-all-currencies/',
+    addBankAccount : 'user/add-bank/',
+    getBanks : 'user/get-all-bank-accounts/',
+    deleteBank: 'user/delete-user-bank-account/',
 };

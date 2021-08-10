@@ -1,43 +1,56 @@
-<div class="form-by my-forms">
-	<div class="input-bxx mb-0 pos-rel">
-		<mat-form-field class="example-full-width" appearance="outline">
-			<input matInput placeholder="Enter Amount to withdraw">
-		</mat-form-field>
+<form [(formGroup)]="addCashForm" (ngSubmit)="submitDetails()">
+	<div class="form-by my-forms">
+		<div class="input-bxx mb-0 pos-rel">
+			<mat-form-field class="example-full-width" appearance="outline">
+                <input matInput type="number" min="1" formControlName="amount" placeholder="Enter the amount ">
+                <mat-error *ngIf="addCashForm.get('amount')?.hasError('required')">
+                    Please enter an amount.
+                </mat-error>
+                <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
+                    Amount should be at least 1;
+                </mat-error>
+            </mat-form-field>
+		</div>
 	</div>
-</div>
-<!--  -->
-<div class="admin-body pt-20">
-	<div class="d-flex pb-20 space-b">
-		<h3 class="tp-head">
-			Selecet Bank
-		</h3>
-		<p class="theme-color" routerLink="/dashboard/addbankdetails">Add Bank</p>
-	</div>
-	<div class="bank-list">
-		<div class="bank-card d-flex">
-			<div class="l">
-				<input type="radio" id="html" name="fav_language" value="HTML">
-			</div>
-			<div class="r">
-				<div class="d-flex ftf">
-					<div class="d-flex bank-name mb-10">
-						<figure><img src="assets/images/auth/address.png" alt=""></figure>
-						Citi Bank
-					</div>
-					<div class="action-btn d-flex">
-						<figure><img src="assets/images/edit.png" alt=""></figure>
-						<figure><img src="assets/images/delete.png" alt=""></figure>
-					</div>
+	<!--  -->
+	<div class="admin-body pt-20">
+		<div class="d-flex pb-20 space-b">
+			<h3 class="tp-head">
+				Selecet Bank
+			</h3>
+			<p class="theme-color" routerLink="/dashboard/addbankdetails">Add Bank</p>
+		</div>
+		<div class="bank-list">
+			<div class="bank-card d-flex" *ngFor="let bank of bankList; let i = index;">
+				<div class="l">
+					<input formControlName="bankId" type="radio" id="html" name="bankId" value="{{ bank?.id }}">
 				</div>
+				<div class="r">
+					<div class="d-flex ftf">
+						<div class="d-flex bank-name mb-10">
+							<figure><img style="height: 25px;
+								width: 25px;
+								object-fit: cover;" src="{{ baseUrl + bank?.bank_name?.bank_image?.media_file }}" alt=""></figure>
+							{{ bank?.bank_name?.name }}
+						</div>
+						<div class="action-btn d-flex">
+							<figure class="cursor-pointer"><img src="assets/images/edit.png" alt=""></figure>
+							<figure class="cursor-pointer" (click)="deleteBank(i)"><img src="assets/images/delete.png"
+									alt=""></figure>
+						</div>
+					</div>
 
-				<div class="bank-account mb-20">
-					<p>Account holder name <span>Coinswell Pvt. Ltd.</span></p>
-					<p>Account Number <span>1256289898785662</span></p>
+					<div class="bank-account mb-20">
+						<p>Account holder name <span>{{ bank?.account_holder_name }}</span></p>
+						<p>Account Number <span>{{ bank?.account_number }}</span></p>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="btn-outer m-auto w-100 pt-20">
+			<div id="add-cash-button">
+				<button class="btn btn-primary" type="submit">Submit</button>
+			</div>
+		</div>
 	</div>
-	<div class="btn-outer m-auto w-100 pt-20">
-		<button class="btn btn-primary" routerLink="/dashboard">Submit</button>
-	</div>
-</div>
+</form>

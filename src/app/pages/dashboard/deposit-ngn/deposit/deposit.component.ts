@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Block, Loading, Notify } from 'notiflix';
-import { loadImage } from 'src/app/_helpers/common.helper';
+import { Block, Loading } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
-import { ValidString } from 'src/app/_validators/string';
 import { environment } from 'src/environments/environment';
 
 @Component({

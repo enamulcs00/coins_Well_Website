@@ -5,7 +5,7 @@ import { DepositNgnRoutingModule } from './deposit-ngn-routing.module';
 import { DepositNgnComponent } from './deposit-ngn.component';
 import { WithdrawngnComponent } from './withdrawngn/withdrawngn.component';
 import { MaterialCommonModule } from 'src/app/material-common/material-common.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
@@ -15,7 +15,8 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 		DepositNgnRoutingModule,
 		MaterialCommonModule,
 		ReactiveFormsModule,
-		NgxMatFileInputModule
+		NgxMatFileInputModule,
+		FormsModule
 	]
 })
 export class DepositNgnModule { }

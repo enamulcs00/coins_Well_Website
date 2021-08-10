@@ -8,8 +8,9 @@ import { DepositComponent } from './deposit/deposit.component';
 import { BuyComponent } from './buy/buy.component';
 import { HomeComponent } from './home.component';
 import { MaterialCommonModule } from '../../../material-common/material-common.module';
+import { SwiperCardComponent } from './swiper-card/swiper-card.component';
 @NgModule({
-	declarations: [WithdrawComponent, SellComponent, DepositComponent, BuyComponent, HomeComponent],
+	declarations: [WithdrawComponent, SellComponent, DepositComponent, BuyComponent, HomeComponent, SwiperCardComponent],
 	imports: [
 		CommonModule,
 		HomeRoutingModule,

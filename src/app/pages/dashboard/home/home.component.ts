@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Loading, } from 'notiflix';
+import { CommonService } from 'src/app/_services/common.service';
+import { urls } from 'src/app/_services/urls';
 
 @Component({
 	selector: 'app-home',
@@ -8,12 +11,23 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 	link = 'withdraw';
-	constructor(private router: Router) {}
+	cmsData : any;
+	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
-		let urls = this.router.url.split('/');
+		let urls = this._router.url.split('/');
 		this.link = urls[urls.length - 1];
-		// console.log("This/", );
+		this.getCMS();
+	}
+
+	getCMS() {
+		Loading.circle();
+		this._common.get(urls.getAllCurrencies).subscribe(data => {
+			this.cmsData = data.data;
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
 	}
 
 }

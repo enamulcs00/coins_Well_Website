@@ -9,10 +9,9 @@
 			</figure>
 		</span>
 		<mtx-select typeToSearchText="Search bank name or IFSC code." [typeahead]="bankListEvent"
-		formControlName="bank_name"
-			[loading]="bankListLoading" loadingText="Fetching banks..." notFoundText="No banks found. Try another name"
-			[virtualScroll]="true" bindLabel="Select bank name" [items]="bankList" bindLabel="name" bindValue="id"
-			placeholder="Select bank name">
+			formControlName="bank_name" [loading]="bankListLoading" loadingText="Fetching banks..."
+			notFoundText="No banks found. Try another name" [virtualScroll]="true" bindLabel="Select bank name"
+			[items]="bankList" bindLabel="name" bindValue="id" placeholder="Select bank name">
 			<ng-template ng-label-tmp let-item="item">
 				<div class="bank-dropdown-label">
 					<div>
@@ -61,7 +60,16 @@
 					<img src="assets/images/auth/perfered-name.png" alt="">
 				</figure>
 			</span>
-			<input matInput placeholder="Account holder name">
+			<input matInput formControlName="account_holder_name" name="account_holder_name"
+				placeholder="Account holder name">
+
+			<mat-error *ngIf="showError(bankForm.get('account_holder_name')) == 'required'">
+				Please enter account holder name.
+			</mat-error>
+
+			<mat-error *ngIf="showError(bankForm.get('account_holder_name')) == 'validString'">
+				Numbers not allowed.
+			</mat-error>
 		</mat-form-field>
 	</div>
 	<mat-form-field class="example-full-width" appearance="outline">
@@ -99,6 +107,6 @@
 		</mat-error>
 	</mat-form-field>
 	<div class="btn-outer mt-40 w-100">
-		<button class="btn btn-primary" routerLink="/Congratulations">Submit</button>
+		<div id="add-bank-account-button" class="border-plus"><button class="btn btn-primary" type="submit">Submit</button></div>
 	</div>
 </form>

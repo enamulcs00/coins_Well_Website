@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Block } from 'notiflix';
+import { Block, Notify } from 'notiflix';
 import { Observable, Subject } from 'rxjs';
-import { loadImage } from 'src/app/_helpers/common.helper';
+import { loadImage, showErrors } from 'src/app/_helpers/common.helper';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -23,9 +23,11 @@ export class AddbankdetailsComponent implements OnInit {
 	public bankListEvent = new Subject<string>();
 	bankListLoading: boolean = false;
 	baseUrl: string = environment.homeURL;
+	showError = showErrors;
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) {
 		this.bankForm = this._fb.group({
 			bank_name: [null, [Validators.required]],
+			account_holder_name : [null, [Validators.required, ValidString]],
 			account_number: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
 			confirm_account: [null, Validators.required]
 		}, { validators: MustMatch('account_number', 'confirm_account') });
@@ -78,10 +80,13 @@ export class AddbankdetailsComponent implements OnInit {
 	submitDetails() {
 		this.removeSpaces();
 		if (this.bankForm.valid) {
-			Block.circle('#create-profile-button');
-			this._common.post(urls.changeEmail, this.bankForm.value).subscribe(image => {
+			Block.circle('#add-bank-account-button');
+			this._common.post(urls.addBankAccount, this.bankForm.value).subscribe(_ => {
+				Block.remove('#add-bank-account-button');
+				this._router.navigate(['/dashboard/payment/withdrawal'])
+				Notify.success("Bank added successfully.");
 			}, _ => {
-				Block.remove('#create-profile-button');
+				Block.remove('#add-bank-account-button');
 			});
 		} else {
 			this.bankForm.markAllAsTouched();

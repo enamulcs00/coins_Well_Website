@@ -32,14 +32,14 @@ export class CommonService {
 	}
 
 	delete(url: string) {
-		return this._http.delete<any>(`${environment.baseUrl}${urls[url]}`)
+		return this._http.delete<any>(`${environment.baseUrl}${url}`)
 			.pipe(map((data: any) => {
 				return data;
 			}));
 	}
 
 	deleteById(url: string, id: string) {
-		return this._http.delete<any>(`${environment.baseUrl}${urls[url]}/${id}`)
+		return this._http.delete<any>(`${environment.baseUrl}${url}${id}`)
 			.pipe(map((data: any) => {
 				return data;
 			}));

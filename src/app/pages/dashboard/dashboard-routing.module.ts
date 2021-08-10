@@ -62,7 +62,12 @@ const routes: Routes = [
 		{
 			path: 'addbankdetails',
 			component: AddbankdetailsComponent,
-		}, {
+		}, 
+		{
+			path: 'addbankdetails/:bank_id',
+			component: AddbankdetailsComponent,
+		}, 
+		{
 			path: 'withdrawcryto',
 			component: WithdrawcryptoComponent,
 		}
