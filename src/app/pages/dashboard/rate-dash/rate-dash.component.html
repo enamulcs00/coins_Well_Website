@@ -44,8 +44,8 @@
 						<p>{{ rate?.name }}</p>
 					</div>
 				</td>
-				<td>{{ rate?.buy_rate }}</td>
-				<td>{{ rate?.sell_rate }}</td>
+				<td>{{ rate?.buy_rate | number }}</td>
+				<td>{{ rate?.sell_rate | number }}</td>
 			</tr>
 		</tbody>
 	</table>
