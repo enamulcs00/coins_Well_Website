@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	selectedCountry: any;
 	hide = true;
-	recpach : boolean = true;
+	recpach : boolean = false;
 	@ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
 	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder, private recaptchaV3Service: ReCaptchaV3Service,) { }
 
@@ -60,6 +60,8 @@ export class LoginComponent implements OnInit {
 					}, error => {
 						Block.remove('#login-button');
 					})
+			} else {
+				Notify.failure("Fill the captcha first.");
 			}
 		} else {
 			this.loginForm.markAllAsTouched();
@@ -68,9 +70,11 @@ export class LoginComponent implements OnInit {
 
 	renderReCaptcha() {
 		window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
-			'sitekey': '6Lc83_IbAAAAAMeCei_tT6xzUaDB5nYQsUwWcU3K',
+			'sitekey': environment.googleSiteKey,
 			'callback': (response) => {
-				console.log(response);
+				if(response) {
+					this.recpach = true;
+				}
 			}
 		});
 	}
