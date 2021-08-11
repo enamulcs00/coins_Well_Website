@@ -30,6 +30,7 @@
     "intl-tel-input": "^17.0.13",
     "libphonenumber-js": "^1.9.22",
     "ng-otp-input": "^1.7.1",
+    "ng-recaptcha": "^6.0.2",
     "ngx-bootstrap": "^6.2.0",
     "ngx-otp-input": "^0.9.0",
     "notiflix": "^3.0.1",

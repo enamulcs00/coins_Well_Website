@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Notify, Loading, Block, Confirm, Report } from 'notiflix';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './_services/auth.service';
@@ -10,7 +10,7 @@ import { urls } from './_services/urls';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
 	title = 'coinswellWeb';
 	constructor(private _common: CommonService, private _auth: AuthService) {
 		Notify.init({
@@ -61,8 +61,14 @@ export class AppComponent implements AfterViewInit {
 
 	}
 
+	ngOnInit() {
+		
+	}
+
 	ngAfterViewInit() {
 		Loading.remove(500);
 	}
+
+	
 
 }

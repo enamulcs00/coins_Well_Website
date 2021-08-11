@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { environment } from 'src/environments/environment';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-	allowedCountries : any = environment.allowedCountries;
+	allowedCountries: any = environment.allowedCountries;
 	loginForm: FormGroup;
 	selectedCountry: any;
 	hide = true;
-	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder) { }
+	recpach : boolean = true;
+	@ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
+	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder, private recaptchaV3Service: ReCaptchaV3Service,) { }
 
 	ngOnInit() {
 		this.loginForm = this._fb.group({
@@ -23,6 +27,7 @@ export class LoginComponent implements OnInit {
 			country_code: [null, Validators.required],
 			password: [null, Validators.required]
 		});
+		this.addRecaptchaScript();
 	}
 
 	countryChanged(event: any) {
@@ -38,24 +43,51 @@ export class LoginComponent implements OnInit {
 			this.loginForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}
 		if (this.loginForm.valid) {
-			Block.circle('#login-button');
-			const formData = this.loginForm.value;
-			delete formData.full_phone;
-			this._auth.login(formData).subscribe(res => {
-				Block.remove('#login-button');
-				if(res.data.is_profile_setup) {
-					localStorage.setItem(environment.storageKey,JSON.stringify(res.data));
-					Notify.success("Logged in successfully.");
-					this.router.navigate(['/dashboard']);
-				} else {
-					this._auth.userId = res.data.id;
-					this.router.navigate(['/auth/emailid']);
-				}
-			}, error => {
-				Block.remove('#login-button');
-			})
+			if(this.recpach) {
+				Block.circle('#login-button');
+					const formData = this.loginForm.value;
+					delete formData.full_phone;
+					this._auth.login(formData).subscribe(res => {
+						Block.remove('#login-button');
+						if (res.data.is_profile_setup) {
+							localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
+							Notify.success("Logged in successfully.");
+							this.router.navigate(['/dashboard']);
+						} else {
+							this._auth.userId = res.data.id;
+							this.router.navigate(['/auth/emailid']);
+						}
+					}, error => {
+						Block.remove('#login-button');
+					})
+			}
 		} else {
 			this.loginForm.markAllAsTouched();
 		}
+	}
+
+	renderReCaptcha() {
+		window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+			'sitekey': '6Lc83_IbAAAAAMeCei_tT6xzUaDB5nYQsUwWcU3K',
+			'callback': (response) => {
+				console.log(response);
+			}
+		});
+	}
+
+	addRecaptchaScript() {
+
+		window['grecaptchaCallback'] = () => {
+			this.renderReCaptcha();
+		}
+
+		(function (d, s, id, obj) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) { obj.renderReCaptcha(); return; }
+			js = d.createElement(s); js.id = id;
+			js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&render=explicit";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'recaptcha-jssdk', this));
+
 	}
 }
