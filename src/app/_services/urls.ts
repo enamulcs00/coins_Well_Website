@@ -16,4 +16,7 @@ export const urls = {
     addBankAccount : 'user/add-bank/',
     getBanks : 'user/get-all-bank-accounts/',
     deleteBank: 'user/delete-user-bank-account/',
+    getTransactions : 'payment/get-all-transactions/',
+    getBalance : 'payment/get-user-wallet-amount/',
+    getSingleTransaction : 'user/get-user-transaction-details/',
 };

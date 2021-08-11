@@ -5,14 +5,13 @@ import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	selector: 'app-balance',
+	templateUrl: './balance.component.html',
+	styleUrls: ['./balance.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class BalanceComponent implements OnInit {
 	link = 'withdraw';
-	cmsData : any;
-	balance : any;
+	balance: any;
 	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
@@ -23,12 +22,11 @@ export class HomeComponent implements OnInit {
 
 	getCMS() {
 		Loading.circle();
-		this._common.get(urls.getAllCurrencies).subscribe(data => {
-			this.cmsData = data.data;
+		this._common.get(urls.getBalance).subscribe(data => {
+			this.balance = data.data;
 			Loading.remove();
 		}, _ => {
 			Loading.remove();
 		})
 	}
-
 }

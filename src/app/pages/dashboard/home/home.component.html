@@ -1,53 +1,11 @@
-<div class="dp-top-main">
-    <div class="dp-top">
-        <div class="wallet-main">
-            <div class="wallet-left">
-                <figure>
-                    <img src="assets/images/auth/wallet.png">
-                </figure>
-            </div>
-
-        </div>
-        <div class="aviable-bal d-flex pt-20">
-            <div>
-                <h3>NGN Balance <span>
-                        $1000
-                    </span></h3>
-            </div>
-            <div>
-                <h3> Crypto balance <span>
-                        $10000
-                    </span></h3>
-            </div>
-
-
-        </div>
-        <!-- <h6>$450,933</h6> -->
-    </div>
-    <div class="cash-main">
-        <ul>
-            <li routerLink="/dashboard/payment/deposit">
-                <figure>
-                    <img src="assets/images/plus.svg">
-                </figure>
-                <p>Add Cash</p>
-            </li>
-            <li routerLink="/dashboard/withdrawcryto">
-                <figure>
-                    <img src="assets/images/plus.svg">
-                </figure>
-                <p>Add Crypto</p>
-            </li>
-        </ul>
-    </div>
-</div>
 <div class="wd-main">
     <div class="tab-sec-layout">
         <nav mat-tab-nav-bar>
-            <a mat-tab-link [routerLink]="['withdraw']" (click)="link = 'withdraw'" [active]="link == 'withdraw'">Withdraw
+            <a mat-tab-link [routerLink]="['withdraw']" (click)="link = 'withdraw'"
+                [active]="link == 'withdraw'">Withdraw
             </a>
             <a mat-tab-link [routerLink]="['buy']" (click)="link = 'buy'" [active]="link == 'buy'">Buy
-            </a>    
+            </a>
             <a mat-tab-link [routerLink]="['sell']" (click)="link = 'sell'" [active]="link == 'sell'">Sell
             </a>
             <a mat-tab-link [routerLink]="['deposit']" (click)="link = 'deposit'" [active]="link == 'deposit'">Deposit

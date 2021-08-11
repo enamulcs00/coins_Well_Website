@@ -4,12 +4,12 @@
 
 export const environment = {
 	production: false,
-	baseUrl: 'http://3.108.67.252:2222/api/',
+	baseUrl: 'https://python.appgrowthcompany.com/api/',
 	storageKey: 'coinswellUserInfo',
 	dateFormatWithTime: 'MM-DD-YYYY hh:mm A',
 	dateFormat: 'MM-DD-YYYY',
 	resetPasswordLink: 'http://localhost:4200/resetpassword',
-	homeURL: 'http://3.108.67.252:2222',
+	homeURL: 'https://python.appgrowthcompany.com/',
 	allowedCountries :  ['ng', 'in'],
 	googleSiteKey : '6LdkAPMbAAAAAJgHIVZUJOyVD-9hv9HBmcnx7aSx',
 	googleServerKey : '6LdkAPMbAAAAAAiV3gCP-C5mbms2t2ojUJFqTpA8',

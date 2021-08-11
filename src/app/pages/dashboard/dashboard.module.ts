@@ -16,6 +16,7 @@ import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.compone
 import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MtxSelectModule } from '@ng-matero/extensions';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
 	declarations: [
 		LeftSidebarComponent,
@@ -36,7 +37,8 @@ import { MtxSelectModule } from '@ng-matero/extensions';
 		DashboardRoutingModule,
 		MaterialCommonModule,
 		ReactiveFormsModule,
-		MtxSelectModule
+		MtxSelectModule,
+		MatPaginatorModule
 	]
 })
 export class DashboardModule { }

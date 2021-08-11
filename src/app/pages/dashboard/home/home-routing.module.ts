@@ -5,31 +5,51 @@ import { SellComponent } from './sell/sell.component';
 import { DepositComponent } from './deposit/deposit.component';
 import { BuyComponent } from './buy/buy.component';
 import { HomeComponent } from './home.component';
+import { BalanceComponent } from './balance/balance.component';
+import { WithdrawcryptoComponent } from '../withdrawcrypto/withdrawcrypto.component';
+import { RateDashComponent } from '../rate-dash/rate-dash.component';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'withdraw',
+		redirectTo: 'portfolio/withdraw',
 		pathMatch: 'full',
 	},
 	{
 		path : '',
-		component :  HomeComponent,
+		component :  BalanceComponent,
 		children : [
 			{
-				path : 'withdraw',
-				component : WithdrawComponent
+				path : 'portfolio',
+				component :  HomeComponent,
+				children : [
+					{
+						path : 'withdraw',
+						component : WithdrawComponent
+					},
+					{
+						path : 'sell',
+						component : SellComponent
+					},
+					{
+						path : 'deposit',
+						component : DepositComponent
+					},
+					{
+						path : 'buy',
+						component : BuyComponent
+					}
+				]
 			},
 			{
-				path : 'sell',
-				component : SellComponent
+				path: 'payment',
+				loadChildren: () => import('../deposit-ngn/deposit-ngn.module').then(m => m.DepositNgnModule)
 			},
 			{
-				path : 'deposit',
-				component : DepositComponent
-			},
-			{
-				path : 'buy',
-				component : BuyComponent
+				path: 'withdrawcryto',
+				component: WithdrawcryptoComponent,
+			},{
+				path: 'rate',
+				component: RateDashComponent,
 			}
 		]
 	}

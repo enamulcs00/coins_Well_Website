@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-lg">
     <div class="conta-iner">
         <div class="navbar-main d-flex">
-            <a class="navbar-brand" href="#">
+            <a *ngIf="this.userInfo" class="navbar-brand" [routerLink]="['/dashboard/home/withdraw']">
+                <img src="assets/images/nav-logo.png" alt="">
+            </a>
+            <a *ngIf="!this.userInfo" class="navbar-brand" [routerLink]="['/landingpage']">
                 <img src="assets/images/nav-logo.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

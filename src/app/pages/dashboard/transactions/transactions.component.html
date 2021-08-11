@@ -1,115 +1,43 @@
-<div class="trans-page">
+<div class="trans-page" id="fetch-transaction-list">
 	<div class="conta-iner">
 		<h2>My Transactions</h2>
 		<ul>
-			<li routerLink="/dashboard/transactions-details">
+			<li *ngFor="let tran of transactionList" routerLink="/dashboard/transactions-details/{{ tran?.id }}">
 				<div class="ts-main">
 					<div class="ts-left">
 						<div class="tsl-main">
 							<div class="tsl-left">
 								<figure>
-									<img src="assets/images/partners1.png">
+									<img style="
+									height: 60px;
+									width: 60px;
+									object-fit: contain;" src="{{ baseUrl + tran?.currency?.logo?.media_file }}">
 								</figure>
 							</div>
 							<div class="tsl-right">
-								<p>1299828</p>
-								<h5>BTC</h5>
-								<p>Citi Bank</p>
+								<p>{{ tran?.id}}</p>
+								<h5>{{ tran?.currency.name }}</h5>
+								<p>{{ tran?.bank?.bank_name?.name }}</p>
 							</div>
 						</div>
 					</div>
 					<div class="ts-right">
-						<h5 class="success">Success</h5>
+						<h5 [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">{{ tran?.transaction_status }}</h5>
 						<div class="success-midle-main">
-							<h4><i class="fa fa-caret-down" aria-hidden="true"></i><span>0.20%
-								</span>(10)</h4>
-							<a>Sell</a>
+							<h4><i  [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'" class="fa fa-caret-down" aria-hidden="true"></i><span [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">0.20%
+								</span>({{ tran?.amount | number }})</h4>
+							<a>{{ tran?.type_of_transaction }}</a>
 						</div>
-						<p>June 23, 2021 8:00 AM</p>
-					</div>
-				</div>
-			</li>
-			<li routerLink="/dashboard/transactions-details">
-				<div class="ts-main">
-					<div class="ts-left">
-						<div class="tsl-main">
-							<div class="tsl-left">
-								<figure>
-									<img src="assets/images/partners1.png">
-								</figure>
-							</div>
-							<div class="tsl-right">
-								<p>1299828</p>
-								<h5>BTC</h5>
-								<p>Citi Bank</p>
-							</div>
-						</div>
-					</div>
-					<div class="ts-right">
-						<h5 class="success">Success</h5>
-						<div class="success-midle-main">
-							<h4><i class="fa fa-caret-down" aria-hidden="true"></i><span>0.20%
-								</span>(10)</h4>
-							<a>Sell</a>
-						</div>
-						<p>June 23, 2021 8:00 AM</p>
-					</div>
-				</div>
-			</li>
-			<li routerLink="/dashboard/transactions-details">
-				<div class="ts-main">
-					<div class="ts-left">
-						<div class="tsl-main">
-							<div class="tsl-left">
-								<figure>
-									<img src="assets/images/partners1.png">
-								</figure>
-							</div>
-							<div class="tsl-right">
-								<p>1299828</p>
-								<h5>BTC</h5>
-								<p>Citi Bank</p>
-							</div>
-						</div>
-					</div>
-					<div class="ts-right">
-						<h5 class="success">Success</h5>
-						<div class="success-midle-main">
-							<h4><i class="fa fa-caret-down" aria-hidden="true"></i><span>0.20%
-								</span>(10)</h4>
-							<a>Sell</a>
-						</div>
-						<p>June 23, 2021 8:00 AM</p>
-					</div>
-				</div>
-			</li>
-			<li routerLink="/dashboard/transactions-details">
-				<div class="ts-main">
-					<div class="ts-left">
-						<div class="tsl-main">
-							<div class="tsl-left">
-								<figure>
-									<img src="assets/images/partners1.png">
-								</figure>
-							</div>
-							<div class="tsl-right">
-								<p>1299828</p>
-								<h5>BTC</h5>
-								<p>Citi Bank</p>
-							</div>
-						</div>
-					</div>
-					<div class="ts-right">
-						<h5 class="success">Success</h5>
-						<div class="success-midle-main">
-							<h4><i class="fa fa-caret-down" aria-hidden="true"></i><span>0.20%
-								</span>(10)</h4>
-							<a>Sell</a>
-						</div>
-						<p>June 23, 2021 8:00 AM</p>
+						<p>{{ tran?.created_at | date  : 'medium' }}</p>
+						<!-- <p>June 23, 2021 8:00 AM</p> -->
 					</div>
 				</div>
 			</li>
 		</ul>
+		<mat-paginator [length]="length"
+			(page)="onPageChange($event)"
+            [pageSize]="limit"
+            aria-label="Select page">
+		</mat-paginator>
 	</div>
 </div>

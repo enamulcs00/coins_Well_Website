@@ -32,7 +32,7 @@ const routes: Routes = [
 			component: TransactionsComponent,
 		},
 		{
-			path: 'transactions-details',
+			path: 'transactions-details/:transactionId',
 			component: TransactionDetailsComponent,
 		},
 		{
@@ -41,10 +41,7 @@ const routes: Routes = [
 		}, {
 			path: 'notification',
 			component: NotificationComponent
-		}, {
-			path: 'rate',
-			component: RateDashComponent,
-		}, {
+		}, { 
 			path: 'upgrade-account',
 			component: AccountUpgradeComponent,
 		}, {
@@ -67,10 +64,6 @@ const routes: Routes = [
 			path: 'addbankdetails/:bank_id',
 			component: AddbankdetailsComponent,
 		}, 
-		{
-			path: 'withdrawcryto',
-			component: WithdrawcryptoComponent,
-		}
 		]
 	}];
 

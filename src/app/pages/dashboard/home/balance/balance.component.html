@@ -1,0 +1,41 @@
+<div class="dp-top-main">
+    <div class="dp-top">
+        <div class="wallet-main">
+            <div class="wallet-left">
+                <figure>
+                    <img src="assets/images/auth/wallet.png">
+                </figure>
+            </div>
+
+        </div>
+        <div class="aviable-bal d-flex pt-20">
+            <div>
+                <h3>NGN Balance <span>
+                        ${{ balance?.amount | number }}
+                    </span></h3>
+            </div>
+            <div>
+                <h3> Crypto balance <span>
+                        $10000
+                    </span></h3>
+            </div>
+        </div>
+    </div>
+    <div class="cash-main">
+        <ul>
+            <li routerLink="/dashboard/home/payment/deposit">
+                <figure>
+                    <img src="assets/images/plus.svg">
+                </figure>
+                <p>Add Cash</p>
+            </li>
+            <li routerLink="/dashboard/home/withdrawcryto">
+                <figure>
+                    <img src="assets/images/plus.svg">
+                </figure>
+                <p>Add Crypto</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<router-outlet></router-outlet>

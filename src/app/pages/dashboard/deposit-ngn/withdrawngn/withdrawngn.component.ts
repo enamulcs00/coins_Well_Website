@@ -24,7 +24,7 @@ export class WithdrawngnComponent implements OnInit {
 			request_type: [2],
 			symbol: ['-'],
 			amount: [null, [Validators.required, Validators.min(1)]],
-			bankId : [null, Validators.required]
+			bank : [null, Validators.required]
  		});
 		this.getBanks();
 	}
