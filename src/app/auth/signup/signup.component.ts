@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		this.signUpForm = this._fb.group({
-			full_phone: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(18)]],
+			full_phone: [null, [Validators.required, Validators.minLength(11), Validators.maxLength(19)]],
 			phone_number: [null, [Validators.required]],
 			country_code: [null, Validators.required],
 		});
