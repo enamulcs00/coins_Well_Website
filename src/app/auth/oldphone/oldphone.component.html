@@ -32,9 +32,7 @@
 					(countryChanged)="countryChanged($event)" inputPlaceholder="Phone number"></ngx-mat-intl-tel-input>
 				<mat-error *ngIf="oldPhoneForm.get('full_phone').hasError('required')">Please enter phone number.
 				</mat-error>
-				<mat-error *ngIf="oldPhoneForm.get('full_phone').hasError('validatePhoneNumber')">Please enter valid
-					phone
-					number.
+				<mat-error *ngIf="oldPhoneForm.get('full_phone')?.hasError('maxlength') || oldPhoneForm.get('full_phone')?.hasError('minlength')">Phone number has to be between 7 and 15 digits long.
 				</mat-error>
 			</mat-form-field>
 			<div class="btn-outer mt-40">

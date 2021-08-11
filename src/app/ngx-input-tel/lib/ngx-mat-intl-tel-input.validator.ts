@@ -2,7 +2,7 @@ import {FormControl} from '@angular/forms';
 import {parsePhoneNumber, PhoneNumber} from 'libphonenumber-js';
 
 export const phoneNumberValidator = (control: FormControl) => {
-  const error = {validatePhoneNumber: true};
+  const error = null;
   let numberInstance: PhoneNumber;
   if (control.value) {
     try {

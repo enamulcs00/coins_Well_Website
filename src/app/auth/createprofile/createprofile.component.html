@@ -99,6 +99,23 @@
 							<img src="assets/images/auth/address.png" alt="">
 						</figure>
 					</span>
+					<input formControlName="account_holder_name" name="account_holder_name" matInput placeholder="Account holder name">
+					<mat-error *ngIf="profileForm.get('bank_details').get('account_holder_name')?.hasError('required')">
+						Please enter account holder name.
+					</mat-error>
+
+					<mat-error *ngIf="profileForm.get('bank_details').get('account_holder_name')?.hasError('maxlength') || profileForm.get('bank_details').get('account_holder_name')?.hasError('minlength')">
+						Account holder name has to be between 4 and 30 characters long.
+					</mat-error>
+
+				</mat-form-field>
+
+				<mat-form-field class="example-full-width" appearance="outline">
+					<span matPrefix>
+						<figure class="input-icon">
+							<img src="assets/images/auth/address.png" alt="">
+						</figure>
+					</span>
 					<input formControlName="account_number" name="account_number" matInput placeholder="Account number">
 					<mat-error *ngIf="profileForm.get('bank_details').get('account_number')?.hasError('required')">
 						Please enter account number.

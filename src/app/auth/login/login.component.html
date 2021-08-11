@@ -28,8 +28,7 @@
 				</ngx-mat-intl-tel-input>
 				<mat-error *ngIf="loginForm.get('full_phone').hasError('required')">Please enter phone number.
 				</mat-error>
-				<mat-error *ngIf="loginForm.get('full_phone').hasError('validatePhoneNumber')">Please enter valid phone
-					number.
+				<mat-error *ngIf="loginForm.get('full_phone')?.hasError('maxlength') || loginForm.get('full_phone')?.hasError('minlength')">Phone number has to be between 7 and 15 characters long.
 				</mat-error>
 			</mat-form-field>
 			<mat-form-field class="example-full-width" appearance="outline">

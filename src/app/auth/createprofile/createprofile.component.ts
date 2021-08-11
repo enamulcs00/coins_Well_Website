@@ -37,6 +37,7 @@ export class CreateprofileComponent implements OnInit {
 			full_name: [null, [Validators.required, Validators.maxLength(30), Validators.minLength(4), ValidString]],
 			role: ['2'],
 			bank_details: this._fb.group({
+				account_holder_name : [null, [Validators.required, Validators.maxLength(30), Validators.minLength(4)]],
 				bank_name: [null, [Validators.required]],
 				account_number: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
 				confirm_account: [null, Validators.required]

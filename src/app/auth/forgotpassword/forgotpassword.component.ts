@@ -21,7 +21,7 @@ export class ForgotpasswordComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		this.forgotPasswordForm = this._fb.group({
-			full_phone: [null, Validators.required],
+			full_phone: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(18)]],
 			phone_number: [null, [Validators.required]],
 			country_code: [null, Validators.required],
 		});
