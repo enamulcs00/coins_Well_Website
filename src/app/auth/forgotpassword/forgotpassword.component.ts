@@ -39,7 +39,7 @@ export class ForgotpasswordComponent implements OnInit, AfterViewInit {
 
 	signUpNow() {
 		if (this.forgotPasswordForm.get('full_phone').value) {
-			let phones = this.forgotPasswordForm.get('full_phone').value.split(this.selectedCountry.dialCode);
+			let phones = this.forgotPasswordForm.get('full_phone').value.split('+'+this.selectedCountry.dialCode);
 			this.forgotPasswordForm.get('phone_number').setValue(phones[1]);
 			this.forgotPasswordForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}

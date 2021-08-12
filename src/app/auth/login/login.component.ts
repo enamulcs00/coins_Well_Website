@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { environment } from 'src/environments/environment';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
 	selector: 'app-login',
@@ -18,7 +17,7 @@ export class LoginComponent implements OnInit {
 	hide = true;
 	recpach : boolean = false;
 	@ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
-	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder, private recaptchaV3Service: ReCaptchaV3Service,) { }
+	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder) { }
 
 	ngOnInit() {
 		this.loginForm = this._fb.group({
@@ -38,7 +37,7 @@ export class LoginComponent implements OnInit {
 
 	loginNow() {
 		if (this.loginForm.get('full_phone').value) {
-			let phones = this.loginForm.get('full_phone').value.split(this.selectedCountry.dialCode);
+			let phones = this.loginForm.get('full_phone').value.split('+'+this.selectedCountry.dialCode);
 			this.loginForm.get('phone_number').setValue(phones[1]);
 			this.loginForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}

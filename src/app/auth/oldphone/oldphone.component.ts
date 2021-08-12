@@ -34,7 +34,7 @@ export class OldphoneComponent implements OnInit {
 
 	signUpNow() {
 		if (this.oldPhoneForm.get('full_phone').value) {
-			let phones = this.oldPhoneForm.get('full_phone').value.split(this.selectedCountry.dialCode);
+			let phones = this.oldPhoneForm.get('full_phone').value.split('+'+this.selectedCountry.dialCode);
 			this.oldPhoneForm.get('phone_number').setValue(phones[1]);
 			this.oldPhoneForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}

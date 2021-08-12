@@ -1,43 +1,50 @@
 <div class="trans-page" id="fetch-transaction-list">
 	<div class="conta-iner">
 		<h2>My Transactions</h2>
-		<ul>
-			<li *ngFor="let tran of transactionList" routerLink="/dashboard/transactions-details/{{ tran?.id }}">
-				<div class="ts-main">
-					<div class="ts-left">
-						<div class="tsl-main">
-							<div class="tsl-left">
-								<figure>
-									<img style="
-									height: 60px;
-									width: 60px;
-									object-fit: contain;" src="{{ baseUrl + tran?.currency?.logo?.media_file }}">
-								</figure>
-							</div>
-							<div class="tsl-right">
-								<p>{{ tran?.id}}</p>
-								<h5>{{ tran?.currency.name }}</h5>
-								<p>{{ tran?.bank?.bank_name?.name }}</p>
+		<ng-container *ngIf="transactionList.length > 0; else noDataFound">
+			<ul>
+				<li *ngFor="let tran of transactionList" routerLink="/dashboard/transactions-details/{{ tran?.id }}">
+					<div class="ts-main">
+						<div class="ts-left">
+							<div class="tsl-main">
+								<div class="tsl-left">
+									<figure>
+										<img style="
+										height: 60px;
+										width: 60px;
+										object-fit: contain;" src="{{ baseUrl + tran?.currency?.logo?.media_file }}">
+									</figure>
+								</div>
+								<div class="tsl-right">
+									<p>{{ tran?.id}}</p>
+									<h5>{{ tran?.currency.name }}</h5>
+									<p>{{ tran?.bank?.bank_name?.name }}</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="ts-right">
-						<h5 [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">{{ tran?.transaction_status }}</h5>
-						<div class="success-midle-main">
-							<h4><i  [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'" class="fa fa-caret-down" aria-hidden="true"></i><span [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">0.20%
-								</span>({{ tran?.amount | number }})</h4>
-							<a>{{ tran?.type_of_transaction }}</a>
+						<div class="ts-right">
+							<h5 [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">{{ tran?.transaction_status }}</h5>
+							<div class="success-midle-main">
+								<h4><i  [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'" class="fa fa-caret-down" aria-hidden="true"></i><span [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">0.20%
+									</span>({{ tran?.amount | number }})</h4>
+								<a>{{ tran?.type_of_transaction }}</a>
+							</div>
+							<p>{{ tran?.created_at | date  : 'medium' }}</p>
+							<!-- <p>June 23, 2021 8:00 AM</p> -->
 						</div>
-						<p>{{ tran?.created_at | date  : 'medium' }}</p>
-						<!-- <p>June 23, 2021 8:00 AM</p> -->
 					</div>
-				</div>
-			</li>
-		</ul>
-		<mat-paginator [length]="length"
-			(page)="onPageChange($event)"
-            [pageSize]="limit"
-            aria-label="Select page">
-		</mat-paginator>
+				</li>
+			</ul>
+			<mat-paginator [length]="length"
+				(page)="onPageChange($event)"
+				[pageSize]="limit"
+				aria-label="Select page">
+			</mat-paginator>
+		</ng-container>
+		<ng-template #noDataFound>
+			<p style="text-align: center;
+			FONT-SIZE: 16px;
+			padding-top: 50px;">No transactions yet.</p>
+		</ng-template>
 	</div>
 </div>

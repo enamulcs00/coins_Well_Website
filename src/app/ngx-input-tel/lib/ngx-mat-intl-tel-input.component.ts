@@ -194,10 +194,8 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
       this.numberInstance = parsePhoneNumberFromString(this.phoneNumber.toString(), this.selectedCountry.iso2.toUpperCase() as CC);
       this.formatAsYouTypeIfEnabled();
       this.value = this.numberInstance.number;
-      if (this.numberInstance && this.numberInstance.isValid()) {
-        if (this.phoneNumber !== this.formattedPhoneNumber) {
-          this.phoneNumber = this.formattedPhoneNumber;
-        }
+      if (this.numberInstance) {
+        this.phoneNumber = this.formattedPhoneNumber;
         if (this.selectedCountry.iso2 !== this.numberInstance.country) {
           this.selectedCountry = this.getCountry(this.numberInstance.country);
           this.countryChanged.emit(this.selectedCountry);
@@ -276,8 +274,10 @@ export class NgxMatIntlTelInputComponent extends _NgxMatIntlTelInputMixinBase
   }
 
   writeValue(value: any): void {
+    console.log("Working", value);
     if (value) {
       this.numberInstance = parsePhoneNumberFromString(value);
+      console.log("this.numberInstance",this.numberInstance);
       if (this.numberInstance) {
         const countryCode = this.numberInstance.country;
         this.phoneNumber = this.formattedPhoneNumber;

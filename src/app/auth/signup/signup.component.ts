@@ -32,7 +32,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
 	}
 
 	countryChanged(event: any) {
-		console.log("event",event);
 		if (event) {
 			this.selectedCountry = event;
 		}
@@ -40,7 +39,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
 	signUpNow() {
 		if (this.signUpForm.get('full_phone').value) {
-			let phones = this.signUpForm.get('full_phone').value.split(this.selectedCountry.dialCode);
+			let phones = this.signUpForm.get('full_phone').value.split('+'+this.selectedCountry.dialCode);
 			this.signUpForm.get('phone_number').setValue(phones[1]);
 			this.signUpForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}

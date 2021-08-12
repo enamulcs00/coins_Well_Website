@@ -41,7 +41,7 @@ export class UpdatephonenoComponent {
 
 	signUpNow() {
 		if (this.updatePhoneForm.get('full_phone').value) {
-			let phones = this.updatePhoneForm.get('full_phone').value.split(this.selectedCountry.dialCode);
+			let phones = this.updatePhoneForm.get('full_phone').value.split('+'+this.selectedCountry.dialCode);
 			this.updatePhoneForm.get('phone_number').setValue(phones[1]);
 			this.updatePhoneForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}

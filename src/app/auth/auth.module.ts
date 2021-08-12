@@ -26,9 +26,6 @@ import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { NgxOtpInputModule } from 'ngx-otp-input';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
-import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
-
 
 @NgModule({
 	declarations: [
@@ -58,13 +55,10 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 		MatStepperModule,
 		NgxOtpInputModule,
 		SharedModule,
-		MtxSelectModule,
-		RecaptchaV3Module
+		MtxSelectModule
 	],
 	providers: [
-		MatStepper, 
-		{ provide: RECAPTCHA_V3_SITE_KEY, useValue: '6LeRkfIbAAAAAGo9asdg82uqaKJCwMWJweqs_AIh' },
-		ReCaptchaV3Service
-]
+		MatStepper
+	]
 })
 export class AuthModule { }
