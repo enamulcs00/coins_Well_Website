@@ -18,6 +18,7 @@ export class WithdrawngnComponent implements OnInit {
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
 	selectedBank : string = '';
+	userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) { }
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
@@ -27,6 +28,16 @@ export class WithdrawngnComponent implements OnInit {
 			bank : [null, Validators.required]
  		});
 		this.getBanks();
+		if(this.userInfo.user_bitgo_wallet_address.length > 0) {
+			this.fetchCryptoBalance();
+		}
+	}
+
+	fetchCryptoBalance() {
+		let bit = this.userInfo.user_bitgo_wallet_address[0];
+		this._common.callBitGoAPI(bit['currency_type']+'/wallet/address/'+bit.bitgo_wallet_address).subscribe(data=>{
+			console.log("s", data);
+		})
 	}
 
 	updateDetails(formData: any) {

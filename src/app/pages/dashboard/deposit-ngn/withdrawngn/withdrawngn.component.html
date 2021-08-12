@@ -3,6 +3,7 @@
 		<div class="input-bxx mb-0 pos-rel">
 			<mat-form-field class="example-full-width" appearance="outline">
                 <input matInput type="number" min="1" formControlName="amount" placeholder="Enter the amount ">
+				<span matSuffix>NGN</span>
                 <mat-error *ngIf="addCashForm.get('amount')?.hasError('required')">
                     Please enter an amount.
                 </mat-error>
@@ -18,7 +19,7 @@
 			<h3 class="tp-head">
 				Selecet Bank
 			</h3>
-			<p class="theme-color" routerLink="/dashboard/addbankdetails">Add Bank</p>
+			<p class="theme-color cursor-pointer" routerLink="/dashboard/addbankdetails">Add Bank</p>
 		</div>
 		<div class="bank-list">
 			<div class="bank-card d-flex" *ngFor="let bank of bankList; let i = index;">
@@ -34,7 +35,9 @@
 							{{ bank?.bank_name?.name }}
 						</div>
 						<div class="action-btn d-flex">
-							<figure class="cursor-pointer"><img src="assets/images/edit.png" alt=""></figure>
+							
+							<figure [routerLink]="['/dashboard/editankdetails/'+bank.id]" class="cursor-pointer"><img src="assets/images/edit.png" alt=""></figure>
+
 							<figure class="cursor-pointer" (click)="deleteBank(i)"><img src="assets/images/delete.png"
 									alt=""></figure>
 						</div>

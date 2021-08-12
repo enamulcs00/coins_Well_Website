@@ -32,13 +32,15 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
             }),
             catchError(err => {
-                if (err.status === 401) {
-                    Notify.failure("Not authorized");
-                    localStorage.removeItem(environment.storageKey);
-                    this.router.navigate(['/auth/login']);
-                } else {
-                    var error = err.error.error_description || err.error.message || err.statusText || err.message;
-                    Notify.failure(error);
+                if(request.url.match(environment.baseUrl)) {
+                    if (err.status === 401) {
+                        Notify.failure("Not authorized");
+                        localStorage.removeItem(environment.storageKey);
+                        this.router.navigate(['/auth/login']);
+                    } else {
+                        var error = err.error.error_description || err.error.message || err.statusText || err.message;
+                        Notify.failure(error);
+                    }
                 }
                 var error = err.error.error_description || err.error.message || err.statusText || err.message;
                 return throwError(error);

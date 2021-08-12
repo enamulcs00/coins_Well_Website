@@ -1,5 +1,5 @@
 <h3 class="tp-head pb-20 text-center">
-	{{transactionDetails?.id }}
+	# {{transactionDetails?.id }}
 </h3>
 <div class="bx-x">
 	<div class="biticon-bg">
@@ -11,10 +11,10 @@
 		BTC/Bitcoin
 	</div>
 	<ul>
-		<li>Type of Transaction <span>{{ transactionDetails?.type_of_transaction }}</span></li>
+		<li>Transaction Type <span>{{ transactionDetails?.type_of_transaction }}</span></li>
 		<li>Date <span>{{ transactionDetails?.created_at | date  : 'medium' }}</span></li>
-		<li>Total Amount <span>USD {{ transactionDetails?.amount }} BTC</span></li>
+		<li>Amount <span>USD {{ transactionDetails?.amount }} BTC</span></li>
 		<li>Transaction Status <span class="green" [class.text-success]="transactionDetails?.transaction_status == 'Accept'" [class.text-danger]="transactionDetails?.transaction_status == 'Reject'" [class.text-warning]="transactionDetails?.transaction_status == 'Pending'">{{ transactionDetails?.transaction_status }}</span></li>
-		<li>Transaction No. <span>{{transactionDetails?.id }}</span></li>
+		<li>Transaction ID/Hash ID <span>{{transactionDetails?.id }}</span></li>
 	</ul>
 </div>

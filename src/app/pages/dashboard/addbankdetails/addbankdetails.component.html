@@ -1,5 +1,5 @@
 <h3 class="tp-head pb-20 text-center">
-	Add Bank Details
+	{{ (bankId)?'Edit':'Add' }} Bank Details
 </h3>
 <form class="pt-60 my-forms" [formGroup]="bankForm" (ngSubmit)="submitDetails()">
 	<mat-form-field class=" bank-dropdown example-full-width" appearance="outline">

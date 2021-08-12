@@ -18,7 +18,7 @@ const routes: Routes = [
 		}, {
 			path: 'withdrawal',
 			component: WithdrawngnComponent,
-		},]
+		}]
 	}];
 
 @NgModule({

@@ -17,6 +17,7 @@ import { WithoutheaderComponent } from '../layout/withoutheader/withoutheader.co
 import { AuthGuard } from '../_gurads/auth.guard';
 import { ConfirmaccountComponent } from '../shared/confirmaccount/confirmaccount.component';
 import { UpdatephonenoComponent } from '../shared/updatephoneno/updatephoneno.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 const routes: Routes = [
 	{
 		path: '',
@@ -37,17 +38,21 @@ const routes: Routes = [
 				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
 			},
 			{
-				path: 'aboutus',
-				component: AboutusComponent,
-			},
-			{
 				path: 'ticket',
 				component: TicketComponent,
 			},
 			{
 				path: 'rate',
 				component: RateComponent
-			}
+			},
+			{
+				path: 'contact_us',
+				component: ContactUsComponent
+			},
+			{
+				path: ':type',
+				component: AboutusComponent,
+			},
 		]
 	},
 	{

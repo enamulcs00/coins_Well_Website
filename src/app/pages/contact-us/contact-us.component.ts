@@ -2,24 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
-
 @Component({
-	selector: 'app-aboutus',
-	templateUrl: './aboutus.component.html',
-	styleUrls: ['./aboutus.component.scss']
+  selector: 'app-contact-us',
+  templateUrl: './contact-us.component.html',
+  styleUrls: ['./contact-us.component.scss']
 })
-export class AboutusComponent implements OnInit {
-	type: string = '';
+export class ContactUsComponent implements OnInit {
 	cmsContent;
 	constructor(private _common: CommonService, private route: ActivatedRoute, private _router: Router) {
-		this.type = this.route.snapshot.paramMap.get('type');
-		this.route.params.subscribe(data => {
-			this.type = this.route.snapshot.paramMap.get('type');
-			if (['about_us', 'terms_conditon', 'privacy_policy'].indexOf(this.type) == -1) {
-				this._router.navigate(['/auth/login']);
-			}
-			this.ngOnInit();
-		})
 	}
 
 	ngOnInit(): void {

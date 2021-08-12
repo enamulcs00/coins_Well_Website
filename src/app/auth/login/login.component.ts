@@ -79,7 +79,6 @@ export class LoginComponent implements OnInit {
 	}
 
 	addRecaptchaScript() {
-
 		window['grecaptchaCallback'] = () => {
 			this.renderReCaptcha();
 		}

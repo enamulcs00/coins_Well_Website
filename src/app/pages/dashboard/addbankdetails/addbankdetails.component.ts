@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Block, Notify } from 'notiflix';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Block, Loading, Notify } from 'notiflix';
 import { Observable, Subject } from 'rxjs';
 import { loadImage, showErrors } from 'src/app/_helpers/common.helper';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -23,8 +23,10 @@ export class AddbankdetailsComponent implements OnInit {
 	public bankListEvent = new Subject<string>();
 	bankListLoading: boolean = false;
 	baseUrl: string = environment.homeURL;
+	bankId : any;
 	showError = showErrors;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route : ActivatedRoute) {
+		this.bankId = this.route.snapshot.paramMap.get('bank_id');
 		this.bankForm = this._fb.group({
 			bank_name: [null, [Validators.required]],
 			account_holder_name : [null, [Validators.required, ValidString]],
@@ -34,7 +36,26 @@ export class AddbankdetailsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.searchBanks()
+		if(this.bankId) {
+			this.getBankDetails();
+		}
+		this.searchBanks();
+	}
+
+	getBankDetails() {
+		Loading.circle();
+		this._common.get(urls.getBankInfo+this.bankId+'/').subscribe(data=>{
+			this.bankList = [data.data.bank_name];
+			this.bankForm.patchValue({
+				account_holder_name : data.data.account_holder_name,
+				account_number : data.data.account_number,
+				confirm_account : data.data.account_number,
+				bank_name : data.data.bank_name.id
+			});
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
 	}
 
 	removeSpaces() {
@@ -58,8 +79,7 @@ export class AddbankdetailsComponent implements OnInit {
 					if (term && term != '') {
 						return this._common.get(urls.searchBank + `${term}/`);
 					} else {
-						return new Observable((resolve => resolve.next(null)));
-
+						return this._common.get(urls.searchBank + `b/`);
 					}
 				})
 			)
@@ -71,7 +91,7 @@ export class AddbankdetailsComponent implements OnInit {
 					}
 				},
 				(err) => {
-					this.bankList = [];
+					// this.bankList = [];
 					this.bankListLoading = false;
 				}
 			);
@@ -81,13 +101,23 @@ export class AddbankdetailsComponent implements OnInit {
 		this.removeSpaces();
 		if (this.bankForm.valid) {
 			Block.circle('#add-bank-account-button');
-			this._common.post(urls.addBankAccount, this.bankForm.value).subscribe(_ => {
-				Block.remove('#add-bank-account-button');
-				this._router.navigate(['/dashboard/payment/withdrawal'])
-				Notify.success("Bank added successfully.");
-			}, _ => {
-				Block.remove('#add-bank-account-button');
-			});
+			if(this.bankId) {
+				this._common.put(urls.updateBankAccount+''+this.bankId+'/', this.bankForm.value).subscribe(_ => {
+					Block.remove('#add-bank-account-button');
+					this._router.navigate(['/dashboard/payment/withdrawal'])
+					Notify.success("Bank information updated successfully.");
+				}, _ => {
+					Block.remove('#add-bank-account-button');
+				});
+			} else {
+				this._common.post(urls.addBankAccount, this.bankForm.value).subscribe(_ => {
+					Block.remove('#add-bank-account-button');
+					this._router.navigate(['/dashboard/payment/withdrawal'])
+					Notify.success("Bank added successfully.");
+				}, _ => {
+					Block.remove('#add-bank-account-button');
+				});
+			}
 		} else {
 			this.bankForm.markAllAsTouched();
 		}

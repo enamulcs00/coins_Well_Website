@@ -4,7 +4,9 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './_services/auth.service';
 import { CommonService } from './_services/common.service';
 import { urls } from './_services/urls';
-
+import firebase from "firebase/app";
+import "firebase/messaging";
+import { SwPush, SwUpdate } from '@angular/service-worker';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -12,7 +14,8 @@ import { urls } from './_services/urls';
 })
 export class AppComponent implements AfterViewInit, OnInit {
 	title = 'coinswellWeb';
-	constructor(private _common: CommonService, private _auth: AuthService) {
+	serviceWorkerAttempt = 0;
+	constructor(private _common: CommonService, private _auth: AuthService, updates: SwUpdate, push: SwPush) {
 		Notify.init({
 			clickToClose: true,
 			position: 'right-bottom',
@@ -58,17 +61,63 @@ export class AppComponent implements AfterViewInit, OnInit {
 				this._auth.onProfileUpdate.next(data);
 			})
 		}
+		this.fetchCMS();
+		navigator.serviceWorker.register("ngsw-worker.js");
+		firebase.initializeApp(environment.firebaseConfig);
+		const setInt = () => {
+			navigator.serviceWorker.getRegistration().then((swr: any) => {
+				this.serviceWorkerAttempt++;
+				console.log("swr", swr);
+				if (swr != undefined) {
+					firebase.messaging().useServiceWorker(swr);
+				} else {
+					if (this.serviceWorkerAttempt > 0 && this.serviceWorkerAttempt < 3) {
+						setInt();
+					}
+				}
+			});
+		};
+		setInt();
+		updates.available.subscribe((_) =>
+			updates.activateUpdate().then(() => {
+				console.log("reload for update");
+				document.location.reload();
+			})
+		);
+		push.messages.subscribe((msg) => console.log("push message", msg));
+		push.notificationClicks.subscribe((click) => {
+			console.log("notification click", click);
+		});
+		self.addEventListener("notificationclick", function (event: any) {
+			event.notification.close();
+		});
+	}
 
+	permitToNotify() {
+		const messaging = firebase.messaging();
+		messaging
+			.requestPermission()
+			.then(() =>
+				messaging.getToken().then((token: any) => {
+					console.log(token);
+					// this.messagingService.token = token;
+				})
+			)
+			.catch((err: any) => {
+				console.log("Unable to get permission to notify.", err);
+			});
+	}
+
+	fetchCMS() {
+		this._common.getCMS(urls.getCMS).subscribe(data => {
+		})
 	}
 
 	ngOnInit() {
-		
 	}
 
 	ngAfterViewInit() {
 		Loading.remove(500);
 	}
-
-	
 
 }

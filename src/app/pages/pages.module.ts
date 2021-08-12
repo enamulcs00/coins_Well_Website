@@ -17,6 +17,7 @@ import { RateComponent } from './rate/rate.component';
 import { LayoutModule } from '../layout/layout.module';
 import { MaterialCommonModule } from '../material-common/material-common.module';
 import { SharedModule } from '../shared/shared.module';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
 	declarations: [
@@ -31,7 +32,8 @@ import { SharedModule } from '../shared/shared.module';
 		ChangepasswordComponent,
 		ChangeemailComponent,
 		EmailverifyComponent,
-		RateComponent
+		RateComponent,
+		ContactUsComponent
 	],
 	imports: [
 		CommonModule,

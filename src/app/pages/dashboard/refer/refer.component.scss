@@ -32,3 +32,13 @@
         }
     }
 }
+.my-input {
+    color: #212529 !important;
+    background: transparent;
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+    &:focus {
+        box-shadow: none !important;
+    }
+}

@@ -19,4 +19,9 @@ export const urls = {
     getTransactions : 'payment/get-all-transactions/',
     getBalance : 'payment/get-user-wallet-amount/',
     getSingleTransaction : 'user/get-user-transaction-details/',
+    getBankInfo : 'user/get-bank-details/',
+    updateBankAccount : 'user/update-bank-account/',
+    getFaq : 'cms/get-all-faq/',
+    getReferalCode : 'user/get-referral-code/',
+    getReferAmount : 'admin/get-referal-amount/'
 };

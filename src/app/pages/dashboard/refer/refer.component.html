@@ -3,9 +3,10 @@
 </h3>
 <div class="form-bx mt-40">
 	<div>
+		
 		<div class="Refer-earn">
-			<h3>Earn NGN 2500 on every referral</h3>
-			<p>To start earning, invite a friend to register and trade at least NGN 50000.</p>
+			<h3>Earn NGN {{ referAmount }} on every referral</h3>
+			<p>To start earning, invite a friend to register and trade at least NGN {{ referAmount }}.</p>
 			<figure class="text-center">
 				<img src="assets/images/refer.png" alt="">
 			</figure>
@@ -13,8 +14,8 @@
 				<h4>Invite Code</h4>
 				<div class="code">
 					<div class="code-num">
-						<h5>GC125sd4s8r43</h5>
-						<figure>
+						<input type="text" readonly class="form-control my-input" id="myInput" value="{{ referCode }}">
+						<figure (click)="copyText()" class="cursor-pointer">
 							<img src="assets/images/copy3.png" alt="">
 						</figure>
 					</div>

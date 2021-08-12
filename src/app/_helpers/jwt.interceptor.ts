@@ -6,13 +6,26 @@ import { environment } from '../../../src/environments/environment';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        console.log("request",request);
         let currentUser = JSON.parse(localStorage.getItem(environment.storageKey));
         if (currentUser && currentUser.token) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${currentUser.token}`,
-                }
-            });
+            //For our request to server
+            if(request.url.match(environment.baseUrl)) {
+                request = request.clone({
+                    setHeaders: {
+                        Authorization: `Bearer ${currentUser.token}`,
+                    }
+                });
+            }
+            
+            //For bitgo APIs request
+            if(request.url.match(environment.bitGoUrl)) {
+                request = request.clone({
+                    setHeaders: {
+                        Authorization: `Bearer ${environment.bitGoToken}`,
+                    }
+                });
+            }
         }
         return next.handle(request)
     }

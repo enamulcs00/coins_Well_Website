@@ -4,10 +4,12 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { urls } from './urls';
 import { User } from '../_models/user.model';
+import { Observable } from 'rxjs';
 @Injectable({
 	providedIn: 'root'
 })
 export class CommonService {
+	cmsData: any;
 	constructor(private _http: HttpClient) { }
 
 	post(url: string, postData: any = {}) {
@@ -84,9 +86,32 @@ export class CommonService {
 				return data.map((user: User) => new User().deserialize(user));
 			}));
 	}
-	
+
 	uploadMedia(formData) {
 		return this._http.post<any>(`${environment.baseUrl}upload/media/`, formData)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
+	getCMS(url: string) {
+		return new Observable(resolve => {
+			if (this.cmsData) {
+				resolve.next(this.cmsData);
+			} else {
+				this._http.get<any>(`${environment.baseUrl}${url}`)
+					.pipe(map((data: any) => {
+						return data;
+					})).subscribe((data: any) => {
+						this.cmsData = data.data;
+						resolve.next(data.data);
+					});	
+			}
+		})
+	}
+
+	callBitGoAPI(url : string) {
+		return this._http.get<any>(`${environment.bitGoUrl}/${url}`)
 			.pipe(map((data: any) => {
 				return data;
 			}));

@@ -3,16 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent } from './home/home.component';
 import { MydetailsComponent } from './mydetails/mydetails.component';
 import { NotificationComponent } from './notification/notification.component';
-import { RateDashComponent } from './rate-dash/rate-dash.component';
 import { AccountUpgradeComponent } from './account-upgrade/account-upgrade.component';
 import { ReferComponent } from './refer/refer.component';
 import { FaqComponent } from './faq/faq.component';
-import { DepositNgnComponent } from './deposit-ngn/deposit-ngn.component';
 import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
-import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 
 const routes: Routes = [
 	{
@@ -61,7 +57,7 @@ const routes: Routes = [
 			component: AddbankdetailsComponent,
 		}, 
 		{
-			path: 'addbankdetails/:bank_id',
+			path: 'editankdetails/:bank_id',
 			component: AddbankdetailsComponent,
 		}, 
 		]
