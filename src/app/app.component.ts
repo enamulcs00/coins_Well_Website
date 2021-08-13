@@ -70,6 +70,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				console.log("swr", swr);
 				if (swr != undefined) {
 					firebase.messaging().useServiceWorker(swr);
+					this.permitToNotify();
 				} else {
 					if (this.serviceWorkerAttempt > 0 && this.serviceWorkerAttempt < 3) {
 						setInt();
