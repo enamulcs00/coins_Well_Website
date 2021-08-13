@@ -23,7 +23,7 @@ export const environment = {
 		measurementId: "G-MW1VK0SK0D"
 	},
 	bitGoUrl : 'https://app.bitgo-test.com/api/v2',
-	bitGoToken : 'v2xe53eff642dcb7196ac0752e52b16703401293c105f13a9eeb435b83c3cc21967'
+	bitGoToken : 'v2xe019559d6b8aedcf28852f190c902e4845da3ee9b2a14606a51267c23cf6243b'
 };
 
 /*

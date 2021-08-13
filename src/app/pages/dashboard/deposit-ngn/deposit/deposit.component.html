@@ -1,9 +1,8 @@
-<!-- <pre>{{ addCashForm.value | json }}</pre> -->
 <form [(formGroup)]="addCashForm" (ngSubmit)="submitDetails()">
     <div class="form-by my-forms">
         <div class="input-bxx">
             <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput type="number" min="1" formControlName="amount" placeholder="Enter the amount ">
+                <input matInput type="number" min="1" formControlName="amount" placeholder="Enter the amount">
                 <span matSuffix>NGN</span>
                 <mat-error *ngIf="addCashForm.get('amount')?.hasError('required')">
                     Please enter an amount.
@@ -15,27 +14,34 @@
         </div>
         <div class="input-bxx mb-0 pos-rel">
             <mat-form-field appearance="outline">
-                <ngx-mat-file-input placeholder="Select proof" [formControl]="addCashForm.get('tempImage')" (focus)="addCashForm.get('tempImage').markAllAsTouched()"  [multiple]="false" accept="image/*">
+                <ngx-mat-file-input placeholder="Select proof" [formControl]="addCashForm.get('tempImage')"
+                    (focus)="addCashForm.get('tempImage').markAllAsTouched()" [multiple]="false" accept="image/*">
                 </ngx-mat-file-input>
                 <mat-error *ngIf="addCashForm.get('tempImage')?.hasError('required')">
                     Please select a proof.
                 </mat-error>
-             </mat-form-field>
+            </mat-form-field>
         </div>
     </div>
     <div class="admin-body pt-20">
         <!-- <h3 class="tp-head pb-20">
             Admin's Account
         </h3> -->
-        <div class="d-flex bank-name mb-10">
-            <figure><img style="    height: 30px;
-                width: 30px;
-                object-fit: cover;" src="{{ baseUrl }}{{ cmsData?.bank_name?.bank_image?.media_file }}" alt=""></figure>
-            {{ cmsData?.bank_name?.name }}
-        </div>
         <div class="bank-account mb-20">
-            <p>Account holder name <span>{{ cmsData?.account_holder_name }}.</span></p>
-            <p>Account Number <span>{{ cmsData?.account_number }}</span></p>
+            <div class="code-num">
+                <input type="text" readonly class="form-control my-input" id="myInput" value="{{ cmsData?.account_number }}">
+                <figure (click)="copyText()" class="cursor-pointer">
+                    <img src="assets/images/copy3.png" alt="">
+                </figure>
+            </div>
+            <p class="bank_name">{{ cmsData?.account_holder_name }}</p>
+            <div class="d-flex bank-name mb-10">
+                <figure><img style="    height: 30px;
+                    width: 30px;
+                    object-fit: contain;" src="{{ baseUrl }}{{ cmsData?.bank_name?.bank_image?.media_file }}" alt="">
+                </figure>
+                {{ cmsData?.bank_name?.name }}
+            </div>
         </div>
         <div>
             <h3 class="tp-head pb-20">

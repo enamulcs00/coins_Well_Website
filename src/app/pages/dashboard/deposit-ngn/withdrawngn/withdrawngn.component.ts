@@ -35,9 +35,15 @@ export class WithdrawngnComponent implements OnInit {
 
 	fetchCryptoBalance() {
 		let bit = this.userInfo.user_bitgo_wallet_address[0];
-		this._common.callBitGoAPI(bit['currency_type']+'/wallet/address/'+bit.bitgo_wallet_address).subscribe(data=>{
-			console.log("s", data);
-		})
+
+		
+
+
+		
+		
+		// this._common.callBitGoAPI(bit['currency_type']+'/wallet/address/'+bit.bitgo_wallet_address).subscribe(data=>{
+		// 	console.log("s", data);
+		// })
 	}
 
 	updateDetails(formData: any) {

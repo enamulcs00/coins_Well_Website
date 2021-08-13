@@ -11,6 +11,7 @@ export class AuthService {
 	userId: string | number = '';
 	onLogin: Subject<any> = new Subject();
 	onProfileUpdate: Subject<any> = new Subject();
+	firebaseToken : string = '';
 	constructor(private _http: HttpClient) { }
 
 	login(formData: any) {

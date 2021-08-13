@@ -80,7 +80,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		setInt();
 		updates.available.subscribe((_) =>
 			updates.activateUpdate().then(() => {
-				console.log("reload for update");
+				// console.log("reload for update");
 				document.location.reload();
 			})
 		);
@@ -99,8 +99,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 			.requestPermission()
 			.then(() =>
 				messaging.getToken().then((token: any) => {
-					console.log(token);
-					// this.messagingService.token = token;
+					console.log("Token",token);
+					this._auth.firebaseToken = token;
 				})
 			)
 			.catch((err: any) => {

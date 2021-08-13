@@ -62,9 +62,15 @@
 						formControlName="bank_name" placeholder="Select bank name">
 						<ng-template ng-label-tmp let-item="item">
 							<div class="bank-dropdown-label">
-								<div>
-									<p class="bank-heading">{{ item.name }} </p>
-									<p class="branch">{{ item.branch }}</p>
+								<div class="bank-dropdown-option">
+									<div class="pr-2">
+										<img class="img" src="{{ baseUrl+item?.bank_image?.media_file }}" alt="">
+									</div>
+									<div>
+										<p class="bank-heading">{{ item.name }} </p>
+										<!-- <p class="branch">{{ item.branch }}</p>
+										<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc_code }}</span></p> -->
+									</div>
 								</div>
 							</div>
 						</ng-template>
@@ -75,8 +81,8 @@
 								</div>
 								<div>
 									<p class="bank-heading">{{ item.name }} </p>
-									<p class="branch">{{ item.branch }}</p>
-									<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc_code }}</span></p>
+									<!-- <p class="branch">{{ item.branch }}</p>
+									<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc_code }}</span></p> -->
 								</div>
 							</div>
 							<!-- </div> -->

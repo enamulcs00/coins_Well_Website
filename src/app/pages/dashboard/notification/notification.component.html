@@ -1,17 +1,21 @@
 <div class="notification-page">
 	<div class="conta-iner">
 		<h2>Notification</h2>
-		<ul>
-			<li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
-			</li>
-			<li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
-			</li>
-			<li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
-			</li>
-			<li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
-			</li>
-			<li>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.
-			</li>
-		</ul>
+		<ng-container *ngIf="notificationList.length > 0; else noDataFound">
+			<ul>
+				<li *ngFor="let noti of notificationList">{{ noti.message }}
+				</li>
+			</ul>
+			<mat-paginator [length]="length"
+				(page)="onPageChange($event)"
+				[pageSize]="limit"
+				aria-label="Select page">
+			</mat-paginator>
+		</ng-container>
+		<ng-template #noDataFound>
+			<p style="text-align: center;
+			FONT-SIZE: 16px;
+			padding-top: 50px;">No notifications yet.</p>
+		</ng-template>
 	</div>
 </div>

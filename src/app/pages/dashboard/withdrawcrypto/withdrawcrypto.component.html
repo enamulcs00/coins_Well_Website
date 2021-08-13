@@ -21,10 +21,10 @@
 		<p class="fee mb-5" style="display: flex;
 		justify-content: space-between;">
 			<span>
-				Available : 0.0023568 crypto
+				Available : {{ bitCoinBalance?.balance | number:'0.2' }} crypto
 			</span>
 			<span>
-				Max : 0.0023568 crypto
+				Max : {{ bitCoinBalance?.balance | number:'0.2'  }} crypto
 			</span>
 		</p>
 		<p style="color: #4bc3ed;">Notes:</p>

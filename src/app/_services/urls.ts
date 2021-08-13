@@ -23,5 +23,7 @@ export const urls = {
     updateBankAccount : 'user/update-bank-account/',
     getFaq : 'cms/get-all-faq/',
     getReferalCode : 'user/get-referral-code/',
-    getReferAmount : 'admin/get-referal-amount/'
+    getReferAmount : 'admin/get-referal-amount/',
+    bitcoinBalance : 'bitgo/bitcoin_balance/',
+    getNotification : 'user/get-all-notification/'
 };

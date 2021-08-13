@@ -29,6 +29,14 @@ export class DepositComponent implements OnInit {
 		this.getCMS();
 	}
 
+	copyText() {
+		var copyText : any = document.getElementById("myInput");
+		copyText.select();
+		copyText.setSelectionRange(0, 99999);
+		document.execCommand("copy");
+		console.log("copyText");
+	}
+
 	// preview(files) {
 	// 	let files2 = files.target.files;
 	// 	console.log("files.length",files2);
