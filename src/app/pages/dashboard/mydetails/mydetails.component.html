@@ -5,7 +5,8 @@
 	<input type="file" #myFile class="d-none" (change)="preview(myFile.files)" accept="image/*">
 	<div class="usr-img mb-20 cursor-pointer" (click)="myFile.click()">
 		<figure class="whiite">
-			<img style="height: 80px;width: 80px;border-radius: 50%;" [src]="showImage" alt="">
+			<img style="height: 80px;width: 80px;border-radius: 50%;
+			object-fit: cover;" [src]="showImage" alt="">
 		</figure>
 		<div class="upload">
 			<img src="assets/images/upload.png" alt="">

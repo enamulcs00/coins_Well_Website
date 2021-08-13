@@ -35,7 +35,8 @@ export class TransactionpinComponent implements OnInit {
 			Block.circle('#transaction-pin-set')
 			this._auth.updateDetails({
 				...this.profileForm,
-				...this.transactionForm.value
+				...this.transactionForm.value,
+				token : this._auth.firebaseToken 
 			}, this._auth.userId).subscribe(res => {
 				Block.remove('#transaction-pin-set');
 				Notify.success("Account create successfully.");
