@@ -67,7 +67,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 		const setInt = () => {
 			navigator.serviceWorker.getRegistration().then((swr: any) => {
 				this.serviceWorkerAttempt++;
-				console.log("swr", swr);
 				if (swr != undefined) {
 					firebase.messaging().useServiceWorker(swr);
 					this.permitToNotify();
@@ -104,8 +103,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 					this._auth.firebaseToken = token;
 				})
 			)
-			.catch((err: any) => {
-				console.log("Unable to get permission to notify.", err);
+			.catch((_: any) => {
+				alert("Unable to get permission to notify.");
 			});
 	}
 
