@@ -18,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MtxSelectModule } from '@ng-matero/extensions';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MyEarningComponent } from './my-earning/my-earning.component';
+import {WebcamModule} from 'ngx-webcam';
+
 @NgModule({
 	declarations: [
 		LeftSidebarComponent,
@@ -40,7 +42,8 @@ import { MyEarningComponent } from './my-earning/my-earning.component';
 		MaterialCommonModule,
 		ReactiveFormsModule,
 		MtxSelectModule,
-		MatPaginatorModule
+		MatPaginatorModule,
+		WebcamModule
 	]
 })
 export class DashboardModule { }

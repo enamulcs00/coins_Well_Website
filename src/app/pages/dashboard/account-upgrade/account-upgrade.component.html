@@ -13,8 +13,17 @@
 			<img *ngIf="facialVerificationImageUrl" [src]="facialVerificationImageUrl" alt="">
 		</figure>
 
-		<figure *ngIf="selfieType == 'video'" class="m-auto cursor-pointer">
-			<video id="videoImg" style="height: 200px; width: 300px;" class="camera_stream" alt=""></video>
+		<figure style="position: relative;" *ngIf="selfieType == 'video'" class="m-auto cursor-pointer">
+			<webcam width="300" height="300" [mirrorImage]="'never'" [trigger]="trigger" (initError)="handleInitError($event)" (imageCapture)="handleImage($event)"></webcam>
+			<button (click)="takeSnapshot()" class="btn btn-primary" style="    width: 40px;
+			border-radius: 50%;
+			position: absolute;
+			height: 40px;
+			bottom: 40px;
+			left: 44%;
+			right: auto;
+			padding: 6px 5px 7px;"><i class="fa fa-camera"></i></button>
+			<!-- <video id="videoImg" style="height: 200px; width: 300px;" class="camera_stream" alt=""></video> -->
 		</figure>
 
 		<div class="camera-buttons">

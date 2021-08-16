@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { forkJoin } from 'rxjs';
@@ -7,12 +7,18 @@ import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 
+import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import { Observable, Subject } from 'rxjs';
+
+
 @Component({
 	selector: 'app-account-upgrade',
 	templateUrl: './account-upgrade.component.html',
 	styleUrls: ['./account-upgrade.component.scss']
 })
 export class AccountUpgradeComponent implements OnInit {
+	private trigger: Subject<void> = new Subject<void>();
+
 	facialVerificationImage: any;
 	facialVerificationImageUrl: any;
 	documents: any[] = [
@@ -23,14 +29,16 @@ export class AccountUpgradeComponent implements OnInit {
 			base64: null
 		}
 	];
-	selfieType :  string = 'img';
-	userInfo  =  JSON.parse(localStorage.getItem(environment.storageKey));
+	selfieType: string = 'img';
+	userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
 	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
 	}
 
 	previewVerification(files) {
+		this.selfieType = 'img';
+
 		if (files.length === 0)
 			return;
 		loadImage(files[0]).then(image => {
@@ -48,60 +56,21 @@ export class AccountUpgradeComponent implements OnInit {
 		})
 	}
 
-	getCamera() {
-		let nav : any = navigator;
-		var video : any = document.querySelector('video.camera_stream');
-		nav.getUserMedia(
-			// Options
-			{
-				video: true
-			},
-			// Success Callback
-			(stream) => {
-		
-				// Create an object URL for the video stream and
-				// set it as src of our HTLM video element.
-				video.src = window.URL.createObjectURL(stream);
-		
-				// // Play the video element to show the stream to the user.
-				video.play();
-				this.selfieType = 'video';
-			},
-			// Error Callback
-			(err) => {
-		
-				// Most common errors are PermissionDenied and DevicesNotFound.
-				// console.error(err);
-				Notify.failure("Unable to get camera.");
-			}
-		);
+	public handleInitError(error: WebcamInitError): void {
+		if (error.mediaStreamError && error.mediaStreamError.name === "NotAllowedError") {
+			Notify.failure("Camera access was not allowed by user!");
+		} else {
+			Notify.failure("Camera not found.");
+		}
+		this.selfieType = 'img';
 	}
 
-	takeSnapshot(){
-		var hidden_canvas = document.querySelector('canvas'),
-		video : any = document.querySelector('video.camera_stream'),
-		// image = document.querySelector('img.photo'),
-			// Get the exact size of the video element.
-			width = video.videoWidth,
-			height = video.videoHeight,
-	
-			// Context object for working with the canvas.
-			context = hidden_canvas.getContext('2d');
-	
-		// Set the canvas to the same dimensions as the video.
-		hidden_canvas.width = width;
-		hidden_canvas.height = height;
-	
-		// Draw a copy of the current frame from the video on the canvas.
-		context.drawImage(video, 0, 0, width, height);
-	
-		// Get an image dataURL from the canvas.
-		var imageDataURL = hidden_canvas.toDataURL('image/png');
-	
-		// Set the dataURL as source of an image element, showing the captured photo.
-		this.facialVerificationImageUrl = imageDataURL;
-		this.selfieType = 'img';
-	
+	getCamera() {
+		this.selfieType = 'video';
+	}
+
+	takeSnapshot() {
+		this.trigger.next();
 	}
 
 	goToNext() {
@@ -115,6 +84,16 @@ export class AccountUpgradeComponent implements OnInit {
 		} else {
 			Notify.failure('At least one document is required.')
 		}
+	}
+
+	handleImage(webcamImage: WebcamImage) {
+		this.facialVerificationImage = webcamImage.imageData;
+		this.facialVerificationImageUrl = webcamImage.imageAsDataUrl;
+		console.log("this.facialVerificationImage",this.facialVerificationImage);
+		this.selfieType = 'img';
+		// console.log("webcamImage", webcamImage);
+		// this.getPicture.emit(webcamImage);
+		// this.showWebcam = false;
 	}
 
 	uploadDocuments() {
@@ -139,14 +118,14 @@ export class AccountUpgradeComponent implements OnInit {
 			let facial = imagesUpload.facialVerification.data[0]['id'];
 			this.submitFacialRequest(
 				{
-					user_documents : [
+					user_documents: [
 						{
-							document : facial,
-							document_type : 1
-						}, 
+							document: facial,
+							document_type: 1
+						},
 						{
-							document :  images[0]['document'],
-							document_type : 2
+							document: images[0]['document'],
+							document_type: 2
 						}
 					]
 				}
