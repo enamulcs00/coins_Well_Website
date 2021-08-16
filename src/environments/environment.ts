@@ -22,8 +22,11 @@ export const environment = {
 		appId: "1:865125792184:web:d4960bdf4521823c15b74d",
 		measurementId: "G-MW1VK0SK0D"
 	},
-	bitGoUrl : 'https://app.bitgo-test.com/api/v2',
-	bitGoToken : 'v2xe019559d6b8aedcf28852f190c902e4845da3ee9b2a14606a51267c23cf6243b'
+	bitGoUrl : 'https://coinswell-test.zendesk.com/api/v2/',
+	bitGoToken : 'v2xe019559d6b8aedcf28852f190c902e4845da3ee9b2a14606a51267c23cf6243b',
+	zendDeskPassword : '&wnudyhY6+5uzLp',
+	zendDeskToken : 'kdAToAVlrX4tOgxPO12xgIItTokNL9jevW8uW0Sr',
+	zenDeskSec : '44d2254f85385284a4f247401bfd960694f4ce5db35e37301dc0af8fa7b7b938'
 };
 
 /*

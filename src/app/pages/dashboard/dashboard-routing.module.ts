@@ -9,6 +9,7 @@ import { AccountUpgradeComponent } from './account-upgrade/account-upgrade.compo
 import { ReferComponent } from './refer/refer.component';
 import { FaqComponent } from './faq/faq.component';
 import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
+import { MyEarningComponent } from './my-earning/my-earning.component';
 
 const routes: Routes = [
 	{
@@ -40,9 +41,14 @@ const routes: Routes = [
 		}, { 
 			path: 'upgrade-account',
 			component: AccountUpgradeComponent,
-		}, {
+		}, 
+		{
 			path: 'refer',
 			component: ReferComponent,
+		},
+		{
+			path: 'my-earnings',
+			component: MyEarningComponent,
 		},
 		{
 			path: 'faq',

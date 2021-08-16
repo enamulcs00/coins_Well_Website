@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Loading } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -15,7 +14,7 @@ export class TransactionsComponent implements OnInit {
 	baseUrl : string = environment.homeURL;
 	length : number = 10;
 	limit : number = 5;
-	constructor(private _router: Router, private _common: CommonService) { }
+	constructor(private _common: CommonService) { }
 
 	ngOnInit(): void {
 		this.getTransactions();
@@ -23,7 +22,7 @@ export class TransactionsComponent implements OnInit {
 
 	onPageChange(event) {
 		this.getTransactions(event.pageIndex + 1);
-	}
+	}	
 
 	getTransactions(page = 1) {
 		Loading.circle();

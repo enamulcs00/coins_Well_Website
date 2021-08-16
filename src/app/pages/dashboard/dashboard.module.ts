@@ -17,6 +17,7 @@ import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.compone
 import { ReactiveFormsModule } from '@angular/forms';
 import { MtxSelectModule } from '@ng-matero/extensions';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MyEarningComponent } from './my-earning/my-earning.component';
 @NgModule({
 	declarations: [
 		LeftSidebarComponent,
@@ -30,7 +31,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 		ReferComponent,
 		FaqComponent,
 		AddbankdetailsComponent,
-		WithdrawcryptoComponent
+		WithdrawcryptoComponent,
+		MyEarningComponent
 	],
 	imports: [
 		CommonModule,

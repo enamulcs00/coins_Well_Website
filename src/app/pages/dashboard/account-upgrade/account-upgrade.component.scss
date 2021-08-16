@@ -1,17 +1,42 @@
-.acc-upgrade{
-
-    h3{
+.status-check {
+    font-size: 20px;
+    color: #404040;
+    margin-bottom: 9px;
+}
+.acc-upgrade {
+    h3 {
         font-size: 20px;
         color: #404040;
         margin-bottom: 9px;
     }
-    p{
+    p {
         font-size: 15px;
         color: #999999;
     }
-    figure{
+    figure {
         margin-top: 23px;
         width: 300px;
         padding: 30px 0px;
     }
+}
+
+.camera-buttons {
+    width: 300px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .btn {
+        &:focus,
+        &:active {
+            text-decoration: none !important;
+        }
+    }
+}
+
+.upload-bx {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    height: 190px;
 }

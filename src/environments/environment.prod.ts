@@ -19,5 +19,8 @@ export const environment = {
 		measurementId: "G-MW1VK0SK0D"
 	},
 	bitGoUrl : 'https://app.bitgo-test.com/api/v2',
-	bitGoToken : 'v2xe53eff642dcb7196ac0752e52b16703401293c105f13a9eeb435b83c3cc21967'
+	bitGoToken : 'v2xe53eff642dcb7196ac0752e52b16703401293c105f13a9eeb435b83c3cc21967',
+	zendDeskPassword : '&wnudyhY6+5uzLp',
+	zendDeskToken : 'kdAToAVlrX4tOgxPO12xgIItTokNL9jevW8uW0Sr',
+	zenDeskSec : '44d2254f85385284a4f247401bfd960694f4ce5db35e37301dc0af8fa7b7b938'
 };

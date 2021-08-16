@@ -5,13 +5,13 @@
     <div class="form-by my-forms">
         <div class="input-bxx">
             <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput type="number" min="1" formControlName="amount" placeholder="Enter the amount">
+                <input currencyMask [options]="{ prefix: '₦ ' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount">
                 <span matSuffix>NGN</span>
                 <mat-error *ngIf="addCashForm.get('amount')?.hasError('required')">
                     Please enter an amount.
                 </mat-error>
                 <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
-                    Amount should be at least 1;
+                    Amount should be at least 0.01;
                 </mat-error>
             </mat-form-field>
         </div>
@@ -50,11 +50,7 @@
             <h3 class="tp-head pb-20">
                 Payment Instructions
             </h3>
-            <div class="Instructions">
-                <p>1. Deposit the amount on the above given bank account using any means of
-                    transfer.
-                </p>
-                <p>2. Upload the transaction proof.</p>
+            <div class="Instructions" [innerHtml]="cms?.payment_instructions">
             </div>
         </div>
         <div class="btn-outer m-auto w-100 pt-20">

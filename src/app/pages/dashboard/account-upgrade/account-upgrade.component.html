@@ -1,29 +1,49 @@
 <h3 class="tp-head text-center">
 	Account Upgrade
 </h3>
+<h3 class="text-right status-check">Status:  <span *ngIf="userInfo?.facial_verification  == 4" class="text-success">Verified</span> <span *ngIf="userInfo?.facial_verification  == 3" class="text-danger">Rejected</span><span *ngIf="userInfo?.facial_verification  == 2" class="text-warning">In progress</span> <span *ngIf="userInfo?.facial_verification  == 1" class="text-info">Pending</span></h3>
 <div class="form-bx mt-40">
 	<div class="acc-upgrade">
 		<h3>Facial Verification</h3>
 		<p>Upload a selfie of you holding a piece of paper with your name, Date of Birth on the piece of paper</p>
 		<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
 			class="d-none">
-		<figure class="m-auto cursor-pointer" (click)="facialDocument.click()">
+		<figure *ngIf="selfieType == 'img'" class="m-auto cursor-pointer">
 			<img *ngIf="!facialVerificationImageUrl" src="assets/images/scan.png" alt="">
 			<img *ngIf="facialVerificationImageUrl" [src]="facialVerificationImageUrl" alt="">
 		</figure>
+
+		<figure *ngIf="selfieType == 'video'" class="m-auto cursor-pointer">
+			<video id="videoImg" style="height: 200px; width: 300px;" class="camera_stream" alt=""></video>
+		</figure>
+
+		<div class="camera-buttons">
+			<button class="btn btn-primary btn-sm" (click)="facialDocument.click()"> <i class="fa fa-image"></i> Browse</button>
+			&nbsp;&nbsp;OR&nbsp;&nbsp;
+			<button class="btn btn-primary btn-sm" (click)="getCamera()"> <i class="fa fa-camera"></i> Capture </button>
+		</div>
+
 	</div>
 
 	<div class="acc-upgrade">
 		<h3>Upload Documents</h3>
-		<p>Upload any one of the following to upgrade your account.</p>
+		<p class="mb-2">Upload any one of the following to upgrade your account.</p>
+		<p style="line-height: 22px;">1. Driving License</p>
+		<p style="line-height: 22px;">2. Voter Card</p>
+		<p style="line-height: 22px;">3. International Passport</p>
+		<p style="line-height: 22px;">4. National ID</p>
 		<div class="documents-upload-bx">
 			<div class="upload-bx cursor-pointer" *ngFor="let doc of documents; let i = index;"
 				[ngStyle]="{background: 'url('+doc.base64+')'}">
 				<div class="plus-icon cursor-pointer">+</div>
-				<p class="cursor-pointer">{{ doc?.title }}</p>
+				<!-- <p class="cursor-pointer">{{ doc?.title }}</p> -->
 				<input #file (change)="preview(file.files, i)" type="file" accept="image/*">
 			</div>
 		</div>
+
+		<h3>Note</h3>
+		<p style="line-height: 22px;">Kindly upload a valid document and perform the facial verification correctly.</p>
+		<p style="line-height: 22px;">Verification review time can take 3 to 7 business working days.</p>
 	</div>
 
 	<div class="btn-outer m-auto pt-20">

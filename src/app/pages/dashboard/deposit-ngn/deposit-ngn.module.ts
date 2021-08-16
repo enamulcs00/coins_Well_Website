@@ -7,6 +7,7 @@ import { WithdrawngnComponent } from './withdrawngn/withdrawngn.component';
 import { MaterialCommonModule } from 'src/app/material-common/material-common.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { NgxCurrencyModule } from "ngx-currency";
 
 @NgModule({
 	declarations: [DepositComponent, DepositNgnComponent, WithdrawngnComponent],
@@ -16,7 +17,8 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 		MaterialCommonModule,
 		ReactiveFormsModule,
 		NgxMatFileInputModule,
-		FormsModule
+		FormsModule,
+		NgxCurrencyModule
 	]
 })
 export class DepositNgnModule { }

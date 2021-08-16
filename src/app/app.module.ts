@@ -11,6 +11,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor'; 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
+
 @NgModule({
 	declarations: [
 		AppComponent

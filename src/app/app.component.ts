@@ -88,7 +88,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 			fontSize: '15px',
 			showOnlyTheLastOne: true,
 			messageMaxLength: 50000,
-			width: '300px'
+			width: '300px',
+			zindex : 999999
 		})
 		Loading.init({
 			svgColor: '#17C2EC'

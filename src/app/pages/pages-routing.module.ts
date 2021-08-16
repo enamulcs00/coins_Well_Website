@@ -26,37 +26,6 @@ const routes: Routes = [
 	},
 	{
 		path: '',
-		component: FullComponent,
-		children: [
-			{
-				path: 'landingpage',
-				component: LandingpageComponent
-			},
-			{
-				path: 'dashboard',
-				canActivate: [AuthGuard],
-				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-			},
-			{
-				path: 'ticket',
-				component: TicketComponent,
-			},
-			{
-				path: 'rate',
-				component: RateComponent
-			},
-			{
-				path: 'contact_us',
-				component: ContactUsComponent
-			},
-			{
-				path: ':type',
-				component: AboutusComponent,
-			},
-		]
-	},
-	{
-		path: '',
 		component: WithoutheaderComponent,
 		children: [
 			{
@@ -99,6 +68,37 @@ const routes: Routes = [
 				path: 'verify-phonenumber',
 				component: VerifyphonenumberComponent,
 			}
+		]
+	},
+	{
+		path: '',
+		component: FullComponent,
+		children: [
+			{
+				path: 'landingpage',
+				component: LandingpageComponent
+			},
+			{
+				path: 'dashboard',
+				canActivate: [AuthGuard],
+				loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+			},
+			{
+				path: 'ticket',
+				component: TicketComponent,
+			},
+			{
+				path: 'rate',
+				component: RateComponent
+			},
+			{
+				path: 'contact_us',
+				component: ContactUsComponent
+			},
+			{
+				path: ':type',
+				component: AboutusComponent,
+			},
 		]
 	}
 ];

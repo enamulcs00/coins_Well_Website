@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
+import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -17,6 +18,7 @@ export class DepositComponent implements OnInit {
 	cmsData: any;
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
+	cms : any;
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) { }
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
@@ -24,7 +26,7 @@ export class DepositComponent implements OnInit {
 			proof: [null],
 			request_type: [1],
 			symbol: ['+'],
-			amount: [null, [Validators.required, Validators.min(1)]]
+			amount: [0, [Validators.required, Validators.min(0.01)]]
 		});
 		this.getCMS();
 	}
@@ -89,8 +91,12 @@ export class DepositComponent implements OnInit {
 
 	getCMS() {
 		Loading.circle();
-		this._common.get(urls.getBankDetails).subscribe(data => {
-			this.cmsData = data.data;
+		forkJoin({
+			cmsData : this._common.get(urls.getBankDetails),
+			cms : this._common.getCMS(urls.getCMS)
+		}).subscribe(data => {
+			this.cmsData = data.cmsData.data;
+			this.cms = data.cms;
 			Loading.remove();
 		}, _ => {
 			Loading.remove();

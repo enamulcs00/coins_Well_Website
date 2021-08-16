@@ -20,8 +20,6 @@
 						</div>
 						<div>
 							<p class="bank-heading">{{ item.name }} </p>
-							<!-- <p class="branch">{{ item.branch }}</p>
-							<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc_code }}</span></p> -->
 						</div>
 					</div>
 				</div>
@@ -33,11 +31,8 @@
 					</div>
 					<div>
 						<p class="bank-heading">{{ item.name }} </p>
-						<!-- <p class="branch">{{ item.branch }}</p>
-						<p class="ifsc"><span>IFSC: </span><span>{{ item.ifsc_code }}</span></p> -->
 					</div>
 				</div>
-				<!-- </div> -->
 			</ng-template>
 		</mtx-select>
 
@@ -66,7 +61,7 @@
 					<img src="assets/images/auth/perfered-name.png" alt="">
 				</figure>
 			</span>
-			<input matInput formControlName="account_holder_name" name="account_holder_name"
+			<input readonly matInput formControlName="account_holder_name" name="account_holder_name"
 				placeholder="Account holder name">
 
 			<mat-error *ngIf="showError(bankForm.get('account_holder_name')) == 'required'">

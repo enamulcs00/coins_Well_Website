@@ -25,12 +25,13 @@
 						<div class="ts-right">
 							<h5 [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">{{ tran?.transaction_status }}</h5>
 							<div class="success-midle-main">
-								<h4><i  [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'" class="fa fa-caret-down" aria-hidden="true"></i><span [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">0.20%
-									</span>({{ tran?.amount | number }})</h4>
+								<h4>
+									<i [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'" class="fa fa-caret-down" aria-hidden="true"></i><span [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">0.20%
+									</span>({{ tran?.amount | number }})
+								</h4>
 								<a>{{ tran?.type_of_transaction }}</a>
 							</div>
 							<p>{{ tran?.created_at | date  : 'medium' }}</p>
-							<!-- <p>June 23, 2021 8:00 AM</p> -->
 						</div>
 					</div>
 				</li>

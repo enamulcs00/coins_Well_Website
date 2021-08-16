@@ -24,12 +24,13 @@ export class AddbankdetailsComponent implements OnInit {
 	bankListLoading: boolean = false;
 	baseUrl: string = environment.homeURL;
 	bankId : any;
+	userInfo : any = JSON.parse(localStorage.getItem(environment.storageKey));
 	showError = showErrors;
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route : ActivatedRoute) {
 		this.bankId = this.route.snapshot.paramMap.get('bank_id');
 		this.bankForm = this._fb.group({
 			bank_name: [null, [Validators.required]],
-			account_holder_name : [null, [Validators.required, ValidString]],
+			account_holder_name : [this.userInfo.first_name+' '+this.userInfo.last_name, [Validators.required, ValidString]],
 			account_number: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
 			confirm_account: [null, Validators.required]
 		}, { validators: MustMatch('account_number', 'confirm_account') });

@@ -1,0 +1,38 @@
+<div class="trans-page" id="fetch-transaction-list">
+	<div class="conta-iner">
+		<h2>My Earnings</h2>
+        <p> <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="25" height="25" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g xmlns="http://www.w3.org/2000/svg"><g><path d="m407 46h-362c-12.4 0-23.66 5.05-31.8 13.2-8.15 8.14-13.2 19.4-13.2 31.8 0 24.81 20.19 45 45 45h392c8.28 0 15-6.72 15-15v-30c0-24.81-20.19-45-45-45zm-30 60h-302c-8.28 0-15-6.72-15-15s6.72-15 15-15h302c8.28 0 15 6.72 15 15s-6.72 15-15 15z" fill="#000000" data-original="#000000" style="" class=""></path></g><g><path d="m467 166h-422c-16.87 0-32.45-5.6-45-15.04v270.04c0 24.81 20.19 45 45 45h422c24.81 0 45-20.19 45-45v-210c0-24.81-20.19-45-45-45zm-30 240h-90c-8.28 0-15-6.72-15-15s6.72-15 15-15h90c8.28 0 15 6.72 15 15s-6.72 15-15 15z" fill="#000000" data-original="#000000" style="" class=""></path></g></g></g></svg> My Eanings</p>
+        <h4 style="    color: #3da0d0;
+		margin-bottom: 30px;margin-top: 5px;">₦ {{ finalEarning | number }}</h4>
+		<ng-container *ngIf="transactionList.length > 0; else noDataFound">
+			<ul>
+				<li *ngFor="let tran of transactionList">
+					<div class="ts-main">
+						<div class="ts-left">
+							<div class="tsl-main">
+								<div class="tsl-left">
+									<figure>
+										<img style="
+										height: 60px;
+										width: 60px;
+										border-radius: 50%;
+										object-fit: contain;" src="{{ baseUrl + tran?.image }}">
+									</figure>
+								</div>
+								<div class="tsl-right">
+									<h5>{{ tran?.phone_number }}</h5>
+									<p>Earned NGN {{ tran?.amount }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</ng-container>
+		<ng-template #noDataFound>
+			<p style="text-align: center;
+			FONT-SIZE: 16px;
+			padding-top: 50px;">No transactions yet.</p>
+		</ng-template>
+	</div>
+</div>
