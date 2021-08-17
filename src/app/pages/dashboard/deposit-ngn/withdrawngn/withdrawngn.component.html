@@ -29,20 +29,31 @@
 				<div class="l pt-2">
 					<input formControlName="bank" type="radio" id="html" name="bank" value="{{ bank?.id }}">
 				</div>
-				<div class="r">
-					<div class="code-num">
-						<input type="text" readonly class="form-control my-input" id="myInput" value="{{ bank?.account_number }}">
-					</div>
-					<p class="bank_name">{{ bank?.account_holder_name }}</p>
-					<div class="d-flex bank-name mb-10">
-						<figure><img style="    height: 30px;
-							width: 30px;
-							object-fit: contain;" src="{{ baseUrl }}{{ bank?.bank_name?.bank_image?.media_file }}" alt="">
-						</figure>
-						{{ bank?.bank_name?.name }}
+				<div class="r d-flex">
+					<div class=" ftf">
+						<div class="code-num">
+							<input type="text" readonly class="form-control my-input" id="myInput" value="{{ bank?.account_number }}">
+						</div>
+						<p class="bank_name">{{ bank?.account_holder_name }}</p>
+						<div class="d-flex bank-name mb-10">
+							<figure><img style="    height: 30px;
+								width: 30px;
+								object-fit: contain;" src="{{ baseUrl }}{{ bank?.bank_name?.bank_image?.media_file }}" alt="">
+							</figure>
+							{{ bank?.bank_name?.name }}
+						</div>
 					</div>
 
-					<!-- <div class="d-flex ftf">
+					<div class="action-btn d-flex ml-auto">
+						<figure [routerLink]="['/dashboard/editankdetails/'+bank.id]" class="cursor-pointer">
+							<img src="assets/images/edit.png" alt="">
+						</figure>
+						<figure class="cursor-pointer" (click)="deleteBank(i)">
+							<img src="assets/images/delete.png" alt="">
+						</figure>
+					</div>
+
+					 <!-- <div class="d-flex ftf">
 						<div class="d-flex bank-name mb-10">
 							<figure><img style="height: 25px;
 								width: 25px;
@@ -56,12 +67,12 @@
 							<figure class="cursor-pointer" (click)="deleteBank(i)"><img src="assets/images/delete.png"
 									alt=""></figure>
 						</div>
-					</div>
-
+					</div> -->
+<!-- 
 					<div class="bank-account mb-20">
 						<p>Account holder name <span>{{ bank?.account_holder_name }}</span></p>
 						<p>Account Number <span>{{ bank?.account_number }}</span></p>
-					</div> -->
+					</div>  -->
 				</div>
 			</div>
 		</div>

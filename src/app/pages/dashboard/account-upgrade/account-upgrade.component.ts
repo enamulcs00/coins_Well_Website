@@ -85,14 +85,11 @@ export class AccountUpgradeComponent implements OnInit {
 		}
 	}
 
-	handleImage(webcamImage: WebcamImage) {
-		this.facialVerificationImage = webcamImage.imageData;
+	async handleImage(webcamImage: WebcamImage) {
 		this.facialVerificationImageUrl = webcamImage.imageAsDataUrl;
-		console.log("this.facialVerificationImage",this.facialVerificationImage);
+		const base64 = await fetch(this.facialVerificationImageUrl);
+		this.facialVerificationImage = await base64.blob();
 		this.selfieType = 'img';
-		// console.log("webcamImage", webcamImage);
-		// this.getPicture.emit(webcamImage);
-		// this.showWebcam = false;
 	}
 
 	uploadDocuments() {
