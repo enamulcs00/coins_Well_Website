@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { forkJoin } from 'rxjs';
@@ -6,9 +6,8 @@ import { loadImage } from 'src/app/_helpers/common.helper';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
-
-import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-import { Observable, Subject } from 'rxjs';
+import { WebcamImage, WebcamInitError } from 'ngx-webcam';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -17,7 +16,7 @@ import { Observable, Subject } from 'rxjs';
 	styleUrls: ['./account-upgrade.component.scss']
 })
 export class AccountUpgradeComponent implements OnInit {
-	private trigger: Subject<void> = new Subject<void>();
+	public trigger: Subject<void> = new Subject<void>();
 
 	facialVerificationImage: any;
 	facialVerificationImageUrl: any;
