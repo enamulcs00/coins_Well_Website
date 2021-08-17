@@ -35,15 +35,6 @@ export class WithdrawngnComponent implements OnInit {
 
 	fetchCryptoBalance() {
 		let bit = this.userInfo.user_bitgo_wallet_address[0];
-
-		
-
-
-		
-		
-		// this._common.callBitGoAPI(bit['currency_type']+'/wallet/address/'+bit.bitgo_wallet_address).subscribe(data=>{
-		// 	console.log("s", data);
-		// })
 	}
 
 	updateDetails(formData: any) {
@@ -68,7 +59,7 @@ export class WithdrawngnComponent implements OnInit {
 				this._router.navigate(['/Congratulations'], {
 					state: {
 						message: `Your order has been placed<br>
-						Your account will be credited <br> with in NGN as soon as we verify your order.`
+						Your account will be debited <br> with in NGN as soon as we verify your order.`
 					}
 				});
 			});

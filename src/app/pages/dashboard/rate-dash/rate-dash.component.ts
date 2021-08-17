@@ -14,10 +14,14 @@ import { environment } from 'src/environments/environment';
 export class RateDashComponent implements OnInit {
 	rates : any;
 	imageUrl : string = environment.homeURL;
+	cms : any;
 	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
 		this.getRates();
+		this._common.getCMS(urls.getCMS).subscribe(data=>{
+			this.cms = data;
+		})
 	}
 
 	getRates() {

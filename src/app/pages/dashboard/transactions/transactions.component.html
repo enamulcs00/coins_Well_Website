@@ -3,16 +3,13 @@
 		<h2>My Transactions</h2>
 		<ng-container *ngIf="transactionList.length > 0; else noDataFound">
 			<ul>
-				<li *ngFor="let tran of transactionList" routerLink="/dashboard/transactions-details/{{ tran?.id }}">
+				<li class="cursor-pointer" *ngFor="let tran of transactionList" routerLink="/dashboard/transactions-details/{{ tran?.id }}">
 					<div class="ts-main">
 						<div class="ts-left">
 							<div class="tsl-main">
 								<div class="tsl-left">
 									<figure>
-										<img style="
-										height: 60px;
-										width: 60px;
-										object-fit: contain;" src="{{ baseUrl + tran?.currency?.logo?.media_file }}">
+										<img style="height: 60px; width: 60px; object-fit: contain;" src="{{ baseUrl + tran?.currency?.logo?.media_file }}">
 									</figure>
 								</div>
 								<div class="tsl-right">

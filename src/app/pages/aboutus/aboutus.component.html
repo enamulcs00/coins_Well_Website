@@ -5,6 +5,7 @@
 				<h1 *ngIf="type == 'about_us'">About Us</h1>
 				<h1 *ngIf="type == 'terms_conditon'">Terms and Conditions</h1>
 				<h1 *ngIf="type == 'privacy_policy'">Privacy and policy</h1>
+				<h1 *ngIf="type == 'features'">Features</h1>
 				<div *ngIf="cmsContent" class="ab-contant" [innerHtml]="cmsContent[type]">
 				</div>
 			</div>

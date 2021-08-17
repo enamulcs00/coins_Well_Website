@@ -36,7 +36,6 @@ export class DepositComponent implements OnInit {
 		copyText.select();
 		copyText.setSelectionRange(0, 99999);
 		document.execCommand("copy");
-		console.log("copyText");
 	}
 
 	// preview(files) {
@@ -81,6 +80,7 @@ export class DepositComponent implements OnInit {
 								Your account will be credited <br> with in NGN as soon as we verify your order.`
 							}
 						});
+					},error => {
 					});
 				});
 			}
