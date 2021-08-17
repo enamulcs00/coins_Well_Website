@@ -47,14 +47,13 @@
 			<div class="upload-bx cursor-pointer" *ngFor="let doc of documents; let i = index;"
 				[ngStyle]="{background: 'url('+doc.base64+')'}">
 				<div class="plus-icon cursor-pointer">+</div>
-				<!-- <p class="cursor-pointer">{{ doc?.title }}</p> -->
 				<input #file (change)="preview(file.files, i)" type="file" accept="image/*">
 			</div>
 		</div>
 
 		<h3>Note</h3>
-		<p style="line-height: 22px;">Kindly upload a valid document and perform the facial verification correctly.</p>
-		<p style="line-height: 22px;">Verification review time can take 3 to 7 business working days.</p>
+		<p style="line-height: 22px;">Kindly upload a Valid document and perform the facial verification correctly.</p>
+		<p style="line-height: 22px;">Verification Review Time can take 3 to 7 business days.</p>
 	</div>
 
 	<div class="btn-outer m-auto pt-20">
