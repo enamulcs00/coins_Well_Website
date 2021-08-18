@@ -95,7 +95,6 @@ export class CommonService {
 	}
 
 	getCMS(url: string) {
-		console.log("Das");
 		return new Observable(resolve => {
 			if (this.cmsData) {
 				console.log("this.cmsData",this.cmsData);

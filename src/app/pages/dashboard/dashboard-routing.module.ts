@@ -10,6 +10,8 @@ import { ReferComponent } from './refer/refer.component';
 import { FaqComponent } from './faq/faq.component';
 import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
 import { MyEarningComponent } from './my-earning/my-earning.component';
+import { BuyCryptoComponent } from './buy-crypto/buy-crypto.component';
+import { SellCryptoComponent } from './sell-crypto/sell-crypto.component';
 
 const routes: Routes = [
 	{
@@ -20,52 +22,63 @@ const routes: Routes = [
 	{
 		path: '',
 		component: DashboardComponent,
-		children: [{
-			path: 'home',
-			loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-		},
-		{
-			path: 'transactions',
-			component: TransactionsComponent,
-		},
-		{
-			path: 'transactions-details/:transactionId',
-			component: TransactionDetailsComponent,
-		},
-		{
-			path: 'my-details',
-			component: MydetailsComponent,
-		}, {
-			path: 'notification',
-			component: NotificationComponent
-		}, { 
-			path: 'upgrade-account',
-			component: AccountUpgradeComponent,
-		}, 
-		{
-			path: 'refer',
-			component: ReferComponent,
-		},
-		{
-			path: 'my-earnings',
-			component: MyEarningComponent,
-		},
-		{
-			path: 'faq',
-			component: FaqComponent,
-		},
-		{
-			path: 'payment',
-			loadChildren: () => import('./deposit-ngn/deposit-ngn.module').then(m => m.DepositNgnModule)
-		},
-		{
-			path: 'addbankdetails',
-			component: AddbankdetailsComponent,
-		}, 
-		{
-			path: 'editankdetails/:bank_id',
-			component: AddbankdetailsComponent,
-		}, 
+		children: [
+			{
+				path: 'home',
+				loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+			},
+			{
+				path: 'transactions',
+				component: TransactionsComponent,
+			},
+			{
+				path: 'transactions-details/:transactionId',
+				component: TransactionDetailsComponent,
+			},
+			{
+				path: 'my-details',
+				component: MydetailsComponent,
+			},
+			{
+				path: 'notification',
+				component: NotificationComponent
+			},
+			{
+				path: 'upgrade-account',
+				component: AccountUpgradeComponent,
+			},
+			{
+				path: 'refer',
+				component: ReferComponent,
+			},
+			{
+				path: 'my-earnings',
+				component: MyEarningComponent,
+			},
+			{
+				path: 'faq',
+				component: FaqComponent,
+			},
+			{
+				path: 'payment',
+				loadChildren: () => import('./deposit-ngn/deposit-ngn.module').then(m => m.DepositNgnModule)
+			},
+			{
+				path: 'addbankdetails',
+				component: AddbankdetailsComponent,
+			},
+			{
+				path: 'editankdetails/:bank_id',
+				component: AddbankdetailsComponent,
+			},
+			{
+				path: 'buy/:currency_id',
+				component: BuyCryptoComponent,
+			},
+			{
+				path: 'sell/:currency_id',
+				component: SellCryptoComponent,
+			},
 		]
 	}];
 

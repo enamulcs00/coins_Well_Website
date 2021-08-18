@@ -19,6 +19,11 @@ import { MtxSelectModule } from '@ng-matero/extensions';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MyEarningComponent } from './my-earning/my-earning.component';
 import {WebcamModule} from 'ngx-webcam';
+import { BuyCryptoComponent } from './buy-crypto/buy-crypto.component';
+import { SellCryptoComponent } from './sell-crypto/sell-crypto.component';
+import { NgxCurrencyModule } from 'ngx-currency';
+import { ConfirmPinComponent } from './confirm-pin/confirm-pin.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
 	declarations: [
@@ -34,7 +39,10 @@ import {WebcamModule} from 'ngx-webcam';
 		FaqComponent,
 		AddbankdetailsComponent,
 		WithdrawcryptoComponent,
-		MyEarningComponent
+		MyEarningComponent,
+		BuyCryptoComponent,
+		SellCryptoComponent,
+		ConfirmPinComponent
 	],
 	imports: [
 		CommonModule,
@@ -43,7 +51,10 @@ import {WebcamModule} from 'ngx-webcam';
 		ReactiveFormsModule,
 		MtxSelectModule,
 		MatPaginatorModule,
-		WebcamModule
-	]
+		WebcamModule,
+		NgxCurrencyModule,
+		MatDialogModule
+	],
+	entryComponents : [ConfirmPinComponent]
 })
 export class DashboardModule { }

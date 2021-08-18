@@ -26,5 +26,8 @@ export const urls = {
     getReferAmount : 'admin/get-referal-amount/',
     bitcoinBalance : 'bitgo/bitcoin_balance/',
     getNotification : 'user/get-all-notification/',
-    getEarnigs : 'user/user-refer-history-web/'
+    getEarnigs : 'user/user-refer-history-web/',
+    getCryptoBalances : 'payment/get-all-crypto-wallet-balances/',
+    getCryptoSingleBalance : 'payment/get-user-crypto-wallet-amount/',
+    verifyPin : 'user/verify-transaction-pin/'
 };

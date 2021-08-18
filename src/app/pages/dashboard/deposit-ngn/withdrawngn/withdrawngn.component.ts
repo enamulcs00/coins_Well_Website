@@ -82,7 +82,7 @@ export class WithdrawngnComponent implements OnInit {
 		Confirm.show('Delete Bank', 'Do you want to delete the selected bank account ?', 'Yes', 'No', () => {
 			this._common.delete(urls.deleteBank+this.bankList[index]['id']+'/').subscribe(res => {
 				Notify.success("Bank account deleted successfully.");
-				this.bankList.splice(1, index);
+				this.getBanks();
 			}, _ => {
 				Block.remove('#setup-password-button');
 			})

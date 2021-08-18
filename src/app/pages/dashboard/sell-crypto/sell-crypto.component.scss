@@ -1,0 +1,57 @@
+.currency-balance-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .local {
+        display: flex;
+        align-items: center;
+        figure {
+            img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+            }
+        }
+        span {
+            font-size: 25px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+    }
+    .balance {
+        .title {
+            margin-bottom: 5px;
+            color: #4ac2ec;
+            line-height: 1;
+        }
+        .value {
+            margin-bottom: 0px;
+            font-weight: 500;
+            line-height: 1;
+            color: #404040;
+        }
+    }
+}
+.title-text {
+    color: #404040;
+    font-size: 18px;
+    line-height: 1;
+    margin-top: 40px;
+    font-weight: 500;
+}
+.exchange-rate-section {
+    text-align: center;
+    margin-top: 30px;
+    .title {
+        margin-bottom: 10px;
+        color: #4ac2ec;
+        line-height: 1;
+    }
+    h3 {
+        font-size: 25px;
+    }
+}
+.my-forms {
+    display: flex;
+    justify-content: space-between;
+}
