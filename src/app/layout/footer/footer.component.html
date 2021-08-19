@@ -12,34 +12,47 @@
                 <!-- <figure><img src="assets/images/auth/footer-logo.png" alt="logo"></figure> -->
 
                 <ul class="d-flex social-media">
-                    <li><a href=""><img src="assets/images/linkdin.png" alt=""></a></li>
-                    <li><a href=""><img src="assets/images/twitter.png" alt=""></a></li>
-                    <li><a href=""><img src="assets/images/facebook.png" alt=""></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
+                <li><a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
+                <!-- <li><a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>  -->
+                <li><a href="javascript:void(0)"><i class="fa fa-medium" aria-hidden="true"></i></a></li> 
+                <li><a href="javascript:void(0)"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
+                <li><a href="javascript:void(0)"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>         
                 </ul>
+                <address>
+                    <div> {{ _common.cmsData?.address }}</div>
+                    <!-- <div>VIC3000,US</div> -->                  
+                </address>
             </div>
             <div class="footer__card">
                 <h3>Main Menu</h3>
                 
                 <a [routerLink]="['/landingpage']">Home</a>
                 <a [routerLink]="['/about_us']">About us</a>
-                <a [routerLink]="['/features']">Features</a>
                 <a *ngIf="!userInfo" [routerLink]="['/auth']">Login/Signup</a>
-                <!-- <a [routerLink]="['/partners'] >Partners</a> -->
+            </div>
+            <div class="footer__card">
+                <h3>Contact Us</h3>
+                <a href="mailto:{{ _common.cmsData?.email }}"><i class="fa fa-envelope" aria-hidden="true"></i>
+                    {{ _common.cmsData?.email }}</a>
+                <a href="https://wa.me/:{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> {{ _common.cmsData?.phone_no }}</a>  
+                <a href="https://telegram.me/{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i>
+                    {{ _common.cmsData?.phone_no }}</a>               
             </div>
             <div class="footer__card">
                 <h3>Our Company</h3>
-                <a [routerLink]="['/privacy_policy']">Privacy policy</a>
-                <a [routerLink]="['/terms_conditon']">Terms and Conditions</a>
-                <a [routerLink]="['/contact_us']">Contact Us</a>
+                <a [routerLink]="['/features']">Features</a>
+                <a href="javascript:void(0)">Download</a>
+                <a href="javascript:void(0)">Security</a>
+                <a href="javascript:void(0)">Fee</a>
             </div>
             <div class="footer__card">
-                <h3>Address</h3>
-                <address>
-                    <div> {{ _common.cmsData?.address }}</div>
-                    <!-- <div>VIC3000,US</div> -->
-                    <div> {{ _common.cmsData?.email }}</div>
-                    <div> {{ _common.cmsData?.phone_no }}</div>
-                </address>
+                <h3>Terms</h3>
+                <a [routerLink]="['/privacy_policy']">Privacy policy</a>
+                <a [routerLink]="['/terms_conditon']">Terms of Service</a>
+                <a href="javascript:void(0)">Cookies Service</a>
+                <a href="javascript:void(0)">AML</a>
+                <a href="javascript:void(0)">KYC</a>
             </div>
         </div>
     </div>

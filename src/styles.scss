@@ -517,7 +517,8 @@ footer {
 	font-size: 14px;
 	color: $white;
 	font-weight: 400;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	
 }
 .footer__card p {
 	display: block;
@@ -556,9 +557,22 @@ footer {
 	}
 }
 .social-media {
-	padding-top: 28px;
+	padding-top: 0px;
 	li {
-		margin-right: 16px;
+		margin-right: 5px;
+		a {
+			background: #666;
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+			color: #2d2e35;
+			padding: 3px;
+			text-align: center;
+			margin: 10px 0px 15px;
+			i {
+				font-weight: bold;
+			}
+		}
 	}
 }
 
@@ -1520,8 +1534,8 @@ figure.whiite {
 }
 .documents-upload-bx {
 	display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+	justify-content: space-around;
+	flex-wrap: wrap;
 }
 .upload-bx {
 	height: 150px;
@@ -1742,11 +1756,12 @@ figure.whiite {
 	min-height: 45px !important;
 }
 
-.btn-primary.focus, .btn-primary:focus {
+.btn-primary.focus,
+.btn-primary:focus {
 	color: #fff;
-    background-color: #17c2ec !important;
-    border-color: #17c2ec !important;
-    box-shadow: none;
+	background-color: #17c2ec !important;
+	border-color: #17c2ec !important;
+	box-shadow: none;
 }
 
 .border-plus {
@@ -1771,14 +1786,14 @@ mat-form-field {
 
 .ng-dropdown-panel-items {
 	z-index: 1;
-    background: #fff;
+	background: #fff;
 }
 
 .ng-select.ng-select-opened .ng-arrow-wrapper .ng-arrow {
-	border-color: transparent transparent rgba(0,0,0,.54) !important;
+	border-color: transparent transparent rgba(0, 0, 0, 0.54) !important;
 }
 .ng-select .ng-arrow-wrapper .ng-arrow {
-	border-color: rgba(0,0,0,.54) transparent transparent !important;
+	border-color: rgba(0, 0, 0, 0.54) transparent transparent !important;
 }
 
 .fixednav .navbar {
@@ -1788,9 +1803,7 @@ mat-form-field {
 
 .ngx-mat-file-input--default-icon {
 	color: #ec9a63 !important;
-	transform: rotate(
-45deg
-);
+	transform: rotate(45deg);
 }
 
 input:read-only {
@@ -1799,7 +1812,6 @@ input:read-only {
 .mat-input-element {
 	text-align: left !important;
 }
-
 
 .Instructions {
 	p {
