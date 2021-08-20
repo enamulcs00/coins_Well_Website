@@ -1,10 +1,37 @@
-<div class="wd-main">
+<div class="wd-main" [formGroup]="addCashForm">
 	<h3 class="tp-head py-10">
 		Amount sent in dollars
 	</h3>
-	<div class="d-flex brdr-bt">
-		<figure><img src="assets/images/bitt.png" alt="">BTC Value</figure>
-		<figure><img src="assets/images/bitt1.png" alt="">USD Value </figure>
+	<div class="d-flex withdrawcurrency-boxes">
+		<mat-form-field class="example-full-width" appearance="fill">
+			<input currencyMask  [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="bitamount" placeholder="Enter the amount">
+			<span matPrefix>
+				<figure>
+					<img  style="width: 30px;height: 30px;object-fit: cover;" src="{{ baseUrl + balanceDetails?.currency?.logo?.media_file }}" alt="">
+				</figure>
+			</span>
+			<mat-error *ngIf="addCashForm.get('bitamount')?.hasError('required')">
+				Please enter an amount.
+			</mat-error>
+			<mat-error *ngIf="addCashForm.get('bitamount')?.hasError('min')">
+				Amount should be at least 0.01;
+			</mat-error>
+		</mat-form-field>
+		<!-- to_wallet -->
+		<mat-form-field class="example-full-width" appearance="fill">
+			<input currencyMask [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="amount" readonly placeholder="Enter the amount">
+			<span matPrefix>
+				<figure>
+					<i class="fa fa-dollar"></i>
+				</figure>
+			</span>
+			<mat-error *ngIf="addCashForm.get('amount')?.hasError('required')">
+				Please enter an amount.
+			</mat-error>
+			<mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
+				Amount should be at least 0.01;
+			</mat-error>
+		</mat-form-field>
 	</div>
 	<p class="fee">
 		Fee : 0.0023568 crypto
@@ -13,18 +40,26 @@
 		<h3 class="tp-head py-10">
 			Wallet address
 		</h3>
-		<div class="cpy-text d-flex">
-			<figure><img src="assets/images/copy1.png" alt=""></figure>
-			<p>https://www.google.com/search?qF-8</p>
-			<figure><img src="assets/images/copy2.png" alt=""></figure>
+		<div class="d-flex withdrawcurrency-boxes">
+			<mat-form-field style="width: 100% !important;" class="example-full-width" appearance="fill">
+				<input matInput type="text" formControlName="to_wallet" placeholder="Enter the wallet">
+				<span matPrefix>
+					<figure><img src="assets/images/copy1.png" alt=""></figure>
+				</span>
+				<mat-error *ngIf="addCashForm.get('to_wallet')?.hasError('required')">
+					Please enter wallet address.
+				</mat-error>
+			</mat-form-field>			
+			<!-- <p>https://www.google.com/search?qF-8</p>
+			<figure><img src="assets/images/copy2.png" alt=""></figure> -->
 		</div>
 		<p class="fee mb-5" style="display: flex;
 		justify-content: space-between;">
 			<span>
-				Available : {{ bitCoinBalance?.balance | number:'0.2' }} crypto
+				Available : {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} crypto
 			</span>
 			<span>
-				Max : {{ bitCoinBalance?.balance | number:'0.2'  }} crypto
+				Max : {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} crypto
 			</span>
 		</p>
 		<p style="color: #4bc3ed;">Notes:</p>
@@ -33,7 +68,7 @@
 			<li>Transaction can not be cancelled.</li>
 		</ul>
 		<div class="btn-outer w-100">
-			<button class="btn btn-primary" routerLink="/verify-account">
+			<button class="btn btn-primary" (click)="submitDetails()">
 				Submit
 			</button>
 		</div>

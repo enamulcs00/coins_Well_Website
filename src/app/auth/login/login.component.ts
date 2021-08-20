@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 							this._auth.userId = res.data.id;
 							this.router.navigate(['/auth/emailid']);
 						}
-					}, error => {
+					}, _ => {
 						Block.remove('#login-button');
 					})
 			} else {

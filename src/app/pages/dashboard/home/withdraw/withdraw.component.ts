@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Loading, } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-withdraw',
@@ -10,7 +11,8 @@ import { urls } from 'src/app/_services/urls';
 	styleUrls: ['./withdraw.component.scss']
 })
 export class WithdrawComponent implements OnInit {
-	withdrawRequests : any;
+	baseUrl: string = environment.homeURL;
+	withdrawRequests: any;
 	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
@@ -26,6 +28,5 @@ export class WithdrawComponent implements OnInit {
 			Loading.remove();
 		})
 	}
-
 
 }

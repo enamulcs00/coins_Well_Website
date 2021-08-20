@@ -1,6 +1,43 @@
 <div class="trans-page" id="fetch-transaction-list">
 	<div class="conta-iner">
-		<h2>My Transactions</h2>
+		<h2 style="display: flex;align-items: center;
+		justify-content: space-between;font-weight: 100;">My Transactions
+			<span class="cursor-pointer" (click)="downloadAll()" style="color: #4ac2ec;
+			font-size: 20px;display: flex;align-items: center;">
+				<svg
+				width="18"
+				style="margin-right: 10px;"
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 11 11"
+				id="vector">
+					<path
+						id="path"
+						d="M 10.876 7.418 L 10.876 9.724 C 10.876 10.03 10.754 10.323 10.538 10.539 C 10.322 10.755 10.029 10.877 9.723 10.877 L 1.653 10.877 C 1.347 10.877 1.054 10.755 0.838 10.539 C 0.622 10.323 0.5 10.03 0.5 9.724 L 0.5 7.418"
+						fill="#00000000"
+						stroke="#17c2ec"
+						stroke-width="1"
+						stroke-linecap="round"
+						stroke-linejoin="round"/>
+					<path
+						id="path_1"
+						d="M 2.806 4.535 L 5.688 7.417 L 8.571 4.535"
+						fill="#00000000"
+						stroke="#17c2ec"
+						stroke-width="1"
+						stroke-linecap="round"
+						stroke-linejoin="round"/>
+					<path
+						id="path_2"
+						d="M 5.688 7.418 L 5.688 0.5"
+						fill="#00000000"
+						stroke="#17c2ec"
+						stroke-width="1"
+						stroke-linecap="round"
+						stroke-linejoin="round"/>
+				</svg>
+				Download
+			</span>
+		</h2>
 		<ng-container *ngIf="transactionList.length > 0; else noDataFound">
 			<ul>
 				<li class="cursor-pointer" *ngFor="let tran of transactionList" routerLink="/dashboard/transactions-details/{{ tran?.id }}">

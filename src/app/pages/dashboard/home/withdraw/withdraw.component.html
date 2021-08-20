@@ -3,7 +3,7 @@
         My Portfolio
     </h3>
     <ul id="myDiv">
-        <li>
+        <!-- <li>
             <div class="wb-box" routerLink="/dashboard/payment/deposit">
                 <figure>
                     <img src="assets/images/bit1.png">
@@ -76,6 +76,43 @@
                 </figure>
                 <h5>XRP</h5>
                 <p><span>Balance</span>$250,245</p>
+            </div>
+        </li> -->
+        <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/withdrawcryto/{{ withdraw?.currency?.id }}">
+            <div class="wb-box">
+                <figure>
+                    <img style="height: 70px;
+                    width: 70px;
+                    object-fit: cover;" src="{{ baseUrl + withdraw?.currency?.logo?.media_file }}">
+                </figure>
+                <h5>{{ withdraw?.currency?.name }}</h5>
+                <p>Balance</p>
+                <div class="d-flex bal-body">
+                    <div class="bal">
+                        {{ (withdraw?.balance)?(withdraw?.balance | number : '0.2-2'): '0.00' }}
+                    </div>
+                    <div class="live plus" *ngIf="withdraw?.currency?.percentage_change>0">
+                        <div class="text d-flex">
+                            <figure>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5">
+                                    <path id="Polygon_2" data-name="Polygon 2" d="M3,0,6,5H0Z" fill="#88e57e" />
+                                </svg>
+                            </figure>
+                            {{ withdraw?.currency?.percentage_change | number : '0.2-2' }}%
+                        </div>
+                    </div>
+
+                    <div class="live minus" *ngIf="withdraw?.currency?.percentage_change<0">
+                        <div class="text d-flex">
+                            <figure>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5">
+                                    <path id="Polygon_2" data-name="Polygon 2" d="M3,0,6,5H0Z" fill="#88e57e" />
+                                </svg>
+                            </figure>
+                            {{ withdraw?.currency?.percentage_change | number : '0.2-2' }}%
+                        </div>
+                    </div>
+                </div>
             </div>
         </li>
     </ul>

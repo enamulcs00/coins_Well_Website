@@ -42,11 +42,20 @@ export class SellCryptoComponent implements OnInit {
 			if (value == null) {
 				value = 0;
 			}
-			this.addCashForm.get("amount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+			this.addCashForm.get("amount").setValue(this.balanceDetails?.currency?.sell_rate * value);
 			this.addCashForm.get("ngnamount").setValue(value * this.ngnValue);
 
 		})
 	}
+
+	getNGNrate() {
+		this._common.getCurrencyConversion().subscribe(data=>{
+			if(data) {
+				this.ngnValue = this.balanceDetails?.currency?.sell_rate * data.USD_NGN;
+			}
+		})
+	}
+
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
@@ -94,6 +103,7 @@ export class SellCryptoComponent implements OnInit {
 			balanceDetails: this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/')
 		}).subscribe(data => {
 			this.balanceDetails = data.balanceDetails.data;
+			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
 			Loading.remove();

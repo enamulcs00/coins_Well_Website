@@ -15,7 +15,7 @@ export class BuyComponent implements OnInit {
 	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
-		this.getCryoto()
+		this.getCryoto();
 	}
 
 	getCryoto() {

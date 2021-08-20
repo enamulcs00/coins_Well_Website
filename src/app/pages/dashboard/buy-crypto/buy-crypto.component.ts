@@ -37,13 +37,20 @@ export class BuyCryptoComponent implements OnInit {
 		});
 		this.getCMS();
 		this.addCashForm.get("bitamount").valueChanges.subscribe(value => {
-			// console.log("sdsdfsdf");
 			if (value == null) {
 				value = 0;
 			}
 			this.addCashForm.get("amount").setValue(this.balanceDetails?.currency?.buy_rate * value);
 			this.addCashForm.get("ngnamount").setValue(value * this.ngnValue);
 
+		})
+	}
+
+	getNGNrate() {
+		this._common.getCurrencyConversion().subscribe(data=>{
+			if(data) {
+				this.ngnValue = this.balanceDetails?.currency?.buy_rate * data.USD_NGN;
+			}
 		})
 	}
 
@@ -93,6 +100,7 @@ export class BuyCryptoComponent implements OnInit {
 			balanceDetails: this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/')
 		}).subscribe(data => {
 			this.balanceDetails = data.balanceDetails.data;
+			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
 			Loading.remove();

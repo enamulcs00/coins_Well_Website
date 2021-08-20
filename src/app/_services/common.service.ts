@@ -97,7 +97,7 @@ export class CommonService {
 	getCMS(url: string) {
 		return new Observable(resolve => {
 			if (this.cmsData) {
-				console.log("this.cmsData",this.cmsData);
+				console.log("this.cmsData", this.cmsData);
 				resolve.next(this.cmsData);
 				resolve.complete();
 				console.log("Das2");
@@ -109,13 +109,20 @@ export class CommonService {
 						this.cmsData = data.data;
 						resolve.next(data.data);
 						resolve.complete();
-					});	
+					});
 			}
 		})
 	}
 
-	callBitGoAPI(url : string) {
+	callBitGoAPI(url: string) {
 		return this._http.get<any>(`${environment.bitGoUrl}/${url}`)
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
+	getCurrencyConversion() {
+		return this._http.get('https://free.currconv.com/api/v7/convert?q=USD_NGN&compact=ultra&apiKey=674b25743414f62f261c')
 			.pipe(map((data: any) => {
 				return data;
 			}));

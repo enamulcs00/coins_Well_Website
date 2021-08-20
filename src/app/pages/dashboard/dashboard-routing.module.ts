@@ -12,6 +12,7 @@ import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.compone
 import { MyEarningComponent } from './my-earning/my-earning.component';
 import { BuyCryptoComponent } from './buy-crypto/buy-crypto.component';
 import { SellCryptoComponent } from './sell-crypto/sell-crypto.component';
+import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 
 const routes: Routes = [
 	{
@@ -79,6 +80,10 @@ const routes: Routes = [
 				path: 'sell/:currency_id',
 				component: SellCryptoComponent,
 			},
+			{
+				path : 'withdrawcryto/:currency_id',
+				component : WithdrawcryptoComponent
+			}
 		]
 	}];
 
