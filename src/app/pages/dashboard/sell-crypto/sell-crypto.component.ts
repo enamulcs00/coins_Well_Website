@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
@@ -16,7 +16,6 @@ import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 	styleUrls: ['./sell-crypto.component.scss']
 })
 export class SellCryptoComponent implements OnInit {
-
 	transactionId: any;
 	addCashForm: FormGroup;
 	balanceDetails: any;
@@ -24,6 +23,7 @@ export class SellCryptoComponent implements OnInit {
 	baseUrl: string = environment.homeURL;
 	ngnValue = 500;
 	cms: any;
+	bitcoin_to_usd = 1800;
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
 	}
@@ -36,16 +36,32 @@ export class SellCryptoComponent implements OnInit {
 			amount: [0, [Validators.required]],
 			ngnamount: [0, [Validators.required]]
 		});
+
+		if(this.transactionId == 3 || this.transactionId == 4) {
+			this.addCashForm.addControl('to_wallet',new FormControl(null, [Validators.required]))
+		}
+
 		this.getCMS();
 		this.addCashForm.get("bitamount").valueChanges.subscribe(value => {
 			// console.log("sdsdfsdf");
 			if (value == null) {
 				value = 0;
 			}
-			this.addCashForm.get("amount").setValue(this.balanceDetails?.currency?.sell_rate * value);
-			this.addCashForm.get("ngnamount").setValue(value * this.ngnValue);
+			if(this.transactionId == 1) {
+				this.addCashForm.get("amount").setValue(this.bitcoin_to_usd * value);
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+			} else {
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+			}
 
 		})
+	}
+
+	copyText() {
+		var copyText : any = document.getElementById("myInput");
+		copyText.select();
+		copyText.setSelectionRange(0, 99999);
+		document.execCommand("copy");
 	}
 
 	getNGNrate() {

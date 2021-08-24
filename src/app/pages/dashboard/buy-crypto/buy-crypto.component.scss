@@ -59,10 +59,12 @@
 ::ng-deep .currency-boxes {
     justify-content: space-between;
     mat-form-field {
+        padding: 0px 10px;
+        background: #fff !important;
         .mat-form-field-prefix {
             margin-right: 10px !important;
         }
-        width: 32% !important;
+        // width: 32% !important;
         .fa {
             background: #404040;
             border-radius: 50%;

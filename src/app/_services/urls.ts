@@ -12,6 +12,7 @@ export const urls = {
     getCMS: 'cms/get-details/',
     getBankDetails : 'admin/get-bank-details/',
     addCash  : 'payment/create-payment-deposit-withdraw-request/',
+    addCashNew : 'payment/add-cash/',
     getAllCurrencies : 'user/get-all-currencies/',
     addBankAccount : 'user/add-bank/',
     getBanks : 'user/get-all-bank-accounts/',

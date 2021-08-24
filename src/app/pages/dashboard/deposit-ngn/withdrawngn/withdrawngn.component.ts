@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Block, Confirm, Loading, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
+import { ConfirmPinComponent } from '../../confirm-pin/confirm-pin.component';
 
 @Component({
 	selector: 'app-withdrawngn',
@@ -19,7 +21,7 @@ export class WithdrawngnComponent implements OnInit {
 	baseUrl: string = environment.homeURL;
 	selectedBank : string = '';
 	userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) { }
+	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private dialog : MatDialog) { }
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			request_type: [2],
@@ -39,7 +41,7 @@ export class WithdrawngnComponent implements OnInit {
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
-			this._common.post(urls.addCash, formData).subscribe(res => {
+			this._common.post(urls.addCashNew, formData).subscribe(res => {
 				Block.remove('#add-cash-button')
 				resolve(formData);
 			}, error => {
@@ -54,15 +56,26 @@ export class WithdrawngnComponent implements OnInit {
 			Notify.failure("Please select bank first.");
 		}
 		if (this.addCashForm.valid) {
-			Block.circle('#add-cash-button');
-			this.updateDetails(this.addCashForm.value).then(x => {
-				this._router.navigate(['/Congratulations'], {
-					state: {
-						message: `Your order has been placed<br>
-						Your account will be debited <br> with in NGN as soon as we verify your order.`
+			if (this.addCashForm.valid) {
+				const dialogRef = this.dialog.open(ConfirmPinComponent, {
+					disableClose : true
+				});
+				dialogRef.afterClosed().subscribe(result => {
+					if(result) {
+						Block.circle('#add-cash-button');
+						this.updateDetails(this.addCashForm.value).then(x => {
+							this._router.navigate(['/Congratulations'], {
+								state: {
+									message: `Your order has been placed<br>
+									Your account will be debited <br> with in NGN as soon as we verify your order.`
+								}
+							});
+						});
 					}
 				});
-			});
+			} else {
+				this.addCashForm.markAllAsTouched();
+			}	
 		} else {
 			this.addCashForm.markAllAsTouched();
 		}

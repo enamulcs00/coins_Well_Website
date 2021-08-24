@@ -59,10 +59,12 @@
 ::ng-deep .currency-boxes {
     justify-content: space-between;
     mat-form-field {
+        padding: 0px 10px;
+        background: #fff !important;
         .mat-form-field-prefix {
             margin-right: 10px !important;
         }
-        width: 32% !important;
+        // width: 32% !important;
         .fa {
             background: #404040;
             border-radius: 50%;
@@ -72,6 +74,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+    }
+}
+.code-num  {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    border-bottom: 1px solid #8e8e8e;
+    padding: 4px 12px 4px 0px;
+    align-items: center;
+    border-radius: 0px;
+    input {
+        background:  transparent;
+        border : none !important;
+        &:focus {
+            box-shadow: none !important;
         }
     }
 }

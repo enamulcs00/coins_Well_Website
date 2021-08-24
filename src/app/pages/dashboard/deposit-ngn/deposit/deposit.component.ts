@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
 import { forkJoin } from 'rxjs';
@@ -7,6 +8,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
+import { ConfirmPinComponent } from '../../confirm-pin/confirm-pin.component';
 
 @Component({
 	selector: 'app-deposit',
@@ -19,7 +21,7 @@ export class DepositComponent implements OnInit {
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
 	cms : any;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) { }
+	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private dialog : MatDialog) { }
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			tempImage: [null, Validators.required],
@@ -54,7 +56,7 @@ export class DepositComponent implements OnInit {
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
-			this._common.post(urls.addCash, formData).subscribe(res => {
+			this._common.post(urls.addCashNew, formData).subscribe(res => {
 				Block.remove('#add-cash-button')
 				resolve(formData);
 			}, error => {
@@ -66,24 +68,31 @@ export class DepositComponent implements OnInit {
 
 	submitDetails() {
 		if (this.addCashForm.valid) {
-			Block.circle('#add-cash-button');
-			if (this.addCashForm.get('tempImage').value) {
-				let file = this.addCashForm.get('tempImage').value;
-				const formData: FormData = new FormData();
-				formData.append('media', file, file.name);
-				this._common.uploadMedia(formData).subscribe(image => {
-					this.addCashForm.get('proof').setValue(image.data[0]['id']);
-					this.updateDetails(this.addCashForm.value).then(x => {
-						this._router.navigate(['/Congratulations'], {
-							state: {
-								message: `Your order has been placed<br>
-								Your account will be credited <br> with in NGN as soon as we verify your order.`
-							}
+			const dialogRef = this.dialog.open(ConfirmPinComponent, {
+				disableClose : true
+			});
+			dialogRef.afterClosed().subscribe(result => {
+				if(result) {
+					Block.circle('#add-cash-button');
+					if (this.addCashForm.get('tempImage').value) {
+						let file = this.addCashForm.get('tempImage').value;
+						const formData: FormData = new FormData();
+						formData.append('media', file, file.name);
+						this._common.uploadMedia(formData).subscribe(image => {
+							this.addCashForm.get('proof').setValue(image.data[0]['id']);
+							this.updateDetails(this.addCashForm.value).then(x => {
+								this._router.navigate(['/Congratulations'], {
+									state: {
+										message: `Your order has been placed<br>
+										Your account will be credited <br> with in NGN as soon as we verify your order.`
+									}
+								});
+							},error => {
+							});
 						});
-					},error => {
-					});
-				});
-			}
+					}
+				}
+			});
 		} else {
 			this.addCashForm.markAllAsTouched();
 		}
