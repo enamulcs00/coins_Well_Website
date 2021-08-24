@@ -97,10 +97,8 @@ export class CommonService {
 	getCMS(url: string) {
 		return new Observable(resolve => {
 			if (this.cmsData) {
-				console.log("this.cmsData", this.cmsData);
 				resolve.next(this.cmsData);
 				resolve.complete();
-				console.log("Das2");
 			} else {
 				this._http.get<any>(`${environment.baseUrl}${url}`)
 					.pipe(map((data: any) => {

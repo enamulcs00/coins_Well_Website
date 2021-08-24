@@ -25,6 +25,7 @@ export class DepositComponent implements OnInit {
 			tempImage: [null, Validators.required],
 			proof: [null],
 			request_type: [1],
+			request_for: [],
 			symbol: ['+'],
 			amount: [0, [Validators.required, Validators.min(0.01)]]
 		});

@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
 import { forkJoin } from 'rxjs';
-import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -23,7 +22,7 @@ export class BuyCryptoComponent implements OnInit {
 	baseUrl: string = environment.homeURL;
 	ngnValue = 500;
 	cms: any;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
 	}
 	ngOnInit(): void {
@@ -56,7 +55,7 @@ export class BuyCryptoComponent implements OnInit {
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
-			this._common.post(urls.addCash, formData).subscribe(res => {
+			this._common.post(urls.addCash, formData).subscribe(() => {
 				Block.remove('#add-cash-button')
 				resolve(formData);
 			}, error => {
@@ -83,14 +82,14 @@ export class BuyCryptoComponent implements OnInit {
 
 	confirmed() {
 		Block.circle('#add-cash-button');
-		this.updateDetails(this.addCashForm.value).then(x => {
+		this.updateDetails(this.addCashForm.value).then(() => {
 			this._router.navigate(['/Congratulations'], {
 				state: {
 					message: `Your order has been placed<br>
 					Your account will be credited <br> with in `+ this.balanceDetails?.currency?.name + ` as soon as we verify your order.`
 				}
 			});
-		}, error => {
+		}, () => {
 		});
 	}
 
