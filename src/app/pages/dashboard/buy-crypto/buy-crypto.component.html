@@ -140,10 +140,6 @@
             </figure>
             <span>{{ balanceDetails?.currency?.name }}</span>
         </div>
-        <div class="balance">
-            <p class="title">Balance</p>
-            <p class="value">{{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-2') : '0.00' }}</p>
-        </div>
     </div>
     <p class="title-text">Enter the amount you would like to buy or pay.</p>
     <div class="form-by my-forms currency-boxes">
@@ -174,7 +170,7 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p style="    font-size: 16px;
+    <p *ngIf="transactionId == 3" style="font-size: 16px;
     padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p>
     <!-- to_wallet -->
     <div class="wallet-address currency-boxes">
@@ -183,7 +179,7 @@
 		</h3>
 		<div class="d-flex withdrawcurrency-boxes">
 			<mat-form-field style="width: 100% !important;" class="example-full-width" appearance="fill">
-				<input matInput type="text" formControlName="to_wallet" placeholder="Enter the wallet">
+				<input matInput type="text" formControlName="to_wallet" placeholder="{{ (transactionId == 3)?'Enter the TRC20 USDT address':'Enter the perfect money address' }}">
 				<span matPrefix>
 					<figure><img src="assets/images/copy1.png" alt=""></figure>
 				</span>

@@ -24,6 +24,7 @@ import { SellCryptoComponent } from './sell-crypto/sell-crypto.component';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { ConfirmPinComponent } from './confirm-pin/confirm-pin.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 @NgModule({
 	declarations: [
@@ -53,7 +54,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 		MatPaginatorModule,
 		WebcamModule,
 		NgxCurrencyModule,
-		MatDialogModule
+		MatDialogModule,
+		NgxMatFileInputModule
 	],
 	entryComponents : [ConfirmPinComponent]
 })

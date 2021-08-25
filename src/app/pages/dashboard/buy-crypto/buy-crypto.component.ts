@@ -33,7 +33,8 @@ export class BuyCryptoComponent implements OnInit {
 			symbol: ['+'],
 			bitamount: [0, []],
 			amount: [0, [Validators.required,  Validators.min(0.01)]],
-			ngnamount: [0, [Validators.required]]
+			ngnamount: [0, [Validators.required]],
+			service_fee : [0]
 		});
 
 		if(this.transactionId == 3 || this.transactionId == 4) {
@@ -45,23 +46,31 @@ export class BuyCryptoComponent implements OnInit {
 			if (value == null) {
 				value = 0;
 			}
+			
+			if(['1','2','3'].indexOf(this.transactionId) != -1) {
+				console.log("valye", value);
+				this.addCashForm.get('service_fee').setValue(
+					(value > 0 && value <= 20)?100:((value > 500)?3:0)
+				)
+			}
+			
 			if(this.transactionId == 1) {
 				this.addCashForm.get("bitamount").setValue((1/this.bitcoin_to_usd) * value);
 				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
 			} else {
-				console.log("Df",this.balanceDetails?.currency?.buy_rate);
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate / value);
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
 			}
-		})
+		});
 	}
 
 	getNGNrate() {
-		this._common.getCurrencyConversion().subscribe(data=>{
+		this._common.getCurrencyConversion().subscribe(data => {
 			if(data) {
 				this.ngnValue = this.balanceDetails?.currency?.buy_rate * data.USD_NGN;
 			}
 		})
 	}
+	
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
@@ -95,8 +104,8 @@ export class BuyCryptoComponent implements OnInit {
 		this.updateDetails(this.addCashForm.value).then(() => {
 			this._router.navigate(['/Congratulations'], {
 				state: {
-					message: `Your order has been placed<br>
-					Your account will be credited <br> with in `+ this.balanceDetails?.currency?.name + ` as soon as we verify your order.`
+					message: `Your order has been placed successfully.<br>
+					Note this order could take sometime if the value order is not available on our hot wallet.`
 				}
 			});
 		}, () => {

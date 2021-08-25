@@ -9,6 +9,7 @@ export const urls = {
     deactivateAccount: 'user/deactivate_user/',
     searchBank: 'admin/search-bank/',
     facialVerification: 'user/account_upgrade/',
+    updateDocuments  : 'user/update-documents/',
     getCMS: 'cms/get-details/',
     getBankDetails : 'admin/get-bank-details/',
     addCash  : 'payment/create-payment-deposit-withdraw-request/',
@@ -30,5 +31,7 @@ export const urls = {
     getEarnigs : 'user/user-refer-history-web/',
     getCryptoBalances : 'payment/get-all-crypto-wallet-balances/',
     getCryptoSingleBalance : 'payment/get-user-crypto-wallet-amount/',
-    verifyPin : 'user/verify-transaction-pin/'
+    verifyPin : 'user/verify-transaction-pin/',
+    getWalletAddress : 'admin/get-wallet-addresses/',
+    getDocuments : 'user/get-all-documents/'
 };
