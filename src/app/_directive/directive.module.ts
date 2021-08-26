@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultImage } from './defaultimg';
+import { MatInputCommifiedDirective } from './inputComma';
 
 @NgModule({
 	declarations: [
-		DefaultImage
+		DefaultImage,
+		MatInputCommifiedDirective
 	],
 	imports: [
 		CommonModule
-	], exports: [DefaultImage]
+	], exports: [DefaultImage, MatInputCommifiedDirective]
 })
 export class DirectiveModule { }

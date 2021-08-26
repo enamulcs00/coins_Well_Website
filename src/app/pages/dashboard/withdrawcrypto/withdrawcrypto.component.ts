@@ -9,7 +9,7 @@ import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
-
+import { CurrencyMaskInputMode } from "ngx-currency";
 @Component({
 	selector: 'app-withdrawcrypto',
 	templateUrl: './withdrawcrypto.component.html',
@@ -22,7 +22,9 @@ export class WithdrawcryptoComponent implements OnInit {
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
 	ngnValue = 500;
+	bitCoinPrice :  number = 1800;
 	cms: any;
+	temp = CurrencyMaskInputMode;
 	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
 	}
@@ -30,17 +32,23 @@ export class WithdrawcryptoComponent implements OnInit {
 		this.addCashForm = this._fb.group({
 			request_type: [2],
 			request_for: [this.transactionId],
-			symbol: ['+'],
-			bitamount: [0, [Validators.required, Validators.min(0.01)]],
+			symbol: ['-'],
+			bitamount: [null, [Validators.required, Validators.min(0.00000000000000001)]],
 			amount: [0, [Validators.required]],
-			to_wallet: [null, [Validators.required]]
+			to_wallet: [null, [Validators.required]],
+			service_fee: [0]
 		});
 		this.getCMS();
 		this.addCashForm.get("bitamount").valueChanges.subscribe(value => {
 			if (value == null) {
 				value = 0;
 			}
-			this.addCashForm.get("amount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+			this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
+			if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
+				this.addCashForm.get('service_fee').setValue(
+					(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
+				)
+			}
 		})
 	}
 
@@ -84,8 +92,8 @@ export class WithdrawcryptoComponent implements OnInit {
 		this.updateDetails(this.addCashForm.value).then(x => {
 			this._router.navigate(['/Congratulations'], {
 				state: {
-					message: `Your order has been placed<br>
-					Your account will be credited <br> with in `+ this.balanceDetails?.currency?.name + ` as soon as we verify your order.`
+					message: `Your order has been placed successfully.<br>
+					Note this order could take sometime if the value order is not available on our hot wallet.`
 				}
 			});
 		}, error => {

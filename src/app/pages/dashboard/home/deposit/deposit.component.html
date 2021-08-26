@@ -1,88 +1,56 @@
 <div class="wd-body mt-40">
     <h3 class="tp-head pb-20">
-        My Portfolio
+        Select currency
     </h3>
     <ul>
-
-        <li routerLink="/dashboard/withdrawcryto">
+        <div class="w-100">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-select (selectionChange)="onChanged($event)" placeholder="Select Currency">
+                    <mat-option value="ngn">
+                        NGN
+                    </mat-option>
+                    <mat-option *ngFor="let withdraw of withdrawRequests" [value]="withdraw?.currency?.id">
+                        {{ withdraw?.currency?.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/depositcrypto/{{ withdraw?.currency?.id }}">
             <div class="wb-box">
                 <figure>
-                    <img src="assets/images/45.png">
+                    <img style="height: 70px;
+                    width: 70px;
+                    object-fit: cover;" src="{{ baseUrl + withdraw?.currency?.logo?.media_file }}">
                 </figure>
-                <h5>BTC/Bitcoin</h5>
-                <p>Balance</p>
-                <div class="d-flex bal-body">
+                <h5>{{ withdraw?.currency?.name }}</h5>
+                <p *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2">Balance</p>
+                <div class="d-flex bal-body" *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2">
                     <div class="bal">
-                        $250,245
+                        {{ (withdraw?.balance)?(withdraw?.balance | number : '0.2-2'): '0.00' }}
                     </div>
-                    <div class="live minus">
+                    <div class="live plus" *ngIf="withdraw?.currency?.percentage_change>0">
                         <div class="text d-flex">
                             <figure>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5"
-                                    viewBox="0 0 6 5">
-                                    <path id="Polygon_2" data-name="Polygon 2" d="M3,0,6,5H0Z"
-                                        fill="#88e57e" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5">
+                                    <path id="Polygon_2" data-name="Polygon 2" d="M3,0,6,5H0Z" fill="#88e57e" />
                                 </svg>
                             </figure>
-                            0.20%
+                            {{ withdraw?.currency?.percentage_change | number : '0.2-2' }}%
+                        </div>
+                    </div>
+
+                    <div class="live minus" *ngIf="withdraw?.currency?.percentage_change<0">
+                        <div class="text d-flex">
+                            <figure>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5" viewBox="0 0 6 5">
+                                    <path id="Polygon_2" data-name="Polygon 2" d="M3,0,6,5H0Z" fill="#88e57e" />
+                                </svg>
+                            </figure>
+                            {{ withdraw?.currency?.percentage_change | number : '0.2-2' }}%
                         </div>
                     </div>
                 </div>
             </div>
-        </li>
-        <li routerLink="/dashboard/payment/deposit">
-            <div class="wb-box">
-                <figure>
-                    <img src="assets/images/bit1.png">
-                </figure>
-                <h5>NGN/Local</h5>
-                <p>Balance</p>
-                <div class="d-flex bal-body">
-                    <div class="bal">
-                        $250,245
-                    </div>
-                    <div class="live plus">
-                        <div class="text d-flex">
-                            <figure>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="5"
-                                    viewBox="0 0 6 5">
-                                    <path id="Polygon_2" data-name="Polygon 2" d="M3,0,6,5H0Z"
-                                        fill="#88e57e" />
-                                </svg>
-                            </figure>
-                            0.20%
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </li>
-        <li routerLink="/dashboard/withdrawcryto">
-            <div class="wb-box">
-                <figure>
-                    <img src="assets/images/bit1.png">
-                </figure>
-                <h5>ETH/Etherium</h5>
-                <p><span>Balance</span>$250,245</p>
-            </div>
-        </li>
-        <li>
-            <div class="wb-box">
-                <figure>
-                    <img src="assets/images/bit1.png">
-                </figure>
-                <h5>USDT/ ERC20</h5>
-                <p><span>Balance</span>$250,245</p>
-            </div>
-        </li>
-        <li>
-            <div class="wb-box">
-                <figure>
-                    <img src="assets/images/bit1.png">
-                </figure>
-                <h5>XRP</h5>
-                <p><span>Balance</span>$250,245</p>
-            </div>
-        </li>
+        </li> -->
     </ul>
 </div>

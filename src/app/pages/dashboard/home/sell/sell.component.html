@@ -11,8 +11,8 @@
                     object-fit: cover;" src="{{ baseUrl + withdraw?.currency?.logo?.media_file }}">
                 </figure>
                 <h5>{{ withdraw?.currency?.name }}</h5>
-                <p>Balance</p>
-                <div class="d-flex bal-body">
+                <p *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2">Balance</p>
+                <div  *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2" class="d-flex bal-body">
                     <div class="bal">
                         {{ (withdraw?.balance)?(withdraw?.balance | number : '0.2-2'): '0.00' }}
                     </div>

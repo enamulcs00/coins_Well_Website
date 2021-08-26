@@ -64,9 +64,9 @@ export class SellCryptoComponent implements OnInit {
 			}
 			if (this.transactionId == 1) {
 				this.addCashForm.get("bitamount").setValue((1 / this.bitcoin_to_usd) * value);
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.sell_rate * value);
 			} else {
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.sell_rate * value);
 			}
 		});
 	}

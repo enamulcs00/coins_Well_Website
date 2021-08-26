@@ -1,8 +1,20 @@
 <div class="wd-body mt-40">
     <h3 class="tp-head pb-20">
-        My Portfolio
+        Select currency
     </h3>
     <ul id="myDiv">
+        <div class="w-100">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-select (selectionChange)="onChanged($event)" placeholder="Select Currency">
+                    <mat-option value="ngn">
+                        NGN
+                    </mat-option>
+                    <mat-option *ngFor="let withdraw of withdrawRequests" [value]="withdraw?.currency?.id">
+                        {{ withdraw?.currency?.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <!-- <li>
             <div class="wb-box" routerLink="/dashboard/payment/deposit">
                 <figure>
@@ -78,7 +90,7 @@
                 <p><span>Balance</span>$250,245</p>
             </div>
         </li> -->
-        <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/withdrawcryto/{{ withdraw?.currency?.id }}">
+        <!-- <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/withdrawcryto/{{ withdraw?.currency?.id }}">
             <div class="wb-box">
                 <figure>
                     <img style="height: 70px;
@@ -86,8 +98,8 @@
                     object-fit: cover;" src="{{ baseUrl + withdraw?.currency?.logo?.media_file }}">
                 </figure>
                 <h5>{{ withdraw?.currency?.name }}</h5>
-                <p>Balance</p>
-                <div class="d-flex bal-body">
+                <p *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2">Balance</p>
+                <div *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2" class="d-flex bal-body">
                     <div class="bal">
                         {{ (withdraw?.balance)?(withdraw?.balance | number : '0.2-2'): '0.00' }}
                     </div>
@@ -114,6 +126,6 @@
                     </div>
                 </div>
             </div>
-        </li>
+        </li> -->
     </ul>
 </div>

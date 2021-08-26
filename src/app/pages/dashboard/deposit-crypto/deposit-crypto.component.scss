@@ -1,0 +1,35 @@
+::ng-deep .withdrawcurrency-boxes {
+    justify-content: space-between;
+    mat-form-field {
+        .mat-form-field-prefix {
+            margin-right: 10px !important;
+        }
+        .mat-form-field-wrapper {
+            background: #fff !important;
+        }
+        width: 48% !important;
+        .fa-dollar {
+            background: #404040;
+            padding: 5px 9px;
+            border-radius: 50%;
+            color: white;
+        }
+    }
+}
+
+.code-num  {
+    display: flex;
+    justify-content: space-between;
+    width: 49%;
+    border-bottom: 1px solid #8e8e8e;
+    padding: 4px 12px 4px 0px;
+    align-items: center;
+    border-radius: 0px;
+    input {
+        background:  transparent;
+        border : none !important;
+        &:focus {
+            box-shadow: none !important;
+        }
+    }
+}

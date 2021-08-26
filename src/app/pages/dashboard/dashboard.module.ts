@@ -25,7 +25,8 @@ import { NgxCurrencyModule } from 'ngx-currency';
 import { ConfirmPinComponent } from './confirm-pin/confirm-pin.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
-
+import { DepositCryptoComponent } from './deposit-crypto/deposit-crypto.component';
+import { DirectiveModule } from '../../_directive/directive.module'
 @NgModule({
 	declarations: [
 		LeftSidebarComponent,
@@ -43,7 +44,8 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 		MyEarningComponent,
 		BuyCryptoComponent,
 		SellCryptoComponent,
-		ConfirmPinComponent
+		ConfirmPinComponent,
+		DepositCryptoComponent
 	],
 	imports: [
 		CommonModule,
@@ -55,7 +57,8 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 		WebcamModule,
 		NgxCurrencyModule,
 		MatDialogModule,
-		NgxMatFileInputModule
+		NgxMatFileInputModule,
+		DirectiveModule
 	],
 	entryComponents : [ConfirmPinComponent]
 })

@@ -14,7 +14,7 @@
             <p class="value">{{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-2') : '0.00' }}</p>
         </div>
     </div>
-    <p class="title-text">Enter the amount you would like to buy or pay.</p>
+    <p class="title-text">Enter the amount</p>
     <div class="form-by my-forms currency-boxes">
         <mat-form-field class="example-full-width" appearance="fill">
             <input currencyMask [options]="{ prefix: ' ' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount">
@@ -88,7 +88,7 @@
             <p class="value">{{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-2') : '0.00' }}</p>
         </div>
     </div>
-    <p class="title-text">Enter the amount you would like to buy or pay.</p>
+    <p class="title-text">Enter the amount</p>
     <div class="form-by my-forms currency-boxes">
         <mat-form-field class="example-full-width" appearance="fill">
             <input currencyMask  [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount">
@@ -141,7 +141,7 @@
             <span>{{ balanceDetails?.currency?.name }}</span>
         </div>
     </div>
-    <p class="title-text">Enter the amount you would like to buy or pay.</p>
+    <p class="title-text">Enter the amount</p>
     <div class="form-by my-forms currency-boxes">
         <mat-form-field class="example-full-width" appearance="fill">
             <input currencyMask  [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount">

@@ -29,4 +29,12 @@ export class WithdrawComponent implements OnInit {
 		})
 	}
 
+	onChanged(event) {
+		if(event.value == 'ngn') {
+			this._router.navigate(['/dashboard/home/payment/withdrawal']);
+		} else {
+			this._router.navigate(['/dashboard/withdrawcryto/'+event.value]);
+		}
+	}
+
 }

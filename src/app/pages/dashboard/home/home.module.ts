@@ -10,12 +10,14 @@ import { HomeComponent } from './home.component';
 import { MaterialCommonModule } from '../../../material-common/material-common.module';
 import { SwiperCardComponent } from './swiper-card/swiper-card.component';
 import { BalanceComponent } from './balance/balance.component';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
 	declarations: [WithdrawComponent, SellComponent, DepositComponent, BuyComponent, HomeComponent, SwiperCardComponent, BalanceComponent],
 	imports: [
 		CommonModule,
 		HomeRoutingModule,
-		MaterialCommonModule
+		MaterialCommonModule,
+		MatSelectModule
 	]
 })
 export class HomeModule { }
