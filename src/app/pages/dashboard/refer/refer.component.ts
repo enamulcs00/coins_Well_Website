@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { Loading, } from 'notiflix';
 import { forkJoin } from 'rxjs';
 import { CommonService } from 'src/app/_services/common.service';
@@ -15,7 +14,7 @@ export class ReferComponent {
 	baseUrl: string = environment.homeURL;
 	referCode: any;
 	referAmount : any;
-	constructor(private _router: Router, private _common: CommonService, private route: ActivatedRoute) {
+	constructor(private _common: CommonService) {
 		this.getDetails();
 	}
 

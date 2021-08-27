@@ -19,7 +19,6 @@ export class JwtInterceptor implements HttpInterceptor {
             
             //For bitgo APIs request
             if(request.url.match(environment.bitGoUrl)) {
-                let authdata = window.btoa('manpreetkumar@apptunix.com' + ':' + environment.zendDeskToken);
                 request = request.clone({
                     setHeaders: {
                         Authorization: `Bearer ${environment.zenDeskSec}`,

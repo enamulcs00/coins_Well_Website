@@ -3,8 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
-import { forkJoin } from 'rxjs';
-import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -25,8 +23,11 @@ export class SellCryptoComponent implements OnInit {
 	cms: any;
 	bitcoin_to_usd = 1800;
 	walletAddress: any;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
+		if([environment.bitGoCurrencies.bitcoin, environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, environment.bitGoCurrencies.ERC20].indexOf(Number(this.transactionId)) == -1) {
+			this._router.navigate(['/dashboard/home/portfolio/buy']);
+		}
 	}
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
@@ -95,7 +96,7 @@ export class SellCryptoComponent implements OnInit {
 				formData2.append('media', file, file.name);
 				this._common.uploadMedia(formData2).subscribe(image => {
 					this.addCashForm.get('proof').setValue(image.data[0]['id']);
-					this._common.post(urls.addCash, formData).subscribe(res => {
+					this._common.post(urls.addCash, formData).subscribe(() => {
 						Block.remove('#add-cash-button')
 						resolve(formData);
 					}, error => {
@@ -104,7 +105,7 @@ export class SellCryptoComponent implements OnInit {
 					})
 				});
 			} else {
-				this._common.post(urls.addCash, formData).subscribe(res => {
+				this._common.post(urls.addCash, formData).subscribe(() => {
 					Block.remove('#add-cash-button')
 					resolve(formData);
 				}, error => {
@@ -132,7 +133,7 @@ export class SellCryptoComponent implements OnInit {
 
 	confirmed() {
 		Block.circle('#add-cash-button');
-		this.updateDetails(this.addCashForm.value).then(x => {
+		this.updateDetails(this.addCashForm.value).then(() => {
 			Block.remove('#add-cash-button');
 			this._router.navigate(['/Congratulations'], {
 				state: {
@@ -147,13 +148,12 @@ export class SellCryptoComponent implements OnInit {
 
 	getCMS() {
 		Loading.circle();
-		forkJoin({
-			balanceDetails: this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/')
-		}).subscribe(data => {
-			this.balanceDetails = data.balanceDetails.data;
+		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
+			this.balanceDetails = data.data;
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
+			this._router.navigate(['/dashboard/home/portfolio/sell']);
 			Loading.remove();
 		})
 	}

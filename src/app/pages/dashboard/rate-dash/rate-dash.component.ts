@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Loading, } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -15,7 +14,7 @@ export class RateDashComponent implements OnInit {
 	rates : any;
 	imageUrl : string = environment.homeURL;
 	cms : any;
-	constructor(private _router: Router, private _common: CommonService) { }
+	constructor(private _common: CommonService) { }
 
 	ngOnInit(): void {
 		this.getRates();

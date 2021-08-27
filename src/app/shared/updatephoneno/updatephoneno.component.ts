@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Block, Notify, Report } from 'notiflix';
+import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
-import { removeSpaces } from 'src/app/_validators/remove-spaces';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -49,7 +48,7 @@ export class UpdatephonenoComponent {
 			Block.circle('#update-phone-button');
 			const formData = Object.assign(this.updatePhoneForm.value);
 			delete formData.full_phone;
-			this._auth.updatePhone(formData, this.confirmAccount.id).subscribe(res => {
+			this._auth.updatePhone(formData, this.confirmAccount.id).subscribe(() => {
 				Block.remove('#update-phone-button');
 				this._router.navigate(['/auth/login']);
 				if (this.from == 'dashboard') {

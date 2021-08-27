@@ -22,5 +22,11 @@ export const environment = {
 	bitGoToken : 'v2xe53eff642dcb7196ac0752e52b16703401293c105f13a9eeb435b83c3cc21967',
 	zendDeskPassword : '&wnudyhY6+5uzLp',
 	zendDeskToken : 'kdAToAVlrX4tOgxPO12xgIItTokNL9jevW8uW0Sr',
-	zenDeskSec : '44d2254f85385284a4f247401bfd960694f4ce5db35e37301dc0af8fa7b7b938'
+	zenDeskSec : '44d2254f85385284a4f247401bfd960694f4ce5db35e37301dc0af8fa7b7b938',
+	bitGoCurrencies : {
+		bitcoin : 1,
+		ERC20 : 2,
+		TRC20 : 3,
+		PerfectMoney : 4
+	}
 };

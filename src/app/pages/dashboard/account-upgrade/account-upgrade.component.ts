@@ -40,7 +40,7 @@ export class AccountUpgradeComponent implements OnInit {
 		this.getDocuments();
 	}
 
-	previewVerification(files) {
+	previewVerification(files: string | any[]) {
 		this.selfieType = 'img';
 
 		if (files.length === 0)
@@ -51,7 +51,7 @@ export class AccountUpgradeComponent implements OnInit {
 		})
 	}
 
-	preview(files, index: string) {
+	preview(files: string | any[], index: string) {
 		if (files.length === 0)
 			return;
 		loadImage(files[0]).then(image => {
@@ -145,7 +145,7 @@ export class AccountUpgradeComponent implements OnInit {
 			forkJoin(uploads).subscribe((imagesUpload : any) => {
 				const images = [];
 				if(typeof imagesUpload.documents != "undefined") {
-					imagesUpload.documents.forEach(image => {
+					imagesUpload.documents.forEach((image: { data: { [x: string]: any; }[]; }) => {
 						images.push({
 							document: image.data[0]['id']
 						});
@@ -155,7 +155,7 @@ export class AccountUpgradeComponent implements OnInit {
 						document: this.otherDocument.document.id
 					});
 				}
-				let facial;
+				let facial: any;
 				if(typeof imagesUpload.facialVerification != "undefined") {
 					facial = imagesUpload.facialVerification.data[0]['id'];
 				} else {
@@ -195,7 +195,7 @@ export class AccountUpgradeComponent implements OnInit {
 	}
 
 	submitFacialRequest(formData: any) {
-		this._common.put(urls.facialVerification, formData).subscribe(data => {
+		this._common.put(urls.facialVerification, formData).subscribe(() => {
 			Block.remove('#submit-documents');
 			Notify.success("Facial Verification request submitted successfully.");
 			this._router.navigate(['/dashboard']);
@@ -209,12 +209,12 @@ export class AccountUpgradeComponent implements OnInit {
 			this.facial_verification = data.data.facial_verification;
 			this.document_verification = data.data.document_verification;
 			this.previousDocuments = data.data.documents;
-			this.facialUrl = data.data.documents.find(x => x.document_type == 1);
+			this.facialUrl = data.data.documents.find((x: { document_type: number; }) => x.document_type == 1);
 			if (this.facialUrl) {
 				this.facialVerificationImageUrl = environment.homeURL + this.facialUrl.document.media_file;
 			}
 
-			this.otherDocument = data.data.documents.find(x => x.document_type == 2);
+			this.otherDocument = data.data.documents.find((x: { document_type: number; }) => x.document_type == 2);
 			if (this.otherDocument) {
 				this.documents[0]['base64'] = environment.homeURL + this.otherDocument.document.media_file;
 			}

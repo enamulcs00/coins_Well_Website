@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
-import { forkJoin } from 'rxjs';
-import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -25,8 +23,13 @@ export class WithdrawcryptoComponent implements OnInit {
 	bitCoinPrice :  number = 1800;
 	cms: any;
 	temp = CurrencyMaskInputMode;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
+
+		if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(Number(this.transactionId)) != -1) {
+			this._router.navigate(['/dashboard/home/portfolio/withdraw']);
+		}
+
 	}
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
@@ -62,7 +65,7 @@ export class WithdrawcryptoComponent implements OnInit {
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
-			this._common.post(urls.addCash, formData).subscribe(res => {
+			this._common.post(urls.addCash, formData).subscribe(() => {
 				Block.remove('#add-cash-button')
 				resolve(formData);
 			}, error => {
@@ -89,27 +92,26 @@ export class WithdrawcryptoComponent implements OnInit {
 
 	confirmed() {
 		Block.circle('#add-cash-button');
-		this.updateDetails(this.addCashForm.value).then(x => {
+		this.updateDetails(this.addCashForm.value).then(() => {
 			this._router.navigate(['/Congratulations'], {
 				state: {
 					message: `Your order has been placed successfully.<br>
 					Note this order could take sometime if the value order is not available on our hot wallet.`
 				}
 			});
-		}, error => {
+		}, () => {
 		});
 	}
 
 	getCMS() {
 		Loading.circle();
-		forkJoin({
-			balanceDetails: this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/')
-		}).subscribe(data => {
-			this.balanceDetails = data.balanceDetails.data;
+		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
+			this.balanceDetails = data.data;
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
 			Loading.remove();
+			this._router.navigate(['/dashboard/home/portfolio/withdraw']);
 		})
 	}
 

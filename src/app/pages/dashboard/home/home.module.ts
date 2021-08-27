@@ -8,11 +8,10 @@ import { DepositComponent } from './deposit/deposit.component';
 import { BuyComponent } from './buy/buy.component';
 import { HomeComponent } from './home.component';
 import { MaterialCommonModule } from '../../../material-common/material-common.module';
-import { SwiperCardComponent } from './swiper-card/swiper-card.component';
 import { BalanceComponent } from './balance/balance.component';
 import { MatSelectModule } from '@angular/material/select';
 @NgModule({
-	declarations: [WithdrawComponent, SellComponent, DepositComponent, BuyComponent, HomeComponent, SwiperCardComponent, BalanceComponent],
+	declarations: [WithdrawComponent, SellComponent, DepositComponent, BuyComponent, HomeComponent, BalanceComponent],
 	imports: [
 		CommonModule,
 		HomeRoutingModule,

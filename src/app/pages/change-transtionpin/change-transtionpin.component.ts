@@ -31,7 +31,7 @@ export class ChangeTranstionpinComponent implements OnInit {
 			Block.circle('#setup-tcp-button');
 			const formData = Object.assign(this.setTransactionForm.value);
 			delete formData.confirm_password;
-			this._common.put(urls.changeTransactionPin, formData).subscribe(res => {
+			this._common.put(urls.changeTransactionPin, formData).subscribe(() => {
 				Notify.success("Transaction pin changed successfully.");
 				this._router.navigate(['/dashboard/my-details']);
 				Block.remove('#setup-tcp-button');

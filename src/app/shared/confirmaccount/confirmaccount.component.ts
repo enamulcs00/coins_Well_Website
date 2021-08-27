@@ -77,7 +77,7 @@ export class ConfirmaccountComponent implements OnInit {
 
 	resendOtp() {
 		Block.circle('#confirm-account-button');
-		this._auth.resendEmailOtp(this.data).subscribe(data => {
+		this._auth.resendEmailOtp(this.data).subscribe(() => {
 			Notify.success("Otp sent successfully.");
 			Block.remove('#confirm-account-button');
 		}, _ => {

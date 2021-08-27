@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { Notify } from 'notiflix';
 export const loadImage = (files) => {
     return new Promise((resolve, reject) => {

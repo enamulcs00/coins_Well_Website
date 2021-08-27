@@ -81,7 +81,7 @@ export class AuthService {
 			}));
 	}
 
-	validateEmail(formData: any, id: string | number) {
+	validateEmail(formData: any, _id: string | number) {
 		return this._http.post<any>(`${environment.baseUrl}user/validate-email/`, formData)
 			.pipe(map((data: any) => {
 				return data;

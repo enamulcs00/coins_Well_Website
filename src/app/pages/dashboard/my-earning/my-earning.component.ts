@@ -33,7 +33,7 @@ export class MyEarningComponent implements OnInit {
 	}
 
 
-	getTransactions(page = 1) {
+	getTransactions(_page = 1) {
 		Loading.circle();
 		this._common.get(urls.getEarnigs).subscribe(data => {
 			const reducer = (accumulator, currentValue) => accumulator + currentValue;

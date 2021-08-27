@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Loading, } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -14,7 +14,7 @@ export class TransactionDetailsComponent {
 	baseUrl : string = environment.homeURL;
 	transactionDetails: any;
 	transactionId : number | string | null;
-	constructor(private _router: Router, private _common: CommonService, private route : ActivatedRoute) {
+	constructor(private _common: CommonService, private route : ActivatedRoute) {
 		this.transactionId = this.route.snapshot.paramMap.get('transactionId');
 		this.getDetails();
 	}

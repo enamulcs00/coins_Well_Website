@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
 import { forkJoin } from 'rxjs';
-import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -21,7 +20,7 @@ export class DepositComponent implements OnInit {
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
 	cms : any;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private dialog : MatDialog) { }
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private dialog : MatDialog) { }
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			tempImage: [null, Validators.required],
@@ -40,23 +39,9 @@ export class DepositComponent implements OnInit {
 		document.execCommand("copy");
 	}
 
-	// preview(files) {
-	// 	let files2 = files.target.files;
-	// 	console.log("files.length",files2);
-	// 	console.log("files.length",this.addCashForm.get('tempImage').value);
-	// 	if (files2.length === 0)
-	// 	return;
-	// 	loadImage(files2[0]).then(image => {
-	// 		console.log("files",files2);
-	// 		this.addCashForm.get('tempImage').setValue(files2[0]);
-	// 		this.showImage = image;
-	// 		console.log("Ss",this.showImage);
-	// 	})
-	// }
-
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
-			this._common.post(urls.addCashNew, formData).subscribe(res => {
+			this._common.post(urls.addCashNew, formData).subscribe(() => {
 				Block.remove('#add-cash-button')
 				resolve(formData);
 			}, error => {
@@ -80,14 +65,14 @@ export class DepositComponent implements OnInit {
 						formData.append('media', file, file.name);
 						this._common.uploadMedia(formData).subscribe(image => {
 							this.addCashForm.get('proof').setValue(image.data[0]['id']);
-							this.updateDetails(this.addCashForm.value).then(x => {
+							this.updateDetails(this.addCashForm.value).then(() => {
 								this._router.navigate(['/Congratulations'], {
 									state: {
 										message: `Your order has been placed<br>
 										Your account will be credited <br> with in NGN as soon as we verify your order.`
 									}
 								});
-							},error => {
+							},() => {
 							});
 						});
 					}
@@ -107,7 +92,7 @@ export class DepositComponent implements OnInit {
 			this.cmsData = data.cmsData.data;
 			this.cms = data.cms;
 			Loading.remove();
-		}, _ => {
+		}, () => {
 			Loading.remove();
 		})
 	}

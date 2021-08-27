@@ -114,7 +114,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	fetchCMS() {
-		this._common.getCMS(urls.getCMS).subscribe(data => {
+		this._common.getCMS(urls.getCMS).subscribe(() => {
 		})
 	}
 

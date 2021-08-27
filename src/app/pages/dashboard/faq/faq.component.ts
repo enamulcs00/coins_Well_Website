@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { Loading, } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -13,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class FaqComponent {
 	baseUrl: string = environment.homeURL;
 	faqList: any;
-	constructor(private _router: Router, private _common: CommonService, private route: ActivatedRoute) {
+	constructor(private _common: CommonService) {
 		this.getDetails();
 	}
 

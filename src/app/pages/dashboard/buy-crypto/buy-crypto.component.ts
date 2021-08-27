@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
-import { forkJoin } from 'rxjs';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -25,6 +24,9 @@ export class BuyCryptoComponent implements OnInit {
 	bitcoin_to_usd = 1800;
 	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
+		if([environment.bitGoCurrencies.bitcoin, environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, environment.bitGoCurrencies.ERC20].indexOf(Number(this.transactionId)) == -1) {
+			this._router.navigate(['/dashboard/home/portfolio/buy']);
+		}
 	}
 	
 	ngOnInit(): void {
@@ -114,13 +116,12 @@ export class BuyCryptoComponent implements OnInit {
 
 	getCMS() {
 		Loading.circle();
-		forkJoin({
-			balanceDetails: this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/')
-		}).subscribe(data => {
-			this.balanceDetails = data.balanceDetails.data;
+		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
+			this.balanceDetails = data.data;
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
+			this._router.navigate(['/dashboard/home/portfolio/buy']);
 			Loading.remove();
 		})
 	}

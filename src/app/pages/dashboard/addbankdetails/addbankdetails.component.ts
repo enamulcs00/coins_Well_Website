@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading, Notify } from 'notiflix';
-import { Observable, Subject } from 'rxjs';
-import { loadImage, showErrors } from 'src/app/_helpers/common.helper';
-import { AuthService } from 'src/app/_services/auth.service';
+import { Subject } from 'rxjs';
+import { showErrors } from 'src/app/_helpers/common.helper';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { MustMatch } from 'src/app/_validators/must-match.validator';
@@ -26,7 +25,7 @@ export class AddbankdetailsComponent implements OnInit {
 	bankId : any;
 	userInfo : any = JSON.parse(localStorage.getItem(environment.storageKey));
 	showError = showErrors;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route : ActivatedRoute) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route : ActivatedRoute) {
 		this.bankId = this.route.snapshot.paramMap.get('bank_id');
 		this.bankForm = this._fb.group({
 			bank_name: [null, [Validators.required]],
@@ -91,7 +90,7 @@ export class AddbankdetailsComponent implements OnInit {
 						this.bankList = items.data;
 					}
 				},
-				(err) => {
+				() => {
 					// this.bankList = [];
 					this.bankListLoading = false;
 				}

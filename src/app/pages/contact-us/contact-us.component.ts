@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 @Component({
@@ -9,7 +8,7 @@ import { urls } from 'src/app/_services/urls';
 })
 export class ContactUsComponent implements OnInit {
 	cmsContent;
-	constructor(private _common: CommonService, private route: ActivatedRoute, private _router: Router) {
+	constructor(private _common: CommonService) {
 	}
 
 	ngOnInit(): void {

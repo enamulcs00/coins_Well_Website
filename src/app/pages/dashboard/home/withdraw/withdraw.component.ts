@@ -22,7 +22,13 @@ export class WithdrawComponent implements OnInit {
 	getCryoto() {
 		Loading.circle();
 		this._common.get(urls.getCryptoBalances).subscribe(data => {
-			this.withdrawRequests = data.data;
+			this.withdrawRequests = data.data.filter(x=>{
+				if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(x.currency.id) == -1) {
+					return true
+				} else {
+					return false;
+				}
+			});
 			Loading.remove();
 		}, _ => {
 			Loading.remove();

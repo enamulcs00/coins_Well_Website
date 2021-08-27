@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Block, Notify } from 'notiflix';
-import { removeSpaces } from 'src/app/_validators/remove-spaces';
-import { MustMatch } from 'src/app/_validators/must-match.validator';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

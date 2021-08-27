@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { loadImage } from 'src/app/_helpers/common.helper';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -17,7 +16,7 @@ export class MydetailsComponent implements OnInit {
 	profileForm: FormGroup;
 	showImage: any = '';
 	userInfo: any = JSON.parse(localStorage.getItem(environment.storageKey));
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) {
+	constructor(private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService) {
 		this.profileForm = this._fb.group({
 			tempImage: [null],
 			image: [null],
@@ -41,7 +40,7 @@ export class MydetailsComponent implements OnInit {
 		}
 	}
 
-	preview(files) {
+	preview(files: string | any[]) {
 		if (files.length === 0)
 			return;
 		loadImage(files[0]).then(image => {
@@ -65,7 +64,7 @@ export class MydetailsComponent implements OnInit {
 						email: this.userInfo.email,
 						phone_number: this.userInfo.phone_number
 					}
-					this.updateDetails(formData).then(x => {
+					this.updateDetails(formData).then(() => {
 						Notify.success("Profile updated successfully.");
 					});
 				});
@@ -75,7 +74,7 @@ export class MydetailsComponent implements OnInit {
 					email: this.userInfo.email,
 					phone_number: this.userInfo.phone_number
 				}
-				this.updateDetails(formData).then(x => {
+				this.updateDetails(formData).then(() => {
 					Notify.success("Profile updated successfully.");
 				});
 			}
@@ -86,7 +85,7 @@ export class MydetailsComponent implements OnInit {
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
-			this._common.put(urls.updateDetail, formData).subscribe(res => {
+			this._common.put(urls.updateDetail, formData).subscribe(() => {
 				this._common.get(urls.getProfileDetails).subscribe(data=>{
 					Block.remove('#create-profile-button')
 					this.userInfo = {
