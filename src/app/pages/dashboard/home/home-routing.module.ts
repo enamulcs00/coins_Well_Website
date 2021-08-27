@@ -8,10 +8,11 @@ import { HomeComponent } from './home.component';
 import { BalanceComponent } from './balance/balance.component';
 import { WithdrawcryptoComponent } from '../withdrawcrypto/withdrawcrypto.component';
 import { RateDashComponent } from '../rate-dash/rate-dash.component';
+import { AllComponent } from './all/all.component';
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'portfolio/withdraw',
+		redirectTo: 'portfolio',
 		pathMatch: 'full',
 	},
 	{
@@ -23,6 +24,10 @@ const routes: Routes = [
 				component :  HomeComponent,
 				children : [
 					{
+						path: '',
+						component : AllComponent
+					},
+					{
 						path : 'withdraw',
 						component : WithdrawComponent
 					},
@@ -32,6 +37,10 @@ const routes: Routes = [
 					},
 					{
 						path : 'deposit',
+						component : DepositComponent
+					},
+					{
+						path : 'deposit_crypto',
 						component : DepositComponent
 					},
 					{

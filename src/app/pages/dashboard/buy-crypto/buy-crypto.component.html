@@ -59,8 +59,8 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p style="    font-size: 16px;
-    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p>
+    <!-- <p style="    font-size: 16px;
+    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p> -->
     <div class="exchange-rate-section">
         <p class="title">Rate : {{ balanceDetails?.currency?.buy_rate | number : '0.2-2' }}</p>
         <h3>1 BTC = {{ bitcoin_to_usd | number : '0.2-2' }} USD ({{ bitcoin_to_usd * balanceDetails?.currency?.buy_rate | number : '0.2-2' }} NGN)</h3>
@@ -117,8 +117,8 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p style="    font-size: 16px;
-    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p>
+    <!-- <p style="    font-size: 16px;
+    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p> -->
     <div class="exchange-rate-section">
         <p class="title">Rate : {{ balanceDetails?.currency?.buy_rate | number : '0.2-2' }}</p>
     </div>
@@ -170,8 +170,8 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p *ngIf="transactionId == 3" style="font-size: 16px;
-    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p>
+    <!-- <p *ngIf="transactionId == 3" style="font-size: 16px;
+    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p> -->
     <!-- to_wallet -->
     <div class="wallet-address currency-boxes">
 		<h3 class="tp-head py-10">

@@ -18,7 +18,7 @@
             <div>
                 <h3>Crypto Balance
                     <span>
-                        ${{ 10000 | number:'0.2' }}
+                        ${{ balance?.crypto_balance | number:'0.2' }}
                     </span>
                 </h3>
             </div>
@@ -32,7 +32,7 @@
                 </figure>
                 <p>Add Cash</p>
             </li>
-            <li class="cursor-pointer">
+            <li class="cursor-pointer" routerLink="/dashboard/home/portfolio/deposit_crypto">
                 <figure>
                     <img src="assets/images/plus.svg">
                 </figure>

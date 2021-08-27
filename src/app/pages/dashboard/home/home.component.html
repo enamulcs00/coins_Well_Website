@@ -4,7 +4,7 @@
             <a mat-tab-link [routerLink]="['withdraw']" (click)="link = 'withdraw'"
                 [active]="link == 'withdraw'">Withdraw
             </a>
-            <a mat-tab-link [routerLink]="['deposit']" (click)="link = 'deposit'" [active]="link == 'deposit'">Deposit
+            <a mat-tab-link [routerLink]="['deposit']" (click)="link = 'deposit'" [active]="link == 'deposit' || link == 'deposit_crypto'">Deposit
             </a>
             <a mat-tab-link [routerLink]="['buy']" (click)="link = 'buy'" [active]="link == 'buy'">Buy
             </a>

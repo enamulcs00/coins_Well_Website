@@ -50,11 +50,11 @@ export class BuyCryptoComponent implements OnInit {
 				value = 0;
 			}
 			
-			if(['1','2','3'].indexOf(this.transactionId) != -1) {
-				this.addCashForm.get('service_fee').setValue(
-					(value > 0 && value <= 20)?100:((value > 500)?3:0)
-				)
-			}
+			// if(['1','2','3'].indexOf(this.transactionId) != -1) {
+			// 	this.addCashForm.get('service_fee').setValue(
+			// 		(value > 0 && value <= 20)?100:((value > 500)?3:0)
+			// 	)
+			// }
 			
 			if(this.transactionId == 1) {
 				this.addCashForm.get("bitamount").setValue((1/this.bitcoin_to_usd) * value);

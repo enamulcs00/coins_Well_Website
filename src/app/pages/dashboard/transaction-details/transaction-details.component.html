@@ -13,7 +13,17 @@
 	<ul>
 		<li>Transaction Type <span>{{ transactionDetails?.type_of_transaction }}</span></li>
 		<li>Date <span>{{ transactionDetails?.created_at | date  : 'medium' }}</span></li>
-		<li>Amount <span>USD {{ transactionDetails?.amount }} BTC</span></li>
+
+
+		<li *ngIf="(transactionDetails?.type_of_transaction == 'Sell' || transactionDetails?.type_of_transaction == 'Buy')  && transactionDetails?.currency?.id == 1">Amount <span>USD {{ transactionDetails?.amount | number }} ( {{ ((transactionDetails?.bitamount)?transactionDetails?.bitamount:0) | number }} BTC)</span></li>
+
+
+        <li *ngIf="(transactionDetails?.type_of_transaction == 'Sell' || transactionDetails?.type_of_transaction == 'Buy') && transactionDetails?.currency?.id != 1">Amount <span>USD {{ transactionDetails?.amount | number }} ( {{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number }} NGN)</span></li>
+
+
+		<li *ngIf="(transactionDetails?.type_of_transaction == 'Withdraw' || transactionDetails?.type_of_transaction == 'Deposit')">Amount <span>USD {{ transactionDetails?.amount | number }} ( {{ ((transactionDetails?.bitamount)?transactionDetails?.bitamount:0) | number }} {{ transactionDetails?.currency?.name }})</span></li>
+
+
 		<li>Transaction Status <span class="green" [class.text-success]="transactionDetails?.transaction_status == 'Accept'" [class.text-danger]="transactionDetails?.transaction_status == 'Reject'" [class.text-warning]="transactionDetails?.transaction_status == 'Pending'">{{ transactionDetails?.transaction_status }}</span></li>
 		<li>Transaction ID/Hash ID <span>{{transactionDetails?.id }}</span></li>
 	</ul>

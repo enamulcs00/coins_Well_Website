@@ -5,8 +5,8 @@
     <ul>
         <div class="w-100">
             <mat-form-field class="w-100" appearance="fill">
-                <mat-select (selectionChange)="onChanged($event)" placeholder="Select Currency">
-                    <mat-option value="ngn">
+                <mat-select #mySelect (selectionChange)="onChanged($event)" placeholder="Select Currency">
+                    <mat-option value="ngn" *ngIf="link != 'deposit_crypto'">
                         NGN
                     </mat-option>
                     <mat-option *ngFor="let withdraw of withdrawRequests" [value]="withdraw?.currency?.id">

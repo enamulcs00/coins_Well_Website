@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 import { CurrencyMaskInputMode } from "ngx-currency";
 
-
 @Component({
 	selector: 'app-deposit-crypto',
 	templateUrl: './deposit-crypto.component.html',
@@ -50,11 +49,11 @@ export class DepositCryptoComponent implements OnInit {
 				value = 0;
 			}
 			this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
-			if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
-				this.addCashForm.get('service_fee').setValue(
-					(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
-				)
-			}
+			// if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
+			// 	this.addCashForm.get('service_fee').setValue(
+			// 		(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
+			// 	)
+			// }
 		})
 	}
 

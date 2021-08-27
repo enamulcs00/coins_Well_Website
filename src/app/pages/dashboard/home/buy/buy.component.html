@@ -1,9 +1,18 @@
 <div class="wd-body mt-40">
     <h3 class="tp-head pb-20">
-        My Portfolio
+        Select currency
     </h3>
-    <ul>
-        <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/buy/{{ withdraw?.currency?.id }}">
+    <ul id="myDiv">
+        <div class="w-100">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-select (selectionChange)="onChanged($event)" placeholder="Select Currency">
+                    <mat-option *ngFor="let withdraw of withdrawRequests" [value]="withdraw?.currency?.id">
+                        {{ withdraw?.currency?.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/buy/{{ withdraw?.currency?.id }}">
             <div class="wb-box">
                 <figure>
                     <img style="height: 70px;
@@ -39,6 +48,6 @@
                     </div>
                 </div>
             </div>
-        </li>
+        </li> -->
     </ul>
 </div>

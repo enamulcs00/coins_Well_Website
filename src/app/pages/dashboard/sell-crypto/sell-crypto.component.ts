@@ -23,6 +23,8 @@ export class SellCryptoComponent implements OnInit {
 	cms: any;
 	bitcoin_to_usd = 1800;
 	walletAddress: any;
+	service_fee: number = 0;
+	sellRate: number = 0;
 	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
 		if([environment.bitGoCurrencies.bitcoin, environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, environment.bitGoCurrencies.ERC20].indexOf(Number(this.transactionId)) == -1) {
@@ -59,15 +61,21 @@ export class SellCryptoComponent implements OnInit {
 				value = 0;
 			}
 			if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
-				this.addCashForm.get('service_fee').setValue(
-					(value > 0 && value <= 20) ? 100 : ((value > 500) ? 3 : 0)
-				)
+				this.service_fee = (value > 0 && value <= 20) ? 100 : ((value > 500) ? 3 : 0)
 			}
 			if (this.transactionId == 1) {
 				this.addCashForm.get("bitamount").setValue((1 / this.bitcoin_to_usd) * value);
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.sell_rate * value);
+				
+			}
+			if((value >= 1 && value <= 20)) {
+				this.sellRate = this.balanceDetails.currency.sell_rate;
+				this.addCashForm.get("ngnamount").setValue((this.sellRate * value) - 100);	
+			} else if((value > 500)) {
+				this.sellRate  = Number(this.balanceDetails.currency.sell_rate) + 3;
+				this.addCashForm.get("ngnamount").setValue(this.sellRate * value);
 			} else {
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.sell_rate * value);
+				this.sellRate = this.balanceDetails.currency.sell_rate;
+				this.addCashForm.get("ngnamount").setValue(this.sellRate * value);
 			}
 		});
 	}
@@ -150,6 +158,7 @@ export class SellCryptoComponent implements OnInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
 			this.balanceDetails = data.data;
+			this.sellRate = this.balanceDetails.currency.sell_rate;
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {

@@ -59,10 +59,10 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ addCashForm.get('service_fee').value }} NGN</p>
+    <p style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
     <div class="exchange-rate-section">
-        <p class="title">Rate : {{ balanceDetails?.currency?.sell_rate | number : '0.2-2' }}</p>
-        <h3>1 BTC = {{ bitcoin_to_usd | number : '0.2-2' }} USD ({{ bitcoin_to_usd * balanceDetails?.currency?.sell_rate | number : '0.2-2' }} NGN)</h3>
+        <p class="title">Rate : {{ sellRate | number : '0.2-2' }}</p>
+        <h3>1 BTC = {{ bitcoin_to_usd | number : '0.2-2' }} USD ({{ bitcoin_to_usd * sellRate | number : '0.2-2' }} NGN)</h3>
     </div>
     <div class="admin-body pt-20">
         <div class="btn-outer m-auto w-100 pt-20">
@@ -116,9 +116,9 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ addCashForm.get('service_fee').value }} NGN</p>
+    <p style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
     <div class="exchange-rate-section">
-        <p class="title">Rate : {{ balanceDetails?.currency?.sell_rate | number : '0.2-2' }}</p>
+        <p class="title">Rate : {{ sellRate | number : '0.2-2' }}</p>
     </div>
     <div class="admin-body pt-20">
         <div class="btn-outer m-auto w-100 pt-20">
@@ -189,9 +189,9 @@
             </div>
 				
 		</div>
-        <p style="font-size: 16px;padding-left: 13px !important;">Service Fee : {{ addCashForm.get('service_fee').value }} NGN</p>
+        <p *ngIf="transactionId == 3" style="font-size: 16px;padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
         <div class="exchange-rate-section">
-            <p class="title">Rate : {{ balanceDetails?.currency?.sell_rate | number : '0.2-2' }}</p>
+            <p class="title">Rate : {{ sellRate | number : '0.2-2' }}</p>
         </div>
 		<p style="color: #4bc3ed;">Notes:</p>
 		<ul class="mb-2">

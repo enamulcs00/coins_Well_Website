@@ -121,6 +121,7 @@ export class CreateprofileComponent implements OnInit {
 				this.profileForm.get('image').setValue(image.data[0]['id']);
 				let copyOfProfileForm = this.profileForm.value;
 				delete copyOfProfileForm.tempImage;
+
 				this._router.navigate(['/auth/transtionpin'], {
 					state: {
 						profileForm: {
@@ -129,6 +130,8 @@ export class CreateprofileComponent implements OnInit {
 						}
 					}
 				});
+
+                
 			}, _ => {
 				Block.remove('#create-profile-button');
 			});

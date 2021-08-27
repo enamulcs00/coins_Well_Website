@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class MyEarningComponent implements OnInit {
 	transactionList: any = [];
 	baseUrl: string = environment.homeURL;
-	finalEarning : any = [];
+	finalEarning : any = 0;
 	constructor(private _common: CommonService) { }
 
 	ngOnInit(): void {
@@ -41,7 +41,12 @@ export class MyEarningComponent implements OnInit {
 			var temps = this.transactionList.map(x=> {
 				return x.amount;
 			});
-			this.finalEarning = temps.reduce(reducer);
+
+			if(temps.length > 0 ){
+				this.finalEarning = temps.reduce(reducer);
+			} else {
+				this.finalEarning = 0;
+			}
 			Loading.remove();
 		}, _ => {
 			Loading.remove();

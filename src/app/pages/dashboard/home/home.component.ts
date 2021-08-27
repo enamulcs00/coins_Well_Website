@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
 	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
+		this._router.events.subscribe((val) => {
+			let urls = this._router.url.split('/');
+			this.link = urls[urls.length - 1];
+		})
 		let urls = this._router.url.split('/');
 		this.link = urls[urls.length - 1];
 		this.getCMS();

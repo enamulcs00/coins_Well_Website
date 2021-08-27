@@ -4,25 +4,33 @@ import { Loading, } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
+
 @Component({
-	selector: 'app-buy',
-	templateUrl: './buy.component.html',
-	styleUrls: ['./buy.component.scss']
+	selector: 'app-all',
+	templateUrl: './all.component.html',
+	styleUrls: ['./all.component.scss']
 })
-export class BuyComponent implements OnInit {
-	baseUrl : string = environment.homeURL;
+export class AllComponent implements OnInit {
+	baseUrl: string = environment.homeURL;
 	withdrawRequests: any;
-	constructor(private _common: CommonService, private _router : Router) { }
+	balance : any;
+	constructor(private _router: Router, private _common: CommonService) { }
 
 	ngOnInit(): void {
 		this.getCryoto();
+		this._common.get(urls.getBalance).subscribe(data => {
+			this.balance = data.data;
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
 	}
 
 	getCryoto() {
 		Loading.circle();
 		this._common.get(urls.getCryptoBalances).subscribe(data => {
-			this.withdrawRequests = data.data.filter(x=>{
-				if([environment.bitGoCurrencies.bitcoin, environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, environment.bitGoCurrencies.ERC20].indexOf(x.currency.id) != -1) {
+			this.withdrawRequests = data.data.filter(x => {
+				if ([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(x.currency.id) == -1) {
 					return true
 				} else {
 					return false;
@@ -35,10 +43,10 @@ export class BuyComponent implements OnInit {
 	}
 
 	onChanged(event) {
-		if(event.value == 'ngn') {
+		if (event.value == 'ngn') {
 			this._router.navigate(['/dashboard/home/payment/withdrawal']);
 		} else {
-			this._router.navigate(['/dashboard/buy/'+event.value]);
+			this._router.navigate(['/dashboard/withdrawcryto/' + event.value]);
 		}
 	}
 

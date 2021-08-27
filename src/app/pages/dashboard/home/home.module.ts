@@ -10,8 +10,9 @@ import { HomeComponent } from './home.component';
 import { MaterialCommonModule } from '../../../material-common/material-common.module';
 import { BalanceComponent } from './balance/balance.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AllComponent } from './all/all.component';
 @NgModule({
-	declarations: [WithdrawComponent, SellComponent, DepositComponent, BuyComponent, HomeComponent, BalanceComponent],
+	declarations: [WithdrawComponent, SellComponent, DepositComponent, BuyComponent, HomeComponent, BalanceComponent, AllComponent],
 	imports: [
 		CommonModule,
 		HomeRoutingModule,

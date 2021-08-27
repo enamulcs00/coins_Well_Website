@@ -47,11 +47,11 @@ export class WithdrawcryptoComponent implements OnInit {
 				value = 0;
 			}
 			this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
-			if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
-				this.addCashForm.get('service_fee').setValue(
-					(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
-				)
-			}
+			// if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
+			// 	this.addCashForm.get('service_fee').setValue(
+			// 		(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
+			// 	)
+			// }
 		})
 	}
 
