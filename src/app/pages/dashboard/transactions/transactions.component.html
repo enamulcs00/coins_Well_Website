@@ -46,7 +46,8 @@
 							<div class="tsl-main">
 								<div class="tsl-left">
 									<figure>
-										<img style="height: 60px; width: 60px; object-fit: contain;" src="{{ baseUrl + tran?.currency?.logo?.media_file }}">
+										<img *ngIf="tran?.currency?.logo?.media_file" style="height: 60px; width: 60px; object-fit: contain;" src="{{ baseUrl + tran?.currency?.logo?.media_file }}">
+										<img *ngIf="!tran?.currency?.logo?.media_file" style="height: 60px; width: 60px; object-fit: contain;" src="assets/images/ngn-currency.png">
 									</figure>
 								</div>
 								<div class="tsl-right">

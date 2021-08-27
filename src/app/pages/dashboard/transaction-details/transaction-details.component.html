@@ -4,9 +4,12 @@
 <div class="bx-x">
 	<div class="biticon-bg">
 		<figure>
-			<img style="    height: 50px;
+			<img *ngIf="transactionDetails?.currency?.logo?.media_file" style="    height: 50px;
 			width: 50px;
 			object-fit: contain;" src="{{ baseUrl + transactionDetails?.currency?.logo?.media_file }}" alt="">
+			<img *ngIf="!transactionDetails?.currency?.logo?.media_file" style="    height: 50px;
+			width: 50px;
+			object-fit: contain;" src="assets/images/ngn-currency.png" alt="">
 		</figure>
 		BTC/Bitcoin
 	</div>
