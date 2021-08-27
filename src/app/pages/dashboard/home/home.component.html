@@ -6,9 +6,9 @@
             </a>
             <a mat-tab-link [routerLink]="['deposit']" (click)="link = 'deposit'" [active]="link == 'deposit' || link == 'deposit_crypto'">Deposit
             </a>
-            <a mat-tab-link [routerLink]="['buy']" (click)="link = 'buy'" [active]="link == 'buy'">Buy
-            </a>
             <a mat-tab-link [routerLink]="['sell']" (click)="link = 'sell'" [active]="link == 'sell'">Sell
+            </a>
+            <a mat-tab-link [routerLink]="['buy']" (click)="link = 'buy'" [active]="link == 'buy'">Buy
             </a>
         </nav>
         <router-outlet></router-outlet>

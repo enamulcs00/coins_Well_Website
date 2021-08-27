@@ -20,8 +20,9 @@
 									</figure>
 								</div>
 								<div class="tsl-right">
+									<h5>{{ (tran?.name)?tran?.name:'N/A' }}</h5>
 									<h5>{{ tran?.phone_number }}</h5>
-									<p>Earned NGN {{ tran?.amount }}</p>
+									<p>Earned NGN {{ tran?.amount | number }}</p>
 								</div>
 							</div>
 						</div>

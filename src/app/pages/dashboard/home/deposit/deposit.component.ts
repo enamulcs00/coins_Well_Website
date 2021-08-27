@@ -36,7 +36,7 @@ export class DepositComponent implements OnInit, AfterViewInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoBalances).subscribe(data => {
 			this.withdrawRequests = data.data.filter(x=>{
-				if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(x.currency.id) == -1) {
+				if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, 5].indexOf(x.currency.id) == -1) {
 					return true
 				} else {
 					return false;

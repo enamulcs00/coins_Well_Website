@@ -5,7 +5,7 @@
                 My Portfolio
             </h3>
             <ul>
-                <li routerLink="/dashboard/home/payment/withdrawal">
+                <li routerLink="/dashboard/home/payment/withdrawal" class="cursor-pointer">
                     <div class="wb-box">
                         <figure>
                             <img style="height: 70px;
@@ -21,16 +21,14 @@
                         </div>
                     </div>
                 </li>
-                <li *ngFor="let withdraw of withdrawRequests" routerLink="/withdrawcryto/{{ withdraw?.currency?.id }}">
+                <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/withdrawcryto/{{ withdraw?.currency?.id }}" class="cursor-pointer">
                     <div class="wb-box">
                         <figure>
-                            <img style="height: 70px;
-                            width: 70px;
-                            object-fit: cover;" src="{{ baseUrl + withdraw?.currency?.logo?.media_file }}">
+                            <img style="height: 70px; width: 70px; object-fit: cover;" src="{{ baseUrl + withdraw?.currency?.logo?.media_file }}">
                         </figure>
                         <h5>{{ withdraw?.currency?.name }}</h5>
-                        <p  *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2">Balance</p>
-                        <div  *ngIf="withdraw?.currency?.id == 1 || withdraw?.currency?.id == 2" class="d-flex bal-body">
+                        <p>Balance</p>
+                        <div class="d-flex bal-body">
                             <div class="bal">
                                 {{ (withdraw?.balance)?(withdraw?.balance | number : '0.2-2'): '0.00' }}
                             </div>

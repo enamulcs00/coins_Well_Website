@@ -62,20 +62,22 @@ export class SellCryptoComponent implements OnInit {
 			}
 			if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
 				this.service_fee = (value > 0 && value <= 20) ? 100 : ((value > 500) ? 3 : 0)
-			}
-			if (this.transactionId == 1) {
-				this.addCashForm.get("bitamount").setValue((1 / this.bitcoin_to_usd) * value);
-				
-			}
-			if((value >= 1 && value <= 20)) {
-				this.sellRate = this.balanceDetails.currency.sell_rate;
-				this.addCashForm.get("ngnamount").setValue((this.sellRate * value) - 100);	
-			} else if((value > 500)) {
-				this.sellRate  = Number(this.balanceDetails.currency.sell_rate) + 3;
-				this.addCashForm.get("ngnamount").setValue(this.sellRate * value);
+				if((value >= 1 && value <= 20)) {
+					this.sellRate = this.balanceDetails.currency.sell_rate;
+					this.addCashForm.get("ngnamount").setValue((this.sellRate * value) - 100);	
+				} else if((value > 500)) {
+					this.sellRate  = Number(this.balanceDetails.currency.sell_rate) + 3;
+					this.addCashForm.get("ngnamount").setValue(this.sellRate * value);
+				} else {
+					this.sellRate = this.balanceDetails.currency.sell_rate;
+					this.addCashForm.get("ngnamount").setValue(this.sellRate * value);
+				}
 			} else {
 				this.sellRate = this.balanceDetails.currency.sell_rate;
 				this.addCashForm.get("ngnamount").setValue(this.sellRate * value);
+			}
+			if (this.transactionId == 1) {
+				this.addCashForm.get("bitamount").setValue((1 / this.bitcoin_to_usd) * value);
 			}
 		});
 	}
