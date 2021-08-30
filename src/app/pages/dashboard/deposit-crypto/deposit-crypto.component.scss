@@ -43,21 +43,133 @@
     background: white;
     position: relative;
     display: inline-block;
-    border: solid 4px #000;
-    padding:  4px 6px;
+    // border: solid 4px #000;
+    // padding:  4px 6px;
+    // border-radius: 4px;
+}
+#barcode-top-left {
+    &:after {
+        content: "";
+        position: absolute;
+        top: -4px;
+        background: black;
+        width: 25px;
+        height: 4px;
+        border-radius: 10px;
+        left: 0px;   
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        background: black;
+        width: 4px;
+        height: 25px;
+        border-radius: 10px;
+        left: -4px;  
+    }
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border-top: 4px solid black;
+    z-index: 5;
+    border-left: 4px solid black;
     border-radius: 4px;
-}
-#barcode-div::before, #barcode-div::after { position: absolute; background: inherit; content: ''; z-index: 1; }
-#barcode-div::before { 
-    width: calc(100% - 40px);
-    left: 20px;
-    height: calc(100% + 8px);
-    top: -4px;
-}
-#barcode-div::after { 
-    height: calc(100% - 40px);
-    left: -4px;
-    width: calc(100% + 8px);
-    top: 20px
-}
-#barcode-div > * { position: relative; z-index: 2; }
+    left: -10px;
+    top: -7px;
+} 
+#barcode-top-right {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border-top: 4px solid black;
+    z-index: 5;
+    border-right: 4px solid black;
+    border-radius: 4px;
+    right: -10px;
+    top: -7px;
+    &:after {
+        content: "";
+        position: absolute;
+        top: -4px;
+        background: black;
+        width: 25px;
+        height: 4px;
+        border-radius: 10px;
+        right: 0px;   
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        background: black;
+        width: 4px;
+        height: 25px;
+        border-radius: 10px;
+        right: -4px;  
+    }
+} 
+
+#barcode-bottom-left {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border-bottom: 4px solid black;
+    z-index: 5;
+    border-left: 4px solid black;
+    border-radius: 4px;
+    left: -10px;
+    bottom: -7px;
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        background: black;
+        width: 25px;
+        height: 4px;
+        border-radius: 10px;
+        left: 0px;   
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        background: black;
+        width: 4px;
+        height: 25px;
+        border-radius: 10px;
+        left: -4px;  
+    }
+} 
+
+#barcode-bottom-right {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border-bottom: 4px solid black;
+    z-index: 5;
+    border-right: 4px solid black;
+    border-radius: 4px;
+    right: -10px;
+    bottom: -7px;
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        background: black;
+        width: 25px;
+        height: 4px;
+        border-radius: 10px;
+        right: 0px;   
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        background: black;
+        width: 4px;
+        height: 25px;
+        border-radius: 10px;
+        right: -4px;  
+    }
+} 
