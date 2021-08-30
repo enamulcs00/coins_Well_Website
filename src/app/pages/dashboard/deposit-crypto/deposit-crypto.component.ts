@@ -26,7 +26,7 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 	bitCoinPrice :  number = 1800;
 	cms: any;
 	temp = CurrencyMaskInputMode;
-	constructor(private _router: Router, private _fb: FormBuilder, private _auth: AuthService, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
 		if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(Number(this.transactionId)) != -1) {
 			this._router.navigate(['/dashboard/home/portfolio/deposit']);
@@ -125,6 +125,11 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
 			this.balanceDetails = data.data;
+			JsBarcode("#barcode", data.data.user_bitgo_wallet_address, {
+				height : 120,
+				text: "a",
+				fontSize : 0
+			});
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
