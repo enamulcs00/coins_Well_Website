@@ -59,7 +59,7 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
+    <p style="font-size: 16px; padding-left: 13px !important;" *ngIf="addCashForm.get('amount').value <= 500">Service Fee : {{ service_fee }} NGN</p>
     <div class="exchange-rate-section">
         <p class="title">Rate : {{ sellRate | number : '0.2-2' }}</p>
         <h3>1 BTC = {{ bitcoin_to_usd | number : '0.2-2' }} USD ({{ bitcoin_to_usd * sellRate | number : '0.2-2' }} NGN)</h3>
@@ -116,7 +116,7 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <p style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
+    <p *ngIf="addCashForm.get('amount').value <= 500" style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
     <div class="exchange-rate-section">
         <p class="title">Rate : {{ sellRate | number : '0.2-2' }}</p>
     </div>
@@ -189,7 +189,7 @@
             </div>
 				
 		</div>
-        <p *ngIf="transactionId == 3" style="font-size: 16px;padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
+        <p *ngIf="addCashForm.get('amount').value <= 500 && transactionId == 3" style="font-size: 16px;padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
         <div class="exchange-rate-section">
             <p class="title">Rate : {{ sellRate | number : '0.2-2' }}</p>
         </div>

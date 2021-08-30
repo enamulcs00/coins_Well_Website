@@ -22,8 +22,8 @@ export class WithdrawComponent implements OnInit {
 	getCryoto() {
 		Loading.circle();
 		this._common.get(urls.getCryptoBalances).subscribe(data => {
-			this.withdrawRequests = data.data.filter(x=>{
-				if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(x.currency.id, 5) == -1) {
+			this.withdrawRequests = data.data.filter(x => {
+				if ([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(x.currency.id, 5) == -1) {
 					return true
 				} else {
 					return false;
@@ -36,10 +36,10 @@ export class WithdrawComponent implements OnInit {
 	}
 
 	onChanged(event) {
-		if(event.value == 'ngn') {
+		if (event.value == 'ngn') {
 			this._router.navigate(['/dashboard/home/payment/withdrawal']);
 		} else {
-			this._router.navigate(['/dashboard/withdrawcryto/'+event.value]);
+			this._router.navigate(['/dashboard/withdrawcryto/' + event.value]);
 		}
 	}
 

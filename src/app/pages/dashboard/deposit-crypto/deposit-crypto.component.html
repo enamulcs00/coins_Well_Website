@@ -6,7 +6,6 @@
 		Enter the amount
 	</h3>
 	<div class="d-flex withdrawcurrency-boxes">
-
 		<mat-form-field class="example-full-width" appearance="fill">
 			<input currencyMask [options]="{ prefix: '', precision : 10, nullable :  true, inputMode : temp.NATURAL}"   matInput type="text" min="0.01" formControlName="bitamount" placeholder="Enter the amount">
 			<span matPrefix>
@@ -37,6 +36,17 @@
 			</mat-error>
 		</mat-form-field>
 	</div>
+
+	<barcode-scanner-livestream
+      type="code_128"
+      (valueChanges)="onValueChanges($event)"
+      (started)="(onStarted)"
+    ></barcode-scanner-livestream>
+    <div [hidden]="!barcodeValue">
+      {{ barcodeValue }}
+    </div>
+
+	
 	<!-- <p class="fee">
 		Fee : {{ addCashForm.get('service_fee').value }} NGN
 	</p> -->

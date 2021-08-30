@@ -16,20 +16,6 @@ export class MyEarningComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getTransactions();
-		// this._common.callBitGoAPI('users/me.json').subscribe(data => {
-		// 	console.log("Woro");
-		// 	Loading.remove();
-		// }, _ => {
-		// 	Loading.remove();
-		// })
-		//Call ZendDesk API
-		// var request = new XMLHttpRequest();
-		// var url = 'https://your_subdomain.zendesk.com/api/v2/tickets.json';
-		// request.open('GET', url, true);
-		// request.setRequestHeader("Authorization", "Bearer " + environment.zenDeskSec);
-		// request.send();
-		// user.authdata = window.btoa(username + ':' + password);
-
 	}
 
 
@@ -41,7 +27,6 @@ export class MyEarningComponent implements OnInit {
 			var temps = this.transactionList.map(x=> {
 				return x.amount;
 			});
-
 			if(temps.length > 0 ){
 				this.finalEarning = temps.reduce(reducer);
 			} else {

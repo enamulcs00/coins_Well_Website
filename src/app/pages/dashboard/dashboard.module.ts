@@ -27,6 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { DepositCryptoComponent } from './deposit-crypto/deposit-crypto.component';
 import { DirectiveModule } from '../../_directive/directive.module'
+import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
+
 @NgModule({
 	declarations: [
 		LeftSidebarComponent,
@@ -58,7 +60,8 @@ import { DirectiveModule } from '../../_directive/directive.module'
 		NgxCurrencyModule,
 		MatDialogModule,
 		NgxMatFileInputModule,
-		DirectiveModule
+		DirectiveModule,
+		BarcodeScannerLivestreamModule
 	],
 	entryComponents : [ConfirmPinComponent]
 })
