@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1630327629138,
+  "timestamp": 1630331076653,
   "index": "/coinswell/web/index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "/coinswell/web/10.aaf3e8c7cc7cab384c8b.js",
         "/coinswell/web/2.3e15f76b363aae7c879d.js",
         "/coinswell/web/3.d695b8cbdb620101336e.js",
-        "/coinswell/web/7.adefd7cebe453a90ae48.js",
+        "/coinswell/web/7.fcb19c0529fc0aae432d.js",
         "/coinswell/web/8.2b30e9d4a7546187a99e.js",
         "/coinswell/web/9.989b5143aeefbf7152b7.js",
         "/coinswell/web/favicon.ico",
@@ -23,7 +23,7 @@
         "/coinswell/web/main.4d7a113afa44d749d4da.js",
         "/coinswell/web/manifest.webmanifest",
         "/coinswell/web/polyfills.cd4ed4a1f6b365dfb0f8.js",
-        "/coinswell/web/runtime.28237a713833cc02358c.js",
+        "/coinswell/web/runtime.7f2b2cdf7cc272d2e12b.js",
         "/coinswell/web/styles.dff6c0ee8d90c44f1eba.css"
       ],
       "patterns": []
@@ -209,6 +209,7 @@
         "/coinswell/web/assets/images/upload.png",
         "/coinswell/web/assets/images/wallet (1).svg",
         "/coinswell/web/assets/js/jaquey.js",
+        "/coinswell/web/assets/js/qrcode.min.js",
         "/coinswell/web/flags.007b2705c0a8f69dfdf6.png",
         "/coinswell/web/flags@2x.9d5328fb490cddd43f66.png",
         "/coinswell/web/flags_sprite_2x.803fc634f571ed3c7cdb.png",
@@ -223,7 +224,7 @@
     "/coinswell/web/10.aaf3e8c7cc7cab384c8b.js": "211fc800d97c977be0811702e0def479bf1ce81a",
     "/coinswell/web/2.3e15f76b363aae7c879d.js": "47a4c6102f1ffcb58de05633c38601b43c3f8a55",
     "/coinswell/web/3.d695b8cbdb620101336e.js": "0ea2897e063f64343f1f6ea54c4db348231964fd",
-    "/coinswell/web/7.adefd7cebe453a90ae48.js": "df76df51b8309e0681246f35e7c077241d1a2c39",
+    "/coinswell/web/7.fcb19c0529fc0aae432d.js": "2e84536f5ca58c681fe846228a3cb77fa9e5a4db",
     "/coinswell/web/8.2b30e9d4a7546187a99e.js": "f437556cbc89842038215caea89d625765641d78",
     "/coinswell/web/9.989b5143aeefbf7152b7.js": "b73a68904361ccfa27499a8e7c93fcfc95ed5c36",
     "/coinswell/web/Rubik-Black.314a52e5ef2b9c9b23e3.woff2": "5d39fd79dfcb333a0959d930f3fc68aaa21de494",
@@ -399,16 +400,17 @@
     "/coinswell/web/assets/images/upload.png": "c89a326daf89f577c0f551fc10f24ba56be16df5",
     "/coinswell/web/assets/images/wallet (1).svg": "e954ea7362032b38e0f89a6771ec5abaa26dfb75",
     "/coinswell/web/assets/js/jaquey.js": "ec0e1955e25735853e1562f5db16e82061244473",
+    "/coinswell/web/assets/js/qrcode.min.js": "2d06c1f823f34c19981c6ae0b0eb0f5861c5e14b",
     "/coinswell/web/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
     "/coinswell/web/flags.007b2705c0a8f69dfdf6.png": "21572c9751e5a3dc20395befa0fcb349c32c4811",
     "/coinswell/web/flags@2x.9d5328fb490cddd43f66.png": "d6f843711c3cfe6d9a037e4c61d293f563e55802",
     "/coinswell/web/flags_sprite_2x.803fc634f571ed3c7cdb.png": "e803647907841782b9a813cd9d456316ecc1ea8d",
-    "/coinswell/web/index.html": "f291514faef421648ade786a90ce62bc4e91a605",
+    "/coinswell/web/index.html": "492382a4ba7f4244ce9be8067a97980fcdba0f9b",
     "/coinswell/web/lnd_abtlsticon.20ee50367453851dd6ef.png": "ba242f72595f148040e3df0298f6bd15176ae33c",
     "/coinswell/web/main.4d7a113afa44d749d4da.js": "ec25ed93c3ba8ecdce123f904836496d554505d9",
     "/coinswell/web/manifest.webmanifest": "77ab079239764d3fa2cda3b5d220b4bdb941c2f4",
     "/coinswell/web/polyfills.cd4ed4a1f6b365dfb0f8.js": "df6fa69622640a1d4428322e8f6c00094ec6b09b",
-    "/coinswell/web/runtime.28237a713833cc02358c.js": "7ccbde07f17b823ae8da80ce4ea005fc8bc110a0",
+    "/coinswell/web/runtime.7f2b2cdf7cc272d2e12b.js": "7d172283c300d0d9ff16b7c2088b4dc5775c20d2",
     "/coinswell/web/styles.dff6c0ee8d90c44f1eba.css": "741a49c07a41d51d81c123d33c9193f66aa1cc15"
   },
   "navigationUrls": [

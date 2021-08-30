@@ -10,7 +10,7 @@ import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 import { CurrencyMaskInputMode } from "ngx-currency";
-declare var JsBarcode : any;
+declare var QRCode : any;
 @Component({
 	selector: 'app-deposit-crypto',
 	templateUrl: './deposit-crypto.component.html',
@@ -35,11 +35,11 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 	}
 	
 	ngAfterViewInit() {
-		JsBarcode("#barcode", "TSjQAg8vY6hL3ZCq86DrsTJfr7M5vniBrR", {
-			height : 120,
-			text: "a",
-			fontSize : 0
-		});
+		// JsBarcode("#barcode", "TSjQAg8vY6hL3ZCq86DrsTJfr7M5vniBrR", {
+		// 	height : 120,
+		// 	text: "a",
+		// 	fontSize : 0
+		// });
 	}
 
 	copyText() {
@@ -55,8 +55,6 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 			request_for: [this.transactionId],
 			symbol: ['+'],
 			bitamount: [null, [Validators.required, Validators.min(0.00000000000000001)]],
-			// amount: [0, [Validators.required]],
-			// to_wallet: [null, [Validators.required]],
 			service_fee: [0]
 		});
 		this.getCMS();
@@ -64,12 +62,6 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 			if (value == null) {
 				value = 0;
 			}
-			// this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
-			// if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
-			// 	this.addCashForm.get('service_fee').setValue(
-			// 		(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
-			// 	)
-			// }
 		})
 	}
 
@@ -125,11 +117,20 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
 			this.balanceDetails = data.data;
-			JsBarcode("#barcode", data.data.user_bitgo_wallet_address, {
-				height : 120,
-				text: "a",
-				fontSize : 0
+			var qrcode = new QRCode(document.getElementById("barcode"), {
+				text: data.data.user_bitgo_wallet_address,
+				width: 150,
+				height: 150,
+				colorDark : "#000000",
+				colorLight : "#ffffff",
+				correctLevel : QRCode.CorrectLevel.H
 			});
+
+			// QRCode("#barcode", data.data.user_bitgo_wallet_address, {
+			// 	height : 120,
+			// 	text: "a",
+			// 	fontSize : 0
+			// });
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
