@@ -6,7 +6,7 @@
 		Enter the amount
 	</h3>
 	<div class="d-flex withdrawcurrency-boxes">
-		<mat-form-field class="example-full-width" appearance="fill">
+		<mat-form-field class="example-full-width w-100" appearance="fill">
 			<input currencyMask [options]="{ prefix: '', precision : 10, nullable :  true, inputMode : temp.NATURAL}"   matInput type="text" min="0.01" formControlName="bitamount" placeholder="Enter the amount">
 			<span matPrefix>
 				<figure>
@@ -21,7 +21,7 @@
 			</mat-error>
 		</mat-form-field>
 
-		<mat-form-field class="example-full-width" appearance="fill">
+		<!-- <mat-form-field class="example-full-width" appearance="fill">
 			<input currencyMask readonly [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="amount"  placeholder="Enter the amount">
 			<span matPrefix>
 				<figure>
@@ -34,21 +34,31 @@
 			<mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
 				Amount should be at least 0.01;
 			</mat-error>
-		</mat-form-field>
+		</mat-form-field> -->
 	</div>
 
-	<zxing-scanner style="height: 200px; width: 100%;"></zxing-scanner>
+	<div>
+		<h3 class="tp-head">Bar code</h3>
+		<svg id="barcode"></svg>
+	</div>
 
-
-	
-	<!-- <p class="fee">
-		Fee : {{ addCashForm.get('service_fee').value }} NGN
-	</p> -->
 	<div class="wallet-address">
 		<h3 class="tp-head py-10">
 			Wallet address
 		</h3>
+
 		<div class="d-flex withdrawcurrency-boxes">
+            <div class="code-num w-100">
+				<span matPrefix>
+					<figure><img style="width: 26px;" src="assets/images/copy1.png" alt=""></figure>
+				</span>
+                <input type="text" readonly="" id="myInput" class="form-control my-input" value="TSjQAg8vY6hL3ZCq86DrsTJfr7M5vniBrR">
+                <figure class="cursor-pointer" (click)="copyText()">
+                    <img src="assets/images/copy3.png" alt="">
+                </figure>
+            </div>
+		</div>
+		<!-- <div class="d-flex withdrawcurrency-boxes">
 			<mat-form-field style="width: 100% !important;" class="example-full-width" appearance="fill">
 				<input matInput type="text" formControlName="to_wallet" placeholder="Enter the wallet">
 				<span matPrefix>
@@ -58,18 +68,19 @@
 					Please enter wallet address.
 				</mat-error>
 			</mat-form-field>			
-		</div>
-		<p class="fee mb-5" style="display: flex; justify-content: space-between;">
+		</div> -->
+		<!-- <p class="fee mb-5" style="display: flex; justify-content: space-between;">
 			<span>
 				Available : {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} crypto
 			</span>
 			<span>
 				Max : {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} crypto
 			</span>
-		</p>
+		</p> -->
 		<p style="color: #4bc3ed;">Notes:</p>
 		<ul class="mb-2">
 			<li>Ensure that the address is correct and on the same network.</li>
+			<li>2 Network confirmations need, before the asset can appear on your wallet.</li>
 			<li>Transaction can not be cancelled.</li>
 		</ul>
 		<div class="btn-outer w-100">

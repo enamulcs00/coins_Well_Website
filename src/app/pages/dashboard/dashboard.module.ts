@@ -27,7 +27,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { DepositCryptoComponent } from './deposit-crypto/deposit-crypto.component';
 import { DirectiveModule } from '../../_directive/directive.module'
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
 	declarations: [
@@ -60,8 +59,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 		NgxCurrencyModule,
 		MatDialogModule,
 		NgxMatFileInputModule,
-		DirectiveModule,
-		ZXingScannerModule
+		DirectiveModule
 	],
 	entryComponents : [ConfirmPinComponent]
 })

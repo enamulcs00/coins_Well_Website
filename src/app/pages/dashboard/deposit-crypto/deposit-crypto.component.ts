@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,13 +10,13 @@ import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 import { CurrencyMaskInputMode } from "ngx-currency";
-
+declare var JsBarcode : any;
 @Component({
 	selector: 'app-deposit-crypto',
 	templateUrl: './deposit-crypto.component.html',
 	styleUrls: ['./deposit-crypto.component.scss']
 })
-export class DepositCryptoComponent implements OnInit {
+export class DepositCryptoComponent implements OnInit, AfterViewInit {
 	transactionId: any;
 	addCashForm: FormGroup;
 	balanceDetails: any;
@@ -33,14 +33,31 @@ export class DepositCryptoComponent implements OnInit {
 		}
 
 	}
+	
+	ngAfterViewInit() {
+		JsBarcode("#barcode", "TSjQAg8vY6hL3ZCq86DrsTJfr7M5vniBrR", {
+			width: 3,
+			height : 180,
+			text: "a",
+			fontSize : 0
+		});
+	}
+
+	copyText() {
+		var copyText: any = document.getElementById("myInput");
+		copyText.select();
+		copyText.setSelectionRange(0, 99999);
+		document.execCommand("copy");
+	}
+
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			request_type: [1],
 			request_for: [this.transactionId],
 			symbol: ['+'],
 			bitamount: [null, [Validators.required, Validators.min(0.00000000000000001)]],
-			amount: [0, [Validators.required]],
-			to_wallet: [null, [Validators.required]],
+			// amount: [0, [Validators.required]],
+			// to_wallet: [null, [Validators.required]],
 			service_fee: [0]
 		});
 		this.getCMS();
@@ -48,7 +65,7 @@ export class DepositCryptoComponent implements OnInit {
 			if (value == null) {
 				value = 0;
 			}
-			this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
+			// this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
 			// if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
 			// 	this.addCashForm.get('service_fee').setValue(
 			// 		(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
@@ -58,7 +75,7 @@ export class DepositCryptoComponent implements OnInit {
 	}
 
 	getNGNrate() {
-		this._common.getCurrencyConversion().subscribe(data=> {
+		this._common.getCurrencyConversion().subscribe(data=>{
 			if(data) {
 				this.ngnValue = this.balanceDetails?.currency?.buy_rate * data.USD_NGN;
 			}
