@@ -27,7 +27,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { DepositCryptoComponent } from './deposit-crypto/deposit-crypto.component';
 import { DirectiveModule } from '../../_directive/directive.module'
-import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
 	declarations: [
@@ -61,7 +61,7 @@ import { BarcodeScannerLivestreamModule } from "ngx-barcode-scanner";
 		MatDialogModule,
 		NgxMatFileInputModule,
 		DirectiveModule,
-		BarcodeScannerLivestreamModule
+		ZXingScannerModule
 	],
 	entryComponents : [ConfirmPinComponent]
 })

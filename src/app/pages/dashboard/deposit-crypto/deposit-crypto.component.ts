@@ -1,27 +1,22 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
+import { forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 import { CurrencyMaskInputMode } from "ngx-currency";
-import { BarcodeScannerLivestreamComponent } from "ngx-barcode-scanner";
-
 
 @Component({
 	selector: 'app-deposit-crypto',
 	templateUrl: './deposit-crypto.component.html',
 	styleUrls: ['./deposit-crypto.component.scss']
 })
-export class DepositCryptoComponent implements OnInit, AfterViewInit {
-	@ViewChild(BarcodeScannerLivestreamComponent)
-	barcodeScanner: BarcodeScannerLivestreamComponent;
-	barcodeValue;
-	
+export class DepositCryptoComponent implements OnInit {
 	transactionId: any;
 	addCashForm: FormGroup;
 	balanceDetails: any;
@@ -38,20 +33,6 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 		}
 
 	}
-
-	onStarted(started) {
-		console.log(started);
-	}
-
-	ngAfterViewInit() {
-		this.barcodeScanner.start();
-	}
-
-	onValueChanges(result) {
-		this.barcodeValue = result.codeResult.code;
-	}
-
-
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			request_type: [1],
