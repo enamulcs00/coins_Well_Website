@@ -2,11 +2,11 @@
 	Deposit {{ balanceDetails?.currency?.name }}
 </h3>
 <div class="wd-main" [formGroup]="addCashForm">
-	<h3 class="tp-head py-10">
+	<!-- <h3 class="tp-head py-10">
 		Enter the amount
-	</h3>
+	</h3> -->
 	<div class="d-flex withdrawcurrency-boxes">
-		<mat-form-field class="example-full-width w-100" appearance="fill">
+		<!-- <mat-form-field class="example-full-width w-100" appearance="fill">
 			<input currencyMask [options]="{ prefix: '', precision : 10, nullable :  true, inputMode : temp.NATURAL}"   matInput type="text" min="0.01" formControlName="bitamount" placeholder="Enter the amount">
 			<span matPrefix>
 				<figure>
@@ -19,7 +19,7 @@
 			<mat-error *ngIf="addCashForm.get('bitamount')?.hasError('min')">
 				Amount should be at least 0.01;
 			</mat-error>
-		</mat-form-field>
+		</mat-form-field> -->
 
 		<!-- <mat-form-field class="example-full-width" appearance="fill">
 			<input currencyMask readonly [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="amount"  placeholder="Enter the amount">
@@ -39,10 +39,14 @@
 
 	<div>
 		<h3 class="tp-head">Bar code</h3>
-		<svg id="barcode"></svg>
+		<div class="w-100 text-center">
+			<div id="barcode-div">
+				<svg id="barcode"></svg>
+			</div>
+		</div>
 	</div>
 
-	<div class="wallet-address">
+	<div class="wallet-address mt-4">
 		<h3 class="tp-head py-10">
 			Wallet address
 		</h3>
@@ -83,10 +87,10 @@
 			<li>2 Network confirmations need, before the asset can appear on your wallet.</li>
 			<li>Transaction can not be cancelled.</li>
 		</ul>
-		<div class="btn-outer w-100">
+		<!-- <div class="btn-outer w-100">
 			<button class="btn btn-primary" (click)="submitDetails()">
 				Submit
 			</button>
-		</div>
+		</div> -->
 	</div>
 </div>

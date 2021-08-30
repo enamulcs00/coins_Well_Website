@@ -36,8 +36,7 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 	
 	ngAfterViewInit() {
 		JsBarcode("#barcode", "TSjQAg8vY6hL3ZCq86DrsTJfr7M5vniBrR", {
-			width: 3,
-			height : 180,
+			height : 120,
 			text: "a",
 			fontSize : 0
 		});

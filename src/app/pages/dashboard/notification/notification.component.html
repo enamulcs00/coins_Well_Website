@@ -6,16 +6,11 @@
 				<li *ngFor="let noti of notificationList">{{ noti.message }}
 				</li>
 			</ul>
-			<mat-paginator [length]="length"
-				(page)="onPageChange($event)"
-				[pageSize]="limit"
-				aria-label="Select page">
+			<mat-paginator [length]="length" (page)="onPageChange($event)" [pageSize]="limit" aria-label="Select page">
 			</mat-paginator>
 		</ng-container>
 		<ng-template #noDataFound>
-			<p style="text-align: center;
-			FONT-SIZE: 16px;
-			padding-top: 50px;">No notifications yet.</p>
+			<p style="text-align: center; font-size: 16px; padding-top: 50px;">No notifications yet.</p>
 		</ng-template>
 	</div>
 </div>

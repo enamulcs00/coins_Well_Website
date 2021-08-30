@@ -11,14 +11,14 @@ import { environment } from 'src/environments/environment';
 	styleUrls: ['./rate-dash.component.scss']
 })
 export class RateDashComponent implements OnInit {
-	rates : any;
-	imageUrl : string = environment.homeURL;
-	cms : any;
+	rates: any;
+	imageUrl: string = environment.homeURL;
+	cms: any;
 	constructor(private _common: CommonService) { }
 
 	ngOnInit(): void {
 		this.getRates();
-		this._common.getCMS(urls.getCMS).subscribe(data=>{
+		this._common.getCMS(urls.getCMS).subscribe(data => {
 			this.cms = data;
 		})
 	}
@@ -26,7 +26,7 @@ export class RateDashComponent implements OnInit {
 	getRates() {
 		Loading.circle();
 		this._common.get(urls.getAllCurrencies).subscribe(data => {
-			this.rates  = data.data;
+			this.rates = data.data.filter(x => Object.values(environment.bitGoCurrencies).indexOf(x.id) != -1);
 			Loading.remove();
 		}, _ => {
 			Loading.remove();
