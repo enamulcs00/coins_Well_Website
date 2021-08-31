@@ -34,7 +34,7 @@ export class SellCryptoComponent implements OnInit {
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			request_type: [4],
-			request_for: [this.transactionId],
+			request_for: [Number(this.transactionId)],
 			symbol: ['-'],
 			bitamount: [0],
 			amount: [0, [Validators.required, Validators.min(0.01)]],
