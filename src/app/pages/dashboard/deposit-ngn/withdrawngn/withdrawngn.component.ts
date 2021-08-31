@@ -25,7 +25,7 @@ export class WithdrawngnComponent implements OnInit {
 		this.addCashForm = this._fb.group({
 			request_type: [2],
 			symbol: ['-'],
-			amount: [0, [Validators.required, Validators.min(0.01)]],
+			ngnamount: [0, [Validators.required, Validators.min(0.01)]],
 			bank : [null, Validators.required]
  		});
 		this.getBanks();

@@ -27,7 +27,7 @@ export class DepositComponent implements OnInit {
 			proof: [null],
 			request_type: [1],
 			symbol: ['+'],
-			amount: [0, [Validators.required, Validators.min(0.01)]]
+			ngnamount: [0, [Validators.required, Validators.min(0.01)]]
 		});
 		this.getCMS();
 	}

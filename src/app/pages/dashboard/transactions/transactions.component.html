@@ -63,7 +63,21 @@
 							<div class="success-midle-main">
 								<h4>
 									<i [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'" class="fa fa-caret-down" aria-hidden="true"></i><span [class.text-success]="tran?.transaction_status == 'Accept'" [class.text-danger]="tran?.transaction_status == 'Reject'" [class.text-warning]="tran?.transaction_status == 'Pending'">0.20%
-									</span>({{ tran?.amount | number }})
+									</span>
+									
+									<!-- withdraw and deposit -->
+									<span class="text-dark" style="font-weight: 500;" *ngIf="tran.currency.id == 5 && (tran.type_of_transaction =='Withdraw' || tran.type_of_transaction =='Deposit')">
+										({{ ((tran?.ngnamount)?tran?.ngnamount:0) | number }})
+									</span>
+
+									<span class="text-dark" style="font-weight: 500;" *ngIf="tran.currency.id != 5 && tran.type_of_transaction =='Withdraw'">
+										({{ ((tran?.bitamount)?tran?.bitamount:0) | number }})
+									</span>
+
+									<span class="text-dark" style="font-weight: 500;" *ngIf="tran.type_of_transaction =='Sell' || tran.type_of_transaction =='Buy'">
+										({{ ((tran?.amount)?tran?.amount:0) | number }})
+									</span>
+
 								</h4>
 								<a>{{ tran?.type_of_transaction }}</a>
 							</div>

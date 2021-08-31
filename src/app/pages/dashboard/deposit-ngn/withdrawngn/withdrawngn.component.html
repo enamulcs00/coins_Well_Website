@@ -5,12 +5,12 @@
 	<div class="form-by my-forms">
 		<div class="input-bxx mb-0 pos-rel">
 			<mat-form-field class="example-full-width" appearance="outline">
-                <input currencyMask [options]="{ prefix: '₦ ' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount ">
+                <input currencyMask [options]="{ prefix: '₦ ' }" matInput type="text" min="0.01" formControlName="ngnamount" placeholder="Enter the amount ">
 				<span matSuffix>NGN</span>
-                <mat-error *ngIf="addCashForm.get('amount')?.hasError('required')">
+                <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('required')">
                     Please enter an amount.
                 </mat-error>
-                <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
+                <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
                     Amount should be at least 1;
                 </mat-error>
             </mat-form-field>
