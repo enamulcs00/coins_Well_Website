@@ -18,25 +18,38 @@
 		<li>Date <span>{{ transactionDetails?.created_at | date  : 'medium' }}</span></li>
 
 
-		<li *ngIf="transactionDetails?.currency?.id == 5 && (transactionDetails?.type_of_transaction =='Withdraw' || transactionDetails?.type_of_transaction =='Deposit')">Amount <span>{{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number }} NGN</span></li>
+		<li *ngIf="transactionDetails?.currency?.id == 5 && (transactionDetails?.type_of_transaction =='Withdraw' || transactionDetails?.type_of_transaction =='Deposit')">Amount <span>{{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number : '0.2-10' }} NGN</span></li>
 
 
-		<li *ngIf="transactionDetails?.currency?.id != 5 && (transactionDetails?.type_of_transaction =='Withdraw')">Amount <span>{{ ((transactionDetails?.bitamount)?transactionDetails?.bitamount:0) | number }} {{ transactionDetails?.currency?.name }} ( {{ ((transactionDetails?.amount)?transactionDetails?.amount:0) | number }} USD )</span></li>
+		<li *ngIf="transactionDetails?.currency?.id != 5 && (transactionDetails?.type_of_transaction =='Withdraw')">Amount <span>{{ ((transactionDetails?.bitamount)?transactionDetails?.bitamount:0) | number  : '0.2-10' 	}} {{ transactionDetails?.currency?.name }} ( {{ ((transactionDetails?.amount)?transactionDetails?.amount:0) | number : '0.2-10'}} USD )</span></li>
 
 
-		<li *ngIf="transactionDetails?.currency?.id == 1 && (transactionDetails?.type_of_transaction =='Sell' || transactionDetails?.type_of_transaction =='Buy')">Amount <span>{{ ((transactionDetails?.amount)?transactionDetails?.amount:0) | number }} USD ( {{ ((transactionDetails?.bitamount)?transactionDetails?.bitamount:0) | number }} BTC )  ( {{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number }} NGN )</span></li>
+		<li *ngIf="transactionDetails?.currency?.id == 1 && (transactionDetails?.type_of_transaction =='Sell' || transactionDetails?.type_of_transaction =='Buy')">Amount <span>{{ ((transactionDetails?.amount)?transactionDetails?.amount:0) | number }} USD ( {{ ((transactionDetails?.bitamount)?transactionDetails?.bitamount:0) | number : '0.2-10' }} BTC )  ( {{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number }} NGN )</span></li>
 
 
-		<li *ngIf="transactionDetails?.currency?.id != 1 && (transactionDetails?.type_of_transaction =='Sell' || transactionDetails?.type_of_transaction =='Buy')">Amount <span>{{ ((transactionDetails?.amount)?transactionDetails?.amount:0) | number }} USD ( {{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number }} NGN )</span></li>
+		<li *ngIf="transactionDetails?.currency?.id != 1 && (transactionDetails?.type_of_transaction =='Sell' || transactionDetails?.type_of_transaction =='Buy')">Amount <span>{{ ((transactionDetails?.amount)?transactionDetails?.amount:0) | number : '0.2-10' }} USD ( {{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number : '0.2-10'}} NGN )</span></li>
 
 
-        <!-- <li *ngIf="(transactionDetails?.type_of_transaction == 'Sell' || transactionDetails?.type_of_transaction == 'Buy') && transactionDetails?.currency?.id != 1">Amount <span>USD {{ transactionDetails?.amount | number }} ( {{ ((transactionDetails?.ngnamount)?transactionDetails?.ngnamount:0) | number }} NGN)</span></li>
+		<!-- Bank Account -->
+		<li *ngIf="transactionDetails?.currency?.id == 5 && (transactionDetails?.type_of_transaction =='Withdraw')">Bank <span>{{ transactionDetails?.bank?.bank_name?.name }}</span></li>
+
+		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Sending Wallet <span>{{ transactionDetails?.to_wallet || 'N/A' }}</span></li>
+
+		<li *ngIf="[3,4].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Buy')">Wallet <span>{{ transactionDetails?.to_wallet || 'N/A' }}</span></li>
+
+		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Receiving Wallet <span>{{ transactionDetails?.from_wallet || 'N/A' }}</span></li>
+
+		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Fee <span>{{ 0 }}</span></li>
+
+		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Confirmation <span class="badge badge-success text-white">5 Confirmations</span></li>
+
+		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Transaction ID <span>{{ 'BTC56456456456GJH' }}</span></li>
+
+		<!-- <li *ngIf="['1','2','3','4','6','7','8','9'].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Bank {{ transactionDetails?.transaction_status }}</li> -->
 
 
-		<li *ngIf="(transactionDetails?.type_of_transaction == 'Withdraw' || transactionDetails?.type_of_transaction == 'Deposit')">Amount <span>USD {{ transactionDetails?.amount | number }} ( {{ ((transactionDetails?.bitamount)?transactionDetails?.bitamount:0) | number }} {{ transactionDetails?.currency?.name }})</span></li>
-			-->
 
-		<li>Transaction Status <span class="green" [class.text-success]="transactionDetails?.transaction_status == 'Accept'" [class.text-danger]="transactionDetails?.transaction_status == 'Reject'" [class.text-warning]="transactionDetails?.transaction_status == 'Pending'">{{ transactionDetails?.transaction_status }}</span></li>
-		<li>Transaction ID/Hash ID <span>{{transactionDetails?.id }}</span></li> 
+		<li>Transaction Status <span class="green" [class.text-success]="transactionDetails?.transaction_status == 'Completed'" [class.text-danger]="transactionDetails?.transaction_status == 'Reject'" [class.text-warning]="transactionDetails?.transaction_status == 'In Progress'">{{ transactionDetails?.transaction_status }}</span></li>
+		<li>Order ID <span>{{transactionDetails?.id }}</span></li> 
 	</ul>
 </div>

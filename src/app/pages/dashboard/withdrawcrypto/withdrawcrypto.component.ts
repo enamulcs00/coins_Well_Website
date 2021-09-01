@@ -92,6 +92,7 @@ export class WithdrawcryptoComponent implements OnInit {
 
 	confirmed() {
 		Block.circle('#add-cash-button');
+		console.log("this.addCashForm.value",this.addCashForm.value);
 		this.updateDetails(this.addCashForm.value).then(() => {
 			this._router.navigate(['/Congratulations'], {
 				state: {

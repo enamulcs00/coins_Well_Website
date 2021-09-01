@@ -31,6 +31,7 @@ export class SellCryptoComponent implements OnInit {
 			this._router.navigate(['/dashboard/home/portfolio/buy']);
 		}
 	}
+
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			request_type: [4],
@@ -41,7 +42,9 @@ export class SellCryptoComponent implements OnInit {
 			ngnamount: [0, [Validators.required]],
 			service_fee: [0]
 		});
+	}
 
+	checkForChanges() {
 		if (this.transactionId == 3 || this.transactionId == 4) {
 			this.addCashForm.addControl('tempImage', new FormControl(null, Validators.required));
 			this.addCashForm.addControl('proof', new FormControl(null));
@@ -96,7 +99,6 @@ export class SellCryptoComponent implements OnInit {
 			}
 		})
 	}
-
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
