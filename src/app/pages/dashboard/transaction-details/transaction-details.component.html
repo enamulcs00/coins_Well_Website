@@ -1,5 +1,5 @@
 <h3 class="tp-head pb-20 text-center">
-	# {{transactionDetails?.id }}
+	# {{transactionDetails?.order_id }}
 </h3>
 <div class="bx-x">
 	<div class="biticon-bg">
@@ -50,6 +50,6 @@
 
 
 		<li>Transaction Status <span class="green" [class.text-success]="transactionDetails?.transaction_status == 'Completed'" [class.text-danger]="transactionDetails?.transaction_status == 'Reject'" [class.text-warning]="transactionDetails?.transaction_status == 'In Progress'">{{ transactionDetails?.transaction_status }}</span></li>
-		<li>Order ID <span>{{transactionDetails?.id }}</span></li> 
+		<li>Order ID <span>{{transactionDetails?.order_id }}</span></li> 
 	</ul>
 </div>
