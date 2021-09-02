@@ -37,7 +37,7 @@
 		</mat-form-field>
 	</div>
 	<p class="fee">
-		Fee : {{ addCashForm.get('service_fee').value }} NGN
+		Fee : {{ addCashForm.get('fee').value | number : '0.2-2' }} $
 	</p>
 	<div class="wallet-address">
 		<h3 class="tp-head py-10">

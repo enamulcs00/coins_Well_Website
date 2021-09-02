@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Loading } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
@@ -14,7 +15,9 @@ export class NotificationComponent implements OnInit {
 	baseUrl: string = environment.homeURL;
 	length: number = 10;
 	limit: number = 5;
-	constructor(private _common: CommonService) { }
+	filteredNotificationsList: any = [];
+	customizedNotificationList : any = [];
+	constructor(private _common: CommonService, private _router: Router) { }
 
 	ngOnInit(): void {
 		this.getTransactions();
@@ -38,4 +41,9 @@ export class NotificationComponent implements OnInit {
 		})
 	}
 
+	goToDetails(noti: any) {
+		if (noti.notification.notification_type == 'Transaction') {
+			this._router.navigate(['/dashboard/transactions-details/' + noti.order_id]);
+		}
+	}
 }

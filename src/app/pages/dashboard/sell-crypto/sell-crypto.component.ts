@@ -42,6 +42,7 @@ export class SellCryptoComponent implements OnInit {
 			ngnamount: [0, [Validators.required]],
 			service_fee: [0]
 		});
+		this.checkForChanges();
 	}
 
 	checkForChanges() {

@@ -20,13 +20,13 @@ export class WithdrawcryptoComponent implements OnInit {
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
 	ngnValue = 500;
-	bitCoinPrice :  number = 1800;
+	bitCoinPrice: number = 1800;
 	cms: any;
 	temp = CurrencyMaskInputMode;
 	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
 
-		if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(Number(this.transactionId)) != -1) {
+		if ([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(Number(this.transactionId)) != -1) {
 			this._router.navigate(['/dashboard/home/portfolio/withdraw']);
 		}
 
@@ -39,7 +39,7 @@ export class WithdrawcryptoComponent implements OnInit {
 			bitamount: [null, [Validators.required, Validators.min(0.00000000000000001)]],
 			amount: [0, [Validators.required]],
 			to_wallet: [null, [Validators.required]],
-			service_fee: [0]
+			fee: [0]
 		});
 		this.getCMS();
 		this.addCashForm.get("bitamount").valueChanges.subscribe(value => {
@@ -47,17 +47,15 @@ export class WithdrawcryptoComponent implements OnInit {
 				value = 0;
 			}
 			this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
-			// if (['1', '2', '3'].indexOf(this.transactionId) != -1) {
-			// 	this.addCashForm.get('service_fee').setValue(
-			// 		(this.addCashForm.get("amount").value > 0 && this.addCashForm.get("amount").value <= 20) ? 100 : ((this.addCashForm.get("amount").value > 500) ? 3 : 0)
-			// 	)
-			// }
+			this.addCashForm.get('fee').setValue(
+				((this.addCashForm.get("amount").value * 0.15) / 100)
+			)
 		})
 	}
 
 	getNGNrate() {
-		this._common.getCurrencyConversion().subscribe(data=>{
-			if(data) {
+		this._common.getCurrencyConversion().subscribe(data => {
+			if (data) {
 				this.ngnValue = this.balanceDetails?.currency?.buy_rate * data.USD_NGN;
 			}
 		})
@@ -78,10 +76,10 @@ export class WithdrawcryptoComponent implements OnInit {
 	submitDetails() {
 		if (this.addCashForm.valid) {
 			const dialogRef = this.dialog.open(ConfirmPinComponent, {
-				disableClose : true
+				disableClose: true
 			});
 			dialogRef.afterClosed().subscribe(result => {
-				if(result) {
+				if (result) {
 					this.confirmed();
 				}
 			});
@@ -92,7 +90,7 @@ export class WithdrawcryptoComponent implements OnInit {
 
 	confirmed() {
 		Block.circle('#add-cash-button');
-		console.log("this.addCashForm.value",this.addCashForm.value);
+		console.log("this.addCashForm.value", this.addCashForm.value);
 		this.updateDetails(this.addCashForm.value).then(() => {
 			this._router.navigate(['/Congratulations'], {
 				state: {

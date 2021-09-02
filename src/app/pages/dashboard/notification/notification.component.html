@@ -3,7 +3,8 @@
 		<h2>Notifications</h2>
 		<ng-container *ngIf="notificationList.length > 0; else noDataFound">
 			<ul>
-				<li *ngFor="let noti of notificationList">{{ noti.message }}
+				<li class="cursor-pointer" *ngFor="let noti of notificationList" (click)="goToDetails(noti)">
+					{{ noti?.notification?.message }}
 				</li>
 			</ul>
 			<mat-paginator [length]="length" (page)="onPageChange($event)" [pageSize]="limit" aria-label="Select page">
