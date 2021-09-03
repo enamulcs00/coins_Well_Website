@@ -32,7 +32,7 @@ export class CreateprofileComponent implements OnInit {
 			this._router.navigate(['/auth/signup']);
 		}
 		this.profileForm = this._fb.group({
-			tempImage: [null, Validators.required],
+			tempImage: [null],
 			image: [null],
 			full_name: [null, [Validators.required, Validators.maxLength(30), Validators.minLength(4), ValidString]],
 			role: ['2'],
@@ -112,16 +112,28 @@ export class CreateprofileComponent implements OnInit {
 	submitDetails() {
 		this.removeSpaces();
 		if (this.profileForm.valid) {
-			Block.circle('#create-profile-button');
-			let file = this.profileForm.get('tempImage').value;
-			const formData: FormData = new FormData();
-			formData.append('media', file, file.name);
-			this._common.uploadMedia(formData).subscribe(image => {
-				Block.remove('#create-profile-button');
-				this.profileForm.get('image').setValue(image.data[0]['id']);
-				let copyOfProfileForm = this.profileForm.value;
-				delete copyOfProfileForm.tempImage;
-
+			if(this.profileForm.get('tempImage').value) {
+				Block.circle('#create-profile-button');
+				let file = this.profileForm.get('tempImage').value;
+				const formData: FormData = new FormData();
+				formData.append('media', file, file.name);
+				this._common.uploadMedia(formData).subscribe(image => {
+					Block.remove('#create-profile-button');
+					this.profileForm.get('image').setValue(image.data[0]['id']);
+					let copyOfProfileForm = this.profileForm.value;
+					delete copyOfProfileForm.tempImage;
+					this._router.navigate(['/auth/transtionpin'], {
+						state: {
+							profileForm: {
+								...this.emailForm,
+								...this.profileForm.value
+							}
+						}
+					});                
+				}, _ => {
+					Block.remove('#create-profile-button');
+				});
+			} else {
 				this._router.navigate(['/auth/transtionpin'], {
 					state: {
 						profileForm: {
@@ -129,12 +141,8 @@ export class CreateprofileComponent implements OnInit {
 							...this.profileForm.value
 						}
 					}
-				});
-
-                
-			}, _ => {
-				Block.remove('#create-profile-button');
-			});
+				}); 
+			}	
 		} else {
 			this.profileForm.markAllAsTouched();
 		}

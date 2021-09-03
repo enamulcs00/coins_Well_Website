@@ -3,7 +3,7 @@
 </h3>
 <h3 class="text-right status-check">Status:  <span *ngIf="facial_verification  == 4" class="text-success">Verified</span> <span *ngIf="facial_verification  == 3" class="text-danger">Rejected</span><span *ngIf="facial_verification  == 2" class="text-warning">In progress</span> <span *ngIf="facial_verification  == 1" class="text-info">Pending</span></h3>
 <div class="form-bx mt-40">
-	<div class="acc-upgrade">
+	<div class="acc-upgrade" *ngIf="facial_verification  != 4">
 		<h3>Facial Verification</h3>
 		<p>Upload a selfie of you holding a piece of paper with your name, Date of Birth on the piece of paper</p>
 		<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
@@ -35,8 +35,13 @@
 		</div>
 
 	</div>
+	<div *ngIf="facial_verification == 4 && document_verification == 4" class="documents-verified">
+		<p class="text-success h3">
+			Verified
+		</p>
+	</div>
 
-	<div class="acc-upgrade">
+	<div class="acc-upgrade" *ngIf="document_verification  != 4">
 		<h3>Upload Documents</h3>
 		<p class="mb-2">Upload any one of the following to upgrade your account.</p>
 		<p style="line-height: 22px;">1. Driving License</p>
@@ -57,7 +62,7 @@
 
 	<div class="btn-outer m-auto pt-20">
 		<div id="submit-documents">
-			<button class="btn btn-primary" (click)="goToNext()">Update</button>
+			<button class="btn btn-primary" *ngIf="facial_verification != 4 || document_verification != 4" (click)="goToNext()">Update</button>
 		</div>
 	</div>
 </div>
