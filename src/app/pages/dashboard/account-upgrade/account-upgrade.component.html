@@ -3,61 +3,72 @@
 </h3>
 <h3 class="text-right status-check">Status:  <span *ngIf="facial_verification  == 4" class="text-success">Verified</span> <span *ngIf="facial_verification  == 3" class="text-danger">Rejected</span><span *ngIf="facial_verification  == 2" class="text-warning">In progress</span> <span *ngIf="facial_verification  == 1" class="text-info">Pending</span></h3>
 <div class="form-bx mt-40">
-	<div class="acc-upgrade" *ngIf="facial_verification  != 4">
+	<div class="acc-upgrade">
 		<h3>Facial Verification</h3>
 		<p>Upload a selfie of you holding a piece of paper with your name, Date of Birth on the piece of paper</p>
-		<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
-			class="d-none">
-		<figure *ngIf="selfieType == 'img'" class="m-auto cursor-pointer">
-			<img *ngIf="!facialVerificationImageUrl" style="    height: 225px;
-			width: 300px;
-			object-fit: cover;" src="assets/images/scan.png" alt="">
-			<img *ngIf="facialVerificationImageUrl" [src]="facialVerificationImageUrl" alt="">
-		</figure>
 
-		<figure style="position: relative;" *ngIf="selfieType == 'video'" class="m-auto cursor-pointer">
-			<webcam width="300" height="300" [mirrorImage]="'never'" [trigger]="trigger" (initError)="handleInitError($event)" (imageCapture)="handleImage($event)"></webcam>
-			<button (click)="takeSnapshot()" class="btn btn-primary" style="    width: 40px;
-			border-radius: 50%;
-			position: absolute;
-			height: 40px;
-			bottom: 40px;
-			left: 44%;
-			right: auto;
-			padding: 6px 5px 7px;"><i class="fa fa-camera"></i></button>
-			<!-- <video id="videoImg" style="height: 200px; width: 300px;" class="camera_stream" alt=""></video> -->
-		</figure>
 
-		<div class="camera-buttons">
-			<button class="btn btn-primary btn-sm" (click)="facialDocument.click()"> <i class="fa fa-image"></i> Browse</button>
-			&nbsp;&nbsp;OR&nbsp;&nbsp;
-			<button class="btn btn-primary btn-sm" (click)="getCamera()"> <i class="fa fa-camera"></i> Capture </button>
+		<div *ngIf="facial_verification == 4; else elseBlock" class="documents-verified">
+			<p class="text-success h3">
+				Verified
+			</p>
 		</div>
 
+		<ng-template #elseBlock>
+			<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
+				class="d-none">
+			<figure *ngIf="selfieType == 'img'" class="m-auto cursor-pointer">
+				<img *ngIf="!facialVerificationImageUrl" style="    height: 225px;
+				width: 300px;
+				object-fit: cover;" src="assets/images/scan.png" alt="">
+				<img *ngIf="facialVerificationImageUrl" [src]="facialVerificationImageUrl" alt="">
+			</figure>
+	
+			<figure style="position: relative;" *ngIf="selfieType == 'video'" class="m-auto cursor-pointer">
+				<webcam width="300" height="300" [mirrorImage]="'never'" [trigger]="trigger" (initError)="handleInitError($event)" (imageCapture)="handleImage($event)"></webcam>
+				<button (click)="takeSnapshot()" class="btn btn-primary" style="    width: 40px;
+				border-radius: 50%;
+				position: absolute;
+				height: 40px;
+				bottom: 40px;
+				left: 44%;
+				right: auto;
+				padding: 6px 5px 7px;"><i class="fa fa-camera"></i></button>
+				<!-- <video id="videoImg" style="height: 200px; width: 300px;" class="camera_stream" alt=""></video> -->
+			</figure>
+			<div class="camera-buttons">
+				<button class="btn btn-primary btn-sm" (click)="facialDocument.click()"> <i class="fa fa-image"></i> Browse</button>
+				&nbsp;&nbsp;OR&nbsp;&nbsp;
+				<button class="btn btn-primary btn-sm" (click)="getCamera()"> <i class="fa fa-camera"></i> Capture </button>
+			</div>
+		</ng-template>
 	</div>
-	<div *ngIf="facial_verification == 4 && document_verification == 4" class="documents-verified">
-		<p class="text-success h3">
-			Verified
-		</p>
-	</div>
-
-	<div class="acc-upgrade" *ngIf="document_verification  != 4">
+	<div class="acc-upgrade">
 		<h3>Upload Documents</h3>
 		<p class="mb-2">Upload any one of the following to upgrade your account.</p>
 		<p style="line-height: 22px;">1. Driving License</p>
 		<p style="line-height: 22px;">2. Voter Card</p>
 		<p style="line-height: 22px;">3. International Passport</p>
 		<p style="line-height: 22px;">4. National ID</p>
-		<div class="documents-upload-bx">
-			<div class="upload-bx cursor-pointer" *ngFor="let doc of documents; let i = index;"
-				[ngStyle]="{background: 'url('+doc.base64+')'}">
-				<div class="plus-icon cursor-pointer">+</div>
-				<input #file (change)="preview(file.files, i)" type="file" accept="image/*">
-			</div>
+
+		<div *ngIf="document_verification == 4; else elseBlockDocument" class="documents-verified">
+			<p class="text-success h3">
+				Verified
+			</p>
 		</div>
-		<h3>Note</h3>
-		<p style="line-height: 22px;">Kindly upload a Valid document and perform the facial verification correctly.</p>
-		<p style="line-height: 22px;">Verification Review Time can take 3 to 7 business days.</p>
+		<ng-template #elseBlockDocument>
+			<div class="documents-upload-bx">
+				<div class="upload-bx cursor-pointer" *ngFor="let doc of documents; let i = index;"
+					[ngStyle]="{background: 'url('+doc.base64+')'}">
+					<div class="plus-icon cursor-pointer">+</div>
+					<input #file (change)="preview(file.files, i)" type="file" accept="image/*">
+				</div>
+			</div>
+			<h3>Note</h3>
+			<p style="line-height: 22px;">Kindly upload a Valid document and perform the facial verification correctly.</p>
+			<p style="line-height: 22px;">Verification Review Time can take 3 to 7 business days.</p>
+		</ng-template>
+
 	</div>
 
 	<div class="btn-outer m-auto pt-20">
