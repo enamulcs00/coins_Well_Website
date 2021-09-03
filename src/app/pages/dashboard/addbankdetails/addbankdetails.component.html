@@ -8,7 +8,7 @@
 				<img src="assets/images/auth/address.png" alt="">
 			</figure>
 		</span>
-		<mtx-select typeToSearchText="Search bank name or IFSC code." [typeahead]="bankListEvent"
+		<mtx-select typeToSearchText="Search bank name." [typeahead]="bankListEvent"
 			formControlName="bank_name" [loading]="bankListLoading" loadingText="Fetching banks..."
 			notFoundText="No banks found. Try another name" [virtualScroll]="true" bindLabel="Select bank name"
 			[items]="bankList" bindLabel="name" bindValue="id" placeholder="Select bank name">
