@@ -3,8 +3,9 @@
 		<h2>Notifications</h2>
 		<ng-container *ngIf="notificationList.length > 0; else noDataFound">
 			<ul>
-				<li class="cursor-pointer" [class.noti-success]="noti.status == 'Completed'" [class.noti-danger]="noti.status == 'Reject'" *ngFor="let noti of notificationList" (click)="goToDetails(noti)">
-					{{ noti?.notification?.message }}
+				<li class="cursor-pointer" style="padding-top: 2px;" [class.noti-success]="noti.status == 'Completed'" [class.noti-danger]="noti.status == 'Reject'" *ngFor="let noti of notificationList" (click)="goToDetails(noti)">
+					<p class="text-header">{{ noti?.notification?.title }}</p>
+					<p class="text-message">{{ noti?.notification?.message }}</p>
 				</li>
 			</ul>
 			<mat-paginator [length]="length" (page)="onPageChange($event)" [pageSize]="limit" aria-label="Select page">

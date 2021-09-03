@@ -32,11 +32,11 @@ export class MydetailsComponent implements OnInit {
 				full_name: this.userInfo.first_name + ' ' + this.userInfo.last_name,
 				phone_number: this.userInfo.phone_number,
 				email: this.userInfo.email,
-				image : this.userInfo.image.id
+				image : (this.userInfo.image)?this.userInfo.image.id:''
 			});
-			// this.profileForm.get('email').disable();
-			// this.profileForm.get('phone_number').disable();
-			this.showImage = environment.homeURL + this.userInfo?.image?.media_file;
+			if((this.userInfo.image)) {
+				this.showImage = environment.homeURL + this.userInfo?.image?.media_file;
+			}
 		}
 	}
 

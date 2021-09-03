@@ -5,8 +5,12 @@
 	<input type="file" #myFile class="d-none" (change)="preview(myFile.files)" accept="image/*">
 	<div class="usr-img mb-20 cursor-pointer" (click)="myFile.click()">
 		<figure class="whiite">
-			<img style="height: 80px;width: 80px;border-radius: 50%;
-			object-fit: cover;" [src]="showImage" alt="">
+			<img *ngIf="showImage else elseImageNot;" style="height: 80px;width: 80px;border-radius: 50%;
+			object-fit: cover;" [src]="showImage" alt="{{ userInfo?.first_name }}">
+			<ng-template #elseImageNot>
+				<img style="height: 80px;width: 80px;border-radius: 50%;
+				object-fit: cover;" [src]="'assets/images/hm-feature.png'" alt="{{ userInfo?.first_name }}">
+			</ng-template>
 		</figure>
 		<div class="upload">
 			<img src="assets/images/upload.png" alt="">

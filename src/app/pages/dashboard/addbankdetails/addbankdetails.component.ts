@@ -104,7 +104,7 @@ export class AddbankdetailsComponent implements OnInit {
 			if(this.bankId) {
 				this._common.put(urls.updateBankAccount+''+this.bankId+'/', this.bankForm.value).subscribe(_ => {
 					Block.remove('#add-bank-account-button');
-					this._router.navigate(['/dashboard/payment/withdrawal'])
+					this._router.navigate(['/dashboard/home/payment/withdrawal'])
 					Notify.success("Bank information updated successfully.");
 				}, _ => {
 					Block.remove('#add-bank-account-button');
@@ -112,7 +112,7 @@ export class AddbankdetailsComponent implements OnInit {
 			} else {
 				this._common.post(urls.addBankAccount, this.bankForm.value).subscribe(_ => {
 					Block.remove('#add-bank-account-button');
-					this._router.navigate(['/dashboard/payment/withdrawal'])
+					this._router.navigate(['/dashboard/home/payment/withdrawal'])
 					Notify.success("Bank added successfully.");
 				}, _ => {
 					Block.remove('#add-bank-account-button');

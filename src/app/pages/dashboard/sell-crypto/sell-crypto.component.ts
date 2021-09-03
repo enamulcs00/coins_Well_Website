@@ -25,6 +25,7 @@ export class SellCryptoComponent implements OnInit {
 	walletAddress: any;
 	service_fee: number = 0;
 	sellRate: number = 0;
+	balance: any;
 	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
 		if([environment.bitGoCurrencies.bitcoin, environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, environment.bitGoCurrencies.ERC20].indexOf(Number(this.transactionId)) == -1) {
@@ -43,6 +44,19 @@ export class SellCryptoComponent implements OnInit {
 			service_fee: [0]
 		});
 		this.checkForChanges();
+		this.fetchCryptoBalance();
+	}
+
+	fetchCryptoBalance() {
+		Loading.circle();
+		this._common.get(urls.getBalance).subscribe(data => {
+			this.balance = data.data.amount;
+			this.addCashForm.get('ngnamount').setValidators([Validators.required, Validators.max(this.balance)])
+			this.addCashForm.get('ngnamount').markAllAsTouched();
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
 	}
 
 	checkForChanges() {

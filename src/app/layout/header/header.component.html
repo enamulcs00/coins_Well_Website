@@ -43,8 +43,10 @@
                         <li class="nav-item cursor-pointer">
                             <div class="nav-profile d-flex" routerLink="/dashboard/my-details">
                                 <figure>
-                                    <img class="h-profile-img" [src]="baseUrl+userInfo?.image?.media_file"
-                                        alt="{{ userInfo?.first_name }}">
+                                    <img *ngIf="userInfo?.image?.media_file else elseImageNot;" class="h-profile-img" [src]="baseUrl+userInfo?.image?.media_file" alt="{{ userInfo?.first_name }}">
+                                    <ng-template #elseImageNot>
+                                        <img class="h-profile-img" [src]="'assets/images/hm-feature.png'" alt="{{ userInfo?.first_name }}">
+                                    </ng-template>
                                 </figure>
                                 <div class="usr-name">
                                     <p>{{ userInfo?.first_name }}</p>

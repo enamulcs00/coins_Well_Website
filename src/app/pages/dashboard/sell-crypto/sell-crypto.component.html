@@ -57,6 +57,9 @@
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
                 Amount should be at least 0.01;
             </mat-error>
+            <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
+                Amount should be less than {{ balance | number : '0.2-2' }}
+            </mat-error>
         </mat-form-field>
     </div>
     <p style="font-size: 16px; padding-left: 13px !important;" *ngIf="addCashForm.get('amount').value <= 500">Service Fee : {{ service_fee }} NGN</p>
@@ -114,6 +117,9 @@
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
                 Amount should be at least 0.01;
             </mat-error>
+            <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
+                Amount should be less than {{ balance | number : '0.2-2' }}
+            </mat-error>
         </mat-form-field>
     </div>
     <p *ngIf="addCashForm.get('amount').value <= 500" style="font-size: 16px; padding-left: 13px !important;">Service Fee : {{ service_fee }} NGN</p>
@@ -165,6 +171,9 @@
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
                 Amount should be at least 0.01;
+            </mat-error>
+            <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
+                Amount should be less than {{ balance | number : '0.2-2' }}
             </mat-error>
         </mat-form-field>
     </div>

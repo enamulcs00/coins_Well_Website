@@ -13,6 +13,9 @@
                 <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
                     Amount should be at least 1;
                 </mat-error>
+				<mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
+                    Amount should be less than {{ balance | number : '0.2-2'}}
+                </mat-error>
             </mat-form-field>
 		</div>
 	</div>

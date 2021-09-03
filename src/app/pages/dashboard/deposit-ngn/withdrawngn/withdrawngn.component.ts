@@ -18,23 +18,32 @@ export class WithdrawngnComponent implements OnInit {
 	bankList: any = [];
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
-	selectedBank : string = '';
+	selectedBank: string = '';
+	balance: any;
 	userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private dialog : MatDialog) { }
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private dialog: MatDialog) { }
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			request_type: [2],
 			symbol: ['-'],
 			ngnamount: [0, [Validators.required, Validators.min(0.01)]],
-			bank : [null, Validators.required]
- 		});
+			bank: [null, Validators.required]
+		});
 		this.getBanks();
-		if(this.userInfo.user_bitgo_wallet_address.length > 0) {
+		if (this.userInfo.user_bitgo_wallet_address.length > 0) {
 			this.fetchCryptoBalance();
 		}
 	}
 
 	fetchCryptoBalance() {
+		Loading.circle();
+		this._common.get(urls.getBalance).subscribe(data => {
+			this.balance = data.data.amount;
+			this.addCashForm.get('ngnamount').setValidators([Validators.required, Validators.min(0.01), Validators.max(this.balance)])
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
 	}
 
 	updateDetails(formData: any) {
@@ -50,16 +59,16 @@ export class WithdrawngnComponent implements OnInit {
 	}
 
 	submitDetails() {
-		if(this.addCashForm.value.amount != 0 && this.addCashForm.value.amount != '' && this.addCashForm.value.amount != null && this.addCashForm.value.amount != undefined && this.addCashForm.invalid) {
+		if (this.addCashForm.value.amount != 0 && this.addCashForm.value.amount != '' && this.addCashForm.value.amount != null && this.addCashForm.value.amount != undefined && this.addCashForm.invalid) {
 			Notify.failure("Please select bank first.");
 		}
 		if (this.addCashForm.valid) {
 			if (this.addCashForm.valid) {
 				const dialogRef = this.dialog.open(ConfirmPinComponent, {
-					disableClose : true
+					disableClose: true
 				});
 				dialogRef.afterClosed().subscribe(result => {
-					if(result) {
+					if (result) {
 						Block.circle('#add-cash-button');
 						this.updateDetails(this.addCashForm.value).then(() => {
 							this._router.navigate(['/Congratulations'], {
@@ -73,7 +82,7 @@ export class WithdrawngnComponent implements OnInit {
 				});
 			} else {
 				this.addCashForm.markAllAsTouched();
-			}	
+			}
 		} else {
 			this.addCashForm.markAllAsTouched();
 		}
@@ -91,7 +100,7 @@ export class WithdrawngnComponent implements OnInit {
 
 	deleteBank(index: string | number) {
 		Confirm.show('Delete Bank', 'Do you want to delete the selected bank account ?', 'Yes', 'No', () => {
-			this._common.delete(urls.deleteBank+this.bankList[index]['id']+'/').subscribe(() => {
+			this._common.delete(urls.deleteBank + this.bankList[index]['id'] + '/').subscribe(() => {
 				Notify.success("Bank account deleted successfully.");
 				this.getBanks();
 			}, _ => {
