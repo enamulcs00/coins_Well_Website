@@ -36,6 +36,12 @@ export class NotificationComponent implements OnInit {
 			this.notificationList = data.data;
 			this.length = data.recordsTotal;
 			Loading.remove();
+
+			this._common.post(urls.readNotifications,{
+				"is_read" : true
+			}).subscribe(data=>{
+				this._common.updateNotification.next("");
+			})
 		}, _ => {
 			Loading.remove();
 		})

@@ -33,5 +33,7 @@ export const urls = {
     getCryptoSingleBalance : 'payment/get-user-crypto-wallet-amount/',
     verifyPin : 'user/verify-transaction-pin/',
     getWalletAddress : 'admin/get-wallet-addresses/',
-    getDocuments : 'user/get-all-documents/'
+    getDocuments : 'user/get-all-documents/',
+    getNotificationCount : 'user/get-all-user-unread-notification-count/',
+    readNotifications : 'user/change-user-notification-to-read/'
 };

@@ -43,6 +43,10 @@ export class CreateprofileComponent implements OnInit {
 				confirm_account: [null, Validators.required]
 			}, { validators: MustMatch('account_number', 'confirm_account') }),
 		});
+
+		this.profileForm.get('full_name').valueChanges.subscribe(data=>{
+			this.profileForm.get('bank_details').get('account_holder_name').setValue(data);
+		})
 	}
 	ngOnInit(): void {
 		this.searchBanks();

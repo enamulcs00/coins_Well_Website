@@ -29,7 +29,7 @@
 						<img src="assets/images/auth/perfered-name.png" alt="">
 					</figure>
 				</span>
-				<input matInput type="text" formControlName="full_name" name="full_name" placeholder="Preferred Name">
+				<input matInput type="text" formControlName="full_name" name="full_name" placeholder="Full Name">
 				<mat-error *ngIf="profileForm.get('full_name')?.hasError('required')">
 					Please enter full name.
 				</mat-error>
@@ -55,7 +55,7 @@
 							<img src="assets/images/auth/address.png" alt="">
 						</figure>
 					</span>
-					<mtx-select typeToSearchText="Search bank name or IFSC code." [typeahead]="bankListEvent"
+					<mtx-select typeToSearchText="Search bank name." [typeahead]="bankListEvent"
 						[loading]="bankListLoading" loadingText="Fetching banks..."
 						notFoundText="No bank found. Try another name" [virtualScroll]="true"
 						bindLabel="Select bank name" [items]="bankList" bindLabel="name" bindValue="id"
@@ -99,7 +99,7 @@
 					</mat-error>
 				</mat-form-field>
 
-				<mat-form-field class="example-full-width" appearance="outline">
+				<!-- <mat-form-field class="example-full-width" appearance="outline">
 					<span matPrefix>
 						<figure class="input-icon">
 							<img src="assets/images/auth/address.png" alt="">
@@ -114,7 +114,7 @@
 						Account holder name has to be between 4 and 30 characters long.
 					</mat-error>
 
-				</mat-form-field>
+				</mat-form-field> -->
 
 				<mat-form-field class="example-full-width" appearance="outline">
 					<span matPrefix>
@@ -153,8 +153,11 @@
 				</mat-form-field>
 			</ng-container>
 			<div class="note">
-				<p class="note-p"><span>Note: </span>Please use your real name, because any name used now cannot be
-					changed again.</p>
+				<p class="note-p"><span>Note: </span><br/>
+					1. The account provided above must be yours and you must have access to it, please don't provide a third party account.<br/>
+					2. The name on the bank account must match the name you provided.<br/>
+					3. The bank details provided above would be used for your NAIRA withdrawals.<br/>
+				</p>
 			</div>
 			<div class="btn-outer mt-40">
 				<div id="create-profile-button" class="border-plus">

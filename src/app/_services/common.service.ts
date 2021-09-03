@@ -4,12 +4,13 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { urls } from './urls';
 import { User } from '../_models/user.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
 	providedIn: 'root'
 })
 export class CommonService {
 	cmsData: any;
+	updateNotification : BehaviorSubject<any> = new BehaviorSubject("");
 	constructor(private _http: HttpClient) { }
 
 	post(url: string, postData: any = {}) {
