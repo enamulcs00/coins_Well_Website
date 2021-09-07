@@ -32,7 +32,7 @@ export class AllComponent implements OnInit {
 		this._common.get(urls.getCryptoBalances).subscribe(data => {
 			this.withdrawRequests = data.data.filter(x => {
 				if ([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, 5].indexOf(x.currency.id) == -1) {
-					return true
+					return true;
 				} else {
 					return false;
 				}

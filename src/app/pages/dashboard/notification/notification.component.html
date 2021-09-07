@@ -3,7 +3,7 @@
 		<h2>Notifications</h2>
 		<ng-container *ngIf="notificationList.length > 0; else noDataFound">
 			<ul>
-				<li class="cursor-pointer" [class.noti-success]="noti.status == 'Completed'" [class.noti-danger]="noti.status == 'Reject'" *ngFor="let noti of notificationList" (click)="goToDetails(noti)">
+				<li class="cursor-pointer" [class.noti-success]="noti.status == 'Completed'" [class.noti-danger]="noti.status == 'Rejected'" *ngFor="let noti of notificationList" (click)="goToDetails(noti)">
 					<p class="text-header">{{ noti?.notification?.title }}</p>
 					<p class="text-message">{{ noti?.notification?.message }}</p>
 					<span class="date-text">{{ noti?.notification?.created_at | date : 'MMM dd, yyyy, hh:mm a' }}</span>
