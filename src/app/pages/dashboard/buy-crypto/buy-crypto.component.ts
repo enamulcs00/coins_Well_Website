@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Block, Loading } from 'notiflix';
+import { Block, Loading, Notify } from 'notiflix';
+import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -22,26 +23,46 @@ export class BuyCryptoComponent implements OnInit {
 	ngnValue = 500;
 	cms: any;
 	bitcoin_to_usd = 1800;
-	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
+	canBuyOrNot: boolean = true;
+	userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+	balance : any;
+	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog, private _auth: AuthService) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
-		if([environment.bitGoCurrencies.bitcoin, environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, environment.bitGoCurrencies.ERC20].indexOf(Number(this.transactionId)) == -1) {
+		if ([environment.bitGoCurrencies.bitcoin, environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney, environment.bitGoCurrencies.ERC20].indexOf(Number(this.transactionId)) == -1) {
 			this._router.navigate(['/dashboard/home/portfolio/buy']);
 		}
+		this._auth.onProfileUpdate.subscribe(() => {
+			this.userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+		})
 	}
-	
+
+	fetchCryptoBalance() {
+		Loading.circle();
+		this._common.get(urls.getBalance).subscribe(data => {
+			this.balance = data.data.amount;
+			this.addCashForm.get('ngnamount').setValidators([Validators.required, Validators.max(this.balance)])
+			this.addCashForm.get('ngnamount').markAllAsTouched();
+			Loading.remove();
+		}, _ => {
+			Loading.remove();
+		})
+	}
+
 	ngOnInit(): void {
 		this.addCashForm = this._fb.group({
 			request_type: [3],
 			request_for: [Number(this.transactionId)],
 			symbol: ['+'],
 			bitamount: [0, []],
-			amount: [0, [Validators.required,  Validators.min(0.01)]],
+			amount: [0, [Validators.required, Validators.min(100)]],
 			ngnamount: [0, [Validators.required]],
-			service_fee : [0]
+			service_fee: [0]
 		});
 
-		if(this.transactionId == 3 || this.transactionId == 4) {
-			this.addCashForm.addControl('to_wallet',new FormControl(null, [Validators.required]))
+		this.fetchCryptoBalance();
+
+		if (this.transactionId == 3 || this.transactionId == 4) {
+			this.addCashForm.addControl('to_wallet', new FormControl(null, [Validators.required]))
 		}
 
 		this.getCMS();
@@ -49,23 +70,84 @@ export class BuyCryptoComponent implements OnInit {
 			if (value == null) {
 				value = 0;
 			}
-			if(this.transactionId == 1) {
-				this.addCashForm.get("bitamount").setValue((1/this.bitcoin_to_usd) * value);
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+			if (this.transactionId == 1) {
+				this.addCashForm.get("bitamount").setValue((value / this.bitcoin_to_usd),{emitEvent: false});
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value, {emitEvent: false});
 			} else {
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value, {emitEvent: false});
 			}
+			
 		});
+
+		this.addCashForm.get("bitamount").valueChanges.subscribe(value => {
+			if (value == null) {
+				value = 0;
+			}
+			if (this.transactionId == 1) {
+				this.addCashForm.get("amount").setValue(this.bitcoin_to_usd * value,{emitEvent: false});
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * this.addCashForm.get("amount").value, {emitEvent: false});
+			} else {
+				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * this.addCashForm.get("amount").value, {emitEvent: false});
+			}
+			
+		});
+
+
+		this.addCashForm.get("ngnamount").valueChanges.subscribe(value => {
+			if (value == null) {
+				value = 0;
+			}
+			if (this.transactionId == 1) {
+				this.addCashForm.get("amount").setValue(value / this.balanceDetails?.currency?.buy_rate,{emitEvent: false});
+				this.addCashForm.get("bitamount").setValue(this.addCashForm.get("amount").value / this.bitcoin_to_usd, {emitEvent: false});
+			} else {
+				this.addCashForm.get("amount").setValue(value / this.balanceDetails?.currency?.buy_rate,{emitEvent: false});
+			}
+			
+		});
+	}
+
+	onAmountChange(e){
+		let value = this.addCashForm.get('amount').value;
+		console.log("value",value);
+		if (value == null) {
+			value = 0;
+		}
+		if (value > 100 && (this.userInfo.document_verification != 4 || this.userInfo.facial_verification != 4)) {
+			this.canBuyOrNot = false;
+		} else {
+			this.canBuyOrNot = true;
+		}
+		if (this.transactionId == 1) {
+			this.addCashForm.get("bitamount").setValue((1 / this.bitcoin_to_usd) * value);
+			this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+		} else {
+			this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+		}
+	}
+
+
+	onBitAmountChange(e){
+		let value = this.addCashForm.get('bitamount').value;
+		if (value == null) {
+			value = 0;
+		}
+		if (this.transactionId == 1) {
+			this.addCashForm.get("amount").setValue((this.bitcoin_to_usd) / value);
+			// this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+		} else {
+			// this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
+		}
 	}
 
 	getNGNrate() {
 		this._common.getCurrencyConversion().subscribe(data => {
-			if(data) {
+			if (data) {
 				this.ngnValue = this.balanceDetails?.currency?.buy_rate * data.USD_NGN;
 			}
 		})
 	}
-	
+
 
 	updateDetails(formData: any) {
 		return new Promise((resolve, reject) => {
@@ -81,14 +163,18 @@ export class BuyCryptoComponent implements OnInit {
 
 	submitDetails() {
 		if (this.addCashForm.valid) {
-			const dialogRef = this.dialog.open(ConfirmPinComponent, {
-				disableClose : true
-			});
-			dialogRef.afterClosed().subscribe(result => {
-				if(result) {
-					this.confirmed();
-				}
-			});
+			if(this.canBuyOrNot) {
+				const dialogRef = this.dialog.open(ConfirmPinComponent, {
+					disableClose: true
+				});
+				dialogRef.afterClosed().subscribe(result => {
+					if (result) {
+						this.confirmed();
+					}
+				});
+			} else {
+				Notify.failure("Please verify your account to make an order of more than 100 dollar.");
+			}
 		} else {
 			this.addCashForm.markAllAsTouched();
 		}

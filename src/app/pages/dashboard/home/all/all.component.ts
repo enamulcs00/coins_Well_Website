@@ -14,7 +14,8 @@ export class AllComponent implements OnInit {
 	baseUrl: string = environment.homeURL;
 	withdrawRequests: any;
 	balance : any;
-	constructor(private _router: Router, private _common: CommonService) { }
+	constructor(private _router: Router, private _common: CommonService) { 
+	}
 
 	ngOnInit(): void {
 		this.getCryoto();

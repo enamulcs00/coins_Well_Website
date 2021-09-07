@@ -46,7 +46,21 @@ export class WithdrawcryptoComponent implements OnInit {
 			if (value == null) {
 				value = 0;
 			}
-			this.addCashForm.get("amount").setValue(this.bitCoinPrice * value);
+			this.addCashForm.get("amount").setValue(this.bitCoinPrice * value, {
+				emitEvent: false
+			});
+			this.addCashForm.get('fee').setValue(
+				((this.addCashForm.get("amount").value * 0.15) / 100)
+			)
+		})
+
+		this.addCashForm.get("amount").valueChanges.subscribe(value => {
+			if (value == null) {
+				value = 0;
+			}
+			this.addCashForm.get("bitamount").setValue(value / this.bitCoinPrice, {
+				emitEvent: false
+			});
 			this.addCashForm.get('fee').setValue(
 				((this.addCashForm.get("amount").value * 0.15) / 100)
 			)

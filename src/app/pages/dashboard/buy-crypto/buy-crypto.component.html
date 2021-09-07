@@ -17,7 +17,7 @@
     <p class="title-text">Enter the amount</p>
     <div class="form-by my-forms currency-boxes">
         <mat-form-field class="example-full-width" appearance="fill">
-            <input currencyMask [options]="{ prefix: ' ' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount">
+            <input currencyMask [options]="{ prefix: ' ' }" matInput type="text" min="100" formControlName="amount" placeholder="Enter the amount">
             <span matPrefix>
                 <figure>
                     <i class="fa fa-dollar"></i>
@@ -27,12 +27,12 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
-                Amount should be at least 0.01;
+                Amount should be at least 100;
             </mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
-            <input currencyMask readonly  [options]="{ prefix: '', precision : 5 }" matInput type="text" min="0.01" formControlName="bitamount" placeholder="Enter the amount">
+            <input currencyMask  [options]="{ prefix: '', precision : 5 }" matInput type="text" min="100" formControlName="bitamount" placeholder="Enter the amount">
             <span matPrefix>
                 <figure>
                     <img  style="width: 27px; height: 27px; object-position: center; object-fit: contain; border-radius: 50%;" src="{{ baseUrl + balanceDetails?.currency?.logo?.media_file }}" alt="">
@@ -42,12 +42,12 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('bitamount')?.hasError('min')">
-                Amount should be at least 0.01;
+                Amount should be at least 100;
             </mat-error>
         </mat-form-field>
        
         <mat-form-field class="example-full-width" appearance="fill">
-            <input currencyMask [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="ngnamount" readonly placeholder="Enter the amount">
+            <input currencyMask [options]="{ prefix: '' }" matInput type="text" min="100" formControlName="ngnamount" placeholder="Enter the amount">
             <span matPrefix>
                 <i class="fa">₦</i>    
             </span>
@@ -55,12 +55,13 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
-                Amount should be at least 0.01;
+                Amount should be at least 100;
+            </mat-error>
+            <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
+                Amount should be less than {{ balance | number : '0.2-2' }}
             </mat-error>
         </mat-form-field>
     </div>
-    <!-- <p style="    font-size: 16px;
-    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p> -->
     <div class="exchange-rate-section">
         <p class="title">Rate : {{ balanceDetails?.currency?.buy_rate | number : '0.2-2' }}</p>
         <h3>1 BTC = {{ bitcoin_to_usd | number : '0.2-2' }} USD ({{ bitcoin_to_usd * balanceDetails?.currency?.buy_rate | number : '0.2-2' }} NGN)</h3>
@@ -91,7 +92,7 @@
     <p class="title-text">Enter the amount</p>
     <div class="form-by my-forms currency-boxes">
         <mat-form-field class="example-full-width" appearance="fill">
-            <input currencyMask  [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount">
+            <input currencyMask  [options]="{ prefix: '' }" matInput type="text" min="100" formControlName="amount" placeholder="Enter the amount">
             <span matPrefix>
                 <figure>
                     <i class="fa fa-dollar"></i>
@@ -101,11 +102,11 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
-                Amount should be at least 0.01;
+                Amount should be at least 100;
             </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
-            <input currencyMask [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="ngnamount" readonly placeholder="Enter the amount">
+            <input currencyMask [options]="{ prefix: '' }" matInput type="text" min="100" formControlName="ngnamount" placeholder="Enter the amount">
             <span matPrefix>
                 <i class="fa">₦</i>    
             </span>
@@ -113,12 +114,13 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
-                Amount should be at least 0.01;
+                Amount should be at least 100;
+            </mat-error>
+            <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
+                Amount should be less than {{ balance | number : '0.2-2' }}
             </mat-error>
         </mat-form-field>
     </div>
-    <!-- <p style="    font-size: 16px;
-    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p> -->
     <div class="exchange-rate-section">
         <p class="title">Rate : {{ balanceDetails?.currency?.buy_rate | number : '0.2-2' }}</p>
     </div>
@@ -144,7 +146,7 @@
     <p class="title-text">Enter the amount</p>
     <div class="form-by my-forms currency-boxes">
         <mat-form-field class="example-full-width" appearance="fill">
-            <input currencyMask  [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="amount" placeholder="Enter the amount">
+            <input currencyMask  [options]="{ prefix: '' }" matInput type="text" min="100" formControlName="amount" placeholder="Enter the amount">
             <span matPrefix>
                 <figure>
                     <i class="fa fa-dollar"></i>
@@ -154,11 +156,11 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
-                Amount should be at least 0.01;
+                Amount should be at least 100;
             </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
-            <input currencyMask [options]="{ prefix: '' }" matInput type="text" min="0.01" formControlName="ngnamount" readonly placeholder="Enter the amount">
+            <input currencyMask [options]="{ prefix: '' }" matInput type="text" min="100" formControlName="ngnamount" placeholder="Enter the amount">
             <span matPrefix>
                 <i class="fa">₦</i>    
             </span>
@@ -166,13 +168,13 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
-                Amount should be at least 0.01;
+                Amount should be at least 100;
+            </mat-error>
+            <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
+                Amount should be less than {{ balance | number : '0.2-2' }}
             </mat-error>
         </mat-form-field>
     </div>
-    <!-- <p *ngIf="transactionId == 3" style="font-size: 16px;
-    padding-left: 13px !important;">Service Fee : {{ (addCashForm.get('amount').value > 0 && addCashForm.get('amount').value <= 20)?100:((addCashForm.get('amount').value > 500)?3:0) }} NGN</p> -->
-    <!-- to_wallet -->
     <div class="wallet-address currency-boxes">
 		<h3 class="tp-head py-10">
 			Wallet address

@@ -58,7 +58,7 @@
 		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Confirmation <span class="badge badge-success text-white">5 Confirmations</span></li>
 
 		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Transaction ID <span>{{ 'BTC56456456456GJH' }}</span></li>
-		<li>Transaction Status <span class="green" [class.text-success]="transactionDetails?.transaction_status == 'Completed'" [class.text-danger]="transactionDetails?.transaction_status == 'Reject'" [class.text-warning]="transactionDetails?.transaction_status == 'In Progress'">{{ transactionDetails?.transaction_status }}</span></li>
+		<li>Transaction Status <span class="green" [class.text-success]="transactionDetails?.transaction_status == 'Completed'" [class.text-danger]="transactionDetails?.transaction_status == 'Rejected'" [class.text-warning]="transactionDetails?.transaction_status == 'In Progress'">{{ transactionDetails?.transaction_status }}</span></li>
 		<li>Order ID <span>{{transactionDetails?.order_id }}</span></li> 
 	</ul>
 </div>
