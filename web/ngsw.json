@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1631022914918,
+  "timestamp": 1631027508778,
   "index": "/coinswell/web/index.html",
   "assetGroups": [
     {
@@ -407,7 +407,7 @@
     "/coinswell/web/flags.007b2705c0a8f69dfdf6.png": "21572c9751e5a3dc20395befa0fcb349c32c4811",
     "/coinswell/web/flags@2x.9d5328fb490cddd43f66.png": "d6f843711c3cfe6d9a037e4c61d293f563e55802",
     "/coinswell/web/flags_sprite_2x.803fc634f571ed3c7cdb.png": "e803647907841782b9a813cd9d456316ecc1ea8d",
-    "/coinswell/web/index.html": "ed02317fe7e01b461615356692884d42422754db",
+    "/coinswell/web/index.html": "f1b4b7d91bba3432affccf6dab58f90b2d190470",
     "/coinswell/web/lnd_abtlsticon.20ee50367453851dd6ef.png": "ba242f72595f148040e3df0298f6bd15176ae33c",
     "/coinswell/web/main.42c97e7f617d82bc9c14.js": "1e670479db1f39542953cedd9f0c9a0674e8bdd5",
     "/coinswell/web/manifest.webmanifest": "77ab079239764d3fa2cda3b5d220b4bdb941c2f4",
