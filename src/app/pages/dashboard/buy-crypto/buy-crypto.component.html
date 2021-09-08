@@ -27,7 +27,7 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
-                Amount should be at least 100;
+                Amount should be at least 100.
             </mat-error>
         </mat-form-field>
 
@@ -42,7 +42,7 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('bitamount')?.hasError('min')">
-                Amount should be at least 100;
+                Amount should be at least 100.
             </mat-error>
         </mat-form-field>
        
@@ -55,10 +55,10 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
-                Amount should be at least 100;
+                Amount should be at least 100.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
-                Amount should be less than {{ balance | number : '0.2-2' }}
+                You don't have sufficient funds.
             </mat-error>
         </mat-form-field>
     </div>
@@ -102,7 +102,7 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
-                Amount should be at least 100;
+                Amount should be at least 100.
             </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -114,10 +114,10 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
-                Amount should be at least 100;
+                Amount should be at least 100.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
-                Amount should be less than {{ balance | number : '0.2-2' }}
+                You don't have sufficient funds.
             </mat-error>
         </mat-form-field>
     </div>
@@ -156,7 +156,7 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('min')">
-                Amount should be at least 100;
+                Amount should be at least 100.
             </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -168,10 +168,10 @@
                 Please enter an amount.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
-                Amount should be at least 100;
+                Amount should be at least 100.
             </mat-error>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('max')">
-                Amount should be less than {{ balance | number : '0.2-2' }}
+                You don't have sufficient funds.
             </mat-error>
         </mat-form-field>
     </div>

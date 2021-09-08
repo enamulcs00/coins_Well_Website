@@ -18,6 +18,7 @@ import { AuthGuard } from '../_gurads/auth.guard';
 import { ConfirmaccountComponent } from '../shared/confirmaccount/confirmaccount.component';
 import { UpdatephonenoComponent } from '../shared/updatephoneno/updatephoneno.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ContentShowComponent } from './content-show/content-show.component';
 const routes: Routes = [
 	{
 		path: '',
@@ -96,8 +97,14 @@ const routes: Routes = [
 				component: ContactUsComponent
 			},
 			{
-				path: ':type',
-				component: AboutusComponent,
+				path: 'content',
+				component: ContentShowComponent,
+				children : [
+					{
+						path : ':type',
+						component : AboutusComponent
+					}
+				]
 			},
 		]
 	}

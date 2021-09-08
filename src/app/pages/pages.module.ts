@@ -18,6 +18,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { MaterialCommonModule } from '../material-common/material-common.module';
 import { SharedModule } from '../shared/shared.module';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ContentShowComponent } from './content-show/content-show.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 		ChangeemailComponent,
 		EmailverifyComponent,
 		RateComponent,
-		ContactUsComponent
+		ContactUsComponent,
+		ContentShowComponent
 	],
 	imports: [
 		CommonModule,

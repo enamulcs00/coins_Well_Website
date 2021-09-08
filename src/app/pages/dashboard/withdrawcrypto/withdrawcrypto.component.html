@@ -17,7 +17,10 @@
 				Please enter an amount.
 			</mat-error>
 			<mat-error *ngIf="addCashForm.get('bitamount')?.hasError('min')">
-				Amount should be at least 0.01;
+				Amount should be at least 0.01
+			</mat-error>
+			<mat-error *ngIf="addCashForm.get('bitamount')?.hasError('max')">
+				You don't have sufficient funds.
 			</mat-error>
 		</mat-form-field>
 
@@ -56,10 +59,10 @@
 		</div>
 		<p class="fee mb-5" style="display: flex; justify-content: space-between;">
 			<span>
-				Available : {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} crypto
+				Available : $ {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} {{ balanceDetails?.currency?.name }}
 			</span>
-			<span>
-				Max : {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} crypto
+			<span (click)="fillAmount()" class="cursor-pointer">
+				Max : $ {{ (balanceDetails?.balance)?(balanceDetails?.balance | number : '0.2-6') : '0.00' }} {{ balanceDetails?.currency?.name }}
 			</span>
 		</p>
 		<p style="color: #4bc3ed;">Notes:</p>

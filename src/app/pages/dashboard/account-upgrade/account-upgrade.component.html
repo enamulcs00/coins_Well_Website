@@ -4,8 +4,8 @@
 <h3 class="text-right status-check">Status: 
 	<span *ngIf="facial_verification  == 4 && document_verification == 4" class="text-success">Verified</span>
 	<span *ngIf="facial_verification  == 3 && document_verification == 3" class="text-danger">Rejected</span>
-	<span *ngIf="facial_verification  == 2 || document_verification == 2" class="text-warning">In progress</span>
-	<span *ngIf="(facial_verification  == 1 || facial_verification == null) && (document_verification == 1  || document_verification ==  null)" class="text-info">Pending</span></h3>
+	<span *ngIf="facial_verification  == 2 || document_verification == 2" class="text-warning">Pending</span>
+	<span *ngIf="(facial_verification  == 1 || facial_verification == null) && (document_verification == 1  || document_verification ==  null)" class="text-info">Un-Verified</span></h3>
 <div class="form-bx mt-40">
 	<div class="acc-upgrade">
 		<h3>Facial Verification</h3>

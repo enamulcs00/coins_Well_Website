@@ -30,7 +30,7 @@
                 Amount should be at least 100
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('max')">
-                Amount should be less than {{ balanceDetails?.balance | number : '0.2-2' }}
+                You don't have sufficient funds.
             </mat-error>
         </mat-form-field>
 
@@ -106,7 +106,7 @@
                 Amount should be at least 100
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('max')">
-                Amount should be less than {{ balanceDetails?.balance | number : '0.2-2' }}
+                You don't have sufficient funds.
             </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
@@ -168,7 +168,7 @@
                 Amount should be at least 100
             </mat-error>
             <mat-error *ngIf="addCashForm.get('amount')?.hasError('max')">
-                Amount should be less than {{ balanceDetails?.balance | number : '0.2-2' }}
+                You don't have sufficient funds.
             </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">

@@ -1,0 +1,25 @@
+<div class="body_wrapper mb-5">
+	<div class="conta-iner pt-60">
+		<section class="ab-sec">
+			<div class="conta_iner">
+				<div class="tab-sec-layout">
+					<nav mat-tab-nav-bar class="mb-5">
+						<a mat-tab-link [routerLink]="['privacy_policy']" (click)="link = 'privacy_policy'" [active]="link == 'privacy_policy'">Privacy policy
+						</a>
+						<a mat-tab-link [routerLink]="['about_us']" (click)="link = 'about_us'"
+							[active]="link == 'about_us'">About Us
+						</a>
+						<a mat-tab-link [routerLink]="['terms_conditon']" (click)="link = 'terms_conditon'" [active]="link == 'terms_conditon' || link == 'terms_conditon'">Terms and Conditions 
+						</a>
+						<a mat-tab-link [routerLink]="['cookies']" (click)="link = 'cookies'" [active]="link == 'cookies' || link == 'cookies'">Cookies Service 
+						</a>
+                        <a mat-tab-link [routerLink]="['aml_kyc']" (click)="link = 'aml_kml'" [active]="link == 'aml_kml' || link == 'aml_kml'">AML/KYC
+						</a>
+					</nav>
+					<router-outlet></router-outlet>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+

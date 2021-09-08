@@ -67,6 +67,10 @@ export class WithdrawcryptoComponent implements OnInit {
 		})
 	}
 
+	fillAmount() {
+		this.addCashForm.get("amount").setValue(this.balanceDetails?.balance || 0);
+	}
+
 	getNGNrate() {
 		this._common.getCurrencyConversion().subscribe(data => {
 			if (data) {
@@ -120,6 +124,8 @@ export class WithdrawcryptoComponent implements OnInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
 			this.balanceDetails = data.data;
+			this.addCashForm.get('bitamount').setValidators([Validators.required, Validators.min(0.00000000000000001), Validators.max(this.balanceDetails.balance)])
+			this.addCashForm.get('bitamount').updateValueAndValidity();
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {

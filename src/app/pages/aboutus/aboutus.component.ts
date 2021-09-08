@@ -15,9 +15,9 @@ export class AboutusComponent implements OnInit {
 		this.type = this.route.snapshot.paramMap.get('type');
 		this.route.params.subscribe(() => {
 			this.type = this.route.snapshot.paramMap.get('type');
-			if (['about_us', 'terms_conditon', 'privacy_policy','features'].indexOf(this.type) == -1) {
-				this._router.navigate(['/auth/login']);
-			}
+			// if (['about_us', 'terms_conditon', 'privacy_policy','features'].indexOf(this.type) == -1) {
+			// 	this._router.navigate(['/auth/login']);
+			// }
 			this.ngOnInit();
 		})
 	}
@@ -27,6 +27,7 @@ export class AboutusComponent implements OnInit {
 	}
 
 	fetchCMS() {
+		console.log("Its working");
 		this._common.getCMS(urls.getCMS).subscribe(data => {
 			this.cmsContent = data;
 		})
