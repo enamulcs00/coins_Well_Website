@@ -12,7 +12,10 @@
 							<div class="tsl-main">
 								<div class="tsl-left">
 									<figure>
-										<img style=" height: 60px; width: 60px; border-radius: 50%; object-fit: contain;" src="{{ baseUrl + tran?.image }}">
+										<img style=" height: 60px; width: 60px; border-radius: 50%; object-fit: contain;" *ngIf="tran?.image else elseImageNot;" class="h-profile-img" [src]="baseUrl + tran?.image" alt="{{ (tran?.used_by_name)?tran?.used_by_name:'N/A' }}">
+										<ng-template #elseImageNot>
+											<img style=" height: 60px; width: 60px; border-radius: 50%; object-fit: contain;" class="h-profile-img" [src]="'assets/images/hm-feature.png'" alt="{{ (tran?.used_by_name)?tran?.used_by_name:'N/A' }}">
+										</ng-template>
 									</figure>
 								</div>
 								<div class="tsl-right">
