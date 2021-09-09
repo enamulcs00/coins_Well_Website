@@ -53,7 +53,7 @@
 
 		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Receiving Wallet <span>{{ transactionDetails?.from_wallet || 'N/A' }}</span></li>
 
-		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Fee <span>{{ 0 }}</span></li>
+		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Fee <span>{{ transactionDetails?.fee }}</span></li>
 
 		<li *ngIf="[1,2,3,4,6,7,8,9].indexOf(transactionDetails?.currency?.id) != -1 && (transactionDetails?.type_of_transaction =='Withdraw')">Confirmation <span class="badge badge-success text-white">5 Confirmations</span></li>
 
