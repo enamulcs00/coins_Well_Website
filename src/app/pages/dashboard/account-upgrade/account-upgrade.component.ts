@@ -195,7 +195,7 @@ export class AccountUpgradeComponent implements OnInit {
 	}
 
 	submitFacialRequest(formData: any) {
-		this._common.put(urls.facialVerification, formData).subscribe(() => {
+		this._common.put(urls.updateDocuments, formData).subscribe(() => {
 			Block.remove('#submit-documents');
 			Notify.success("Facial Verification request submitted successfully.");
 			this._router.navigate(['/dashboard']);
