@@ -18,6 +18,12 @@
 			</p>
 		</div>
 
+		<div *ngIf="facial_verification == 3">
+			<p class="text-danger">
+				{{ facialUrl?.rejected_reasons[0][''] }}
+			</p>
+		</div>
+
 		<ng-template #elseBlock>
 			<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
 				class="d-none">
