@@ -28,7 +28,7 @@ export class LeftSidebarComponent implements OnInit {
 	logoutMe() {
 		Confirm.show('Logout', 'Do you want to logout ?', 'Yes', 'No', () => {
 			localStorage.removeItem(environment.storageKey);
-			this.router.navigate(['/auth']);
+			this.router.navigate(['/landingpage']);
 		}, () => {
 			// No button callbackalert('If you say so...');
 		});
