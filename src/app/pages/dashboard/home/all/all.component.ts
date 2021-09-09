@@ -14,6 +14,7 @@ export class AllComponent implements OnInit {
 	baseUrl: string = environment.homeURL;
 	withdrawRequests: any;
 	balance : any;
+	bitCoinPrice: number = 1800;
 	constructor(private _router: Router, private _common: CommonService) { 
 	}
 
@@ -37,6 +38,11 @@ export class AllComponent implements OnInit {
 					return false;
 				}
 			});
+			this.withdrawRequests = this.withdrawRequests.map(x=>{
+				x['bitBalance'] = x.balance / this.bitCoinPrice;
+				return x;
+			});
+			console.log("this.withdrawRequests",this.withdrawRequests);
 			Loading.remove();
 		}, _ => {
 			Loading.remove();

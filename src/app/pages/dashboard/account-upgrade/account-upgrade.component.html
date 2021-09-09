@@ -4,8 +4,11 @@
 <h3 class="text-right status-check">Status: 
 	<span *ngIf="facial_verification  == 4 && document_verification == 4" class="text-success">Verified</span>
 	<span *ngIf="facial_verification  == 3 && document_verification == 3" class="text-danger">Rejected</span>
-	<span *ngIf="facial_verification  == 2 || document_verification == 2" class="text-warning">Pending</span>
-	<span *ngIf="(facial_verification  == 1 || facial_verification == null) && (document_verification == 1  || document_verification ==  null)" class="text-info">Un-Verified</span></h3>
+	<span *ngIf="(facial_verification  == 1 &&  facial_verification == null) && (document_verification == 1  &&  document_verification ==  null)" class="text-info">Un-Verified</span>
+	<span *ngIf="(facial_verification  == 2 || document_verification == 2) || (facial_verification == 3 && document_verification == 4) || (facial_verification == 4 && document_verification == 3)" class="text-warning">Pending</span>
+
+</h3>
+
 <div class="form-bx mt-40">
 	<div class="acc-upgrade">
 		<h3>Facial Verification</h3>
@@ -18,12 +21,6 @@
 			</p>
 		</div>
 
-		<div *ngIf="facial_verification == 3">
-			<p class="text-danger">
-				{{ facialUrl?.rejected_reasons[0][''] }}
-			</p>
-		</div>
-
 		<ng-template #elseBlock>
 			<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
 				class="d-none">
@@ -33,6 +30,11 @@
 				object-fit: cover;" src="assets/images/scan.png" alt="">
 				<img *ngIf="facialVerificationImageUrl" [src]="facialVerificationImageUrl" alt="">
 			</figure>
+			<div *ngIf="facial_verification == 3">
+				<p class="text-danger">
+					<b>Rejected : </b>{{ facialUrl?.rejected_reasons[0]['description'] }}
+				</p>
+			</div>
 	
 			<figure style="position: relative;" *ngIf="selfieType == 'video'" class="m-auto cursor-pointer">
 				<webcam width="300" height="300" [mirrorImage]="'never'" [trigger]="trigger" (initError)="handleInitError($event)" (imageCapture)="handleImage($event)"></webcam>
@@ -59,13 +61,14 @@
 		<p style="line-height: 22px;">1. Driving License</p>
 		<p style="line-height: 22px;">2. Voter Card</p>
 		<p style="line-height: 22px;">3. International Passport</p>
-		<p style="line-height: 22px;">4. National ID</p>
+		<p style="line-height: 22px;">4. National ID</p>		
 
 		<div *ngIf="document_verification == 4; else elseBlockDocument" class="documents-verified">
 			<p class="text-success h3">
 				Verified
 			</p>
 		</div>
+	
 		<ng-template #elseBlockDocument>
 			<div class="documents-upload-bx">
 				<div class="upload-bx cursor-pointer" *ngFor="let doc of documents; let i = index;"
@@ -73,6 +76,11 @@
 					<div class="plus-icon cursor-pointer">+</div>
 					<input #file (change)="preview(file.files, i)" type="file" accept="image/*">
 				</div>
+			</div>
+			<div *ngIf="document_verification == 3">
+				<p class="text-danger">
+					<b>Rejected : </b>{{ otherDocument?.rejected_reasons[0]['description'] }}
+				</p>
 			</div>
 			<h3>Note</h3>
 			<p style="line-height: 22px;">Kindly upload a Valid document and perform the facial verification correctly.</p>

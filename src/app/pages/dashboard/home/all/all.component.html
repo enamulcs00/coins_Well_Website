@@ -19,8 +19,9 @@
                         </div>
                     </div>
                 </li>
-                <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/withdrawcryto/{{ withdraw?.currency?.id }}" class="cursor-pointer">
+                <li *ngFor="let withdraw of withdrawRequests" routerLink="/dashboard/withdrawcryto/{{ withdraw?.currency?.id }}" class="card-each cursor-pointer">
                     <div class="wb-box">
+                        <p class="balance-bit" *ngIf="withdraw?.bitBalance" >{{ withdraw?.bitBalance | number : '0.2-6' }}</p>
                         <figure>
                             <img style="height: 70px; width: 70px; object-fit: cover;" src="{{ baseUrl + withdraw?.currency?.logo?.media_file }}">
                         </figure>

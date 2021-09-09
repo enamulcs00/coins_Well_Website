@@ -1,0 +1,11 @@
+.card-each {
+    position: relative;
+    .balance-bit {
+        position: absolute;
+        right: 0;
+        font-size: 14px;
+        color:  #212529;
+        padding-right: 10px;
+        font-weight: 500;
+    }
+}

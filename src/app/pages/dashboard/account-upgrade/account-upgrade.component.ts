@@ -213,7 +213,7 @@ export class AccountUpgradeComponent implements OnInit {
 			if (this.facialUrl) {
 				this.facialVerificationImageUrl = environment.homeURL + this.facialUrl.document.media_file;
 			}
-
+			console.log("data.data.documents",data.data.documents);
 			this.otherDocument = data.data.documents.find((x: { document_type: number; }) => x.document_type == 2);
 			if (this.otherDocument) {
 				this.documents[0]['base64'] = environment.homeURL + this.otherDocument.document.media_file;
