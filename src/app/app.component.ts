@@ -27,6 +27,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 				this.serviceWorkerAttempt++;
 				if (swr != undefined) {
 					firebase.messaging().useServiceWorker(swr);
+					setTimeout(() => {
+						this.permitToNotify();
+					}, 2000)
 				} else {
 					if (this.serviceWorkerAttempt > 0 && this.serviceWorkerAttempt < 20) {
 						setInt();
@@ -54,6 +57,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	permitToNotify() {
+		const messaging = firebase.messaging();
+		messaging.onMessage(()=>{
+			alert("From App Component");
+		})
 	}
 
 	listenEvents() {

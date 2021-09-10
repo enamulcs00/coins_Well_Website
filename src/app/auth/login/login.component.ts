@@ -42,42 +42,48 @@ export class LoginComponent implements OnInit {
 			this.loginForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}
 		if (this.loginForm.valid) {
-
-			const messaging = firebase.messaging();
-			console.log("messaging", messaging);
-			messaging
+			if (this.recpach) {
+				const sumitFrm = () => {
+					const formData = this.loginForm.value;
+					delete formData.full_phone;
+					formData['device-token'] = this._auth.firebaseToken;
+					formData['device-type'] = "WEB";
+					this._auth.login(formData).subscribe(res => {
+						Block.remove('#login-button');
+						if (res.data.is_profile_setup) {
+							localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
+							Notify.success("Logged in successfully.");
+							this.router.navigate(['/dashboard']);
+						} else {
+							this._auth.userId = res.data.id;
+							this.router.navigate(['/auth/emailid']);
+						}
+					}, _ => {
+						Block.remove('#login-button');
+					})
+				} 
+				Block.circle('#login-button');
+				const messaging = firebase.messaging();
+				messaging
 				.requestPermission()
 				.then(() =>
-					messaging.getToken().then((token: any) => {
-						console.log("token", token);
-						this._auth.firebaseToken = token;
-						if (this.recpach) {
-							Block.circle('#login-button');
-							const formData = this.loginForm.value;
-							delete formData.full_phone;
-							formData['device-token'] = this._auth.firebaseToken;
-							formData['device-type'] = "WEB";
-							this._auth.login(formData).subscribe(res => {
-								Block.remove('#login-button');
-								if (res.data.is_profile_setup) {
-									localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
-									Notify.success("Logged in successfully.");
-									this.router.navigate(['/dashboard']);
-								} else {
-									this._auth.userId = res.data.id;
-									this.router.navigate(['/auth/emailid']);
-								}
-							}, _ => {
-								Block.remove('#login-button');
-							})
-						} else {
-							Notify.failure("Fill the captcha first.");
-						}
-					})
+					{
+						messaging.getToken().then((token: any) => {
+							this._auth.firebaseToken = token;
+							sumitFrm();
+						})
+						messaging.onMessage(()=>{
+							alert();
+						})
+					}
 				)
 				.catch((error: any) => {
-					console.log("Unable to get permission to notify.", error);
+					Notify.failure("Unable to get permission to notify.");
+					sumitFrm();
 				});
+			} else {
+				Notify.failure("Fill the captcha first.");
+			}
 		} else {
 			this.loginForm.markAllAsTouched();
 		}
