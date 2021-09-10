@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit {
 				Block.circle('#login-button');
 					const formData = this.loginForm.value;
 					delete formData.full_phone;
-					formData['token'] = this._auth.firebaseToken;
-					formData['device_type'] = "WEB";
+					formData['device-token'] = this._auth.firebaseToken;
 					this._auth.login(formData).subscribe(res => {
 						Block.remove('#login-button');
 						if (res.data.is_profile_setup) {

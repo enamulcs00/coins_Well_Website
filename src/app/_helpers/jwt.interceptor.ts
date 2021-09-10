@@ -9,13 +9,15 @@ export class JwtInterceptor implements HttpInterceptor {
         let currentUser = JSON.parse(localStorage.getItem(environment.storageKey));
         if (currentUser && currentUser.token) {
             //For our request to server
+            let requestTemp = {
+                'device-type' : 'WEB',
+            };
             if(request.url.match(environment.baseUrl)) {
-                request = request.clone({
-                    setHeaders: {
-                        Authorization: `Bearer ${currentUser.token}`,
-                    }
-                });
+                requestTemp['Authorization'] = `Bearer ${currentUser.token}`;
             }
+            request = request.clone({
+                setHeaders: requestTemp
+            });
             
             //For bitgo APIs request
             if(request.url.match(environment.bitGoUrl)) {

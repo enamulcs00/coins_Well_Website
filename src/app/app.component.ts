@@ -71,9 +71,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 				console.log("Unable to get permission to notify.");
 			});
 
-		messaging.onMessage((message) => {
-			console.log("Message", message);
-		})
+		// messaging.onMessage((message) => {
+		// 	console.log("Message", message);
+		// })
 
 	}
 
