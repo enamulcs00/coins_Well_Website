@@ -1825,3 +1825,15 @@ input:read-only {
 		line-height: inherit !important;
 	}
 }
+
+
+.contn_show_wrap .mat-tab-links {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.contn_show_wrap {
+    min-height: 500px;
+}

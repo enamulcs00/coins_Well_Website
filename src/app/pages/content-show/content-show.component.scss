@@ -1,8 +1,13 @@
 .mat-tab-nav-bar, .mat-tab-header {
     border: navajowhite;
 }
-.mat-tab-link {
-    color: #000;
+.mat-tab-link.mat-tab-label-active{
+    background-color: #17C2EC !important;
+    color: #fff;
+    border-color: #17c2ec;
+}
+.mat-tab-link{
+    color: #999;
     opacity: 1;
     padding: 14px 13px;
     background: #fff;
@@ -11,8 +16,5 @@
     border-radius: 8px;
     cursor: pointer;
     margin-right: 10px;
-}
-.mat-tab-link.mat-tab-label-active {
-    background-color: #17C2EC !important;
-    color: #fff;
+    border: solid 1px #dcdcdc;
 }
