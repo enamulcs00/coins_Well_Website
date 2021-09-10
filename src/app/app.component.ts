@@ -63,7 +63,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			.requestPermission()
 			.then(() =>
 				messaging.getToken().then((token: any) => {
-					console.log("token", token);
+					// console.log("token", token);
 					this._auth.firebaseToken = token;
 				})
 			)
