@@ -24,6 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		firebase.initializeApp(environment.firebaseConfig);
 		const setInt = () => {
 			navigator.serviceWorker.getRegistration().then((swr: any) => {
+				console.log("swr",swr);
 				this.serviceWorkerAttempt++;
 				if (swr != undefined) {
 					firebase.messaging().useServiceWorker(swr);
