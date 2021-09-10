@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { environment } from 'src/environments/environment';
-
+import firebase from "firebase/app";
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	selectedCountry: any;
 	hide = true;
-	recpach : boolean = false;
+	recpach: boolean = false;
 	@ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
 	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder) { }
 
@@ -37,33 +37,47 @@ export class LoginComponent implements OnInit {
 
 	loginNow() {
 		if (this.loginForm.get('full_phone').value) {
-			let phones = this.loginForm.get('full_phone').value.split('+'+this.selectedCountry.dialCode);
+			let phones = this.loginForm.get('full_phone').value.split('+' + this.selectedCountry.dialCode);
 			this.loginForm.get('phone_number').setValue(phones[1]);
 			this.loginForm.get('country_code').setValue('+' + this.selectedCountry.dialCode);
 		}
 		if (this.loginForm.valid) {
-			if(this.recpach) {
-				Block.circle('#login-button');
-					const formData = this.loginForm.value;
-					delete formData.full_phone;
-					formData['device-token'] = this._auth.firebaseToken;
-					formData['device-type'] = "WEB";
-					this._auth.login(formData).subscribe(res => {
-						Block.remove('#login-button');
-						if (res.data.is_profile_setup) {
-							localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
-							Notify.success("Logged in successfully.");
-							this.router.navigate(['/dashboard']);
+
+			const messaging = firebase.messaging();
+			console.log("messaging", messaging);
+			messaging
+				.requestPermission()
+				.then(() =>
+					messaging.getToken().then((token: any) => {
+						console.log("token", token);
+						this._auth.firebaseToken = token;
+						if (this.recpach) {
+							Block.circle('#login-button');
+							const formData = this.loginForm.value;
+							delete formData.full_phone;
+							formData['device-token'] = this._auth.firebaseToken;
+							formData['device-type'] = "WEB";
+							this._auth.login(formData).subscribe(res => {
+								Block.remove('#login-button');
+								if (res.data.is_profile_setup) {
+									localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
+									Notify.success("Logged in successfully.");
+									this.router.navigate(['/dashboard']);
+								} else {
+									this._auth.userId = res.data.id;
+									this.router.navigate(['/auth/emailid']);
+								}
+							}, _ => {
+								Block.remove('#login-button');
+							})
 						} else {
-							this._auth.userId = res.data.id;
-							this.router.navigate(['/auth/emailid']);
+							Notify.failure("Fill the captcha first.");
 						}
-					}, _ => {
-						Block.remove('#login-button');
 					})
-			} else {
-				Notify.failure("Fill the captcha first.");
-			}
+				)
+				.catch((error: any) => {
+					console.log("Unable to get permission to notify.", error);
+				});
 		} else {
 			this.loginForm.markAllAsTouched();
 		}
@@ -73,7 +87,7 @@ export class LoginComponent implements OnInit {
 		window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
 			'sitekey': environment.googleSiteKey,
 			'callback': (response) => {
-				if(response) {
+				if (response) {
 					this.recpach = true;
 				}
 			}

@@ -27,9 +27,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 				this.serviceWorkerAttempt++;
 				if (swr != undefined) {
 					firebase.messaging().useServiceWorker(swr);
-					setTimeout(() => {
-						this.permitToNotify();
-					}, 2000)
 				} else {
 					if (this.serviceWorkerAttempt > 0 && this.serviceWorkerAttempt < 20) {
 						setInt();
@@ -57,24 +54,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	permitToNotify() {
-		const messaging = firebase.messaging();
-		console.log("messaging", messaging);
-		messaging
-			.requestPermission()
-			.then(() =>
-				messaging.getToken().then((token: any) => {
-					// console.log("token", token);
-					this._auth.firebaseToken = token;
-				})
-			)
-			.catch((_: any) => {
-				console.log("Unable to get permission to notify.");
-			});
-
-		// messaging.onMessage((message) => {
-		// 	console.log("Message", message);
-		// })
-
 	}
 
 	listenEvents() {
