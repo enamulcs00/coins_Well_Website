@@ -19,12 +19,14 @@ import { ConfirmaccountComponent } from '../shared/confirmaccount/confirmaccount
 import { UpdatephonenoComponent } from '../shared/updatephoneno/updatephoneno.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ContentShowComponent } from './content-show/content-show.component';
+import { CompanyTypeComponent } from './company-type/company-type.component';
 const routes: Routes = [
 	{
 		path: '',
 		redirectTo: '/landingpage',
 		pathMatch: 'full',
 	},
+	
 	{
 		path: '',
 		component: WithoutheaderComponent,
@@ -76,6 +78,10 @@ const routes: Routes = [
 		component: FullComponent,
 		children: [
 			{
+				path: 'companyType',
+				component: CompanyTypeComponent
+			},
+			{
 				path: 'landingpage',
 				component: LandingpageComponent
 			},
@@ -98,14 +104,10 @@ const routes: Routes = [
 			},
 			{
 				path: 'content',
-				component: ContentShowComponent,
-				children : [
-					{
-						path : ':type',
-						component : AboutusComponent
-					}
-				]
+				component: ContentShowComponent
 			},
+		
+			
 		]
 	}
 ];
