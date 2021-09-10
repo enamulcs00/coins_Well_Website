@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { urls } from './urls';
-import { User } from '../_models/user.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
 	providedIn: 'root'
@@ -80,14 +79,7 @@ export class CommonService {
 			}));
 	}
 
-	//Custom  data for models binding start here
-	fetchUsers() {
-		return this._http.get<any>(`${environment.baseUrl}${urls.users}`)
-			.pipe(map((data: any) => {
-				return data.map((user: User) => new User().deserialize(user));
-			}));
-	}
-
+	
 	uploadMedia(formData) {
 		return this._http.post<any>(`${environment.baseUrl}upload/media/`, formData)
 			.pipe(map((data: any) => {

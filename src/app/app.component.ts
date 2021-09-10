@@ -15,7 +15,7 @@ import { SwPush, SwUpdate } from '@angular/service-worker';
 export class AppComponent implements AfterViewInit, OnInit {
 	title = 'coinswellWeb';
 	serviceWorkerAttempt = 0;
-	constructor(private _common: CommonService, private _auth: AuthService, updates: SwUpdate, push: SwPush) {
+	constructor(private _common: CommonService, private _auth: AuthService, public updates: SwUpdate, public push: SwPush) {
 		this.loadFiles();
 		this.fetchInfo();
 		
@@ -36,22 +36,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 			});
 		};
 		setInt();
-		updates.available.subscribe((_) =>
-			updates.activateUpdate().then(() => {
-				// console.log("reload for update");
-				document.location.reload();
-			})
-		);
-		push.messages.subscribe((msg) => {
-			console.log("push message", msg);
-		});
-		push.notificationClicks.subscribe((click) => {
-			console.log("notification click", click);
-		});
-		self.addEventListener("notificationclick", function (event: any) {
-			console.log("Not Working");
-			event.notification.close();
-		});
 	}
 
 	permitToNotify() {
@@ -61,11 +45,31 @@ export class AppComponent implements AfterViewInit, OnInit {
 			.then(() =>
 				messaging.getToken().then((token: any) => {
 					this._auth.firebaseToken = token;
+					this.listenEvents()
 				})
 			)
 			.catch((_: any) => {
 				console.log("Unable to get permission to notify.");
 			});
+	}
+
+	listenEvents() {
+		this.updates.available.subscribe((_) =>
+			this.updates.activateUpdate().then(() => {
+				// console.log("reload for update");
+				document.location.reload();
+			})
+		);
+		this.push.messages.subscribe((msg) => {
+			console.log("push message", msg);
+		});
+		this.push.notificationClicks.subscribe((click) => {
+			console.log("notification click", click);
+		});
+		self.addEventListener("notificationclick", function (event: any) {
+			console.log("Not Working");
+			event.notification.close();
+		});
 	}
 
 	fetchInfo() {
