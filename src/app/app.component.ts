@@ -70,6 +70,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 			.catch((_: any) => {
 				console.log("Unable to get permission to notify.");
 			});
+
+			messaging.onMessage((message)=>{
+				console.log("Message", message);
+			})
+
 	}
 
 	listenEvents() {
