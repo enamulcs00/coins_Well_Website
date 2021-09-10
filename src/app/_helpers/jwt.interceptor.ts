@@ -10,7 +10,7 @@ export class JwtInterceptor implements HttpInterceptor {
         if (currentUser && currentUser.token) {
             //For our request to server
             let requestTemp = {
-                'device-type' : 'WEB',
+                // 'device-type' : 'WEB',
             };
             if(request.url.match(environment.baseUrl)) {
                 requestTemp['Authorization'] = `Bearer ${currentUser.token}`;
