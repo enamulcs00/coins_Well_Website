@@ -49,6 +49,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			console.log("notification click", click);
 		});
 		self.addEventListener("notificationclick", function (event: any) {
+			console.log("Not Working");
 			event.notification.close();
 		});
 	}
