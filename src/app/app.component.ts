@@ -18,26 +18,26 @@ export class AppComponent implements AfterViewInit, OnInit {
 	constructor(private _common: CommonService, private _auth: AuthService, public updates: SwUpdate, public push: SwPush) {
 		this.loadFiles();
 		this.fetchInfo();
-		
+
 		//Check if user is logged in or not.
 		navigator.serviceWorker.register("ngsw-worker.js");
 		firebase.initializeApp(environment.firebaseConfig);
 		const setInt = () => {
 			navigator.serviceWorker.getRegistration().then((swr: any) => {
-				console.log("swr",swr);
 				this.serviceWorkerAttempt++;
 				if (swr != undefined) {
 					firebase.messaging().useServiceWorker(swr);
-					this.permitToNotify();
+					setTimeout(() => {
+						this.permitToNotify();
+					}, 2000)
 				} else {
-					if (this.serviceWorkerAttempt > 0 && this.serviceWorkerAttempt < 3) {
+					if (this.serviceWorkerAttempt > 0 && this.serviceWorkerAttempt < 20) {
 						setInt();
 					}
 				}
 			});
 		};
 		setInt();
-		console.log("ssssss");
 		updates.available.subscribe((_) =>
 			updates.activateUpdate().then(() => {
 				// console.log("reload for update");
@@ -63,7 +63,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			.requestPermission()
 			.then(() =>
 				messaging.getToken().then((token: any) => {
-					console.log("token",token);
+					console.log("token", token);
 					this._auth.firebaseToken = token;
 				})
 			)
@@ -71,14 +71,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 				console.log("Unable to get permission to notify.");
 			});
 
-			messaging.onMessage((message)=>{
-				console.log("Message", message);
-			})
+		messaging.onMessage((message) => {
+			console.log("Message", message);
+		})
 
 	}
 
 	listenEvents() {
-		
+
 	}
 
 	fetchInfo() {
@@ -104,7 +104,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			showOnlyTheLastOne: true,
 			messageMaxLength: 50000,
 			width: '300px',
-			zindex : 999999
+			zindex: 999999
 		})
 		Loading.init({
 			svgColor: '#17C2EC'
