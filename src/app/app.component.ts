@@ -45,13 +45,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 			})
 		);
 		push.messages.subscribe((msg) => {
-			console.log("push message", msg);
+			this._common.updateNotification.next("");
+			// console.log("push message", msg);
 		});
 		push.notificationClicks.subscribe((click) => {
-			console.log("notification click", click);
+			// console.log("notification click", click);
 		});
 		self.addEventListener("notificationclick", function (event: any) {
-			console.log("Not Working");
+			// console.log("Not Working");
 			event.notification.close();
 		});
 	}
@@ -59,7 +60,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 	permitToNotify() {
 		const messaging = firebase.messaging();
 		messaging.onMessage(()=>{
-			alert("From App Component");
 		})
 	}
 

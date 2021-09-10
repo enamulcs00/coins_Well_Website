@@ -21,6 +21,9 @@ export class NotificationComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getTransactions();
+		this._common.updateNotification.subscribe(dta=>{
+			this.getTransactions();
+		})
 	}
 
 	onPageChange(event) {

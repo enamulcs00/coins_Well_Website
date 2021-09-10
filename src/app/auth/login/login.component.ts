@@ -73,7 +73,6 @@ export class LoginComponent implements OnInit {
 							sumitFrm();
 						})
 						messaging.onMessage(()=>{
-							alert();
 						})
 					}
 				)
