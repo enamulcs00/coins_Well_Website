@@ -36,16 +36,34 @@ export class AppComponent implements AfterViewInit, OnInit {
 			});
 		};
 		setInt();
+		console.log("ssssss");
+		updates.available.subscribe((_) =>
+			updates.activateUpdate().then(() => {
+				// console.log("reload for update");
+				document.location.reload();
+			})
+		);
+		push.messages.subscribe((msg) => {
+			console.log("push message", msg);
+		});
+		push.notificationClicks.subscribe((click) => {
+			console.log("notification click", click);
+		});
+		self.addEventListener("notificationclick", function (event: any) {
+			console.log("Not Working");
+			event.notification.close();
+		});
 	}
 
 	permitToNotify() {
 		const messaging = firebase.messaging();
+		console.log("messaging", messaging);
 		messaging
 			.requestPermission()
 			.then(() =>
 				messaging.getToken().then((token: any) => {
+					console.log("token",token);
 					this._auth.firebaseToken = token;
-					this.listenEvents()
 				})
 			)
 			.catch((_: any) => {
@@ -54,22 +72,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	listenEvents() {
-		this.updates.available.subscribe((_) =>
-			this.updates.activateUpdate().then(() => {
-				// console.log("reload for update");
-				document.location.reload();
-			})
-		);
-		this.push.messages.subscribe((msg) => {
-			console.log("push message", msg);
-		});
-		this.push.notificationClicks.subscribe((click) => {
-			console.log("notification click", click);
-		});
-		self.addEventListener("notificationclick", function (event: any) {
-			console.log("Not Working");
-			event.notification.close();
-		});
+		
 	}
 
 	fetchInfo() {
