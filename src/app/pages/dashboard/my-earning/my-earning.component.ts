@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class MyEarningComponent implements OnInit {
 	transactionList: any = [];
 	baseUrl: string = environment.homeURL;
-	finalEarning : any = 0;
+	finalEarning: any = 0;
 	constructor(private _common: CommonService) { }
 
 	ngOnInit(): void {
@@ -22,12 +22,12 @@ export class MyEarningComponent implements OnInit {
 	getTransactions(_page = 1) {
 		Loading.circle();
 		this._common.get(urls.getEarnigs).subscribe(data => {
-			const reducer = (accumulator, currentValue) => accumulator + currentValue;
-			this.transactionList = (data.data != null)?data.data:[];
-			var temps = this.transactionList.map(x=> {
+			const reducer = (accumulator, currentValue) => Number(accumulator) + Number(currentValue);
+			this.transactionList = (data.data != null) ? data.data : [];
+			var temps = this.transactionList.map(x => {
 				return x.amount;
 			});
-			if(temps.length > 0 ){
+			if (temps.length > 0) {
 				this.finalEarning = temps.reduce(reducer);
 			} else {
 				this.finalEarning = 0;

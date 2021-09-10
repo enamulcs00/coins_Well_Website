@@ -42,7 +42,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 				document.location.reload();
 			})
 		);
-		push.messages.subscribe((msg) => console.log("push message", msg));
+		push.messages.subscribe((msg) => {
+			console.log("push message", msg);
+		});
 		push.notificationClicks.subscribe((click) => {
 			console.log("notification click", click);
 		});
@@ -57,7 +59,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 			.requestPermission()
 			.then(() =>
 				messaging.getToken().then((token: any) => {
-					console.log("Token",token);
 					this._auth.firebaseToken = token;
 				})
 			)
