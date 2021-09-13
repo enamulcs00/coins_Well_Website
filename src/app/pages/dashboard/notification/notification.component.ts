@@ -21,9 +21,6 @@ export class NotificationComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getTransactions();
-		// this._common.updateNotification.subscribe(dta=>{
-		// 	this.getTransactions();
-		// })
 	}
 
 	onPageChange(event) {
@@ -39,7 +36,6 @@ export class NotificationComponent implements OnInit {
 			this.notificationList = data.data;
 			this.length = data.recordsTotal;
 			Loading.remove();
-
 			this._common.post(urls.readNotifications,{
 				"is_read" : true
 			}).subscribe(data=>{

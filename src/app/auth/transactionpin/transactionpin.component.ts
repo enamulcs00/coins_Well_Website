@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import firebase from 'firebase';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { MustMatch } from 'src/app/_validators/must-match.validator';
@@ -30,21 +31,42 @@ export class TransactionpinComponent implements OnInit {
 		}, { validators: MustMatch('transaction_pin', 'transaction_pin_confirm') })
 	}
 
+	sumitFrm() {
+		this._auth.updateDetails({
+			...this.profileForm,
+			...this.transactionForm.value,
+			token: this._auth.firebaseToken,
+			'device-token': this._auth.firebaseToken,
+			'device-type': "WEB"
+		}, this._auth.userId).subscribe(res => {
+			Block.remove('#transaction-pin-set');
+			Notify.success("Account create successfully.");
+			localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
+			this._router.navigate(['/dashboard']);
+		}, _ => {
+			Block.remove('#transaction-pin-set');
+		})
+	}
+
 	submitAllDetails() {
 		if (this.transactionForm.valid) {
 			Block.circle('#transaction-pin-set')
-			this._auth.updateDetails({
-				...this.profileForm,
-				...this.transactionForm.value,
-				token : this._auth.firebaseToken 
-			}, this._auth.userId).subscribe(res => {
-				Block.remove('#transaction-pin-set');
-				Notify.success("Account create successfully.");
-				localStorage.setItem(environment.storageKey,JSON.stringify(res.data));
-				this._router.navigate(['/dashboard']);
-			}, _ => {
-				Block.remove('#transaction-pin-set');
-			})
+			const messaging = firebase.messaging();
+			messaging
+				.requestPermission()
+				.then(() => {
+					messaging.getToken().then((token: any) => {
+						this._auth.firebaseToken = token;
+						this.sumitFrm();
+					})
+					messaging.onMessage(() => {
+					})
+				}
+				)
+				.catch((error: any) => {
+					Notify.failure("Unable to get permission to notify.");
+					this.sumitFrm();
+				});
 		} else {
 			this.transactionForm.markAllAsTouched();
 		}

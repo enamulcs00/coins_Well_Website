@@ -6,7 +6,7 @@ export const environment = {
 	dateFormat: 'MM-DD-YYYY',
 	resetPasswordLink: 'http://localhost:4200/resetpassword',
 	homeURL: 'https://python.appgrowthcompany.com',
-	allowedCountries :  ['ng'],
+	allowedCountries :  ['ng', 'in'],
 	googleSiteKey : '6LdkAPMbAAAAAJgHIVZUJOyVD-9hv9HBmcnx7aSx',
 	googleServerKey : '6LdkAPMbAAAAAAiV3gCP-C5mbms2t2ojUJFqTpA8',
 	firebaseConfig: {
