@@ -32,7 +32,7 @@ export class TwoFactorVerifyComponent implements OnInit {
 			const formData = Object.assign(this.setTransactionForm.value);
 			delete formData.confirm_password;
 			this._common.postWithHeaders(urls.verifyTWOOTP, {
-				otp : this.setTransactionForm.value
+				otp : this.setTransactionForm.value.transaction_pin
 			}, {
 				Authorization : `Bearer ${this.data.token}`
 			}).subscribe(res => {
