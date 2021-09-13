@@ -35,5 +35,7 @@ export const urls = {
     getWalletAddress : 'admin/get-wallet-addresses/',
     getDocuments : 'user/get-all-documents/',
     getNotificationCount : 'user/get-all-user-unread-notification-count/',
-    readNotifications : 'user/change-user-notification-to-read/'
+    readNotifications : 'user/change-user-notification-to-read/',
+    twoAuthSend : 'user/change-two-factor-authentication-status/',
+    verifyTWOOTP : 'user/two-factor-authentication/'
 };

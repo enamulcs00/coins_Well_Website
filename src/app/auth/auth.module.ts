@@ -26,7 +26,7 @@ import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { NgxOtpInputModule } from 'ngx-otp-input';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
-
+import {  TwoFactorModule } from '../two-factor/two-factor.module';
 @NgModule({
 	declarations: [
 		CreateprofileComponent,
@@ -55,7 +55,8 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
 		MatStepperModule,
 		NgxOtpInputModule,
 		SharedModule,
-		MtxSelectModule
+		MtxSelectModule,
+		TwoFactorModule
 	],
 	providers: [
 		MatStepper

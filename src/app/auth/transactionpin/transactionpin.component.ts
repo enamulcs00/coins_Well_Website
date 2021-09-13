@@ -58,6 +58,9 @@ export class TransactionpinComponent implements OnInit {
 					messaging.getToken().then((token: any) => {
 						this._auth.firebaseToken = token;
 						this.sumitFrm();
+					}).catch(() => {
+						this.sumitFrm();
+						Notify.failure("Unable to get permission to notify.");
 					})
 					messaging.onMessage(() => {
 					})

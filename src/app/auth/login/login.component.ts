@@ -5,6 +5,8 @@ import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 import { environment } from 'src/environments/environment';
 import firebase from "firebase/app";
+import { TwoFactorVerifyComponent } from 'src/app/two-factor/two-factor-verify/two-factor-pin.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
 	hide = true;
 	recpach: boolean = false;
 	@ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
-	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder) { }
+	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder, private dialog : MatDialog) { }
 
 	ngOnInit() {
 		this.loginForm = this._fb.group({
@@ -51,9 +53,25 @@ export class LoginComponent implements OnInit {
 					this._auth.login(formData).subscribe(res => {
 						Block.remove('#login-button');
 						if (res.data.is_profile_setup) {
-							localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
-							Notify.success("Logged in successfully.");
-							this.router.navigate(['/dashboard']);
+							if(res.data.is_two_factor_authentication_enable) {
+								const dialogRef = this.dialog.open(TwoFactorVerifyComponent, {
+									disableClose: true,
+									data : {
+										token : res.data.token
+									}
+								});
+								dialogRef.afterClosed().subscribe(result => {
+									if (result) {
+										localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
+										Notify.success("Logged in successfully.");
+										this.router.navigate(['/dashboard']);
+									}
+								});
+							} else {
+								localStorage.setItem(environment.storageKey, JSON.stringify(res.data));
+								Notify.success("Logged in successfully.");
+								this.router.navigate(['/dashboard']);
+							}
 						} else {
 							this._auth.userId = res.data.id;
 							this.router.navigate(['/auth/emailid']);
@@ -61,25 +79,26 @@ export class LoginComponent implements OnInit {
 					}, _ => {
 						Block.remove('#login-button');
 					})
-				} 
+				}
 				Block.circle('#login-button');
 				const messaging = firebase.messaging();
 				messaging
-				.requestPermission()
-				.then(() =>
-					{
+					.requestPermission()
+					.then(() => {
 						messaging.getToken().then((token: any) => {
 							this._auth.firebaseToken = token;
 							sumitFrm();
+							messaging.onMessage(() => {
+							})
+						}).catch(() => {
+							sumitFrm();
+							Notify.failure("Unable to get permission to notify.");
 						})
-						messaging.onMessage(()=>{
-						})
-					}
-				)
-				.catch((error: any) => {
-					Notify.failure("Unable to get permission to notify.");
-					sumitFrm();
-				});
+					})
+					.catch(() => {
+						Notify.failure("Unable to get permission to notify.");
+						sumitFrm();
+					});
 			} else {
 				Notify.failure("Fill the captcha first.");
 			}

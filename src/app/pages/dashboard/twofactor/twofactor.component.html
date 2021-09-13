@@ -1,0 +1,30 @@
+<div class="form-bx mt-40">
+	<div class="acc-upgrade">
+		<h3>Setup 2FA (Two-Factor Authentication)</h3>
+		<p>Secure your payment and login process.</p>
+    </div>   
+    <div class="mt-2">
+        <section class="example-section">
+            Enable
+            <mat-slide-toggle
+                class="example-margin"
+                [color]="'primary'"
+                [(ngModel)]="enable2FA"
+                >
+            </mat-slide-toggle>
+        </section>
+        <section class="example-section">
+            Deposit
+            <mat-checkbox  [color]="'primary'" class="example-margin" [(ngModel)]="deposit"></mat-checkbox>
+        </section>
+        <section class="example-section">
+            Withdraw
+            <mat-checkbox  [color]="'primary'" class="example-margin" [(ngModel)]="withdraw"></mat-checkbox>
+        </section>
+    </div>
+	<div class="btn-outer m-auto pt-20">
+		<div id="submit-documents">
+			<button class="btn btn-primary" (click)="goToNext()">Update</button>
+		</div>
+	</div>
+</div>

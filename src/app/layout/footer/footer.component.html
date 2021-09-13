@@ -33,26 +33,30 @@
             </div>
             <div class="footer__card">
                 <h3>Contact Us</h3>
-                <a href="mailto:{{ _common.cmsData?.email }}"><i class="fa fa-envelope" aria-hidden="true"></i>
-                    {{ _common.cmsData?.email }}</a>
-                <a href="https://wa.me/:{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> {{ _common.cmsData?.phone_no }}</a>  
+                <a href="mailto:{{ _common.cmsData?.email }}">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    {{ _common.cmsData?.email }}
+                </a>
+                <a href="https://wa.me/:{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> 
+                    {{ _common.cmsData?.phone_no }}
+                </a>  
                 <a href="https://telegram.me/{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i>
                     {{ _common.cmsData?.telegram_phone_number }}</a>               
             </div>
             <div class="footer__card">
                 <h3>Our Company</h3>
-                <a [routerLink]="['/companyType']">Features</a>
-                <a [routerLink]="['/companyType']">Download</a>
-                <a [routerLink]="['/companyType']">Security</a>
-                <a [routerLink]="['/companyType']">Fee</a>
+                <a [routerLink]="['/companyType/features']">Features</a>
+                <a [routerLink]="['/companyType/download']">Download</a>
+                <a [routerLink]="['/companyType/security']">Security</a>
+                <a [routerLink]="['/companyType/fee']">Fee</a>
             </div>
             <div class="footer__card">
                 <h3>Terms</h3>
-                <a [routerLink]="['/content']">Privacy policy</a>
-                <a [routerLink]="['/content']">Terms of Service</a>
-                <a href="javascript:void(0)">Cookies Service</a>
-                <a href="javascript:void(0)">AML</a>
-                <a href="javascript:void(0)">KYC</a>
+                <a [routerLink]="['/content/privacy_policy']">Privacy policy</a>
+                <a [routerLink]="['/content/terms_and_condition']">Terms of Service</a>
+                <a [routerLink]="['/content/cookie_service']">Cookies Service</a>
+                <a [routerLink]="['/content/aml']">AML</a>
+                <a [routerLink]="['/content/about_us']">KYC</a>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@ import { ReferComponent } from './refer/refer.component';
 import { FaqComponent } from './faq/faq.component';
 import { AddbankdetailsComponent } from './addbankdetails/addbankdetails.component';
 import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MtxSelectModule } from '@ng-matero/extensions';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MyEarningComponent } from './my-earning/my-earning.component';
@@ -26,7 +26,10 @@ import { ConfirmPinComponent } from './confirm-pin/confirm-pin.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { DepositCryptoComponent } from './deposit-crypto/deposit-crypto.component';
-import { DirectiveModule } from '../../_directive/directive.module'
+import { DirectiveModule } from '../../_directive/directive.module';
+import { TwofactorComponent } from './twofactor/twofactor.component'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
 	declarations: [
@@ -46,7 +49,8 @@ import { DirectiveModule } from '../../_directive/directive.module'
 		BuyCryptoComponent,
 		SellCryptoComponent,
 		ConfirmPinComponent,
-		DepositCryptoComponent
+		DepositCryptoComponent,
+		TwofactorComponent,
 	],
 	imports: [
 		CommonModule,
@@ -59,7 +63,10 @@ import { DirectiveModule } from '../../_directive/directive.module'
 		NgxCurrencyModule,
 		MatDialogModule,
 		NgxMatFileInputModule,
-		DirectiveModule
+		DirectiveModule,
+		MatSlideToggleModule,
+		MatCheckboxModule,
+		FormsModule
 	],
 	entryComponents : [ConfirmPinComponent]
 })

@@ -14,6 +14,7 @@ import { BuyCryptoComponent } from './buy-crypto/buy-crypto.component';
 import { SellCryptoComponent } from './sell-crypto/sell-crypto.component';
 import { WithdrawcryptoComponent } from './withdrawcrypto/withdrawcrypto.component';
 import { DepositCryptoComponent } from './deposit-crypto/deposit-crypto.component';
+import { TwofactorComponent } from './twofactor/twofactor.component';
 
 const routes: Routes = [
 	{
@@ -32,6 +33,10 @@ const routes: Routes = [
 			{
 				path: 'transactions',
 				component: TransactionsComponent,
+			},
+			{
+				path: '2fa',
+				component: TwofactorComponent,
 			},
 			{
 				path: 'transactions-details/:transactionId',

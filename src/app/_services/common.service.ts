@@ -19,6 +19,15 @@ export class CommonService {
 			}));
 	}
 
+	postWithHeaders(url: string, postData: any = {}, headers) {
+		return this._http.post<any>(`${environment.baseUrl}${url}`, postData,{
+			headers : headers
+		})
+			.pipe(map((data: any) => {
+				return data;
+			}));
+	}
+
 	get(url: string) {
 		return this._http.get<any>(`${environment.baseUrl}${url}`)
 			.pipe(map((data: any) => {

@@ -150,7 +150,6 @@ export class SellCryptoComponent implements OnInit {
 				const formData2: FormData = new FormData();
 				formData2.append('media', file, file.name);
 				this._common.uploadMedia(formData2).subscribe(image => {
-					console.log("Image here", image);
 					formData['proof'] = image.data[0]['id'];
 					this._common.post(urls.addCash, formData).subscribe(() => {
 						Block.remove('#add-cash-button')

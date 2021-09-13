@@ -1,0 +1,32 @@
+<div class="auth-main d-flex" style="height: 80vh;position: relative;">
+    <i style="position: absolute;
+    right: 0px;
+    font-size: 35px;" [mat-dialog-close]="false" class="fa fa-times"></i>
+	<div class="auth-img">
+		<figure>
+			<img src="assets/images/pin-c.png" alt="">
+		</figure>
+	</div>
+	<form [formGroup]="setTransactionForm" class="auth-form my-forms" style="padding: 50px 20px 36px 0px;" (ngSubmit)="setupPassword()">
+		<div class="d-flex auth-title">
+			<h3 class="auth-title__h3">Enter otp
+				<span class="d-block">
+					Please check your authy app for otp.
+				</span>
+			</h3>
+		</div>
+		<div class="auth-form-bx">
+			<mat-form-field class="example-full-width" appearance="outline">
+				<input [type]="'password'" formControlName="transaction_pin" name="transaction_pin" matInput
+					placeholder="Enter Transaction Pin">
+				<mat-error *ngIf="setTransactionForm.get('transaction_pin').hasError('required')">Please enter transaction pin.
+				</mat-error>
+			</mat-form-field>
+			<div class="btn-outer mt-40">
+				<div id="setup-tcp-button" class="border-plus">
+					<button type="submit" class="btn btn-primary">Continue</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

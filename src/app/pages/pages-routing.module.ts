@@ -78,10 +78,6 @@ const routes: Routes = [
 		component: FullComponent,
 		children: [
 			{
-				path: 'companyType',
-				component: CompanyTypeComponent
-			},
-			{
 				path: 'landingpage',
 				component: LandingpageComponent
 			},
@@ -103,10 +99,41 @@ const routes: Routes = [
 				component: ContactUsComponent
 			},
 			{
-				path: 'content',
+				path: 'content/privacy_policy',
 				component: ContentShowComponent
 			},
-		
+			{
+				path: 'content/about_us',
+				component: ContentShowComponent
+			},
+			{
+				path: 'content/terms_and_condition',
+				component: ContentShowComponent
+			},
+			{
+				path: 'content/cookie_service',
+				component: ContentShowComponent
+			},
+			{
+				path: 'content/aml',
+				component: ContentShowComponent
+			},
+			{
+				path: 'companyType/features',
+				component: CompanyTypeComponent
+			},
+			{
+				path: 'companyType/download',
+				component: CompanyTypeComponent
+			},
+			{
+				path: 'companyType/security',
+				component: CompanyTypeComponent
+			},
+			{
+				path: 'companyType/fee',
+				component: CompanyTypeComponent
+			}
 			
 		]
 	}
