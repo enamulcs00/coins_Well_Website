@@ -36,11 +36,7 @@ export class TwoFactorVerifyComponent implements OnInit {
 			}, {
 				Authorization : `Bearer ${this.data.token}`
 			}).subscribe(res => {
-				if(res.data.status) {
-					this.dialog.openDialogs[0].close(true);
-				} else {
-					Notify.failure("Invalid code.");
-				}
+				this.dialog.openDialogs[0].close(true);
 				Block.remove('#setup-tcp-button');
 			}, _ => {
 				Block.remove('#setup-tcp-button');
