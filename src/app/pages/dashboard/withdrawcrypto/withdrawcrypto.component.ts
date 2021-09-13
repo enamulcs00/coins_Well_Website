@@ -62,13 +62,16 @@ export class WithdrawcryptoComponent implements OnInit {
 				emitEvent: false
 			});
 			this.addCashForm.get('fee').setValue(
-				((this.addCashForm.get("amount").value * 0.15) / 100)
+				((this.addCashForm.get("amount").value * 0.15))
 			)
 		})
 	}
 
 	fillAmount() {
-		this.addCashForm.get("amount").setValue(this.balanceDetails?.balance || 0);
+		let balance  = this.balanceDetails.balance;
+			let fee = balance * 0.15;
+
+		this.addCashForm.get("amount").setValue((balance - fee) || 0);
 	}
 
 	getNGNrate() {
@@ -124,8 +127,11 @@ export class WithdrawcryptoComponent implements OnInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
 			this.balanceDetails = data.data;
-			this.addCashForm.get('bitamount').setValidators([Validators.required, Validators.min(0.00000000000000001), Validators.max(this.balanceDetails.balance)])
-			this.addCashForm.get('bitamount').updateValueAndValidity();
+			let balance  = this.balanceDetails.balance;
+			let fee = balance * 0.15;
+			console.log("fee", fee, balance);
+			this.addCashForm.get('amount').setValidators([Validators.required, Validators.min(0.00000000000000001), Validators.max((balance - fee))])
+			this.addCashForm.get('amount').updateValueAndValidity();
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {
