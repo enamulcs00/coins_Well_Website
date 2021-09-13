@@ -19,6 +19,7 @@ import { MaterialCommonModule } from '../material-common/material-common.module'
 import { SharedModule } from '../shared/shared.module';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ContentShowComponent } from './content-show/content-show.component';
+import { CompanyTypeComponent } from './company-type/company-type.component';
 
 @NgModule({
 	declarations: [
@@ -35,7 +36,8 @@ import { ContentShowComponent } from './content-show/content-show.component';
 		EmailverifyComponent,
 		RateComponent,
 		ContactUsComponent,
-		ContentShowComponent
+		ContentShowComponent,
+		CompanyTypeComponent
 	],
 	imports: [
 		CommonModule,
