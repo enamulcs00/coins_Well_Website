@@ -66,7 +66,7 @@ export class WithdrawngnComponent implements OnInit {
 		if (this.addCashForm.valid) {
 			if (this.addCashForm.valid) {
 				let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-				if(userInfo) {
+				if(userInfo.is_two_factor_authentication_enable) {
 					const dialogRef = this.dialog.open(TwoFactorVerifyComponent, {
 						disableClose: true
 					});

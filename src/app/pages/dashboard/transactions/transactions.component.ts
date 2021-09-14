@@ -5,6 +5,8 @@ import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { Socket } from 'ngx-socket-io';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-transactions',
@@ -16,10 +18,18 @@ export class TransactionsComponent implements OnInit {
 	baseUrl: string = environment.homeURL;
 	length: number = 10;
 	limit: number = 5;
-	constructor(private _common: CommonService) { }
+	constructor(private _common: CommonService, private socket :Socket) { }
 
 	ngOnInit(): void {
 		this.getTransactions();
+		//Check kro
+		this.socket.fromEvent('message').pipe(map((data : any) => data.msg)).subscribe(data=>{
+			alert();
+		});
+
+		setTimeout(()=>{
+			this.socket.emit('message', { msg : "Its really working."});
+		}, 5000);
 	}
 
 	onPageChange(event) {

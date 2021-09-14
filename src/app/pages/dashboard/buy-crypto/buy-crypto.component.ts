@@ -110,40 +110,6 @@ export class BuyCryptoComponent implements OnInit {
 		}
 	}
 	
-
-	// onAmountChange(){
-	// 	let value = this.addCashForm.get('amount').value;
-	// 	console.log("value",value);
-	// 	if (value == null) {
-	// 		value = 0;
-	// 	}
-	// 	if (value > 100 && (this.userInfo.document_verification != 4 || this.userInfo.facial_verification != 4)) {
-	// 		this.canBuyOrNot = false;
-	// 	} else {
-	// 		this.canBuyOrNot = true;
-	// 	}
-	// 	if (this.transactionId == 1) {
-	// 		this.addCashForm.get("bitamount").setValue((1 / this.bitcoin_to_usd) * value);
-	// 		this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
-	// 	} else {
-	// 		this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
-	// 	}
-	// }
-
-
-	// onBitAmountChange(e){
-	// 	let value = this.addCashForm.get('bitamount').value;
-	// 	if (value == null) {
-	// 		value = 0;
-	// 	}
-	// 	if (this.transactionId == 1) {
-	// 		this.addCashForm.get("amount").setValue((this.bitcoin_to_usd) / value);
-	// 		// this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
-	// 	} else {
-	// 		// this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value);
-	// 	}
-	// }
-
 	getNGNrate() {
 		this._common.getCurrencyConversion().subscribe(data => {
 			if (data) {

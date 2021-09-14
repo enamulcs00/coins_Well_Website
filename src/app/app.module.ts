@@ -8,9 +8,12 @@ import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service'
 import { CommonService } from './_services/common.service';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { JwtInterceptor } from './_helpers/jwt.interceptor'; 
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
+
 
 @NgModule({
 	declarations: [
@@ -24,7 +27,8 @@ import { environment } from 'src/environments/environment';
 		BrowserAnimationsModule,
 		ServiceWorkerModule.register('ngsw-worker.js', {
 			enabled: environment.production
-		})
+		}),
+		SocketIoModule.forRoot(config)
 	],
 	providers: [
 		{ provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
