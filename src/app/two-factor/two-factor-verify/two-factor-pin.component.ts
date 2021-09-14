@@ -31,16 +31,27 @@ export class TwoFactorVerifyComponent implements OnInit {
 			Block.circle('#setup-tcp-button');
 			const formData = Object.assign(this.setTransactionForm.value);
 			delete formData.confirm_password;
-			this._common.postWithHeaders(urls.verifyTWOOTP, {
-				otp : this.setTransactionForm.value.transaction_pin
-			}, {
-				Authorization : `Bearer ${this.data.token}`
-			}).subscribe(res => {
-				this.dialog.openDialogs[0].close(true);
-				Block.remove('#setup-tcp-button');
-			}, _ => {
-				Block.remove('#setup-tcp-button');
-			})
+			if(this.data) {
+				this._common.postWithHeaders(urls.verifyTWOOTP, {
+					otp : this.setTransactionForm.value.transaction_pin
+				}, {
+					Authorization : `Bearer ${this.data.token}`
+				}).subscribe(res => {
+					this.dialog.openDialogs[0].close(true);
+					Block.remove('#setup-tcp-button');
+				}, _ => {
+					Block.remove('#setup-tcp-button');
+				})
+			} else {
+				this._common.post(urls.verifyTWOOTP, {
+					otp : this.setTransactionForm.value.transaction_pin
+				}).subscribe(res => {
+					this.dialog.openDialogs[0].close(true);
+					Block.remove('#setup-tcp-button');
+				}, _ => {
+					Block.remove('#setup-tcp-button');
+				})
+			}
 		} else {
 			Notify.failure("Enter code.");
 		}

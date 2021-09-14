@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Block, Confirm, Loading, Notify } from 'notiflix';
+import { TwoFactorVerifyComponent } from 'src/app/two-factor/two-factor-verify/two-factor-pin.component';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -64,28 +65,44 @@ export class WithdrawngnComponent implements OnInit {
 		}
 		if (this.addCashForm.valid) {
 			if (this.addCashForm.valid) {
-				const dialogRef = this.dialog.open(ConfirmPinComponent, {
-					disableClose: true
-				});
-				dialogRef.afterClosed().subscribe(result => {
-					if (result) {
-						Block.circle('#add-cash-button');
-						this.updateDetails(this.addCashForm.value).then(() => {
-							this._router.navigate(['/Congratulations'], {
-								state: {
-									message: `Your order has been placed<br>
-									Your account will be debited <br> with in NGN as soon as we verify your order.`
-								}
-							});
-						});
-					}
-				});
+				let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+				if(userInfo) {
+					const dialogRef = this.dialog.open(TwoFactorVerifyComponent, {
+						disableClose: true
+					});
+					dialogRef.afterClosed().subscribe(result => {
+						if (result) {
+							this.askForPin();
+						}
+					});
+				} else {
+					this.askForPin();
+				}
 			} else {
 				this.addCashForm.markAllAsTouched();
 			}
 		} else {
 			this.addCashForm.markAllAsTouched();
 		}
+	}
+
+	askForPin() {
+		const dialogRef = this.dialog.open(ConfirmPinComponent, {
+			disableClose: true
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				Block.circle('#add-cash-button');
+				this.updateDetails(this.addCashForm.value).then(() => {
+					this._router.navigate(['/Congratulations'], {
+						state: {
+							message: `Your order has been placed<br>
+							Your account will be debited <br> with in NGN as soon as we verify your order.`
+						}
+					});
+				});
+			}
+		});
 	}
 
 	getBanks() {

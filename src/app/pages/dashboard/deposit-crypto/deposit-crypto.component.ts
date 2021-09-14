@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Block, Loading } from 'notiflix';
-import { forkJoin } from 'rxjs';
-import { AuthService } from 'src/app/_services/auth.service';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 import { CurrencyMaskInputMode } from "ngx-currency";
-declare var QRCode : any;
+import { TwoFactorVerifyComponent } from 'src/app/two-factor/two-factor-verify/two-factor-pin.component';
+declare var QRCode: any;
 @Component({
 	selector: 'app-deposit-crypto',
 	templateUrl: './deposit-crypto.component.html',
@@ -23,17 +22,17 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 	showImage: string | any;
 	baseUrl: string = environment.homeURL;
 	ngnValue = 500;
-	bitCoinPrice :  number = 1800;
+	bitCoinPrice: number = 1800;
 	cms: any;
 	temp = CurrencyMaskInputMode;
 	constructor(private _router: Router, private _fb: FormBuilder, private _common: CommonService, private route: ActivatedRoute, private dialog: MatDialog) {
 		this.transactionId = this.route.snapshot.paramMap.get('currency_id');
-		if([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(Number(this.transactionId)) != -1) {
+		if ([environment.bitGoCurrencies.TRC20, environment.bitGoCurrencies.PerfectMoney].indexOf(Number(this.transactionId)) != -1) {
 			this._router.navigate(['/dashboard/home/portfolio/deposit']);
 		}
 
 	}
-	
+
 	ngAfterViewInit() {
 		// JsBarcode("#barcode", "TSjQAg8vY6hL3ZCq86DrsTJfr7M5vniBrR", {
 		// 	height : 120,
@@ -66,8 +65,8 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 	}
 
 	getNGNrate() {
-		this._common.getCurrencyConversion().subscribe(data=>{
-			if(data) {
+		this._common.getCurrencyConversion().subscribe(data => {
+			if (data) {
 				this.ngnValue = this.balanceDetails?.currency?.buy_rate * data.USD_NGN;
 			}
 		})
@@ -88,11 +87,23 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 	submitDetails() {
 		if (this.addCashForm.valid) {
 			const dialogRef = this.dialog.open(ConfirmPinComponent, {
-				disableClose : true
+				disableClose: true
 			});
 			dialogRef.afterClosed().subscribe(result => {
-				if(result) {
-					this.confirmed();
+				if (result) {
+					let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+					if(userInfo) {
+						const dialogRef2 = this.dialog.open(TwoFactorVerifyComponent, {
+							disableClose: true
+						});
+						dialogRef2.afterClosed().subscribe(result => {
+							if (result) {
+								this.confirmed();
+							}
+						});
+					} else {
+						this.confirmed();
+					}
 				}
 			});
 		} else {
@@ -117,20 +128,14 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
 			this.balanceDetails = data.data;
-			var qrcode = new QRCode(document.getElementById("barcode"), {
+			new QRCode(document.getElementById("barcode"), {
 				text: data.data.user_bitgo_wallet_address,
 				width: 150,
 				height: 150,
-				colorDark : "#000000",
-				colorLight : "#ffffff",
-				correctLevel : QRCode.CorrectLevel.H
+				colorDark: "#000000",
+				colorLight: "#ffffff",
+				correctLevel: QRCode.CorrectLevel.H
 			});
-
-			// QRCode("#barcode", data.data.user_bitgo_wallet_address, {
-			// 	height : 120,
-			// 	text: "a",
-			// 	fontSize : 0
-			// });
 			this.getNGNrate();
 			Loading.remove();
 		}, _ => {

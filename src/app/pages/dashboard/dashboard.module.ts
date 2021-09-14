@@ -30,6 +30,7 @@ import { DirectiveModule } from '../../_directive/directive.module';
 import { TwofactorComponent } from './twofactor/twofactor.component'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TwoFactorModule } from 'src/app/two-factor/two-factor.module';
 
 @NgModule({
 	declarations: [
@@ -66,7 +67,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 		DirectiveModule,
 		MatSlideToggleModule,
 		MatCheckboxModule,
-		FormsModule
+		FormsModule,
+		TwoFactorModule
 	],
 	entryComponents : [ConfirmPinComponent]
 })

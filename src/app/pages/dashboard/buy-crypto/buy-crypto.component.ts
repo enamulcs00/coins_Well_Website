@@ -72,10 +72,8 @@ export class BuyCryptoComponent implements OnInit {
 			}
 			if (this.transactionId == 1) {
 				this.addCashForm.get("bitamount").setValue((value / this.bitcoin_to_usd),{emitEvent: false});
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value, {emitEvent: false});
-			} else {
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value, {emitEvent: false});
 			}
+			this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * value, {emitEvent: false});
 			this.checkAmount();
 		});
 
@@ -85,10 +83,8 @@ export class BuyCryptoComponent implements OnInit {
 			}
 			if (this.transactionId == 1) {
 				this.addCashForm.get("amount").setValue(this.bitcoin_to_usd * value,{emitEvent: false});
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * this.addCashForm.get("amount").value, {emitEvent: false});
-			} else {
-				this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * this.addCashForm.get("amount").value, {emitEvent: false});
 			}
+			this.addCashForm.get("ngnamount").setValue(this.balanceDetails?.currency?.buy_rate * this.addCashForm.get("amount").value, {emitEvent: false});
 			this.checkAmount();
 		});
 
@@ -97,11 +93,9 @@ export class BuyCryptoComponent implements OnInit {
 			if (value == null) {
 				value = 0;
 			}
+			this.addCashForm.get("amount").setValue(value / this.balanceDetails?.currency?.buy_rate,{emitEvent: false});
 			if (this.transactionId == 1) {
-				this.addCashForm.get("amount").setValue(value / this.balanceDetails?.currency?.buy_rate,{emitEvent: false});
 				this.addCashForm.get("bitamount").setValue(this.addCashForm.get("amount").value / this.bitcoin_to_usd, {emitEvent: false});
-			} else {
-				this.addCashForm.get("amount").setValue(value / this.balanceDetails?.currency?.buy_rate,{emitEvent: false});
 			}
 			this.checkAmount();
 		});

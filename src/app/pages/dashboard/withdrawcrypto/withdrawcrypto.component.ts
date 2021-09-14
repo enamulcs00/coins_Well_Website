@@ -8,6 +8,7 @@ import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
 import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 import { CurrencyMaskInputMode } from "ngx-currency";
+import { TwoFactorVerifyComponent } from 'src/app/two-factor/two-factor-verify/two-factor-pin.component';
 @Component({
 	selector: 'app-withdrawcrypto',
 	templateUrl: './withdrawcrypto.component.html',
@@ -96,17 +97,33 @@ export class WithdrawcryptoComponent implements OnInit {
 
 	submitDetails() {
 		if (this.addCashForm.valid) {
-			const dialogRef = this.dialog.open(ConfirmPinComponent, {
-				disableClose: true
-			});
-			dialogRef.afterClosed().subscribe(result => {
-				if (result) {
-					this.confirmed();
-				}
-			});
+			let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+			if(userInfo) {
+				const dialogRef = this.dialog.open(TwoFactorVerifyComponent, {
+					disableClose: true
+				});
+				dialogRef.afterClosed().subscribe(result => {
+					if (result) {
+						this.askForPin();
+					}
+				});
+			} else {
+				this.askForPin();
+			}
 		} else {
 			this.addCashForm.markAllAsTouched();
 		}
+	}
+
+	askForPin() {
+		const dialogRef = this.dialog.open(ConfirmPinComponent, {
+			disableClose: true
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				this.confirmed();
+			}
+		});
 	}
 
 	confirmed() {

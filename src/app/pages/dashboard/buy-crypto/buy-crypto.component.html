@@ -35,7 +35,7 @@
             <input currencyMask  [options]="{ prefix: '', precision : 5 }" matInput type="text" min="100" formControlName="bitamount" placeholder="Enter the amount">
             <span matPrefix>
                 <figure>
-                    <img  style="width: 27px; height: 27px; object-position: center; object-fit: contain; border-radius: 50%;" src="{{ baseUrl + balanceDetails?.currency?.logo?.media_file }}" alt="">
+                    <img style="width: 27px; height: 27px; object-position: center; object-fit: contain; border-radius: 50%;" src="{{ baseUrl + balanceDetails?.currency?.logo?.media_file }}" alt="">
                 </figure>
             </span>
             <mat-error *ngIf="addCashForm.get('bitamount')?.hasError('required')">
@@ -53,7 +53,7 @@
             </span>
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('required')">
                 Please enter an amount.
-            </mat-error>
+            </mat-error>`
             <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
                 Amount should be at least 100.
             </mat-error>

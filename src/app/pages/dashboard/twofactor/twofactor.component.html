@@ -6,11 +6,7 @@
     <div class="mt-2">
         <section class="example-section">
             Enable
-            <mat-slide-toggle
-                class="example-margin"
-                [color]="'primary'"
-                [(ngModel)]="enable2FA"
-                >
+            <mat-slide-toggle [color]="'primary'" class="example-margin" [(ngModel)]="enable2FA">
             </mat-slide-toggle>
         </section>
         <section class="example-section">
@@ -21,6 +17,11 @@
             Withdraw
             <mat-checkbox  [color]="'primary'" class="example-margin" [(ngModel)]="withdraw"></mat-checkbox>
         </section>
+    </div>
+
+    <h3 class="tp-head mt-5 pb-20">Instructions</h3>
+    <div class="Instructions">
+        <p>Please download Authy app to recieve 2FA code on your phone.</p>
     </div>
 	<div class="btn-outer m-auto pt-20">
 		<div id="submit-documents">
