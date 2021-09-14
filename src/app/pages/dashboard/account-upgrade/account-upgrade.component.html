@@ -4,7 +4,7 @@
 <h3 class="text-right status-check">Status: 
 	<span *ngIf="facial_verification  == 4 && document_verification == 4" class="text-success">Verified</span>
 	<span *ngIf="facial_verification  == 3 && document_verification == 3" class="text-danger">Rejected</span>
-	<span *ngIf="(facial_verification  == 1 &&  facial_verification == null) && (document_verification == 1  &&  document_verification ==  null)" class="text-info">Un-Verified</span>
+	<span *ngIf="(facial_verification  == 1 &&  document_verification == 1) || (facial_verification == null  &&  document_verification ==  null)" class="text-info">Un-Verified</span>
 	<span *ngIf="(facial_verification  == 2 || document_verification == 2) || (facial_verification == 3 && document_verification == 4) || (facial_verification == 4 && document_verification == 3)" class="text-warning">Pending</span>
 
 </h3>
@@ -13,7 +13,6 @@
 	<div class="acc-upgrade">
 		<h3>Facial Verification</h3>
 		<p>Upload a selfie of you holding a piece of paper with your name, Date of Birth on the piece of paper</p>
-
 
 		<div *ngIf="facial_verification == 4; else elseBlock" class="documents-verified">
 			<p class="text-success h3">
@@ -25,9 +24,7 @@
 			<input #facialDocument (change)="previewVerification(facialDocument.files)" type="file" accept="image/*"
 				class="d-none">
 			<figure *ngIf="selfieType == 'img'" class="m-auto cursor-pointer">
-				<img *ngIf="!facialVerificationImageUrl" style="    height: 225px;
-				width: 300px;
-				object-fit: cover;" src="assets/images/scan.png" alt="">
+				<img *ngIf="!facialVerificationImageUrl" style="height: 225px;width: 300px;object-fit: cover;" src="assets/images/scan.png" alt="">
 				<img *ngIf="facialVerificationImageUrl" [src]="facialVerificationImageUrl" alt="">
 			</figure>
 			<div *ngIf="facial_verification == 3">

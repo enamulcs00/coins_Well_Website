@@ -73,31 +73,49 @@ export class DepositComponent implements OnInit {
 	}
 
 	askForPin() {
-		const dialogRef = this.dialog.open(ConfirmPinComponent, {
-			disableClose : true
-		});
-		dialogRef.afterClosed().subscribe(result => {
-			if(result) {
-				Block.circle('#add-cash-button');
-				if (this.addCashForm.get('tempImage').value) {
-					let file = this.addCashForm.get('tempImage').value;
-					const formData: FormData = new FormData();
-					formData.append('media', file, file.name);
-					this._common.uploadMedia(formData).subscribe(image => {
-						this.addCashForm.get('proof').setValue(image.data[0]['id']);
-						this.updateDetails(this.addCashForm.value).then(() => {
-							this._router.navigate(['/Congratulations'], {
-								state: {
-									message: `Your order has been placed<br>
-									Your account will be credited <br> with in NGN as soon as we verify your order.`
-								}
-							});
-						},() => {
-						});
+		Block.circle('#add-cash-button');
+		if (this.addCashForm.get('tempImage').value) {
+			let file = this.addCashForm.get('tempImage').value;
+			const formData: FormData = new FormData();
+			formData.append('media', file, file.name);
+			this._common.uploadMedia(formData).subscribe(image => {
+				this.addCashForm.get('proof').setValue(image.data[0]['id']);
+				this.updateDetails(this.addCashForm.value).then(() => {
+					this._router.navigate(['/Congratulations'], {
+						state: {
+							message: `Your order has been placed<br>
+							Your account will be credited <br> with in NGN as soon as we verify your order.`
+						}
 					});
-				}
-			}
-		});
+				},() => {
+				});
+			});
+		}
+		// const dialogRef = this.dialog.open(ConfirmPinComponent, {
+		// 	disableClose : true
+		// });
+		// dialogRef.afterClosed().subscribe(result => {
+		// 	if(result) {
+		// 		Block.circle('#add-cash-button');
+		// 		if (this.addCashForm.get('tempImage').value) {
+		// 			let file = this.addCashForm.get('tempImage').value;
+		// 			const formData: FormData = new FormData();
+		// 			formData.append('media', file, file.name);
+		// 			this._common.uploadMedia(formData).subscribe(image => {
+		// 				this.addCashForm.get('proof').setValue(image.data[0]['id']);
+		// 				this.updateDetails(this.addCashForm.value).then(() => {
+		// 					this._router.navigate(['/Congratulations'], {
+		// 						state: {
+		// 							message: `Your order has been placed<br>
+		// 							Your account will be credited <br> with in NGN as soon as we verify your order.`
+		// 						}
+		// 					});
+		// 				},() => {
+		// 				});
+		// 			});
+		// 		}
+		// 	}
+		// });
 	}
 
 	getCMS() {
