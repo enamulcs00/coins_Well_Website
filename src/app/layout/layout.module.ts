@@ -7,6 +7,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ChatIconComponent } from './chat-icon/chat-icon.component';
 import { WithoutheaderComponent } from './withoutheader/withoutheader.component';
 import { AuthService } from '../_services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+
 // import
 @NgModule({
 	declarations: [
@@ -18,7 +21,9 @@ import { AuthService } from '../_services/auth.service';
 	],
 	imports: [
 		CommonModule,
-		RouterModule
+		RouterModule,
+		FormsModule,
+		NgScrollbarModule
 	],
 	exports: [FullComponent, WithoutheaderComponent],
 	providers : [AuthService]

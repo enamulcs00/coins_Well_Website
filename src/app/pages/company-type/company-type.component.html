@@ -39,7 +39,7 @@
 
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div class="tab-pane active" id="features" role="features">
+						<div class="tab-pane" [class.active]="link == 'features'" id="features" role="features">
 							<div class="cons_cms_outr">
 								<div class="cons_cms_hdmn">
 									<h2>Features</h2>
@@ -84,7 +84,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane" id="downlaod" role="downlaod">
+						<div class="tab-pane" [class.active]="link == 'download'" id="downlaod" role="downlaod">
 							<div class="cons_cms_outr">
 								<div class="cons_cms_hdmn">
 									<h2>Download</h2>
@@ -115,7 +115,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane" id="security" role="security">
+						<div class="tab-pane" [class.active]="link == 'security'"id="security" role="security">
 							<div class="cons_cms_outr">
 								<div class="cons_cms_hdmn">
 									<h2>Security</h2>
@@ -175,7 +175,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane" id="fee" role="fee">
+						<div class="tab-pane" [class.active]="link == 'fee'" id="fee" role="fee">
 							<div class="cons_cms_outr">
 								<div class="cons_cms_hdmn">
 									<h2>Fee</h2>

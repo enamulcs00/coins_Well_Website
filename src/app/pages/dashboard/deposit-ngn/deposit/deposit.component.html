@@ -11,14 +11,13 @@
                     Please enter an amount.
                 </mat-error>
                 <mat-error *ngIf="addCashForm.get('ngnamount')?.hasError('min')">
-                    Amount should be at least 0.01;
+                    Amount should be greater than 0.
                 </mat-error>
             </mat-form-field>
         </div>
         <div class="input-bxx mb-0 pos-rel">
             <mat-form-field appearance="outline">
-                <ngx-mat-file-input placeholder="Select proof" [formControl]="addCashForm.get('tempImage')"
-                    (focus)="addCashForm.get('tempImage').markAllAsTouched()" [multiple]="false" accept="image/*">
+                <ngx-mat-file-input placeholder="Select proof" [formControl]="addCashForm.get('tempImage')" (focus)="addCashForm.get('tempImage').markAllAsTouched()" [multiple]="false" accept="image/*">
                 </ngx-mat-file-input>
                 <mat-error *ngIf="addCashForm.get('tempImage')?.hasError('required')">
                     Please select a proof.

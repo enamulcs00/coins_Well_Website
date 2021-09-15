@@ -32,7 +32,8 @@ export const environment = {
 		ERC20 : 2,
 		TRC20 : 3,
 		PerfectMoney : 4
-	}
+	},
+	socketUrl : ''
 };
 
 /*

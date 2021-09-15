@@ -41,7 +41,7 @@
     "ngx-intl-tel-input": "^3.1.1",
     "ngx-mask": "^12.0.0",
     "ngx-otp-input": "^0.9.0",
-    "ngx-socket-io": "^4.1.0",
+    "ngx-scrollbar": "^7.4.1",
     "ngx-webcam": "^0.3.2",
     "notiflix": "^3.0.1",
     "rxjs": "~6.5.5",

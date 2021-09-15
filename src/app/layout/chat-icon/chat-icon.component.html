@@ -1,5 +1,61 @@
-<!-- <div class="chat-icon">
-<figure>
-<img src="assets/images/chatting.png" alt="">
-</figure>
-</div> -->
+<div class="chat-icon" (click)="showChat()">
+    <figure>
+        <img src="assets/images/chatting.png" alt="">
+    </figure>
+</div>
+
+<div [class.d-none]="!hideChatBox" class="auth-form-bx">
+    <button class="btn btn-sm btn-primary close-btn" (click)="hideChatBox = false;">
+        <i class="fa fa-close"></i>
+    </button>
+    <div class="chat-bx">
+        <div class="chat-messagebx">
+            <ng-scrollbar #scrollable >
+                <div class="you-mess">
+                    <p>The topics you choose will help us suggest the courses suitable to you</p>
+                </div>
+                <div class="you-mess">
+                    <p>The topics you </p>
+                </div>
+                <div class="sender-mess">
+                    <div class="sender-mess-bx">
+                        <p>The topics you choose will help us suggest the courses suitable to you</p>
+                    </div>
+                </div>
+                <div class="sender-mess">
+                    <div class="sender-mess-bx">
+                        <p>The topics you choose will help us suggest the courses suitable to you</p>
+                    </div>
+                </div>
+                <div class="sender-mess">
+                    <div class="sender-mess-bx">
+                        <p>The topics you choose will help us suggest the courses suitable to you</p>
+                    </div>
+                </div>
+                <div class="you-mess">
+                    <p>The topics you choose will help us suggest the courses suitable to you</p>
+                </div>
+                <div class="you-mess">
+                    <p>The topics you </p>
+                </div>
+                <div class="you-mess">
+                    <p>The topics you choose will help us suggest the courses suitable to you</p>
+                </div>
+                <div class="you-mess">
+                    <p>The topics you </p>
+                </div>
+            </ng-scrollbar>
+            
+        </div>
+
+        <div class="chat-message clearfix">
+            <button class="send cursor-pointer" >
+                <img src="assets/images/attachment-icon.png" alt="">
+            </button>
+            <textarea [(ngModel)]="message" placeholder="Enter message" name="message" type="text"></textarea>
+            <button class="atta cursor-pointer" (click)="sendMessage()">
+                <img src="assets/images/Subtraction 8.png" alt="">
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1631630573485,
+  "timestamp": 1631713231076,
   "index": "/coinswell/web/index.html",
   "assetGroups": [
     {
@@ -12,18 +12,19 @@
       },
       "urls": [
         "/coinswell/web/1.702764ea3bca597ac980.js",
-        "/coinswell/web/10.5f1b7f21d6b79b24f941.js",
+        "/coinswell/web/10.ba697dcee71189c24d92.js",
+        "/coinswell/web/11.a1b67bb607cb4b425cff.js",
         "/coinswell/web/2.378dfc9e1df1004bb91a.js",
-        "/coinswell/web/3.2c579541ec515b9997f5.js",
-        "/coinswell/web/7.373f5c212f8cd257ffad.js",
+        "/coinswell/web/3.453d5c7b1b053472302a.js",
+        "/coinswell/web/7.03ea61a4210ff46f5b97.js",
         "/coinswell/web/8.dce53b4e2c4ba4306554.js",
-        "/coinswell/web/9.9f60ac9eac2c53fc5d5b.js",
+        "/coinswell/web/9.f415a640072ed3cc277a.js",
         "/coinswell/web/favicon.ico",
         "/coinswell/web/index.html",
-        "/coinswell/web/main.388be78660b5a189a0cb.js",
+        "/coinswell/web/main.277111e397fe043d49f1.js",
         "/coinswell/web/manifest.webmanifest",
         "/coinswell/web/polyfills.cd4ed4a1f6b365dfb0f8.js",
-        "/coinswell/web/runtime.e63f520d9f785862c9b1.js",
+        "/coinswell/web/runtime.172c8a53b46d8ee9b4e9.js",
         "/coinswell/web/styles.f1680aade877c1ea7697.css"
       ],
       "patterns": []
@@ -253,12 +254,13 @@
   "dataGroups": [],
   "hashTable": {
     "/coinswell/web/1.702764ea3bca597ac980.js": "5f92947885d221e81063a2ab2eefca90b6deda21",
-    "/coinswell/web/10.5f1b7f21d6b79b24f941.js": "e60a3cd2b496986d22df39a0c5b2bd31baab7608",
+    "/coinswell/web/10.ba697dcee71189c24d92.js": "2fab5e993be950130b48d298a9377c6f04a443d0",
+    "/coinswell/web/11.a1b67bb607cb4b425cff.js": "0144d77cc9e88600b109627c9e73e0249d7d99ae",
     "/coinswell/web/2.378dfc9e1df1004bb91a.js": "c11ed1f774ada41bf998829cb8d21ccbdb6dd8a9",
-    "/coinswell/web/3.2c579541ec515b9997f5.js": "cf2861cfda0feb40ad2bf1f3a4f19702b6d486a9",
-    "/coinswell/web/7.373f5c212f8cd257ffad.js": "0fea9a10ef8e8c3d13ec043612b7ea110ea3d84a",
+    "/coinswell/web/3.453d5c7b1b053472302a.js": "76084079cd634ca2341d9e9dba091b4c8a18afde",
+    "/coinswell/web/7.03ea61a4210ff46f5b97.js": "139ed62c41ae643a62613a69a722635b616ad742",
     "/coinswell/web/8.dce53b4e2c4ba4306554.js": "9018be919ef138d5f60b883cdd337bb8d74a8a0b",
-    "/coinswell/web/9.9f60ac9eac2c53fc5d5b.js": "7f2f4dbd734aff3aabcc9f62e2db7d9fd2380717",
+    "/coinswell/web/9.f415a640072ed3cc277a.js": "7846d98b4ef3dd61bf5c7a2369233f393d435d01",
     "/coinswell/web/Rubik-Black.314a52e5ef2b9c9b23e3.woff2": "5d39fd79dfcb333a0959d930f3fc68aaa21de494",
     "/coinswell/web/Rubik-Black.d9706d4180c1efeffc41.woff": "5b1abc89b0419caf73b186cf85c8009b5f006a0d",
     "/coinswell/web/Rubik-Bold.704be18a0bc7e7537b96.woff": "4fd9b6d809b13370a32b28ee2a7c61a569cd39b1",
@@ -469,12 +471,12 @@
     "/coinswell/web/flags.007b2705c0a8f69dfdf6.png": "21572c9751e5a3dc20395befa0fcb349c32c4811",
     "/coinswell/web/flags@2x.9d5328fb490cddd43f66.png": "d6f843711c3cfe6d9a037e4c61d293f563e55802",
     "/coinswell/web/flags_sprite_2x.803fc634f571ed3c7cdb.png": "e803647907841782b9a813cd9d456316ecc1ea8d",
-    "/coinswell/web/index.html": "024e420dfc352a8089a2790956199c140f930963",
+    "/coinswell/web/index.html": "7e4d81bc68e71989fd3fa8a07df5e9f2b0312dfd",
     "/coinswell/web/lnd_abtlsticon.20ee50367453851dd6ef.png": "ba242f72595f148040e3df0298f6bd15176ae33c",
-    "/coinswell/web/main.388be78660b5a189a0cb.js": "26a331f84040a72c2c8cbb7c0341a7c42a20851f",
+    "/coinswell/web/main.277111e397fe043d49f1.js": "50aaa165d624a821d47615f2735a65aa5f06f24a",
     "/coinswell/web/manifest.webmanifest": "77ab079239764d3fa2cda3b5d220b4bdb941c2f4",
     "/coinswell/web/polyfills.cd4ed4a1f6b365dfb0f8.js": "df6fa69622640a1d4428322e8f6c00094ec6b09b",
-    "/coinswell/web/runtime.e63f520d9f785862c9b1.js": "500c68b9d4516c7f5fe1ee4fb432c3cce18d04ab",
+    "/coinswell/web/runtime.172c8a53b46d8ee9b4e9.js": "d7e387f24e8242c9c9a3a783f1cb2a80fa3f1d26",
     "/coinswell/web/styles.f1680aade877c1ea7697.css": "95812631e3d43d30eee51ba5d81d75be4348ae8a"
   },
   "navigationUrls": [
