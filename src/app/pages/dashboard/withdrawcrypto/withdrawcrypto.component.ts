@@ -51,7 +51,7 @@ export class WithdrawcryptoComponent implements OnInit {
 				emitEvent: false
 			});
 			this.addCashForm.get('fee').setValue(
-				((this.addCashForm.get("amount").value * 0.15) / 100)
+				((this.addCashForm.get("amount").value * 0.15))
 			)
 		})
 
@@ -69,8 +69,8 @@ export class WithdrawcryptoComponent implements OnInit {
 	}
 
 	fillAmount() {
-		let balance  = this.balanceDetails.balance;
-			let fee = balance * 0.15;
+		let balance = this.balanceDetails.balance;
+		let fee = balance * 0.15;
 
 		this.addCashForm.get("amount").setValue((balance - fee) || 0);
 	}
@@ -98,7 +98,7 @@ export class WithdrawcryptoComponent implements OnInit {
 	submitDetails() {
 		if (this.addCashForm.valid) {
 			let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-			if(userInfo.is_two_factor_authentication_enable) {
+			if (userInfo.is_two_factor_authentication_enable) {
 				const dialogRef = this.dialog.open(TwoFactorVerifyComponent, {
 					disableClose: true
 				});
@@ -144,9 +144,8 @@ export class WithdrawcryptoComponent implements OnInit {
 		Loading.circle();
 		this._common.get(urls.getCryptoSingleBalance + this.transactionId + '/').subscribe(data => {
 			this.balanceDetails = data.data;
-			let balance  = this.balanceDetails.balance;
+			let balance = this.balanceDetails.balance;
 			let fee = balance * 0.15;
-			console.log("fee", fee, balance);
 			this.addCashForm.get('amount').setValidators([Validators.required, Validators.min(0.00000000000000001), Validators.max((balance - fee))])
 			this.addCashForm.get('amount').updateValueAndValidity();
 			this.getNGNrate();
