@@ -4,13 +4,14 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { urls } from './urls';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 @Injectable({
 	providedIn: 'root'
 })
 export class CommonService {
 	cmsData: any;
 	updateNotification : BehaviorSubject<any> = new BehaviorSubject("");
-	constructor(private _http: HttpClient) { }
+	constructor(private _http: HttpClient, private _auth : AuthService) { }
 
 	post(url: string, postData: any = {}) {
 		return this._http.post<any>(`${environment.baseUrl}${url}`, postData)
@@ -126,6 +127,20 @@ export class CommonService {
 			.pipe(map((data: any) => {
 				return data;
 			}));
+	}
+
+	updateProfileInfo() {
+		if (localStorage.getItem(environment.storageKey) != null) {
+			let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+			this.get(urls.getProfileDetails).subscribe(data => {
+				userInfo = {
+					...userInfo,
+					...data.data
+				};
+				localStorage.setItem(environment.storageKey, JSON.stringify(userInfo));
+				this._auth.onProfileUpdate.next(data);
+			})
+		}
 	}
 
 }

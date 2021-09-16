@@ -37,5 +37,6 @@ export const urls = {
     getNotificationCount : 'user/get-all-user-unread-notification-count/',
     readNotifications : 'user/change-user-notification-to-read/',
     twoAuthSend : 'user/change-two-factor-authentication-status/',
-    verifyTWOOTP : 'user/two-factor-authentication/'
+    verifyTWOOTP : 'user/two-factor-authentication/',
+    changePaymentRestriction : 'user/change-payment-restriction/'
 };

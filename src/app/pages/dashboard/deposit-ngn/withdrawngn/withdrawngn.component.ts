@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import moment from 'moment';
 import { Block, Confirm, Loading, Notify } from 'notiflix';
 import { TwoFactorVerifyComponent } from 'src/app/two-factor/two-factor-verify/two-factor-pin.component';
 import { CommonService } from 'src/app/_services/common.service';
@@ -60,10 +61,11 @@ export class WithdrawngnComponent implements OnInit {
 	}
 
 	submitDetails() {
-		if (this.addCashForm.value.amount != 0 && this.addCashForm.value.amount != '' && this.addCashForm.value.amount != null && this.addCashForm.value.amount != undefined && this.addCashForm.invalid) {
-			Notify.failure("Please select bank first.");
-		}
-		if (this.addCashForm.valid) {
+		let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+		if(!userInfo.is_payment_restriction) {
+			if (this.addCashForm.value.amount != 0 && this.addCashForm.value.amount != '' && this.addCashForm.value.amount != null && this.addCashForm.value.amount != undefined && this.addCashForm.invalid) {
+				Notify.failure("Please select bank first.");
+			}
 			if (this.addCashForm.valid) {
 				let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
 				if(userInfo.is_two_factor_authentication_enable) {
@@ -82,7 +84,22 @@ export class WithdrawngnComponent implements OnInit {
 				this.addCashForm.markAllAsTouched();
 			}
 		} else {
-			this.addCashForm.markAllAsTouched();
+			let startTime = moment();
+			let end  = moment.utc(this.userInfo.payment_restriction_added_at);
+			var duration = moment.duration(startTime.diff(end));
+			var hours = Math.floor(duration.asHours());
+			if(hours <= 48) {
+				Notify.failure("Your account is disbaled for 48 hours for security reasons.");
+			} else {
+				//call update API here
+				this._common.put(urls.changePaymentRestriction,{
+					payment_restriction : false
+				}).subscribe(()=>{
+					this.userInfo.is_payment_restriction = false;
+					this._common.updateProfileInfo();
+					this.submitDetails();
+				})
+			}
 		}
 	}
 

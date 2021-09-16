@@ -64,6 +64,7 @@ export class ChangeemailComponent implements OnInit, AfterViewInit {
 				localStorage.setItem(environment.storageKey, JSON.stringify(userInfo));
 				this._auth.onProfileUpdate.next();
 				Notify.success("Email changed successfully.");
+				this._common.updateProfileInfo();
 				this._router.navigate(['/dashboard/my-details']);
 				Block.remove('#setup-email-form-button');
 			}, _ => {

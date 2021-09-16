@@ -38,6 +38,7 @@ export class ChangepasswordComponent implements OnInit {
 			const formData = Object.assign(this.setPasswordForm.value);
 			delete formData.confirm_password;
 			this._common.put(urls.changePassword, formData).subscribe(() => {
+				this._common.updateProfileInfo();
 				Notify.success("Password changed successfully.");
 				this._router.navigate(['/dashboard/my-details']);
 				Block.remove('#setup-password-button');

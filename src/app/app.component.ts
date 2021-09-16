@@ -68,17 +68,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	fetchInfo() {
-		if (localStorage.getItem(environment.storageKey) != null) {
-			let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-			this._common.get(urls.getProfileDetails).subscribe(data => {
-				userInfo = {
-					...userInfo,
-					...data.data
-				};
-				localStorage.setItem(environment.storageKey, JSON.stringify(userInfo));
-				this._auth.onProfileUpdate.next(data);
-			})
-		}
+		this._common.updateProfileInfo();
 		this.fetchCMS();
 	}
 
