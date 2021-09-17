@@ -26,7 +26,6 @@ const routes: Routes = [
 		redirectTo: '/landingpage',
 		pathMatch: 'full',
 	},
-	
 	{
 		path: '',
 		component: WithoutheaderComponent,

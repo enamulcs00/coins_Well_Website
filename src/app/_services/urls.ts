@@ -38,5 +38,6 @@ export const urls = {
     readNotifications : 'user/change-user-notification-to-read/',
     twoAuthSend : 'user/change-two-factor-authentication-status/',
     verifyTWOOTP : 'user/two-factor-authentication/',
-    changePaymentRestriction : 'user/change-payment-restriction/'
+    changePaymentRestriction : 'user/change-payment-restriction/',
+    checkMaintenace : 'admin/get-website-maintenance-status/'
 };

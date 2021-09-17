@@ -15,10 +15,10 @@ import { SwPush, SwUpdate } from '@angular/service-worker';
 export class AppComponent implements AfterViewInit, OnInit {
 	title = 'coinswellWeb';
 	serviceWorkerAttempt = 0;
+	isMaintenace: boolean = false;
 	constructor(private _common: CommonService, private _auth: AuthService, public updates: SwUpdate, public push: SwPush) {
 		this.loadFiles();
 		this.fetchInfo();
-
 		//Check if user is logged in or not.
 		navigator.serviceWorker.register("ngsw-worker.js");
 		firebase.initializeApp(environment.firebaseConfig);
@@ -55,11 +55,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 			// console.log("Not Working");
 			event.notification.close();
 		});
+		this.checkMaintenance();
 	}
 
 	permitToNotify() {
 		const messaging = firebase.messaging();
-		messaging.onMessage(()=>{
+		messaging.onMessage(() => {
 		})
 	}
 
@@ -102,6 +103,17 @@ export class AppComponent implements AfterViewInit, OnInit {
 			}
 		})
 		Loading.pulse();
+	}
+
+	checkMaintenance() {
+		this._common.get(urls.checkMaintenace).subscribe((data) => {
+			this.isMaintenace = data.data.maintainance;
+		})
+		setInterval(() => {
+			this._common.get(urls.checkMaintenace).subscribe((data) => {
+				this.isMaintenace = data.data.maintainance;
+			})
+		}, 15000);
 	}
 
 	fetchCMS() {

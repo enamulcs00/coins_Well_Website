@@ -120,7 +120,7 @@ export class WithdrawcryptoComponent implements OnInit {
 			var duration = moment.duration(startTime.diff(end));
 			var hours = Math.floor(duration.asHours());
 			if(hours <= 48) {
-				Notify.failure("Your account is disbaled for 48 hours for security reasons.");
+				Notify.failure("Your account is disabled for 48 hours for security reasons.");
 			} else {
 				//call update API here
 				this._common.put(urls.changePaymentRestriction,{

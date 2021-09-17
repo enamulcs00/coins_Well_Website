@@ -62,13 +62,13 @@ export class WithdrawngnComponent implements OnInit {
 
 	submitDetails() {
 		let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-		if(!userInfo.is_payment_restriction) {
+		if (!userInfo.is_payment_restriction) {
 			if (this.addCashForm.value.amount != 0 && this.addCashForm.value.amount != '' && this.addCashForm.value.amount != null && this.addCashForm.value.amount != undefined && this.addCashForm.invalid) {
 				Notify.failure("Please select bank first.");
 			}
 			if (this.addCashForm.valid) {
 				let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-				if(userInfo.is_two_factor_authentication_enable) {
+				if (userInfo.is_two_factor_authentication_enable) {
 					const dialogRef = this.dialog.open(TwoFactorVerifyComponent, {
 						disableClose: true
 					});
@@ -85,16 +85,16 @@ export class WithdrawngnComponent implements OnInit {
 			}
 		} else {
 			let startTime = moment();
-			let end  = moment.utc(this.userInfo.payment_restriction_added_at);
+			let end = moment.utc(this.userInfo.payment_restriction_added_at);
 			var duration = moment.duration(startTime.diff(end));
 			var hours = Math.floor(duration.asHours());
-			if(hours <= 48) {
-				Notify.failure("Your account is disbaled for 48 hours for security reasons.");
+			if (hours <= 48) {
+				Notify.failure("Your account is disabled for 48 hours for security reasons.");
 			} else {
 				//call update API here
-				this._common.put(urls.changePaymentRestriction,{
-					payment_restriction : false
-				}).subscribe(()=>{
+				this._common.put(urls.changePaymentRestriction, {
+					payment_restriction: false
+				}).subscribe(() => {
 					this.userInfo.is_payment_restriction = false;
 					this._common.updateProfileInfo();
 					this.submitDetails();
@@ -126,7 +126,7 @@ export class WithdrawngnComponent implements OnInit {
 		Loading.circle();
 		this._common.get(urls.getBanks).subscribe(data => {
 			this.bankList = data.data;
-			Loading.remove();
+			Loading.remove();``
 		}, _ => {
 			Loading.remove();
 		})

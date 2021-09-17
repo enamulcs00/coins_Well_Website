@@ -12,9 +12,11 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 import { MessagesService } from './_services/messages.service';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		MaintenanceComponent
 	],
 	imports: [
 		BrowserModule,

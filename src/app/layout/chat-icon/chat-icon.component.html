@@ -5,9 +5,12 @@
 </div>
 
 <div [class.d-none]="!hideChatBox" class="auth-form-bx">
-    <button class="btn btn-sm btn-primary close-btn" (click)="hideChatBox = false;">
-        <i class="fa fa-close"></i>
-    </button>
+    <h3>
+        Coinswell Support
+        <button class="btn btn-sm btn-primary close-btn" (click)="hideChatBox = false;">
+            <i class="fa fa-close"></i>
+        </button>
+    </h3>
     <div class="chat-bx">
         <div class="chat-messagebx">
             <ng-scrollbar #scrollable >
@@ -45,7 +48,6 @@
                     <p>The topics you </p>
                 </div>
             </ng-scrollbar>
-            
         </div>
 
         <div class="chat-message clearfix">
