@@ -6,17 +6,17 @@
     <div class="mt-2">
         <section class="example-section" style="font-size: 18px;font-weight: 500;margin-left: 10px;">
             Enable
-            <mat-slide-toggle [color]="'primary'" class="example-margin" [(ngModel)]="enable2FA"></mat-slide-toggle>
+            <mat-slide-toggle [color]="'primary'" (change)="checkCode(enable2FA)" class="example-margin" [(ngModel)]="enable2FA"></mat-slide-toggle>
         </section>
     </div>
-
-    <h3 class="tp-head mt-5 pb-20">Instructions</h3>
-    <div class="Instructions">
-        <p>Please download Authy app to recieve 2FA code on your phone.</p>
+    <ng-container *ngIf="enable2FA">
+        <div class="text-center Instructions">
+            <div id="barcode" style="margin: auto; width: 150px;">
+            </div>
+            <p class="mt-2">Scan the QR code from authy or google autheticator app to add the two factor authentication.</p>
+        </div>
+    </ng-container>
+    <div class="Instructions text-center mt-5" *ngIf="!enable2FA">
+        <p>Enable the toggle to add two factor authentication.</p>
     </div>
-	<div class="btn-outer m-auto pt-20">
-		<div id="submit-documents">
-			<button class="btn btn-primary" (click)="goToNext()">Update</button>
-		</div>
-	</div>
 </div>

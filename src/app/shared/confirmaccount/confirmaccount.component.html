@@ -15,7 +15,6 @@
 					</span>
 				</span>
 			</h3>
-			<!-- <p class="auth-link__title" (click)=" signup()">Sign up</p> -->
 		</div>
 		<div class="auth-form-bx my-forms">
 			<ngx-otp-input [config]="{
@@ -79,12 +78,14 @@
 				*ngIf="confirmAccount.get('transaction_pin').touched && !confirmAccount.get('transaction_pin').hasError('required') && confirmAccount.get('otp').hasError('minlength')">
 				Invalid pin.
 			</mat-error>
+			<p *ngIf="from == 'dashboard'">
+				Note : You will not be able to withdraw anything for 48 hours after changing the phone number.
+			</p>
 			<div class="btn-outer mt-40">
 				<div id="confirm-account-button" class="border-plus">
 					<button class="btn btn-primary" (click)="submitDetails()">Submit</button>
 				</div>
 			</div>
-			<!-- routerLink="/auth/updatephone" -->
 		</div>
 	</form>
 </div>

@@ -39,5 +39,6 @@ export const urls = {
     twoAuthSend : 'user/change-two-factor-authentication-status/',
     verifyTWOOTP : 'user/two-factor-authentication/',
     changePaymentRestriction : 'user/change-payment-restriction/',
-    checkMaintenace : 'admin/get-website-maintenance-status/'
+    checkMaintenace : 'admin/get-website-maintenance-status/',
+    getQRCode : 'user/get-user-two-factor-authentication-qr-code/'
 };

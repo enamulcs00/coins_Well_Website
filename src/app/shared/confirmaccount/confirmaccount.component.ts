@@ -30,9 +30,8 @@ export class ConfirmaccountComponent implements OnInit {
 			transaction_pin: [null, [Validators.required]]
 		});
 	}
-	ngOnInit(): void {
 
-	}
+	ngOnInit(): void {}
 
 	otpEnter(event) {
 		this.confirmAccount.get('otp').setValue(event.join(''));
