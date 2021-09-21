@@ -121,7 +121,7 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 					this._common.updateProfileInfo();
 					Loading.remove();
 					if(this.enable2FA) {
-						this.enabledQRCode = true;
+						this.enabledQRCode = false;
 						Notify.success("Your 2FA has been successfully Enabled.");
 					} else {
 						Notify.success("Your 2FA has been successfully Dsiabled.");
