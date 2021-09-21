@@ -12,21 +12,29 @@
                 <!-- <figure><img src="assets/images/auth/footer-logo.png" alt="logo"></figure> -->
 
                 <ul class="d-flex social-media">
-                <li><a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
-                <li><a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
-                <!-- <li><a href="javascript:void(0)"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>  -->
-                <li><a href="javascript:void(0)"><i class="fa fa-medium" aria-hidden="true"></i></a></li> 
-                <li><a href="javascript:void(0)"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
-                <li><a href="javascript:void(0)"><i class="fa fa-reddit" aria-hidden="true"></i></a></li>         
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-medium" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+                    </li>
                 </ul>
                 <address>
                     <div> {{ _common.cmsData?.address }}</div>
-                    <!-- <div>VIC3000,US</div> -->                  
                 </address>
             </div>
             <div class="footer__card">
                 <h3>Main Menu</h3>
-                
+
                 <a [routerLink]="['/landingpage']">Home</a>
                 <a [routerLink]="['/about_us']">About us</a>
                 <a *ngIf="!userInfo" [routerLink]="['/auth']">Login/Signup</a>
@@ -37,11 +45,13 @@
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                     {{ _common.cmsData?.email }}
                 </a>
-                <a href="https://wa.me/:{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i> 
+                <a href="https://wa.me/:{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-whatsapp"
+                        aria-hidden="true"></i>
                     {{ _common.cmsData?.phone_no }}
-                </a>  
-                <a href="https://telegram.me/{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i>
-                    {{ _common.cmsData?.telegram_phone_number }}</a>               
+                </a>
+                <a href="https://telegram.me/{{ _common.cmsData?.phone_no }}" target="_blank"><i class="fa fa-telegram"
+                        aria-hidden="true"></i>
+                    {{ _common.cmsData?.telegram_phone_number }}</a>
             </div>
             <div class="footer__card">
                 <h3>Our Company</h3>
@@ -55,8 +65,8 @@
                 <a [routerLink]="['/content/privacy_policy']">Privacy policy</a>
                 <a [routerLink]="['/content/terms_and_condition']">Terms of Service</a>
                 <a [routerLink]="['/content/cookie_service']">Cookies Service</a>
-                <a [routerLink]="['/content/aml']">AML</a>
-                <a [routerLink]="['/content/about_us']">KYC</a>
+                <a [routerLink]="['/content/about_us']">About Us</a>
+                <a [routerLink]="['/content/aml']">AML/KYC</a>
             </div>
         </div>
     </div>

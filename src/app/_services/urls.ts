@@ -40,5 +40,7 @@ export const urls = {
     verifyTWOOTP : 'user/two-factor-authentication/',
     changePaymentRestriction : 'user/change-payment-restriction/',
     checkMaintenace : 'admin/get-website-maintenance-status/',
-    getQRCode : 'user/get-user-two-factor-authentication-qr-code/'
+    getQRCode : 'user/get-user-two-factor-authentication-qr-code/',
+    sendOtpVerify : 'user/send-phone-number-otp/',
+    verifyOtp : 'user/send-phone-number-verify-otp/'
 };

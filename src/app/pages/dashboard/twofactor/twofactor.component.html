@@ -9,14 +9,38 @@
             <mat-slide-toggle [color]="'primary'" (change)="checkCode(enable2FA)" class="example-margin" [(ngModel)]="enable2FA"></mat-slide-toggle>
         </section>
     </div>
-    <ng-container *ngIf="enable2FA">
-        <div class="text-center Instructions">
-            <div id="barcode" style="margin: auto; width: 150px;">
+    <ng-container *ngIf="enabledQRCode">
+        <div class="mt-2 mb-5">
+            <div>
+                <img src="assets/images/authy.png" style="width: 30px;" alt="">
+                <span class="ml-2">Authy</span>
             </div>
-            <p class="mt-2">Scan the QR code from authy or google autheticator app to add the two factor authentication.</p>
+            <div class="Instructions">
+                <p>Download and install AUTHY app on google play store or on App Store.</p>
+            </div>
+        </div>
+        <div class="text-center Instructions" style="display: flex;
+        align-items: center;
+        justify-content: space-between;">
+            <div style="width: 40%;">
+                <div id="barcode" style="margin: auto; width: 150px;">
+                </div>
+                <p class="mt-2">Scan the QR code in the authy app.</p>
+            </div>
+            OR
+            <div style="width: 40%;">
+                <h3>JHGHJGHJGJGJKG</h3>
+                <p class="mt-2">If you are unable to scan the QR code. Please enter the code manually into the Authy app.</p>
+            </div>
+        </div>
+        <div class="mt-5 w-100 text-center">
+            <button style="width: 200px;" (click)="verify2fa()" class="btn btn-primary">Verify</button>
         </div>
     </ng-container>
     <div class="Instructions text-center mt-5" *ngIf="!enable2FA">
         <p>Enable the toggle to add two factor authentication.</p>
+    </div>
+    <div class="Instructions text-center mt-5" *ngIf="enable2FA">
+        <p>You have successfully enabled the two factor authentication.</p>
     </div>
 </div>

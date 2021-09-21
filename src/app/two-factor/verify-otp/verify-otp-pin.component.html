@@ -1,0 +1,30 @@
+<div class="auth-main d-flex" style="height: 80vh;position: relative;">
+    <i style="position: absolute;
+    right: 0px;
+    font-size: 35px;" [mat-dialog-close]="false" class="fa fa-times"></i>
+	<div class="auth-img">
+		<figure>
+			<img src="assets/images/pin-c.png" alt="">
+		</figure>
+	</div>
+	<form [formGroup]="setTransactionForm" class="auth-form my-forms" style="padding: 50px 20px 36px 0px;" (ngSubmit)="setupPassword()">
+		<div class="d-flex auth-title">
+			<h3 class="auth-title__h3">Enter Otp
+				<span class="d-block">
+					Enter 4 digits code sent on your registered mobile number.
+				</span>
+			</h3>
+		</div>
+		<div class="auth-form-bx">
+			<ngx-otp-input [config]="{
+				otpLength: 4,
+				autoFocus: true
+			}" (otpChange)="checkOTP($event)"></ngx-otp-input>
+			<div class="btn-outer mt-40">
+				<div id="setup-tcp-button" class="border-plus">
+					<button type="submit" class="btn btn-primary">Continue</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

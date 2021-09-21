@@ -1,9 +1,12 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Block, Loading, Notify } from 'notiflix';
-import { AuthService } from 'src/app/_services/auth.service';
+import { TwoFactorVerifyComponent } from 'src/app/two-factor/two-factor-verify/two-factor-pin.component';
+import { VerifyOtpPinComponent } from 'src/app/two-factor/verify-otp/verify-otp-pin.component';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
+import { ConfirmPinComponent } from '../confirm-pin/confirm-pin.component';
 declare var QRCode: any;
 
 @Component({
@@ -15,12 +18,14 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 	deposit: boolean = false;
 	withdraw: boolean = false;
 	enable2FA: boolean = false;
-	constructor(private _common: CommonService, private _auth : AuthService) { }
+	enabledQRCode : boolean = false;
+	keySign : string = '';
+	constructor(private _common: CommonService, private dialog: MatDialog) { }
 
 	ngOnInit(): void {
 		let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-		if(userInfo) {
-			this.enable2FA =  userInfo.is_two_factor_authentication_enable;
+		if (userInfo) {
+			this.enable2FA = userInfo.is_two_factor_authentication_enable;
 		}
 	}
 
@@ -29,46 +34,65 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 		this._common.post(urls.twoAuthSend, {
 			'two_factor_authentication_status': this.enable2FA
 		}).subscribe((data) => {
-			Block.remove('#submit-documents');			
+			Block.remove('#submit-documents');
 			Notify.success(data.message);
 		}, () => {
 			Block.remove('#submit-documents');
 		})
 	}
 
-	checkCode(val : boolean) {
-		if(val) {
-			Loading.circle();
-			this._common.post(urls.twoAuthSend, {
-				'two_factor_authentication_status': this.enable2FA
-			}).subscribe((data) => {
-				this._common.get(urls.getQRCode).subscribe(data=>{
+	checkCode(val: boolean) {
+		const dialogRef = this.dialog.open(ConfirmPinComponent, {
+			disableClose: true
+		});
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				Loading.circle();
+				this._common.post(urls.sendOtpVerify).subscribe(() => {
 					Loading.remove();
-					Notify.success("Two factor enabled successfully.")
-					this.genCode(data.data);
+					const verifyOtpPin = this.dialog.open(VerifyOtpPinComponent, {
+						disableClose: true
+					});+
+					verifyOtpPin.afterClosed().subscribe(result => {
+						if (result) {
+							if(this.enable2FA) {
+								this.enableTwoFactor();
+							} else {
+								this.verify2fa();
+							}
+						} else {
+							this.enable2FA = !this.enable2FA
+						}
+					});
+				}, () => {
+					this.enable2FA = !this.enable2FA
+					Loading.remove();
 				})
-			}, () => {
-				Loading.remove();
-			})
-		} else {
-			Loading.circle();
-			this._common.post(urls.twoAuthSend, {
-				'two_factor_authentication_status': this.enable2FA
-			}).subscribe((data) => {
-				Loading.remove();
-				Notify.success("Two factor disabled successfully.")
-			}, () => {
-				Loading.remove();
-			})
-		}
+			} else {
+				this.enable2FA = !this.enable2FA
+			}
+		});
 	}
 
-	ngAfterViewInit()  {
-		if(this.enable2FA) {
+	enableTwoFactor() {
+		Loading.circle();
+		this.enabledQRCode = true;
+		this._common.get(urls.getQRCode).subscribe(data => {
+			Loading.remove();
+			this.genCode(data.data.qr_code);
+			this.keySign =  data.data.auth_code
+		}, () => {
+			Loading.remove();
+		})
+	}
+
+	ngAfterViewInit() {
+		if (this.enable2FA) {
 			Loading.circle();
-			this._common.get(urls.getQRCode).subscribe(data=>{
+			this._common.get(urls.getQRCode).subscribe(data => {
 				Loading.remove();
-				this.genCode(data.data);
+				this.genCode(data.data.qr_code);
+				this.keySign =  data.data.auth_code
 			})
 		}
 	}
@@ -81,6 +105,32 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 			colorDark: "#000000",
 			colorLight: "#ffffff",
 			correctLevel: QRCode.CorrectLevel.H
+		});
+	}
+
+	verify2fa() {
+		const dialogRef2 = this.dialog.open(TwoFactorVerifyComponent, {
+			disableClose: true
+		});
+		dialogRef2.afterClosed().subscribe(result => {
+			if (result) {
+				Loading.circle();
+				this._common.post(urls.twoAuthSend, {
+					'two_factor_authentication_status': this.enable2FA
+				}).subscribe(() => {
+					this._common.updateProfileInfo();
+					Loading.remove();
+					if(this.enable2FA) {
+						this.enabledQRCode = true;
+						Notify.success("Your 2FA has been successfully Enabled.");
+					} else {
+						Notify.success("Your 2FA has been successfully Dsiabled.");
+
+					}
+				}, () => {
+					Loading.remove();
+				});
+			}
 		});
 	}
 
