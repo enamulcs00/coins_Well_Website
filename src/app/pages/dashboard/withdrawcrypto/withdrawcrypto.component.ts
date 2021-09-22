@@ -96,9 +96,13 @@ export class WithdrawcryptoComponent implements OnInit {
 	}
 
 	submitDetails() {
+		let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+		if(userInfo.is_suspended) {
+			Notify.failure("Your account is suspended. Please contact to admin")
+			return;
+		}
 		if(!this.userInfo.is_payment_restriction) {
 			if (this.addCashForm.valid) {
-				let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
 				if (userInfo.is_two_factor_authentication_enable) {
 					const dialogRef = this.dialog.open(TwoFactorVerifyComponent, {
 						disableClose: true

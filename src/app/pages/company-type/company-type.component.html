@@ -44,44 +44,7 @@
 								<div class="cons_cms_hdmn">
 									<h2>Features</h2>
 								</div>
-								<div class="cms_pgs_mndv_lst_updte">
-									<p>Date of latest version: 5 Sept, 2021</p>
-								</div>
-								<div class="cons_cms_mn">
-									<h2>What is Lorem Ipsum?</h2>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-										unknown printer took a galley of type and scrambled it to make a type specimen
-										book. </p>
-									<h2>Why do we use it?</h2>
-									<p>It is a long established fact that a reader will be distracted by the readable
-										content of a page when looking at its layout. The point of using Lorem Ipsum is
-										that it has a more-or-less normal distribution of letters, as opposed to using
-										'Content here, </p>
-									<h2>Where does it come from?</h2>
-									<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
-										in a piece of classical Latin literature from 45 BC, making it over 2000 years
-										old. Richard McClintock, a Latin professor at Hampden-Sydney College in
-										Virginia, looked up one of the more obscure Latin words, consectetur, from a
-										Lorem Ipsum passage, and going through the cites of the word in classical
-										literature, discovered the undoubtable source. Lorem Ipsum comes from sections
-										1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and
-										Evil) by Cicero</p>
-									<ol>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-									</ol>
-									<h2>Where can I get some?</h2>
-									<ul>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-										<li>There are many variations of passages of Lorem Ipsum available</li>
-									</ul>
-								</div>
+								<div class="blog-post" [innerHtml]="cmsData?.features"></div>
 							</div>
 						</div>
 						<div class="tab-pane" [class.active]="link == 'download'" id="downlaod" role="downlaod">
@@ -126,47 +89,13 @@
 								<div class="cons_cms_mn">
 									<div class="cms_pgs_kmlkyc">
 										<ul class="d-flex">
-											<li>
+											<li *ngFor="let item of security">
 												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/encrption_newicon.svg" alt="Icon">
+													<figure><img [src]="baseUrl+item?.image" alt="Icon">
 													</figure>
 													<div class="cms_pgsbx_innr">
-														<h3>Encryptions</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/transaction_pin_icon.svg"
-															alt="Icon"></figure>
-													<div class="cms_pgsbx_innr">
-														<h3>Transaction Pin</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/fa_auth_newico.svg" alt="Icon">
-													</figure>
-													<div class="cms_pgsbx_innr">
-														<h3>2FA</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/cold_storage_newicon.svg"
-															alt="Icon"></figure>
-													<div class="cms_pgsbx_innr">
-														<h3>Cold Storage</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
+														<h3>{{item?.title}}</h3>
+														<p>{{item?.heading}}</p>
 													</div>
 												</div>
 											</li>
@@ -186,47 +115,13 @@
 								<div class="cons_cms_mn">
 									<div class="cms_pgs_kmlkyc">
 										<ul class="d-flex">
-											<li>
+											<li *ngFor="let item of Fee">
 												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/withdrawlfeenewicon.svg" alt="Icon">
+													<figure><img [src]="baseUrl+item?.image" alt="Icon">
 													</figure>
 													<div class="cms_pgsbx_innr">
-														<h3>Withdrawal Fee</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/dpostie_fee_newicon.svg" alt="Icon">
-													</figure>
-													<div class="cms_pgsbx_innr">
-														<h3>Deposit Fee</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/buying_fee_newicon.svg" alt="Icon">
-													</figure>
-													<div class="cms_pgsbx_innr">
-														<h3>Buying Fee</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="cms_pgs_kmlkyc_lst">
-													<figure><img src="assets/images/sellingfee_newicon.svg" alt="Icon">
-													</figure>
-													<div class="cms_pgsbx_innr">
-														<h3>Selling Fee</h3>
-														<p>Contrary to popular belief, Lorem Ipsum is not simply random
-															text. It has roots in a piece of classical</p>
+														<h3>{{item?.title}}</h3>
+														<p>{{item?.heading}}</p>
 													</div>
 												</div>
 											</li>

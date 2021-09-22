@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Block, Loading } from 'notiflix';
+import Notiflix, { Block, Loading } from 'notiflix';
 import { CommonService } from 'src/app/_services/common.service';
 import { urls } from 'src/app/_services/urls';
 import { environment } from 'src/environments/environment';
@@ -86,12 +86,16 @@ export class DepositCryptoComponent implements OnInit, AfterViewInit {
 
 	submitDetails() {
 		if (this.addCashForm.valid) {
+			let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+			if(userInfo.is_suspended) {
+				Notiflix.Notify.failure("Your account is suspended. Please contact to admin")
+				return;
+			}
 			const dialogRef = this.dialog.open(ConfirmPinComponent, {
 				disableClose: true
 			});
 			dialogRef.afterClosed().subscribe(result => {
 				if (result) {
-					let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
 					if(userInfo) {
 						const dialogRef2 = this.dialog.open(TwoFactorVerifyComponent, {
 							disableClose: true

@@ -132,6 +132,11 @@ export class BuyCryptoComponent implements OnInit {
 	}
 
 	submitDetails() {
+		let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+		if(userInfo.is_suspended) {
+			Notify.failure("Your account is suspended. Please contact to admin")
+			return;
+		}
 		if (this.addCashForm.valid) {
 			if(this.canBuyOrNot) {
 				const dialogRef = this.dialog.open(ConfirmPinComponent, {
