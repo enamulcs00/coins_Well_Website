@@ -9,7 +9,7 @@
             <mat-slide-toggle [color]="'primary'" (change)="checkCode(enable2FA)" class="example-margin" [(ngModel)]="enable2FA"></mat-slide-toggle>
         </section>
     </div>
-    <ng-container *ngIf="enabledQRCode">
+    <ng-container *ngIf="enable2FA">
         <div class="mt-2 mb-5">
             <div>
                 <img src="assets/images/authy.png" style="width: 30px;" alt="">
@@ -41,7 +41,7 @@
     <div class="Instructions text-center mt-5" *ngIf="!enable2FA">
         <p>Enable the toggle to add two factor authentication.</p>
     </div>
-    <div class="Instructions text-center mt-5" *ngIf="enable2FA">
+    <!-- <div class="Instructions text-center mt-5" *ngIf="enable2FA">
         <p>You have successfully enabled the two factor authentication.</p>
-    </div>
+    </div> -->
 </div>

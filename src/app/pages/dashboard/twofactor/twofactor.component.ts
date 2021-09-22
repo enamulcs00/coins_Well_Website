@@ -20,6 +20,7 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 	enable2FA: boolean = false;
 	enabledQRCode : boolean = false;
 	keySign : string = '';
+	qrCodeSign : string = '';
 	constructor(private _common: CommonService, private dialog: MatDialog) { }
 
 	ngOnInit(): void {
@@ -47,27 +48,11 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 		});
 		dialogRef.afterClosed().subscribe(result => {
 			if (result) {
-				Loading.circle();
-				this._common.post(urls.sendOtpVerify).subscribe(() => {
-					Loading.remove();
-					const verifyOtpPin = this.dialog.open(VerifyOtpPinComponent, {
-						disableClose: true
-					});+
-					verifyOtpPin.afterClosed().subscribe(result => {
-						if (result) {
-							if(this.enable2FA) {
-								this.enableTwoFactor();
-							} else {
-								this.verify2fa();
-							}
-						} else {
-							this.enable2FA = !this.enable2FA
-						}
-					});
-				}, () => {
-					this.enable2FA = !this.enable2FA
-					Loading.remove();
-				})
+				if(this.enable2FA) {
+					this.enableTwoFactor();
+				} else {
+					this.verify2fa();
+				}	
 			} else {
 				this.enable2FA = !this.enable2FA
 			}
@@ -79,6 +64,7 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 		this.enabledQRCode = true;
 		this._common.get(urls.getQRCode).subscribe(data => {
 			Loading.remove();
+			this.qrCodeSign = data.data.qr_code;
 			this.genCode(data.data.qr_code);
 			this.keySign =  data.data.auth_code
 		}, () => {
@@ -91,6 +77,7 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 			Loading.circle();
 			this._common.get(urls.getQRCode).subscribe(data => {
 				Loading.remove();
+				this.qrCodeSign = data.data.qr_code;
 				this.genCode(data.data.qr_code);
 				this.keySign =  data.data.auth_code
 			})
@@ -130,6 +117,9 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 				}, () => {
 					Loading.remove();
 				});
+			} else {
+				this.enable2FA = !this.enable2FA;
+				this.genCode(this.qrCodeSign);
 			}
 		});
 	}
