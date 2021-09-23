@@ -42,5 +42,6 @@ export const urls = {
     checkMaintenace : 'admin/get-website-maintenance-status/',
     getQRCode : 'user/get-user-two-factor-authentication-qr-code/',
     sendOtpVerify : 'user/send-phone-number-otp/',
-    verifyOtp : 'user/send-phone-number-verify-otp/'
+    verifyOtp : 'user/send-phone-number-verify-otp/',
+    updateToken : 'user/change-device-token/'
 };

@@ -122,6 +122,30 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	ngOnInit() {
+		let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
+		if(userInfo != null) {
+			setTimeout(()=>{
+				const messaging = firebase.messaging();
+				messaging
+					.requestPermission()
+					.then(() => {
+						messaging.getToken().then((token: any) => {
+							this._auth.firebaseToken = token;
+							this._common.post(urls.updateToken, {
+								device_type : 'WEB',
+								device_token : this._auth.firebaseToken
+							}).subscribe();
+							messaging.onMessage(() => {
+							})
+						}).catch(() => {
+							Notify.failure("Unable to get permission to notify.");
+						})
+					})
+					.catch(() => {
+						Notify.failure("Unable to get permission to notify.");
+					});
+			},10000);
+		}
 	}
 
 	ngAfterViewInit() {
