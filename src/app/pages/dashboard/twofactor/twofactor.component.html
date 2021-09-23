@@ -9,7 +9,7 @@
             <mat-slide-toggle [color]="'primary'" (change)="checkCode(enable2FA)" class="example-margin" [(ngModel)]="enable2FA"></mat-slide-toggle>
         </section>
     </div>
-    <ng-container *ngIf="enable2FA">
+    <div [class.d-none]="!enable2FA">
         <div class="mt-2 mb-5">
             <div>
                 <img src="assets/images/authy.png" style="width: 30px;" alt="">
@@ -37,7 +37,7 @@
         <div class="mt-5 w-100 text-center">
             <button style="width: 200px;" (click)="verify2fa()" class="btn btn-primary">Verify</button>
         </div>
-    </ng-container>
+    </div>
     <div class="Instructions text-center mt-5" *ngIf="!enable2FA">
         <p>Enable the toggle to add two factor authentication.</p>
     </div>
