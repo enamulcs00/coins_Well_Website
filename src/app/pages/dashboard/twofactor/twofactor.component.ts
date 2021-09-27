@@ -112,7 +112,6 @@ export class TwofactorComponent implements OnInit, AfterViewInit {
 						Notify.success("Your 2FA has been successfully Enabled.");
 					} else {
 						Notify.success("Your 2FA has been successfully Dsiabled.");
-
 					}
 				}, () => {
 					Loading.remove();

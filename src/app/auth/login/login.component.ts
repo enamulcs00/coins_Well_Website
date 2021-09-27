@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	selectedCountry: any;
 	hide = true;
-	recpach: boolean = false;
+	recpach: boolean = true;
 	@ViewChild('recaptcha', { static: true }) recaptchaElement: ElementRef;
 	constructor(public router: Router, private _auth: AuthService, private _fb: FormBuilder, private dialog : MatDialog) { }
 
@@ -122,7 +122,6 @@ export class LoginComponent implements OnInit {
 		window['grecaptchaCallback'] = () => {
 			this.renderReCaptcha();
 		}
-
 		(function (d, s, id, obj) {
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) { obj.renderReCaptcha(); return; }

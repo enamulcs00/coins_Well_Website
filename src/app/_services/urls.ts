@@ -43,5 +43,6 @@ export const urls = {
     getQRCode : 'user/get-user-two-factor-authentication-qr-code/',
     sendOtpVerify : 'user/send-phone-number-otp/',
     verifyOtp : 'user/send-phone-number-verify-otp/',
-    updateToken : 'user/change-device-token/'
+    updateToken : 'user/change-device-token/',
+    send_message : 'message/send-message/'
 };

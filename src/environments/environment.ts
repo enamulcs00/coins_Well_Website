@@ -33,7 +33,7 @@ export const environment = {
 		TRC20 : 3,
 		PerfectMoney : 4
 	},
-	socketUrl : ''
+	socketUrl : 'wss://python.appgrowthcompany.com:2222/ws/chat/'
 };
 
 /*

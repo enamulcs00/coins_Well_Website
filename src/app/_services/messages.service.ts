@@ -23,6 +23,10 @@ export class MessagesService {
         }
         this.websocket = new WebSocket(environment.socketUrl + this.chatWithId + '/');
 
+        this.websocket.onerror = (err: any) => {
+            console.log("Error", err);
+        }
+
         this.websocket.onopen = (event) => {
             // console.log('open', event);
         }
@@ -37,7 +41,7 @@ export class MessagesService {
         }
     }
 
-    public sendMessage(chatMessageDto: ChatMessageDto) {
+    public sendMessage(chatMessageDto: any) {
         this.websocket.send(JSON.stringify(chatMessageDto));
     }
 
