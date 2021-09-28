@@ -8,8 +8,9 @@ import { NgxMatIntlTelInputModule } from '../ngx-input-tel';
 import { NgxOtpInputModule } from 'ngx-otp-input';
 import { LoginSvg } from './svg/loginSvg';
 import { SignupActivateComponent } from './signup-activate/signup-activate.component';
+import { EmailActivateComponent } from './email-activate/email-activate.component';
 @NgModule({
-  declarations: [ConfirmaccountComponent, UpdatephonenoComponent, LoginSvg, SignupActivateComponent],
+  declarations: [ConfirmaccountComponent, UpdatephonenoComponent, LoginSvg, SignupActivateComponent, EmailActivateComponent],
   imports: [
     CommonModule,
     MaterialCommonModule,
@@ -17,6 +18,6 @@ import { SignupActivateComponent } from './signup-activate/signup-activate.compo
     NgxMatIntlTelInputModule,
     NgxOtpInputModule
   ],
-  exports: [ConfirmaccountComponent, UpdatephonenoComponent, LoginSvg, SignupActivateComponent]
+  exports: [ConfirmaccountComponent, UpdatephonenoComponent, LoginSvg, SignupActivateComponent, EmailActivateComponent]
 })
 export class SharedModule { }

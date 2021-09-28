@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
 @Component({
-	selector: 'signup-activate',
-	templateUrl: './signup-activate.component.html',
-	styleUrls: ['./signup-activate.component.scss']
+	selector: 'email-activate',
+	templateUrl: './email-activate.component.html',
+	styleUrls: ['./email-activate.component.scss']
 })
-export class SignupActivateComponent implements OnInit {
+export class EmailActivateComponent implements OnInit {
 	@Input('data') data: any;
 	@Input('type') type: any = 'new';
 	@Output('verified') verified: EventEmitter<any> = new EventEmitter();
@@ -14,10 +14,11 @@ export class SignupActivateComponent implements OnInit {
 	constructor(private _auth: AuthService) { }
 
 	ngOnInit(): void {
-		console.log("data", this.data);
+		// console.log("data", this.data);
 	}
 	checkOTP(event) {
 		this.otp = event.join('');
+		// console.log("this.otp",this.otp);
 	}
 
 	validateOtp() {

@@ -6,55 +6,61 @@
 		<div class="auth-logo cursor-pointer" routerLink="/landingpage">
 			<figure><img src="assets/images/nav-logo.png" alt=""></figure>
 		</div>
-		<div class="d-flex auth-title">
-			<h3 class="auth-title__h3">What's Your email id ?
-				<span class="d-block">
-					Please enter your email id to continue
-				</span>
-			</h3>
-			<!-- <p class="auth-link__title" (click)=" signup()">Sign up</p> -->
-		</div>
-		<form class="auth-form-bx my-forms" [formGroup]="emailForm" (ngSubmit)="submitEmail()">
-			<mat-form-field class="example-full-width" appearance="outline">
-				<span matPrefix>
-					<figure class="input-icon">
-						<img src="assets/images/auth/a.png" alt="">
-					</figure>
-				</span>
-				<input type="email" formControlName="email" name="email" matInput placeholder="Email">
-				<mat-error *ngIf="emailForm.get('email')?.hasError('required')">
-					Please enter email address.
-				</mat-error>
-				<mat-error
-					*ngIf="!emailForm.get('email')?.hasError('required') && (emailForm.get('email')?.hasError('email') || emailForm.get('email')?.hasError('validEmail') || emailForm.get('email').hasError('removeSpaces'))">
-					Please enter valid email address.
-				</mat-error>
-			</mat-form-field>
-
-			<mat-form-field class="example-full-width" appearance="outline">
-				<span matPrefix>
-					<figure class="input-icon">
-						<img src="assets/images/auth/mail.png" alt="">
-					</figure>
-				</span>
-				<input type="text" formControlName="referred_by" name="referred_by" matInput placeholder="Referral Code (optional)">
-				<mat-error *ngIf="emailForm.get('referred_by')?.hasError('required')">
-					Please enter refer code.
-				</mat-error>
-			</mat-form-field>
-
-			<div class="checkbox-text">
-				<label class="custom-checkbx">Agree with <a>Terms of User</a> and<a>Privacy Policy</a>
-					<input formControlName="tos" name="tos" [value]="true" type="checkbox">
-					<span class="checkmark"></span>
-				</label>
-				<mat-error style="font-size: 13px;" *ngIf="emailForm.get('tos').hasError('required')">Please accept terms and conditions to continue.</mat-error>
-			</div>
-			<div class="btn-outer mt-40">
-				<div id="validate-email-button" class="border-plus">
-					<button type="submit" class="btn btn-primary">Submit</button>
+		<mat-horizontal-stepper linear #stepper>
+			<mat-step>
+				<div class="d-flex auth-title">
+					<h3 class="auth-title__h3">What's Your email id ?
+						<span class="d-block">
+							Please enter your email id to continue
+						</span>
+					</h3>
 				</div>
-			</div>
-		</form>
+				<form class="auth-form-bx my-forms" [formGroup]="emailForm" (ngSubmit)="submitEmail()">
+					<mat-form-field class="example-full-width" appearance="outline">
+						<span matPrefix>
+							<figure class="input-icon">
+								<img src="assets/images/auth/a.png" alt="">
+							</figure>
+						</span>
+						<input type="email" formControlName="email" name="email" matInput placeholder="Email">
+						<mat-error *ngIf="emailForm.get('email')?.hasError('required')">
+							Please enter email address.
+						</mat-error>
+						<mat-error
+							*ngIf="!emailForm.get('email')?.hasError('required') && (emailForm.get('email')?.hasError('email') || emailForm.get('email')?.hasError('validEmail') || emailForm.get('email').hasError('removeSpaces'))">
+							Please enter valid email address.
+						</mat-error>
+					</mat-form-field>
+		
+					<mat-form-field class="example-full-width" appearance="outline">
+						<span matPrefix>
+							<figure class="input-icon">
+								<img src="assets/images/auth/mail.png" alt="">
+							</figure>
+						</span>
+						<input type="text" formControlName="referred_by" name="referred_by" matInput placeholder="Referral Code (optional)">
+						<mat-error *ngIf="emailForm.get('referred_by')?.hasError('required')">
+							Please enter refer code.
+						</mat-error>
+					</mat-form-field>
+		
+					<div class="checkbox-text">
+						<label class="custom-checkbx">Agree with <a>Terms of User</a> and<a>Privacy Policy</a>
+							<input formControlName="tos" name="tos" [value]="true" type="checkbox">
+							<span class="checkmark"></span>
+						</label>
+						<mat-error style="font-size: 13px;" *ngIf="emailForm.get('tos').hasError('required')">Please accept terms and conditions to continue.</mat-error>
+					</div>
+					<div class="btn-outer mt-40">
+						<div id="validate-email-button" class="border-plus">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+			</mat-step>
+			<mat-step>
+				<!-- <signup-activate [data]="emailForm.value" (verified)="OtpVerified($event)"></signup-activate> -->
+			</mat-step>
+		</mat-horizontal-stepper>
 	</div>
 </div>

@@ -1,0 +1,26 @@
+<div class="d-flex auth-title">
+	<h3 class="auth-title__h3" *ngIf="type =='new'">Activate your account <span class="d-block">
+			Enter 4 digit code sent on your entered email address.
+		</span>
+	</h3>
+	<h3 class="auth-title__h3" *ngIf="type =='verify'">Verify account <span class="d-block">
+			Enter 4 digit code sent on your entered email address.
+		</span>
+	</h3>
+</div>
+<div class="auth-form-bx">
+	<div class="d-flex otp">
+		<ngx-otp-input [config]="{
+			otpLength: 4,
+			autoFocus: true
+		}" (otpChange)="checkOTP($event)"></ngx-otp-input>
+	</div>
+	<p style="width: 100%; text-align: right; font-size: 10px;" >
+		<a href="javascript:void(0)" (click)="resendOtp()">Resend Otp</a>
+	</p>
+	<div class="btn-outer mt-40">
+		<div id="validate-otp-button" class="border-plus">
+			<button class="btn btn-primary" (click)="validateOtp()">Submit</button>
+		</div>
+	</div>
+</div>

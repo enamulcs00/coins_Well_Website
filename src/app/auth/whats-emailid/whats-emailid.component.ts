@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -11,8 +12,9 @@ import { validEmail } from '../../_validators/validEmail';
 	templateUrl: './whats-emailid.component.html',
 	styleUrls: ['./whats-emailid.component.scss']
 })
-export class WhatsEmailidComponent implements OnInit {
+export class WhatsEmailidComponent implements OnInit, AfterViewInit {
 	emailForm: FormGroup;
+	@ViewChild('stepper') stepper: MatStepper;
 	constructor(private _auth: AuthService, private _router: Router, private _fb: FormBuilder) { }
 
 	ngOnInit(): void {
@@ -26,11 +28,16 @@ export class WhatsEmailidComponent implements OnInit {
 		});
 	}
 
+	ngAfterViewInit() {
+		this.stepper.selectedIndex = 0;
+	}
+
 
 	submitEmail() {
+		// this.stepper.next();
 		if (this.emailForm.valid) {
 			Block.circle('#validate-email-button');
-			this._auth.validateEmail(this.emailForm.value, this._auth.userId).subscribe(res => {
+			this._auth.validateEmail(this.emailForm.value, this._auth.userId).subscribe(() => {
 				Block.remove('#validate-email-button');
 				this._router.navigate(['/auth/createprofie'], {
 					state: {

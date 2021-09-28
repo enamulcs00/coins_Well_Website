@@ -22,7 +22,6 @@ export class MessagesService {
             return false;
         }
         this.websocket = new WebSocket(environment.socketUrl + this.chatWithId + '/');
-
         this.websocket.onerror = (err: any) => {
             console.log("Error", err);
         }
