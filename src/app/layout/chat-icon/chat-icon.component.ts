@@ -33,19 +33,19 @@ export class ChatIconComponent implements OnInit, AfterViewInit {
 		// 			})
 		// 		}, 5000);
 		// 	})
-		this._message.chatWithId = '1';
-				this._message.openWebSocket();
-				this.onRecieveMessage();
+		// this._message.chatWithId = '1';
+		// this._message.openWebSocket();
+		// this.onRecieveMessage();
 
-				setTimeout(() => {
-					this._message.sendMessage({
-						name: "Hello"
-					})
-				}, 5000);
+		// setTimeout(() => {
+		// 	this._message.sendMessage({
+		// 		name: "Hello"
+		// 	})
+		// }, 5000);
 	}
 
 	ngAfterViewInit() {
-		this.scrollable.scrollTo({ bottom: 0 });
+		// this.scrollable.scrollTo({ bottom: 0 });
 	}
 
 	sendMessage() {

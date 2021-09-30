@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Block, Notify } from 'notiflix';
 import { AuthService } from 'src/app/_services/auth.service';
+import { CommonService } from 'src/app/_services/common.service';
+import { urls } from 'src/app/_services/urls';
 @Component({
 	selector: 'email-activate',
 	templateUrl: './email-activate.component.html',
@@ -11,10 +13,10 @@ export class EmailActivateComponent implements OnInit {
 	@Input('type') type: any = 'new';
 	@Output('verified') verified: EventEmitter<any> = new EventEmitter();
 	otp: string = '';
-	constructor(private _auth: AuthService) { }
+	constructor(private _common: CommonService, private _auth : AuthService) { }
 
 	ngOnInit(): void {
-		// console.log("data", this.data);
+		console.log("data", this.data);
 	}
 	checkOTP(event) {
 		this.otp = event.join('');
@@ -29,7 +31,7 @@ export class EmailActivateComponent implements OnInit {
 				"otp": this.otp
 			});
 			delete formData.full_phone;
-			this._auth.verifyOtp(formData).subscribe(res => {
+			this._common.post(urls.verifyEmailWithoutLogin , formData).subscribe(res => {
 				Block.remove('#validate-otp-button');
 				Notify.success(res.message);
 				this.verified.emit(res.data);
@@ -46,7 +48,7 @@ export class EmailActivateComponent implements OnInit {
 
 	resendOtp() {
 		Block.circle('#validate-otp-button');
-		this._auth.resendOTP(this.data).subscribe(() => {
+		this._auth.validateEmail(this.data, null).subscribe(() => {
 			Notify.success("Otp sent successfully.");
 			Block.remove('#validate-otp-button');
 		}, _ => {

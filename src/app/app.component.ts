@@ -123,8 +123,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	ngOnInit() {
 		let userInfo = JSON.parse(localStorage.getItem(environment.storageKey));
-		if(userInfo != null) {
-			setTimeout(()=>{
+		if (userInfo != null) {
+			setTimeout(() => {
 				const messaging = firebase.messaging();
 				messaging
 					.requestPermission()
@@ -132,24 +132,58 @@ export class AppComponent implements AfterViewInit, OnInit {
 						messaging.getToken().then((token: any) => {
 							this._auth.firebaseToken = token;
 							this._common.post(urls.updateToken, {
-								device_type : 'WEB',
-								device_token : this._auth.firebaseToken
+								device_type: 'WEB',
+								device_token: this._auth.firebaseToken
 							}).subscribe();
 							messaging.onMessage(() => {
 							})
 						}).catch(() => {
-							Notify.failure("Unable to get permission to notify.");
+							// Notify.failure("Unable to get permission to notify.");
 						})
 					})
 					.catch(() => {
-						Notify.failure("Unable to get permission to notify.");
+						// Notify.failure("Unable to get permission to notify.");
 					});
-			},10000);
+			}, 10000);
 		}
 	}
 
 	ngAfterViewInit() {
 		Loading.remove(500);
+		document.onclick = (event : any)=>{
+			if(event.target.tagName == 'BUTTON') {
+				setTimeout(()=>{
+					if(document.getElementsByTagName('mat-error').length > 0) {
+						var elmnt : any = document.getElementsByTagName('mat-form-field')[0].parentElement; 
+						window.scrollTo({
+							top :  elmnt.offsetTop 
+						});
+					}
+				},300);
+			}
+		};
 	}
+
+	doScrolling(elementY, duration) { 
+		var startingY = window.pageYOffset;
+		var diff = elementY - startingY;
+		var start;
+	  
+		// Bootstrap our animation - it will get called right before next frame shall be rendered.
+		window.requestAnimationFrame(function step(timestamp) {
+		  if (!start) start = timestamp;
+		  // Elapsed milliseconds since start of scrolling.
+		  var time = timestamp - start;
+		  // Get percent of completion in range [0, 1].
+		  var percent = Math.min(time / duration, 1);
+	  
+		  window.scrollTo(0, startingY + diff * percent);
+	  
+		  // Proceed with animation as long as we wanted it to.
+		  if (time < duration) {
+			window.requestAnimationFrame(step);
+		  }
+		})
+	  }
 
 }

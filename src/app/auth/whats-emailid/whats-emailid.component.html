@@ -59,7 +59,7 @@
 				</form>
 			</mat-step>
 			<mat-step>
-				<!-- <signup-activate [data]="emailForm.value" (verified)="OtpVerified($event)"></signup-activate> -->
+				<email-activate [data]="emailForm.value" (verified)="OtpVerified()"></email-activate>
 			</mat-step>
 		</mat-horizontal-stepper>
 	</div>

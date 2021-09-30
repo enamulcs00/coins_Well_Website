@@ -44,5 +44,6 @@ export const urls = {
     sendOtpVerify : 'user/send-phone-number-otp/',
     verifyOtp : 'user/send-phone-number-verify-otp/',
     updateToken : 'user/change-device-token/',
-    send_message : 'message/send-message/'
+    send_message : 'message/send-message/',
+    verifyEmailWithoutLogin : 'user/verify-email-otp/'
 };
